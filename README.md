@@ -5,11 +5,13 @@ TP GDD 2018
 - Christian Dario Nievas, 155.900-0
 - Lautaro Gomez Odriozola, 156.607-6
 - Martín Gabriel Mallea Santagada, 159.093-5
+- Denise Fiorella Altobelli, 159.092-3
 
 ## Herramientas a usar
 - Microsoft Visual C# 2012 Express Edition - [Link](https://visualstudio.microsoft.com/es/vs/older-downloads/)
 - SQL Server 2008 Express - [Link](https://www.microsoft.com/en-us/download/details.aspx?id=1695)
 - SQL Server Management Studio Express 
+- Google Group - [Link](https://groups.google.com/forum/#!forum/gestiondedatos)
 
 ## Checklist
 
