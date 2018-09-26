@@ -5,7 +5,7 @@ TP GDD 2018
 - Christian Dario Nievas, 155.900-0
 - Lautaro Gomez Odriozola, 156.607-6
 - Martín Gabriel Mallea Santagada, 159.093-5
-- Denise Fiorella Altobelli, 159.092-3
+- Fiorella Denise Altobelli, 159.092-3
 
 ## Herramientas a usar
 - Microsoft Visual C# 2012 Express Edition - [Link](https://visualstudio.microsoft.com/es/vs/older-downloads/)
