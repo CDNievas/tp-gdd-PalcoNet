@@ -1,12 +1,17 @@
-# PalcoNet
+## PalcoNet
 TP GDD 2018
 
-# Herramientas a usar
+## Alumnos
+- Christian Dario Nievas, 155.900-0
+- Lautaro Gomez Odriozola, 156.607-6
+- Martín Gabriel Mallea Santagada, 159.093-5
+
+## Herramientas a usar
 - Microsoft Visual C# 2012 Express Edition - [Link](https://visualstudio.microsoft.com/es/vs/older-downloads/)
 - SQL Server 2008 Express - [Link](https://www.microsoft.com/en-us/download/details.aspx?id=1695)
 - SQL Server Management Studio Express 
 
-# Checklist
+## Checklist
 
 ### Funcionalidad
 - [ ] Login y seguridad
@@ -27,7 +32,7 @@ TP GDD 2018
 ### Otros
 - [ ] ...
 
-# Fechas
+## Fechas
 
 - **25/10/2018** Envian emails para confirmar grupos quedando inmodificables.
 - **25/11/2018** Entrega unica y obligatoria para poder tener instancias de recuperacion. **(Hasta 12 del mediodia)**
