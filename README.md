@@ -1,4 +1,4 @@
-## PalcoNet
+﻿## PalcoNet
 TP GDD 2018
 
 ## Alumnos
@@ -8,10 +8,14 @@ TP GDD 2018
 - Fiorella Denise Altobelli, 159.092-3
 
 ## Herramientas a usar
-- Microsoft Visual C# 2012 Express Edition - [Link](https://visualstudio.microsoft.com/es/vs/older-downloads/)
-- SQL Server 2008 Express - [Link](https://www.microsoft.com/en-us/download/details.aspx?id=1695)
-- SQL Server Management Studio Express 
+- Microsoft Visual C# 2012 Express Edition - [Link](https://drive.google.com/open?id=18MhNC6NPvG7FKns6-NwQHkiQFdn7Ppby)
+- SQL Server 2012 Express / SQL Server Management Studio Express - [Link](https://drive.google.com/open?id=10hTYrRHnXO9HcZpK4lYh5RvRJImr2gpz)
+
+## Links útiles
 - Google Group - [Link](https://groups.google.com/forum/#!forum/gestiondedatos)
+- Enunciado - [Link](./Enunciado.pdf)
+- Apéndice del enunciado - [Link](https://docs.google.com/document/d/18HzFQXJzCU7gpCueKVMMop1NLSo3m7sVi4HtmTm49sw/edit)
+
 
 ## Checklist
 
