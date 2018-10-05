@@ -41,6 +41,7 @@ TP GDD 2018
 ## Fechas
 
 - **25/10/2018** Envian emails para confirmar grupos quedando inmodificables.
+- **29/10/2018** Entrega obligatoria DER.
 - **25/11/2018** Entrega unica y obligatoria para poder tener instancias de recuperacion. **(Hasta 12 del mediodia)**
 - **##/##/####** Dos entregas mas para recuperacion, no tienen fecha fija.
 - **20/12/2018** Fecha limite de recuperacion.
