@@ -16,6 +16,7 @@ TP GDD 2018
 - Enunciado - [Link](./Enunciado.pdf)
 - Apéndice del enunciado - [Link](https://docs.google.com/document/d/18HzFQXJzCU7gpCueKVMMop1NLSo3m7sVi4HtmTm49sw/edit)
 
+- [Link DER](https://www.lucidchart.com/documents/edit/ec99ef3b-d93e-4c62-a62c-01b3c5b506cd/0?shared=true&)
 
 ## Checklist
 
