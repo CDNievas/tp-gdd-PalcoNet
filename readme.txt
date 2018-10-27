@@ -1,5 +1,5 @@
-Curso: k3571
-Número de grupo: X
+﻿Curso: k3571
+Número de grupo: 17
 Nombre y legajo de todos los integrantes :
 	Christian Dario Nievas, 155.900-0
 	Lautaro Gomez Odriozola, 156.607-6
