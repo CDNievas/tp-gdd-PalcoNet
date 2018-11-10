@@ -78,9 +78,10 @@ create table COMPUMUNDOHIPERMEGARED.Grado(
 )
 
 create table COMPUMUNDOHIPERMEGARED.Publicacion(
-	id_publicacion int identity(1,1) primary key,
+	id_publicacion numeric(18,0) primary key,
 	desrcipcion nvarchar(255),
-	fecha_publicacion date,
+	fecha_publicacion datetime,
+	fecha_vencimiento datetime,
 	fecha_espectaculo datetime,
 	estado nvarchar(255),
 	ciudad nvarchar(255),
@@ -158,6 +159,7 @@ create table COMPUMUNDOHIPERMEGARED.Item_Factura(
 	item_factura_descripcion varchar(60)
 )
 
+go
 /*
 		FIN DE LA CREACION DE TABLAS
 */
@@ -170,6 +172,7 @@ from gd_esquema.Maestra m
 where m.Cli_Dni is not null
 
 select * from COMPUMUNDOHIPERMEGARED.Cliente
+go
 
 insert into COMPUMUNDOHIPERMEGARED.Empresa(razon_social, cuit, fecha_creacion, mail, dom_calle, nro_calle, piso, depto, cod_postal)
 select distinct m.Espec_Empresa_Razon_Social, m.Espec_Empresa_Cuit, m.Espec_Empresa_Fecha_Creacion,
@@ -178,15 +181,32 @@ m.Espec_Empresa_Depto, m.Espec_Empresa_Cod_Postal
 from gd_esquema.Maestra m
 
 select * from COMPUMUNDOHIPERMEGARED.Empresa
+go
 
-
-select * from gd_esquema.Maestra where Espec_Empresa_Cuit like '51-73273898-00'
+insert into COMPUMUNDOHIPERMEGARED.Rubro(descripcion)
+select distinct Espectaculo_Rubro_Descripcion from gd_esquema.Maestra
+go
 
 insert into COMPUMUNDOHIPERMEGARED.TipoUbicacion(codigo, descripcion)
 select distinct m.Ubicacion_Tipo_Codigo, m.Ubicacion_Tipo_Descripcion
 from gd_esquema.Maestra m
 
 select * from COMPUMUNDOHIPERMEGARED.TipoUbicacion
+go
+
+insert into COMPUMUNDOHIPERMEGARED.Publicacion
+(id_empresa, id_publicacion, desrcipcion, fecha_espectaculo, fecha_vencimiento, rubro_id)
+select e.id_empresa, m.Espectaculo_Cod, m.Espectaculo_Descripcion, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc,
+(select id_rubro from COMPUMUNDOHIPERMEGARED.Rubro where descripcion = m.Espectaculo_Descripcion)
+from COMPUMUNDOHIPERMEGARED.Empresa e
+inner join gd_esquema.Maestra m
+on e.cuit = m.Espec_Empresa_Cuit and e.razon_social = m.Espec_Empresa_Razon_Social
+group by e.id_empresa, m.Espectaculo_Cod, m.Espectaculo_Descripcion, m.Espectaculo_Fecha,
+m.Espectaculo_Fecha_Venc, m.Espectaculo_Rubro_Descripcion
+
+select * from COMPUMUNDOHIPERMEGARED.Publicacion
+go
+
 
 select m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar, m.Ubicacion_Precio
 from COMPUMUNDOHIPERMEGARED.TipoUbicacion t
