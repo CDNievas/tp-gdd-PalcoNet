@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PalcoNet.Abm_Grado
 {
-    public partial class ActualizarGrado : Form
+    public partial class actualizarGrado : Form
     {
-        public ActualizarGrado()
+        public actualizarGrado()
         {
             InitializeComponent();
         }

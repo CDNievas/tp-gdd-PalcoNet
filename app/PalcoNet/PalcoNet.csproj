@@ -56,11 +56,29 @@
     <Compile Include="Abm Empresa Espectaculo\altaEmpresa.Designer.cs">
       <DependentUpon>altaEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Grado\Form1.cs">
+    <Compile Include="Abm Empresa Espectaculo\bajaEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Grado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Empresa Espectaculo\bajaEmpresa.Designer.cs">
+      <DependentUpon>bajaEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Grado\ActualizarGrado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Grado\ActualizarGrado.Designer.cs">
+      <DependentUpon>ActualizarGrado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Grado\altaGrado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Grado\altaGrado.Designer.cs">
+      <DependentUpon>altaGrado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Grado\ListarGrado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Grado\ListarGrado.Designer.cs">
+      <DependentUpon>ListarGrado.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\Form1.cs">
       <SubType>Form</SubType>
@@ -98,11 +116,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicacion\Form1.cs">
+    <Compile Include="Generar Publicacion\altaPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Publicacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Generar Publicacion\altaPublicacion.Designer.cs">
+      <DependentUpon>altaPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Generar Rendicion Comisiones\Form1.cs">
       <SubType>Form</SubType>
@@ -136,8 +154,23 @@
     <EmbeddedResource Include="Abm Empresa Espectaculo\altaEmpresa.resx">
       <DependentUpon>altaEmpresa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Empresa Espectaculo\bajaEmpresa.resx">
+      <DependentUpon>bajaEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Grado\ActualizarGrado.resx">
+      <DependentUpon>ActualizarGrado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Grado\altaGrado.resx">
+      <DependentUpon>altaGrado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Grado\ListarGrado.resx">
+      <DependentUpon>ListarGrado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Rubro\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\altaPublicacion.resx">
+      <DependentUpon>altaPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

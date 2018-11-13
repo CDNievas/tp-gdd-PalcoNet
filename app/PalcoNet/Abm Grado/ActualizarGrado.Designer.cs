@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Abm_Grado
 {
-    partial class ActualizarGrado
+    partial class actualizarGrado
     {
         /// <summary>
         /// Required designer variable.
