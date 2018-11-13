@@ -62,6 +62,8 @@
     <Compile Include="Abm Empresa Espectaculo\bajaEmpresa.Designer.cs">
       <DependentUpon>bajaEmpresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Empresa Espectaculo\Buscador.cs" />
+    <Compile Include="Abm Empresa Espectaculo\Empresa.cs" />
     <Compile Include="Abm Grado\ActualizarGrado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +100,7 @@
     <Compile Include="Canje Puntos\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataBase.cs" />
     <Compile Include="Comprar\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +118,11 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2018DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2018DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Generar Publicacion\altaPublicacion.cs">
       <SubType>Form</SubType>
@@ -181,6 +189,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="GD2C2018DataSet.xsc">
+      <DependentUpon>GD2C2018DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2018DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2018DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2018DataSet.xss">
+      <DependentUpon>GD2C2018DataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -192,7 +211,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
