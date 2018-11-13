@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PalcoNet.Abm_Cliente
+namespace PalcoNet.Abm_Grado
 {
-    public partial class Form1 : Form
+    public partial class ListarGrado : Form
     {
-        public Form1()
+        public ListarGrado()
         {
             InitializeComponent();
         }

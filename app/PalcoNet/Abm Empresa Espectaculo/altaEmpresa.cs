@@ -8,17 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PalcoNet.Abm_Rubro
+namespace PalcoNet.Abm_Empresa_Espectaculo
 {
-    public partial class Form1 : Form
+    public partial class altaEmpresa : Form
     {
-        public Form1()
+        public altaEmpresa()
         {
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void altaEmpresa_Load(object sender, EventArgs e)
         {
+
+        }
+
+      
 
         }
     }
