@@ -126,7 +126,7 @@ create table COMPUMUNDOHIPERMEGARED.Facturas(
 	factura_total numeric(18,2),
 	forma_pago_desc varchar(255),
 	factura_compra_total numeric(18,2),
-	cliente_id int foreign key references COMPUMUNDOHIPERMEGARED.Cliente
+	empresa_id int not null foreign key references COMPUMUNDOHIPERMEGARED.Empresa
 )
 
 create table COMPUMUNDOHIPERMEGARED.Pagos(
@@ -148,7 +148,7 @@ create table COMPUMUNDOHIPERMEGARED.Ubicacion(
 	asiento numeric(18),
 	precio numeric(18),
 	ocupado bit default 0,
-	compar_id int foreign key references COMPUMUNDOHIPERMEGARED.Compras
+	compra_id int foreign key references COMPUMUNDOHIPERMEGARED.Compras
 )
 
 create table COMPUMUNDOHIPERMEGARED.Item_Factura(
@@ -185,6 +185,8 @@ go
 
 insert into COMPUMUNDOHIPERMEGARED.Rubro(descripcion)
 select distinct Espectaculo_Rubro_Descripcion from gd_esquema.Maestra
+
+select * from COMPUMUNDOHIPERMEGARED.Rubro
 go
 
 insert into COMPUMUNDOHIPERMEGARED.TipoUbicacion(codigo, descripcion)
@@ -194,22 +196,55 @@ from gd_esquema.Maestra m
 select * from COMPUMUNDOHIPERMEGARED.TipoUbicacion
 go
 
+select id_rubro from COMPUMUNDOHIPERMEGARED.Rubro where descripcion like ''
+
 insert into COMPUMUNDOHIPERMEGARED.Publicacion
 (id_empresa, id_publicacion, desrcipcion, fecha_espectaculo, fecha_vencimiento, rubro_id)
 select e.id_empresa, m.Espectaculo_Cod, m.Espectaculo_Descripcion, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc,
-(select id_rubro from COMPUMUNDOHIPERMEGARED.Rubro where descripcion = m.Espectaculo_Descripcion)
+(select r.id_rubro from COMPUMUNDOHIPERMEGARED.Rubro r where r.descripcion like m.Espectaculo_Rubro_Descripcion)
 from COMPUMUNDOHIPERMEGARED.Empresa e
 inner join gd_esquema.Maestra m
 on e.cuit = m.Espec_Empresa_Cuit and e.razon_social = m.Espec_Empresa_Razon_Social
 group by e.id_empresa, m.Espectaculo_Cod, m.Espectaculo_Descripcion, m.Espectaculo_Fecha,
 m.Espectaculo_Fecha_Venc, m.Espectaculo_Rubro_Descripcion
 
+delete from COMPUMUNDOHIPERMEGARED.Publicacion
+
 select * from COMPUMUNDOHIPERMEGARED.Publicacion
 go
 
-
-select m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar, m.Ubicacion_Precio
-from COMPUMUNDOHIPERMEGARED.TipoUbicacion t
-inner join gd_esquema.Maestra m
-on m.Ubicacion_Tipo_Codigo = t.codigo
+-- EL RESULTADO DE ESTA QUERY ME HACE PENSAR QUE PUEDE SER UN MANY TO MANY
+select m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar, m.Ubicacion_Precio,
+count(distinct m.Espectaculo_Cod) as CantidadDeEspectaculos,
+count(distinct m.Compra_Fecha + m.Compra_Cantidad) as VecesComprada
+from gd_esquema.Maestra m
 group by m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar, m.Ubicacion_Precio
+
+select m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar, m.Ubicacion_Precio,
+count(distinct m.Compra_Fecha + m.Compra_Cantidad) as VecesComprada
+from gd_esquema.Maestra m
+group by m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar, m.Ubicacion_Precio
+
+
+select *
+from gd_esquema.Maestra m
+where m.Factura_Nro is not null
+order by m.Factura_Nro
+
+
+insert into COMPUMUNDOHIPERMEGARED.Facturas(factura_numero, factura_fecha, factura_total, empresa_id)
+select f.nro, f.fecha, f.total,
+(select e.id_empresa from COMPUMUNDOHIPERMEGARED.Empresa e where e.cuit = f.cuit)
+from
+(
+select m.Factura_Fecha as fecha, m.Factura_Nro as nro, m.Factura_Total as total, m.Espec_Empresa_Cuit as cuit
+from gd_esquema.Maestra m
+where m.Factura_Nro is not null
+group by m.Factura_Fecha, m.Factura_Nro, m.Factura_Total, m.Espec_Empresa_Cuit
+) f
+
+go
+
+select f.factura_numero, e.razon_social
+from COMPUMUNDOHIPERMEGARED.Facturas f inner join COMPUMUNDOHIPERMEGARED.Empresa e
+on f.empresa_id = e.id_empresa
