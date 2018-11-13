@@ -34,7 +34,7 @@ C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\bin\Debug\PalcoNet.exe
 C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\bin\Debug\PalcoNet.pdb
 C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.exe
 C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.pdb
-C:\Users\Administrator\Desktop\gdd\app\PalcoNet\bin\Debug\PalcoNet.exe.config
+C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.altaCliente.resources
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.altaEmpresa.resources
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.bajaEmpresa.resources
@@ -45,6 +45,7 @@ C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Abm_Rubro.For
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.altaPublicacion.resources
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Properties.Resources.resources
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\gdd\app\PalcoNet\bin\Debug\PalcoNet.exe.config
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\bin\Debug\PalcoNet.exe
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\bin\Debug\PalcoNet.pdb
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.exe

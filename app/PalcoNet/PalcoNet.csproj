@@ -50,6 +50,7 @@
     <Compile Include="Abm Cliente\altaCliente.Designer.cs">
       <DependentUpon>altaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Cliente\Buscador.cs" />
     <Compile Include="Abm Empresa Espectaculo\altaEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,7 +216,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Abm Cliente\Cliente.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
