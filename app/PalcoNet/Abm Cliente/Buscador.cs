@@ -33,12 +33,12 @@ namespace PalcoNet.Abm_Cliente
             }
             if (apellido != null)
             {
-                var condicion = String.Format("apellido like '%{0}%'", nombre);
+                var condicion = String.Format("apellido like '%{0}%'", apellido);
                 condiciones.Add(condicion);
             }
             if (dni != null && !dni.Trim().Equals(""))
             {
-                var condicion = String.Format("dni = '{0}'", dni);
+                var condicion = String.Format("nro_documento = '{0}'", dni);
                 condiciones.Add(condicion);
             }
             if (email != null)
