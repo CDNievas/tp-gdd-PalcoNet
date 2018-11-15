@@ -21,8 +21,8 @@ create table COMPUMUNDOHIPERMEGARED.Rol(
 
 create table COMPUMUNDOHIPERMEGARED.Rol_Usuario(
 	id_rol_usuario int identity(1,1) primary key,
-	id_usario int foreign key references COMPUMUNDOHIPERMEGARED.Usuario,
-	id_rol int foreign key references COMPUMUNDOHIPERMEGARED.Rol,
+	id_usario int constraint FK__USUARIO references COMPUMUNDOHIPERMEGARED.Usuario,
+	id_rol int constraint FK_ROL references COMPUMUNDOHIPERMEGARED.Rol,
 	habilitado bit,
 	eliminado bit  -- NO entiendo si habilitado/eliminado representan lo mismo o cosas distintas	
 )
@@ -41,7 +41,7 @@ create table COMPUMUNDOHIPERMEGARED.Empresa(
 	depto nvarchar(50),
 	cod_postal nvarchar(50),
 	fecha_creacion datetime,
-	rol_usuario_id int foreign key references COMPUMUNDOHIPERMEGARED.Rol_Usuario
+	rol_usuario_id int constraint FK_EMPRESA_ROLUSUARIO references COMPUMUNDOHIPERMEGARED.Rol_Usuario
 )
 
 create table COMPUMUNDOHIPERMEGARED.Cliente(
@@ -62,7 +62,7 @@ create table COMPUMUNDOHIPERMEGARED.Cliente(
 	cod_postal nvarchar(255),
 	fecha_nacimiento date,
 	fecha_creacion datetime,
-	rol_usuario_id int foreign key references COMPUMUNDOHIPERMEGARED.Rol_Usuario
+	rol_usuario_id int constraint FK_CLIENTE_ROLUSUARIO references COMPUMUNDOHIPERMEGARED.Rol_Usuario
 )
 
 
@@ -89,9 +89,9 @@ create table COMPUMUNDOHIPERMEGARED.Publicacion(
 	dom_calle nvarchar(50),
 	num_calle numeric(18),
 	cod_postal nvarchar(50),
-	id_empresa int foreign key references COMPUMUNDOHIPERMEGARED.Empresa,
-	rubro_id int foreign key references COMPUMUNDOHIPERMEGARED.Rubro,
-	grado_id int foreign key references COMPUMUNDOHIPERMEGARED.Grado
+	id_empresa int constraint FK_PUBLICACION_EMPRESA references COMPUMUNDOHIPERMEGARED.Empresa,
+	rubro_id int constraint FK_PUBLICACION_RUBRO references COMPUMUNDOHIPERMEGARED.Rubro,
+	grado_id int constraint FK_PUBLICACION_GRADO references COMPUMUNDOHIPERMEGARED.Grado
 )
 
 create table COMPUMUNDOHIPERMEGARED.Tarjeta(
@@ -101,19 +101,21 @@ create table COMPUMUNDOHIPERMEGARED.Tarjeta(
 	ccv nvarchar(5),
 	fecha_vencimiento date,
 	habilitado bit,
-	id_cliente int foreign key references COMPUMUNDOHIPERMEGARED.Cliente
+	id_cliente int constraint FK_TARJETA_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente
 )
 
 create table COMPUMUNDOHIPERMEGARED.Compras(
 	compra_id int identity(1,1) primary key,
 	compra_fecha datetime,
 	compra_cantidad numeric(18),
-	tarjeta_id int foreign key references COMPUMUNDOHIPERMEGARED.Tarjeta
+	tarjeta_id int constraint FK_COMPRAS_TARJETA references COMPUMUNDOHIPERMEGARED.Tarjeta,
+	cliente_id int constraint FK_COMPRAS_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente,
+	ubicacion_id int
 )
 
 create table COMPUMUNDOHIPERMEGARED.Puntos(
 	puntos_id int identity(1,1) primary key,
-	cliente_id int foreign key references COMPUMUNDOHIPERMEGARED.Cliente,
+	cliente_id int constraint FK_PUNTOS_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente,
 	fecha_alta date,
 	canjeado bit,
 	cantidad_puntos numeric(10)
@@ -126,19 +128,18 @@ create table COMPUMUNDOHIPERMEGARED.Facturas(
 	factura_total numeric(18,2),
 	forma_pago_desc varchar(255),
 	factura_compra_total numeric(18,2),
-	empresa_id int not null foreign key references COMPUMUNDOHIPERMEGARED.Empresa
+	empresa_id int not null constraint FK_FACTURAS_EMPRESA references COMPUMUNDOHIPERMEGARED.Empresa
 )
 
 create table COMPUMUNDOHIPERMEGARED.Pagos(
 	pago_id int identity(1,1) primary key,
 	monto_pago numeric(18,2),
-	empresa_id int foreign key references COMPUMUNDOHIPERMEGARED.Empresa,
-	factura_id int foreign key references COMPUMUNDOHIPERMEGARED.Facturas
+	empresa_id int constraint FK_PAGOS_EMPRESA references COMPUMUNDOHIPERMEGARED.Empresa,
+	factura_id int constraint FK_PAGOS_FACTURAS references COMPUMUNDOHIPERMEGARED.Facturas
 )
 
 create table COMPUMUNDOHIPERMEGARED.TipoUbicacion(
-	id_tipo_ubicacion int identity(1,1) primary key,
-	codigo numeric(18), -- POR AHI ACA SI TENDRIA SENTIDO HACER QUE ESTO SEA PK
+	codigo numeric(18) primary key,
 	descripcion nvarchar(255)
 )
 
@@ -147,22 +148,36 @@ create table COMPUMUNDOHIPERMEGARED.Ubicacion(
 	fila varchar(3),
 	asiento numeric(18),
 	precio numeric(18),
+	sin_numerar bit,
 	ocupado bit default 0,
-	compra_id int foreign key references COMPUMUNDOHIPERMEGARED.Compras
+	tipo_ubicacion_id numeric(18) constraint FK_UBICACION_TIPOUBICACION references COMPUMUNDOHIPERMEGARED.TipoUbicacion,
+	compra_id int constraint FK_UBICACION_COMPRAS references COMPUMUNDOHIPERMEGARED.Compras,
+	publicacion_id numeric(18,0) constraint FK_UBICACION_PUBLICACION references COMPUMUNDOHIPERMEGARED.Publicacion
 )
 
 create table COMPUMUNDOHIPERMEGARED.Item_Factura(
-	ubicacion_id int foreign key references COMPUMUNDOHIPERMEGARED.Ubicacion,
-	factura_id int foreign key references COMPUMUNDOHIPERMEGARED.Facturas,
+	ubicacion_id int constraint FK_ITEMFACTURA_UBICACION references COMPUMUNDOHIPERMEGARED.Ubicacion,
+	factura_id int constraint FK_ITEMFACTURA_FACTURAS references COMPUMUNDOHIPERMEGARED.Facturas,
 	item_factura_monto numeric(18,2),
 	item_factura_cantidad numeric(18),
 	item_factura_descripcion varchar(60)
 )
 
+alter table COMPUMUNDOHIPERMEGARED.Compras
+add constraint fk_compra_ubicacion foreign key (ubicacion_id) references COMPUMUNDOHIPERMEGARED.Ubicacion
 go
 /*
 		FIN DE LA CREACION DE TABLAS
 */
+
+CREATE UNIQUE INDEX index_dni
+ON COMPUMUNDOHIPERMEGARED.Cliente (nro_documento)
+go
+
+create index index_ubicacion
+on gd_esquema.Maestra(Ubicacion_Fila, Ubicacion_Asiento, Ubicacion_Sin_numerar,
+Ubicacion_Precio, Ubicacion_Tipo_Codigo)
+go
 
 insert into COMPUMUNDOHIPERMEGARED.Cliente(nro_documento, apellido, nombre, fecha_nacimiento, mail, dom_calle,
 num_calle, piso, depto, cod_postal)
@@ -171,7 +186,7 @@ m.Cli_Nro_Calle, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal
 from gd_esquema.Maestra m
 where m.Cli_Dni is not null
 
-select * from COMPUMUNDOHIPERMEGARED.Cliente
+--select * from COMPUMUNDOHIPERMEGARED.Cliente
 go
 
 insert into COMPUMUNDOHIPERMEGARED.Empresa(razon_social, cuit, fecha_creacion, mail, dom_calle, nro_calle, piso, depto, cod_postal)
@@ -180,23 +195,21 @@ m.Espec_Empresa_Mail, m.Espec_Empresa_Dom_Calle, m.Espec_Empresa_Nro_Calle, m.Es
 m.Espec_Empresa_Depto, m.Espec_Empresa_Cod_Postal
 from gd_esquema.Maestra m
 
-select * from COMPUMUNDOHIPERMEGARED.Empresa
+--select * from COMPUMUNDOHIPERMEGARED.Empresa
 go
 
 insert into COMPUMUNDOHIPERMEGARED.Rubro(descripcion)
 select distinct Espectaculo_Rubro_Descripcion from gd_esquema.Maestra
 
-select * from COMPUMUNDOHIPERMEGARED.Rubro
+--select * from COMPUMUNDOHIPERMEGARED.Rubro
 go
 
 insert into COMPUMUNDOHIPERMEGARED.TipoUbicacion(codigo, descripcion)
 select distinct m.Ubicacion_Tipo_Codigo, m.Ubicacion_Tipo_Descripcion
 from gd_esquema.Maestra m
 
-select * from COMPUMUNDOHIPERMEGARED.TipoUbicacion
+--select * from COMPUMUNDOHIPERMEGARED.TipoUbicacion
 go
-
-select id_rubro from COMPUMUNDOHIPERMEGARED.Rubro where descripcion like ''
 
 insert into COMPUMUNDOHIPERMEGARED.Publicacion
 (id_empresa, id_publicacion, desrcipcion, fecha_espectaculo, fecha_vencimiento, rubro_id)
@@ -208,29 +221,8 @@ on e.cuit = m.Espec_Empresa_Cuit and e.razon_social = m.Espec_Empresa_Razon_Soci
 group by e.id_empresa, m.Espectaculo_Cod, m.Espectaculo_Descripcion, m.Espectaculo_Fecha,
 m.Espectaculo_Fecha_Venc, m.Espectaculo_Rubro_Descripcion
 
-delete from COMPUMUNDOHIPERMEGARED.Publicacion
-
-select * from COMPUMUNDOHIPERMEGARED.Publicacion
+--select * from COMPUMUNDOHIPERMEGARED.Publicacion
 go
-
--- EL RESULTADO DE ESTA QUERY ME HACE PENSAR QUE PUEDE SER UN MANY TO MANY
-select m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar, m.Ubicacion_Precio,
-count(distinct m.Espectaculo_Cod) as CantidadDeEspectaculos,
-count(distinct m.Compra_Fecha + m.Compra_Cantidad) as VecesComprada
-from gd_esquema.Maestra m
-group by m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar, m.Ubicacion_Precio
-
-select m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar, m.Ubicacion_Precio,
-count(distinct m.Compra_Fecha + m.Compra_Cantidad) as VecesComprada
-from gd_esquema.Maestra m
-group by m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar, m.Ubicacion_Precio
-
-
-select *
-from gd_esquema.Maestra m
-where m.Factura_Nro is not null
-order by m.Factura_Nro
-
 
 insert into COMPUMUNDOHIPERMEGARED.Facturas(factura_numero, factura_fecha, factura_total, empresa_id)
 select f.nro, f.fecha, f.total,
@@ -245,6 +237,65 @@ group by m.Factura_Fecha, m.Factura_Nro, m.Factura_Total, m.Espec_Empresa_Cuit
 
 go
 
-select f.factura_numero, e.razon_social
-from COMPUMUNDOHIPERMEGARED.Facturas f inner join COMPUMUNDOHIPERMEGARED.Empresa e
-on f.empresa_id = e.id_empresa
+-- INSERTANDO UBICACIONES
+insert into COMPUMUNDOHIPERMEGARED.Ubicacion(fila, asiento, sin_numerar, precio, tipo_ubicacion_id, publicacion_id)
+select m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar,
+m.Ubicacion_Precio, m.Ubicacion_Tipo_Codigo, m.Espectaculo_Cod
+from gd_esquema.Maestra m
+group by m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar,
+m.Ubicacion_Precio, m.Ubicacion_Tipo_Codigo, m.Espectaculo_Cod
+
+--select * from COMPUMUNDOHIPERMEGARED.Ubicacion
+
+go
+
+/*
+drop function COMPUMUNDOHIPERMEGARED.findIdClienteByDni
+create function COMPUMUNDOHIPERMEGARED.findIdClienteByDni(@dni numeric(18,0))
+returns int
+as
+begin
+	return (select c.id_cliente from COMPUMUNDOHIPERMEGARED.Cliente c where c.nro_documento = @dni)
+end
+go
+*/
+
+insert into COMPUMUNDOHIPERMEGARED.Compras(ubicacion_id, compra_fecha, compra_cantidad, cliente_id)
+select distinct u.id_ubicacion, m.Compra_Fecha, m.Compra_Cantidad, c.id_cliente
+from COMPUMUNDOHIPERMEGARED.Ubicacion u
+inner join gd_esquema.Maestra m
+on m.Ubicacion_Fila = u.fila and m.Ubicacion_Asiento = u.asiento and m.Ubicacion_Precio = u.precio
+and m.Ubicacion_Sin_numerar = u.sin_numerar and m.Ubicacion_Tipo_Codigo = u.tipo_ubicacion_id
+and m.Espectaculo_Cod = u.publicacion_id
+inner join COMPUMUNDOHIPERMEGARED.Cliente c
+on c.nro_documento = m.Cli_Dni
+where m.Compra_Cantidad is not null or m.Compra_Fecha is not null
+
+/*
+select * from COMPUMUNDOHIPERMEGARED.Compras order by cliente_id, ubicacion_id
+delete from COMPUMUNDOHIPERMEGARED.Compras
+*/
+go
+
+-- MIGRANDO ITEM_FACTURA
+insert into COMPUMUNDOHIPERMEGARED.Item_Factura(item_factura_cantidad, item_factura_descripcion, item_factura_monto,
+ubicacion_id, factura_id)
+select m.Item_Factura_Cantidad, m.Item_Factura_Descripcion, m.Item_Factura_Monto, u.id_ubicacion, f.factura_id
+from COMPUMUNDOHIPERMEGARED.Facturas f
+inner join gd_esquema.Maestra m
+on m.Factura_Nro = f.factura_numero
+inner join COMPUMUNDOHIPERMEGARED.Ubicacion u
+on m.Ubicacion_Fila = u.fila and m.Ubicacion_Asiento = u.asiento and m.Ubicacion_Precio = u.precio
+and m.Ubicacion_Sin_numerar = u.sin_numerar and m.Ubicacion_Tipo_Codigo = u.tipo_ubicacion_id
+and m.Espectaculo_Cod = u.publicacion_id
+
+-- NO lo vamos a necesitar mas :(
+drop index index_ubicacion on gd_esquema.Maestra
+
+
+-- NO SE SI DEJAR ESTO PERO TIENE SENTIDO QUE SE CUMPLA
+alter table COMPUMUNDOHIPERMEGARED.Compras
+add constraint UQ_UBICACIONES unique(ubicacion_id)
+
+alter table COMPUMUNDOHIPERMEGARED.Facturas
+add constraint UQ_NUMERO unique(factura_numero)
