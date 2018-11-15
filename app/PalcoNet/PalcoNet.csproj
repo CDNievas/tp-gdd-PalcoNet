@@ -32,6 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,6 +53,18 @@
       <DependentUpon>altaCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\Buscador.cs" />
+    <Compile Include="Canje Puntos\canjearPuntos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Canje Puntos\canjearPuntos.Designer.cs">
+      <DependentUpon>canjearPuntos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Canje Puntos\ConsultaPuntos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Canje Puntos\ConsultaPuntos.Designer.cs">
+      <DependentUpon>ConsultaPuntos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Empresa Espectaculo\altaEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,12 +109,6 @@
     <Compile Include="Abm Rubro\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Canje Puntos\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Canje Puntos\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataBase.cs" />
     <Compile Include="Comprar\Form1.cs">
       <SubType>Form</SubType>
@@ -137,17 +145,17 @@
     <Compile Include="Generar Rendicion Comisiones\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Historial Cliente\Form1.cs">
+    <Compile Include="Historial Cliente\historialClienteCompras.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Historial Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Historial Cliente\historialClienteCompras.Designer.cs">
+      <DependentUpon>historialClienteCompras.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\obtenerTop5.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\obtenerTop5.Designer.cs">
+      <DependentUpon>obtenerTop5.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -159,6 +167,12 @@
     </Compile>
     <EmbeddedResource Include="Abm Cliente\altaCliente.resx">
       <DependentUpon>altaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Canje Puntos\canjearPuntos.resx">
+      <DependentUpon>canjearPuntos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Canje Puntos\ConsultaPuntos.resx">
+      <DependentUpon>ConsultaPuntos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Empresa Espectaculo\altaEmpresa.resx">
       <DependentUpon>altaEmpresa.cs</DependentUpon>
@@ -178,8 +192,17 @@
     <EmbeddedResource Include="Abm Rubro\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\altaPublicacion.resx">
       <DependentUpon>altaPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\historialClienteCompras.resx">
+      <DependentUpon>historialClienteCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\obtenerTop5.resx">
+      <DependentUpon>obtenerTop5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

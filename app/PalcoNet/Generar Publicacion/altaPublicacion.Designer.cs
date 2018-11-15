@@ -43,7 +43,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnGPLimpiar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -177,14 +177,14 @@
             this.textBox2.Size = new System.Drawing.Size(264, 111);
             this.textBox2.TabIndex = 41;
             // 
-            // button2
+            // btnGPLimpiar
             // 
-            this.button2.Location = new System.Drawing.Point(452, 480);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 30);
-            this.button2.TabIndex = 43;
-            this.button2.Text = "Cancelar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnGPLimpiar.Location = new System.Drawing.Point(452, 480);
+            this.btnGPLimpiar.Name = "btnGPLimpiar";
+            this.btnGPLimpiar.Size = new System.Drawing.Size(88, 30);
+            this.btnGPLimpiar.TabIndex = 43;
+            this.btnGPLimpiar.Text = "Limpiar";
+            this.btnGPLimpiar.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -201,7 +201,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(689, 533);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnGPLimpiar);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label3);
@@ -242,7 +242,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnGPLimpiar;
         private System.Windows.Forms.Button button1;
     }
 }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PalcoNet.Historial_Cliente
 {
-    public partial class Form1 : Form
+    public partial class historialClienteCompras : Form
     {
-        public Form1()
+        public historialClienteCompras()
         {
             InitializeComponent();
         }

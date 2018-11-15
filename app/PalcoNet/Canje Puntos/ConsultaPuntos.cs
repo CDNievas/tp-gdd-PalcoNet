@@ -8,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PalcoNet.Generar_Publicacion
+namespace PalcoNet.Abm_Cliente
 {
-    public partial class altaPublicacion : Form
+    public partial class ConsultaPuntos : Form
     {
-        public altaPublicacion()
+        public ConsultaPuntos()
         {
             InitializeComponent();
         }
-
-    
     }
 }

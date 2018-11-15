@@ -38,13 +38,15 @@
             this.ColumnDescripcionGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnIDGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnComisionGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             ((System.ComponentModel.ISupportInitialize)(this.numGradoId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblGradoBusqueda)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGradoLimpiar
             // 
-            this.btnGradoLimpiar.Location = new System.Drawing.Point(232, 163);
+            this.btnGradoLimpiar.Location = new System.Drawing.Point(45, 163);
             this.btnGradoLimpiar.Name = "btnGradoLimpiar";
             this.btnGradoLimpiar.Size = new System.Drawing.Size(88, 30);
             this.btnGradoLimpiar.TabIndex = 19;
@@ -101,10 +103,10 @@
             this.columnIDGrado,
             this.columnComisionGrado});
             this.tblGradoBusqueda.GridColor = System.Drawing.SystemColors.InactiveCaption;
-            this.tblGradoBusqueda.Location = new System.Drawing.Point(45, 223);
+            this.tblGradoBusqueda.Location = new System.Drawing.Point(62, 223);
             this.tblGradoBusqueda.Name = "tblGradoBusqueda";
             this.tblGradoBusqueda.RowTemplate.Height = 24;
-            this.tblGradoBusqueda.Size = new System.Drawing.Size(332, 65);
+            this.tblGradoBusqueda.Size = new System.Drawing.Size(343, 208);
             this.tblGradoBusqueda.TabIndex = 24;
             // 
             // ColumnDescripcionGrado
@@ -122,11 +124,28 @@
             this.columnComisionGrado.HeaderText = "comision";
             this.columnComisionGrado.Name = "columnComisionGrado";
             // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape1});
+            this.shapeContainer1.Size = new System.Drawing.Size(499, 461);
+            this.shapeContainer1.TabIndex = 25;
+            this.shapeContainer1.TabStop = false;
+            // 
+            // rectangleShape1
+            // 
+            this.rectangleShape1.Location = new System.Drawing.Point(44, 31);
+            this.rectangleShape1.Name = "rectangleShape1";
+            this.rectangleShape1.Size = new System.Drawing.Size(369, 98);
+            // 
             // ListarGrado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(475, 334);
+            this.ClientSize = new System.Drawing.Size(499, 461);
             this.Controls.Add(this.tblGradoBusqueda);
             this.Controls.Add(this.numGradoId);
             this.Controls.Add(this.lblGradoComision);
@@ -134,6 +153,7 @@
             this.Controls.Add(this.lblGradoID);
             this.Controls.Add(this.btnGradoLimpiar);
             this.Controls.Add(this.btnGradoBuscar);
+            this.Controls.Add(this.shapeContainer1);
             this.Name = "ListarGrado";
             this.Text = "ListarGrado";
             ((System.ComponentModel.ISupportInitialize)(this.numGradoId)).EndInit();
@@ -155,5 +175,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescripcionGrado;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnIDGrado;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnComisionGrado;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
     }
 }

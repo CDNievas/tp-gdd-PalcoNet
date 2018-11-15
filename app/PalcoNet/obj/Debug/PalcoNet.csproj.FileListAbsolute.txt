@@ -50,3 +50,9 @@ C:\Users\Administrator\Desktop\gdd\app\PalcoNet\bin\Debug\PalcoNet.exe
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\bin\Debug\PalcoNet.pdb
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.exe
 C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.pdb
+C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.csprojResolveAssemblyReference.cache
+C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.canjearPuntos.resources
+C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.ConsultaPuntos.resources
+C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Historial_Cliente.historialClienteCompras.resources
+C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Listado_Estadistico.obtenerTop5.resources
+C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Form1.resources
