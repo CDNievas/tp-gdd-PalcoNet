@@ -56,3 +56,23 @@ C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Cli
 C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Historial_Cliente.historialClienteCompras.resources
 C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Listado_Estadistico.obtenerTop5.resources
 C:\Users\FIORELLA\Desktop\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Form1.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\bin\Debug\PalcoNet.exe.config
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\bin\Debug\PalcoNet.exe
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\bin\Debug\PalcoNet.pdb
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.altaCliente.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.canjearPuntos.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.ConsultaPuntos.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.altaEmpresa.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.bajaEmpresa.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.actualizarGrado.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.altaGrado.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.ListarGrado.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Abm_Rubro.Form1.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Form1.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.altaPublicacion.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Historial_Cliente.historialClienteCompras.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Listado_Estadistico.obtenerTop5.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.Properties.Resources.resources
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.csproj.GenerateResource.Cache
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.exe
+C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.pdb
