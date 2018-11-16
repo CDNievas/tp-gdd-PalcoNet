@@ -15,7 +15,7 @@ create table COMPUMUNDOHIPERMEGARED.Usuario(
 
 create table COMPUMUNDOHIPERMEGARED.Funcionalidad(
 	id_funcionalidad tinyint primary key,
-	descripcion varchar(30)
+	descripcion varchar(30) unique
 )
 
 create table COMPUMUNDOHIPERMEGARED.Rol(
@@ -433,3 +433,69 @@ go
 
 
 select * from COMPUMUNDOHIPERMEGARED.Usuario
+go
+
+create function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol(@rol_id smallint)
+returns @funcionalidades table(id_funcionalidad tinyint, descripcion varchar(30))
+as
+begin
+	insert into @funcionalidades
+	select f.id_funcionalidad, f.descripcion
+	from COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad rf
+	inner join COMPUMUNDOHIPERMEGARED.Funcionalidad f
+	on rf.rol_id = @rol_id and f.id_funcionalidad = rf.funcionalidad_id
+	return
+end
+go
+
+select * from COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol(1)
+go
+
+create function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario(@usuario_id int)
+returns @funcionalidades table(id_funcionalidad tinyint, descripcion varchar(30))
+as
+begin
+	declare c1 cursor for select r.id_rol from Rol_Usuario r
+	where r.id_usario = @usuario_id
+	declare @id_rol smallint
+	declare @funcionalidades_temp table(id_funcionalidad tinyint, descripcion varchar(30))
+
+	open c1
+	fetch next from c1 into @id_rol
+
+	while @@FETCH_STATUS = 0
+	begin
+		insert into @funcionalidades_temp
+		select * from COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol(@id_rol)
+		fetch next from c1 into @id_rol
+	end
+
+	close c1
+	deallocate c1
+	insert into @funcionalidades
+	select distinct t.id_funcionalidad, t.descripcion from @funcionalidades_temp t
+	return
+	end
+go
+
+select * from COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario(771)
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.eliminar_rol(@id_rol smallint)
+as
+begin
+	update Rol
+	set habilitado = 0
+	where id_rol = @id_rol
+
+	delete from Rol_Usuario
+	where id_rol = @id_rol
+end
+go
+
+/*
+exec COMPUMUNDOHIPERMEGARED.eliminar_rol 1
+
+select * from COMPUMUNDOHIPERMEGARED.Rol_Usuario 
+select * from COMPUMUNDOHIPERMEGARED.Rol
+*/

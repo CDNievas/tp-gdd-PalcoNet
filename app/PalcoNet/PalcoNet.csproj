@@ -53,6 +53,8 @@
       <DependentUpon>altaCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\Buscador.cs" />
+    <Compile Include="Abm Rol\Rol.cs" />
+    <Compile Include="Abm Rol\Roles.cs" />
     <Compile Include="Canje Puntos\canjearPuntos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +159,9 @@
     <Compile Include="Listado Estadistico\obtenerTop5.Designer.cs">
       <DependentUpon>obtenerTop5.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginUtils\Funcionalidad.cs" />
+    <Compile Include="LoginUtils\Funcionalidades.cs" />
+    <Compile Include="Parametro.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registro de Usuario\Form1.cs">

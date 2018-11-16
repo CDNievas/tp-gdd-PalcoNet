@@ -7,6 +7,18 @@ go
 drop INDEX index_dni on COMPUMUNDOHIPERMEGARED.Cliente
 go
 
+drop procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol
+go
+
+drop type COMPUMUNDOHIPERMEGARED.FuncionalidadList
+go
+
+drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
+go
+
+drop procedure COMPUMUNDOHIPERMEGARED.eliminar_rol
+go
+
 IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Publicacion', 'U') IS NOT NULL 
 	drop table COMPUMUNDOHIPERMEGARED.Publicacion
 IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad', 'U') IS NOT NULL 

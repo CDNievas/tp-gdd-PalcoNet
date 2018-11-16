@@ -42,5 +42,25 @@ namespace PalcoNet
             return dt;
         }
 
+        public void procedure(String procName, params Parametro[] ps){
+            Console.WriteLine("::::STORE PROCEDURE::::");
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = String.Format("{0}.{1}", schemaName, procName);
+            Console.WriteLine(cmd.CommandText);
+            foreach (Parametro p in ps) {
+                cmd.Parameters.AddWithValue("@" + p.nombre, p.valor);
+            }
+            try{
+                cmd.ExecuteNonQuery();
+            }catch(Exception ex){
+                throw new ProcedureException("Error al ejecutar el procedure " + procName, ex);
+            }
+        }
+
+        class ProcedureException : Exception {
+            public ProcedureException(string msg, Exception e) : base(msg, e) { }
+        }
+
     }
 }

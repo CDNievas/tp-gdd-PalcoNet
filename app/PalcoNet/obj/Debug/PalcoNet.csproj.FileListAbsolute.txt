@@ -76,3 +76,8 @@ C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\Palco
 C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.csproj.GenerateResource.Cache
 C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.exe
 C:\Users\FIORELLA\Desktop\New folder\gdd-TPPalcoNet\app\PalcoNet\obj\Debug\PalcoNet.pdb
+C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.canjearPuntos.resources
+C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.ConsultaPuntos.resources
+C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Form1.resources
+C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Historial_Cliente.historialClienteCompras.resources
+C:\Users\Administrator\Desktop\gdd\app\PalcoNet\obj\Debug\PalcoNet.Listado_Estadistico.obtenerTop5.resources
