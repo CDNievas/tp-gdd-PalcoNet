@@ -9,20 +9,30 @@ create table COMPUMUNDOHIPERMEGARED.Usuario(
 	username nvarchar(50),
 	password nvarchar(50),
 	intentos tinyint,
-	habilitado bit
+	habilitado bit,
+	eliminado bit default 0
+)
+
+create table COMPUMUNDOHIPERMEGARED.Funcionalidad(
+	id_funcionalidad tinyint primary key,
+	descripcion varchar(30)
 )
 
 create table COMPUMUNDOHIPERMEGARED.Rol(
-	id_rol int identity(1,1) primary key,
-	nombre nvarchar(50),
-	listaFuncionalidad binary(20),
-	habilitado bit
+	id_rol smallint identity(1,1) primary key,
+	nombre nvarchar(50) unique,
+	habilitado bit default 1
+)
+
+create table COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad(
+	rol_id smallint constraint FK_ROLFUNCIONALIDAD_ROL references COMPUMUNDOHIPERMEGARED.Rol,
+	funcionalidad_id tinyint constraint FK_ROLFUNCIONALIDAD_FUNCIONALIDAD references COMPUMUNDOHIPERMEGARED.Funcionalidad
 )
 
 create table COMPUMUNDOHIPERMEGARED.Rol_Usuario(
 	id_rol_usuario int identity(1,1) primary key,
 	id_usario int constraint FK__USUARIO references COMPUMUNDOHIPERMEGARED.Usuario,
-	id_rol int constraint FK_ROL references COMPUMUNDOHIPERMEGARED.Rol,
+	id_rol smallint constraint FK_ROL references COMPUMUNDOHIPERMEGARED.Rol,
 	habilitado bit,
 	eliminado bit  -- NO entiendo si habilitado/eliminado representan lo mismo o cosas distintas	
 )
@@ -299,3 +309,127 @@ add constraint UQ_UBICACIONES unique(ubicacion_id)
 
 alter table COMPUMUNDOHIPERMEGARED.Facturas
 add constraint UQ_NUMERO unique(factura_numero)
+
+
+insert into COMPUMUNDOHIPERMEGARED.Funcionalidad(id_funcionalidad, descripcion)
+values
+(1, 'ABM ROL'),
+(2, 'ABM CLIENTES'),
+(3, 'ABM EMPRESA ESPECTACULOS'),
+(4, 'ABM RUBRO'),
+(5, 'ABM GRADO PUBLICACION'),
+(6, 'GENERAR PUBLICACION'),
+(7, 'EDITAR PUBLICACION'),
+(8, 'COMPRAR'),
+(9, 'HISTORIAL CLIENTE'),
+(10, 'PUNTOS CLIENTE'),
+(11, 'RENDICION COMISIONES'),
+(12, 'LISTADO ESTADISTICO')
+
+--select * from COMPUMUNDOHIPERMEGARED.Funcionalidad
+
+create type COMPUMUNDOHIPERMEGARED.FuncionalidadList as table(
+	funcionalidad_id tinyint
+)
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol(@nombre nvarchar(50), @listaFuncionalidad FuncionalidadList readonly)
+as
+begin
+	insert into COMPUMUNDOHIPERMEGARED.Rol(habilitado, nombre)
+	values(1, @nombre)
+
+	declare @rol_id smallint = @@IDENTITY
+
+	insert into COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad(funcionalidad_id, rol_id)
+	select l.funcionalidad_id, @rol_id from @listaFuncionalidad l
+end
+go
+
+
+create procedure COMPUMUNDOHIPERMEGARED.crearRolesPrincipales
+as
+begin
+	declare @funcionalidades_cliente COMPUMUNDOHIPERMEGARED.FuncionalidadList
+	insert into @funcionalidades_cliente values (8),(9),(10)
+	exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'CLIENTE', @funcionalidades_cliente
+
+	declare @funcionalidades_admin COMPUMUNDOHIPERMEGARED.FuncionalidadList
+	insert into @funcionalidades_admin values (1),(2),(3),(4),(11),(12)
+	exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'ADMINISTRADOR', @funcionalidades_admin
+
+	declare @funcionalidades_empresa COMPUMUNDOHIPERMEGARED.FuncionalidadList
+	insert into @funcionalidades_empresa values (5),(6),(7)
+	exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'EMPRESA', @funcionalidades_empresa
+
+end
+go
+
+exec COMPUMUNDOHIPERMEGARED.crearRolesPrincipales
+drop procedure COMPUMUNDOHIPERMEGARED.crearRolesPrincipales
+
+select * from COMPUMUNDOHIPERMEGARED.Rol r
+inner join COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad rf on rf.rol_id = r.id_rol
+inner join COMPUMUNDOHIPERMEGARED.Funcionalidad f on f.id_funcionalidad = rf.funcionalidad_id
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.crear_usuarios_de_empresas
+as
+begin
+	declare @id_rol_empresa smallint = (select id_rol from Rol where nombre = 'EMPRESA')
+	declare c1 cursor for select e.cuit from COMPUMUNDOHIPERMEGARED.Empresa e
+	open c1
+	declare @cuit nvarchar(255)
+	fetch next from c1 into @cuit
+
+	while @@FETCH_STATUS = 0
+	begin
+		insert into Usuario(username, intentos, habilitado)
+		values('E-' + @cuit, 0, 0)
+		declare @id_usuario int = @@IDENTITY
+		insert into Rol_Usuario(id_rol, id_usario)
+		values(@id_rol_empresa, @id_usuario)
+
+		fetch next from c1 into @cuit
+	end
+
+	close c1
+	deallocate c1
+end
+go
+
+exec COMPUMUNDOHIPERMEGARED.crear_usuarios_de_empresas
+drop procedure COMPUMUNDOHIPERMEGARED.crear_usuarios_de_empresas
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.crear_usuarios_de_clientes
+as
+begin
+	declare @id_rol_cliente smallint = (select id_rol from Rol where nombre = 'CLIENTE')
+	declare c1 cursor for select c.nro_documento from COMPUMUNDOHIPERMEGARED.Cliente c
+	open c1
+	declare @dni nvarchar(255)
+	fetch next from c1 into @dni
+
+	while @@FETCH_STATUS = 0
+	begin
+		insert into Usuario(username, intentos, habilitado)
+		values('C-' + @dni, 0, 0)
+		declare @id_usuario int = @@IDENTITY
+		insert into Rol_Usuario(id_rol, id_usario)
+		values(@id_rol_cliente, @id_usuario)
+
+		fetch next from c1 into @dni
+	end
+
+	close c1
+	deallocate c1
+end
+go
+
+exec COMPUMUNDOHIPERMEGARED.crear_usuarios_de_clientes
+drop procedure COMPUMUNDOHIPERMEGARED.crear_usuarios_de_clientes
+go
+
+
+select * from COMPUMUNDOHIPERMEGARED.Usuario
