@@ -9,8 +9,8 @@ namespace PalcoNet.LoginUtils
 {
     class Funcionalidad
     {
-        short id { get; set; }
-        String descripcion;
+        public short id { get; set; }
+        public String descripcion { get; set; }
 
         private Funcionalidad()
         {

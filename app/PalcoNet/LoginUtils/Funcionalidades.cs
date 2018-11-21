@@ -23,6 +23,11 @@ namespace PalcoNet.LoginUtils
             return funcionalidadesFromDataTable(dt);
         }
 
+        public static List<Funcionalidad> TraerTodas() {
+            return funcionalidadesFromDataTable(DataBase.GetInstance().query("select * from COMPUMUNDOHIPERMEGARED.Funcionalidad"));
+        }
+
+
         private static List<Funcionalidad> funcionalidadesFromDataTable(DataTable dt)
         {
             var funcionalidades = new List<Funcionalidad>();

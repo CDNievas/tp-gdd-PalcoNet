@@ -9,11 +9,11 @@ namespace PalcoNet
     class Parametro
     {
         public String nombre;
-        public String valor;
+        public Object valor;
 
         public Parametro(String nombre, Object valor) {
             this.nombre = nombre;
-            this.valor = valor.ToString();
+            this.valor = valor;
         }
     }
 }

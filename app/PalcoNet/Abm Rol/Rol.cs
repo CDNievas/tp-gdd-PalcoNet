@@ -41,5 +41,33 @@ namespace PalcoNet.Abm_Rol
         public void eliminate(){
             DataBase.GetInstance().procedure("eliminar_rol", new Parametro("id_rol", id));
         }
+
+        public void Persistite() {
+            DataTable dataTable = new DataTable();
+            DataColumn column;
+            DataRow row;
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.Int16");
+            column.ColumnName = "funcionalidad_id";
+            dataTable.Columns.Add(column);
+
+            foreach (Funcionalidad f in funcionalidades) {
+                row = dataTable.NewRow();
+                row["funcionalidad_id"] = f.id;
+                dataTable.Rows.Add(row);
+            }
+
+            DataBase.GetInstance().procedure("crearNuevoRol",
+                new Parametro("listaFuncionalidad", dataTable),
+                new Parametro("nombre", this.nombre));
+
+            /*
+            var cmd = DataBase.GetInstance().GetStoreProcedureCmd("crearNuevoRol");
+            cmd.Parameters.AddWithValue("@listaFuncionalidad", dataTable);
+            cmd.Parameters.AddWithValue("@nombre", this.nombre);
+            cmd.ExecuteNonQuery();
+             */
+        }
     }
 }
