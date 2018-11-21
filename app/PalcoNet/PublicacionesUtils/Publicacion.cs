@@ -72,7 +72,7 @@ namespace PalcoNet.PublicacionesUtils
         public override string ToString()
         {
             return String.Format("Publicacion({0}, {1}, {2}, {3}, {4}, {5})",
-                this.id, this.descripcion, this.fechaPublicacion, this.rubro, this.grado, this.estado);
+                this.id, this.descripcion, this.fechaEspectaculo, this.rubro, this.grado, this.estado);
         }
 
         

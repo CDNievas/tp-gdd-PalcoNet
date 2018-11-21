@@ -84,7 +84,8 @@ create table COMPUMUNDOHIPERMEGARED.Rubro(
 create table COMPUMUNDOHIPERMEGARED.Grado(
 	id_grado int identity(1,1) primary key,
 	descripcion nvarchar(50),
-	comision numeric(5,2)
+	comision numeric(5,2),
+	prioridad smallint not null
 )
 
 create table COMPUMUNDOHIPERMEGARED.Publicacion(
@@ -578,13 +579,20 @@ go
 create view COMPUMUNDOHIPERMEGARED.PublicacionesView as
 SELECT p.id_publicacion, p.descripcion, p.fecha_publicacion, p.fecha_vencimiento, p.fecha_espectaculo,
 p.estado, p.ciudad, p.localidad, p.dom_calle, p.num_calle, p.cod_postal,
-p.id_empresa, p.cod_estado
+p.id_empresa, p.cod_estado,
 r.id_rubro as rubro_id, r.descripcion as rubro_descripcion,
-g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision
+g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision, g.prioridad
 FROM COMPUMUNDOHIPERMEGARED.Publicacion p
 left join COMPUMUNDOHIPERMEGARED.Rubro r
 on r.id_rubro = p.rubro_id
 left join COMPUMUNDOHIPERMEGARED.Grado g
 on g.id_grado = p.grado_id
 WITH CHECK OPTION
+go
+
+insert into COMPUMUNDOHIPERMEGARED.Grado(descripcion, comision, prioridad)
+values
+('Alta', 25.00, 3),
+('Media', 17.50, 2),
+('Baja', 12.10, 1)
 go

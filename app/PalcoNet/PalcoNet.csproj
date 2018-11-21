@@ -157,6 +157,7 @@
     <Compile Include="PublicacionesUtils\Grados.cs" />
     <Compile Include="PublicacionesUtils\Publicacion.cs" />
     <Compile Include="PublicacionesUtils\Publicaciones.cs" />
+    <Compile Include="PublicacionesUtils\RangoFechas.cs" />
     <Compile Include="PublicacionesUtils\Rubro.cs" />
     <EmbeddedResource Include="Abm Cliente\altaCliente.resx">
       <DependentUpon>altaCliente.cs</DependentUpon>

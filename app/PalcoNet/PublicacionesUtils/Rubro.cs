@@ -8,13 +8,11 @@ namespace PalcoNet.PublicacionesUtils
 {
     class Rubro
     {
-        private int idrubro;
-        private string descripcion1;
 
         public Rubro(int idrubro, string descripcion1)
         {
-            this.idrubro = idrubro;
-            this.descripcion1 = descripcion1;
+            this.id = idrubro;
+            this.descripcion = descripcion1;
         }
 
         public Rubro() { }
