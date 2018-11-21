@@ -84,12 +84,12 @@ create table COMPUMUNDOHIPERMEGARED.Rubro(
 create table COMPUMUNDOHIPERMEGARED.Grado(
 	id_grado int identity(1,1) primary key,
 	descripcion nvarchar(50),
-	comisioni numeric(5,2)
+	comision numeric(5,2)
 )
 
 create table COMPUMUNDOHIPERMEGARED.Publicacion(
 	id_publicacion numeric(18,0) primary key,
-	desrcipcion nvarchar(255),
+	descripcion nvarchar(255),
 	fecha_publicacion datetime,
 	fecha_vencimiento datetime,
 	fecha_espectaculo datetime,
@@ -184,11 +184,6 @@ CREATE UNIQUE INDEX index_dni
 ON COMPUMUNDOHIPERMEGARED.Cliente (nro_documento)
 go
 
-create index index_ubicacion
-on gd_esquema.Maestra(Ubicacion_Fila, Ubicacion_Asiento, Ubicacion_Sin_numerar,
-Ubicacion_Precio, Ubicacion_Tipo_Codigo)
-go
-
 insert into COMPUMUNDOHIPERMEGARED.Cliente(nro_documento, apellido, nombre, fecha_nacimiento, mail, dom_calle,
 num_calle, piso, depto, cod_postal)
 select distinct m.Cli_Dni, m.Cli_Apeliido, m.Cli_Nombre, m.Cli_Fecha_Nac, m.Cli_Mail, m.Cli_Dom_Calle,
@@ -222,7 +217,7 @@ from gd_esquema.Maestra m
 go
 
 insert into COMPUMUNDOHIPERMEGARED.Publicacion
-(id_empresa, id_publicacion, desrcipcion, fecha_espectaculo, fecha_vencimiento, rubro_id)
+(id_empresa, id_publicacion, descripcion, fecha_espectaculo, fecha_vencimiento, rubro_id)
 select e.id_empresa, m.Espectaculo_Cod, m.Espectaculo_Descripcion, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc,
 (select r.id_rubro from COMPUMUNDOHIPERMEGARED.Rubro r where r.descripcion like m.Espectaculo_Rubro_Descripcion)
 from COMPUMUNDOHIPERMEGARED.Empresa e
@@ -298,9 +293,6 @@ inner join COMPUMUNDOHIPERMEGARED.Ubicacion u
 on m.Ubicacion_Fila = u.fila and m.Ubicacion_Asiento = u.asiento and m.Ubicacion_Precio = u.precio
 and m.Ubicacion_Sin_numerar = u.sin_numerar and m.Ubicacion_Tipo_Codigo = u.tipo_ubicacion_id
 and m.Espectaculo_Cod = u.publicacion_id
-
--- NO lo vamos a necesitar mas :(
-drop index index_ubicacion on gd_esquema.Maestra
 
 
 -- NO SE SI DEJAR ESTO PERO TIENE SENTIDO QUE SE CUMPLA
@@ -578,4 +570,18 @@ begin
 	set intentos = 0
 	where id_usuario = @id_usuario
 end
+go
+
+create view COMPUMUNDOHIPERMEGARED.PublicacionesView as
+SELECT p.id_publicacion, p.descripcion, p.fecha_publicacion, p.fecha_vencimiento, p.fecha_espectaculo,
+p.estado, p.ciudad, p.localidad, p.dom_calle, p.num_calle, p.cod_postal,
+p.id_empresa,
+r.id_rubro as rubro_id, r.descripcion as rubro_descripcion,
+g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision
+FROM COMPUMUNDOHIPERMEGARED.Publicacion p
+left join COMPUMUNDOHIPERMEGARED.Rubro r
+on r.id_rubro = p.rubro_id
+left join COMPUMUNDOHIPERMEGARED.Grado g
+on g.id_grado = p.grado_id
+WITH CHECK OPTION
 go

@@ -31,6 +31,9 @@ go
 drop procedure COMPUMUNDOHIPERMEGARED.intentar_logear
 go
 
+drop view COMPUMUNDOHIPERMEGARED.PublicacionesView
+go
+
 IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Publicacion', 'U') IS NOT NULL 
 	drop table COMPUMUNDOHIPERMEGARED.Publicacion
 IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad', 'U') IS NOT NULL 
