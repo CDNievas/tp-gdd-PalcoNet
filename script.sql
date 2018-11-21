@@ -94,6 +94,7 @@ create table COMPUMUNDOHIPERMEGARED.Publicacion(
 	fecha_vencimiento datetime,
 	fecha_espectaculo datetime,
 	estado nvarchar(255),
+	cod_estado char(1) not null,
 	ciudad nvarchar(255),
 	localidad nvarchar(255),
 	dom_calle nvarchar(50),
@@ -101,7 +102,8 @@ create table COMPUMUNDOHIPERMEGARED.Publicacion(
 	cod_postal nvarchar(50),
 	id_empresa int constraint FK_PUBLICACION_EMPRESA references COMPUMUNDOHIPERMEGARED.Empresa,
 	rubro_id int constraint FK_PUBLICACION_RUBRO references COMPUMUNDOHIPERMEGARED.Rubro,
-	grado_id int constraint FK_PUBLICACION_GRADO references COMPUMUNDOHIPERMEGARED.Grado
+	grado_id int constraint FK_PUBLICACION_GRADO references COMPUMUNDOHIPERMEGARED.Grado,
+	constraint CHECK_ESTADO check(cod_estado in ('B', 'P', 'F', 'U'))
 )
 
 create table COMPUMUNDOHIPERMEGARED.Tarjeta(
@@ -217,9 +219,10 @@ from gd_esquema.Maestra m
 go
 
 insert into COMPUMUNDOHIPERMEGARED.Publicacion
-(id_empresa, id_publicacion, descripcion, fecha_espectaculo, fecha_vencimiento, rubro_id)
+(id_empresa, id_publicacion, descripcion, fecha_espectaculo, fecha_vencimiento, rubro_id, cod_estado)
 select e.id_empresa, m.Espectaculo_Cod, m.Espectaculo_Descripcion, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc,
-(select r.id_rubro from COMPUMUNDOHIPERMEGARED.Rubro r where r.descripcion like m.Espectaculo_Rubro_Descripcion)
+(select r.id_rubro from COMPUMUNDOHIPERMEGARED.Rubro r where r.descripcion like m.Espectaculo_Rubro_Descripcion),
+'U'
 from COMPUMUNDOHIPERMEGARED.Empresa e
 inner join gd_esquema.Maestra m
 on e.cuit = m.Espec_Empresa_Cuit and e.razon_social = m.Espec_Empresa_Razon_Social
@@ -575,7 +578,7 @@ go
 create view COMPUMUNDOHIPERMEGARED.PublicacionesView as
 SELECT p.id_publicacion, p.descripcion, p.fecha_publicacion, p.fecha_vencimiento, p.fecha_espectaculo,
 p.estado, p.ciudad, p.localidad, p.dom_calle, p.num_calle, p.cod_postal,
-p.id_empresa,
+p.id_empresa, p.cod_estado
 r.id_rubro as rubro_id, r.descripcion as rubro_descripcion,
 g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision
 FROM COMPUMUNDOHIPERMEGARED.Publicacion p

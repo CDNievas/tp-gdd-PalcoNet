@@ -151,6 +151,8 @@
     <Compile Include="DataBasePackage\Parametro.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicacionesUtils\Estado.cs" />
+    <Compile Include="PublicacionesUtils\Estados.cs" />
     <Compile Include="PublicacionesUtils\Grado.cs" />
     <Compile Include="PublicacionesUtils\Grados.cs" />
     <Compile Include="PublicacionesUtils\Publicacion.cs" />
