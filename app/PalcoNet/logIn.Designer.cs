@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet
 {
-    partial class Form1
+    partial class logIn
     {
         /// <summary>
         /// Variable del diseñador requerida.
@@ -34,6 +34,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnIngresarLogIn = new System.Windows.Forms.Button();
             this.btnLimpiarLogIn = new System.Windows.Forms.Button();
+            this.crearUsuario = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -87,11 +88,21 @@
             this.btnLimpiarLogIn.Text = "LIMPIAR";
             this.btnLimpiarLogIn.UseVisualStyleBackColor = true;
             // 
+            // crearUsuario
+            // 
+            this.crearUsuario.Location = new System.Drawing.Point(233, 25);
+            this.crearUsuario.Name = "crearUsuario";
+            this.crearUsuario.Size = new System.Drawing.Size(104, 31);
+            this.crearUsuario.TabIndex = 6;
+            this.crearUsuario.Text = "Crear Usuario";
+            this.crearUsuario.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 305);
+            this.ClientSize = new System.Drawing.Size(349, 297);
+            this.Controls.Add(this.crearUsuario);
             this.Controls.Add(this.btnLimpiarLogIn);
             this.Controls.Add(this.btnIngresarLogIn);
             this.Controls.Add(this.textBox2);
@@ -114,6 +125,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btnIngresarLogIn;
         private System.Windows.Forms.Button btnLimpiarLogIn;
+        private System.Windows.Forms.Button crearUsuario;
     }
 }
 

@@ -16,5 +16,12 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         {
             InitializeComponent();
         }
+
+        private void ListarEmpresa_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'gD2C2018DataSet.Empresa' table. You can move, or remove it, as needed.
+            this.empresaTableAdapter.Fill(this.gD2C2018DataSet.Empresa);
+
+        }
     }
 }

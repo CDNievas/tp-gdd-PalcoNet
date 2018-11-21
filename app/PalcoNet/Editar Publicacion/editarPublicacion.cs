@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PalcoNet.Registro_de_Usuario
+namespace PalcoNet.Editar_Publicacion
 {
-    public partial class Form1 : Form
+    public partial class editarPublicacion : Form
     {
-        public Form1()
+        public editarPublicacion()
         {
             InitializeComponent();
         }

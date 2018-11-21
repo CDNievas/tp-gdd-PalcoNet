@@ -16,5 +16,12 @@ namespace PalcoNet.Abm_Rol
         {
             InitializeComponent();
         }
+
+        private void listadoRol_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'gD2C2018DataSet.Rol' table. You can move, or remove it, as needed.
+            this.rolTableAdapter.Fill(this.gD2C2018DataSet.Rol);
+
+        }
     }
 }

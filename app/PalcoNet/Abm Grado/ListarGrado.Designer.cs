@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnGradoLimpiar = new System.Windows.Forms.Button();
             this.btnGradoBuscar = new System.Windows.Forms.Button();
             this.lblGradoID = new System.Windows.Forms.Label();
@@ -35,16 +36,22 @@
             this.lblGradoComision = new System.Windows.Forms.Label();
             this.numGradoId = new System.Windows.Forms.NumericUpDown();
             this.tblGradoBusqueda = new System.Windows.Forms.DataGridView();
-            this.ColumnDescripcionGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnIDGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnComisionGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.label2 = new System.Windows.Forms.Label();
             this.btnMod = new System.Windows.Forms.Button();
             this.btnBaja = new System.Windows.Forms.Button();
+            this.gD2C2018DataSet = new PalcoNet.GD2C2018DataSet();
+            this.gradoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gradoTableAdapter = new PalcoNet.GD2C2018DataSetTableAdapters.GradoTableAdapter();
+            this.idgradoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comisioniDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numGradoId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblGradoBusqueda)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gradoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGradoLimpiar
@@ -99,33 +106,21 @@
             // 
             // tblGradoBusqueda
             // 
+            this.tblGradoBusqueda.AutoGenerateColumns = false;
             this.tblGradoBusqueda.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.tblGradoBusqueda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tblGradoBusqueda.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnDescripcionGrado,
-            this.columnIDGrado,
-            this.columnComisionGrado});
+            this.idgradoDataGridViewTextBoxColumn,
+            this.descripcionDataGridViewTextBoxColumn,
+            this.comisioniDataGridViewTextBoxColumn,
+            this.Seleccionar});
+            this.tblGradoBusqueda.DataSource = this.gradoBindingSource;
             this.tblGradoBusqueda.GridColor = System.Drawing.SystemColors.InactiveCaption;
             this.tblGradoBusqueda.Location = new System.Drawing.Point(62, 223);
             this.tblGradoBusqueda.Name = "tblGradoBusqueda";
             this.tblGradoBusqueda.RowTemplate.Height = 24;
             this.tblGradoBusqueda.Size = new System.Drawing.Size(343, 208);
             this.tblGradoBusqueda.TabIndex = 24;
-            // 
-            // ColumnDescripcionGrado
-            // 
-            this.ColumnDescripcionGrado.HeaderText = "descripcion";
-            this.ColumnDescripcionGrado.Name = "ColumnDescripcionGrado";
-            // 
-            // columnIDGrado
-            // 
-            this.columnIDGrado.HeaderText = "ID";
-            this.columnIDGrado.Name = "columnIDGrado";
-            // 
-            // columnComisionGrado
-            // 
-            this.columnComisionGrado.HeaderText = "comision";
-            this.columnComisionGrado.Name = "columnComisionGrado";
             // 
             // shapeContainer1
             // 
@@ -173,6 +168,44 @@
             this.btnBaja.Text = "Baja";
             this.btnBaja.UseVisualStyleBackColor = true;
             // 
+            // gD2C2018DataSet
+            // 
+            this.gD2C2018DataSet.DataSetName = "GD2C2018DataSet";
+            this.gD2C2018DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // gradoBindingSource
+            // 
+            this.gradoBindingSource.DataMember = "Grado";
+            this.gradoBindingSource.DataSource = this.gD2C2018DataSet;
+            // 
+            // gradoTableAdapter
+            // 
+            this.gradoTableAdapter.ClearBeforeFill = true;
+            // 
+            // idgradoDataGridViewTextBoxColumn
+            // 
+            this.idgradoDataGridViewTextBoxColumn.DataPropertyName = "id_grado";
+            this.idgradoDataGridViewTextBoxColumn.HeaderText = "id_grado";
+            this.idgradoDataGridViewTextBoxColumn.Name = "idgradoDataGridViewTextBoxColumn";
+            this.idgradoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descripcionDataGridViewTextBoxColumn
+            // 
+            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "descripcion";
+            this.descripcionDataGridViewTextBoxColumn.HeaderText = "descripcion";
+            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
+            // 
+            // comisioniDataGridViewTextBoxColumn
+            // 
+            this.comisioniDataGridViewTextBoxColumn.DataPropertyName = "comisioni";
+            this.comisioniDataGridViewTextBoxColumn.HeaderText = "comisioni";
+            this.comisioniDataGridViewTextBoxColumn.Name = "comisioniDataGridViewTextBoxColumn";
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
             // ListarGrado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -191,8 +224,11 @@
             this.Controls.Add(this.shapeContainer1);
             this.Name = "ListarGrado";
             this.Text = "ListarGrado";
+            this.Load += new System.EventHandler(this.ListarGrado_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numGradoId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblGradoBusqueda)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gradoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,13 +243,17 @@
         private System.Windows.Forms.Label lblGradoComision;
         private System.Windows.Forms.NumericUpDown numGradoId;
         private System.Windows.Forms.DataGridView tblGradoBusqueda;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescripcionGrado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnIDGrado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnComisionGrado;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnMod;
         private System.Windows.Forms.Button btnBaja;
+        private GD2C2018DataSet gD2C2018DataSet;
+        private System.Windows.Forms.BindingSource gradoBindingSource;
+        private GD2C2018DataSetTableAdapters.GradoTableAdapter gradoTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idgradoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descripcionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn comisioniDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
     }
 }

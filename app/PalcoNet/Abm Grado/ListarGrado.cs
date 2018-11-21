@@ -16,5 +16,12 @@ namespace PalcoNet.Abm_Grado
         {
             InitializeComponent();
         }
+
+        private void ListarGrado_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'gD2C2018DataSet.Grado' table. You can move, or remove it, as needed.
+            this.gradoTableAdapter.Fill(this.gD2C2018DataSet.Grado);
+
+        }
     }
 }

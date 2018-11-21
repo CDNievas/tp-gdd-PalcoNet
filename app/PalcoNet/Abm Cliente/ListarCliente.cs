@@ -17,6 +17,13 @@ namespace PalcoNet.Abm_Cliente
             InitializeComponent();
         }
 
+        private void ListarCliente_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'gD2C2018DataSet.Cliente' table. You can move, or remove it, as needed.
+            this.clienteTableAdapter.Fill(this.gD2C2018DataSet.Cliente);
+
+        }
+
        
 
         
