@@ -35,6 +35,8 @@
             this.lblComisionGrado = new System.Windows.Forms.Label();
             this.btnGradoLimpiar = new System.Windows.Forms.Button();
             this.btnGradoGuardar = new System.Windows.Forms.Button();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             ((System.ComponentModel.ISupportInitialize)(this.numComisionGrado)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +61,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(207, 23);
+            this.label2.Location = new System.Drawing.Point(29, 21);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(175, 31);
@@ -84,7 +86,7 @@
             // 
             // btnGradoLimpiar
             // 
-            this.btnGradoLimpiar.Location = new System.Drawing.Point(334, 304);
+            this.btnGradoLimpiar.Location = new System.Drawing.Point(17, 295);
             this.btnGradoLimpiar.Name = "btnGradoLimpiar";
             this.btnGradoLimpiar.Size = new System.Drawing.Size(88, 30);
             this.btnGradoLimpiar.TabIndex = 17;
@@ -93,18 +95,35 @@
             // 
             // btnGradoGuardar
             // 
-            this.btnGradoGuardar.Location = new System.Drawing.Point(446, 304);
+            this.btnGradoGuardar.Location = new System.Drawing.Point(320, 295);
             this.btnGradoGuardar.Name = "btnGradoGuardar";
             this.btnGradoGuardar.Size = new System.Drawing.Size(88, 30);
             this.btnGradoGuardar.TabIndex = 16;
             this.btnGradoGuardar.Text = "Guardar";
             this.btnGradoGuardar.UseVisualStyleBackColor = true;
             // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape1});
+            this.shapeContainer1.Size = new System.Drawing.Size(424, 352);
+            this.shapeContainer1.TabIndex = 18;
+            this.shapeContainer1.TabStop = false;
+            // 
+            // rectangleShape1
+            // 
+            this.rectangleShape1.Location = new System.Drawing.Point(17, 33);
+            this.rectangleShape1.Name = "rectangleShape1";
+            this.rectangleShape1.Size = new System.Drawing.Size(390, 238);
+            // 
             // altaGrado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 362);
+            this.ClientSize = new System.Drawing.Size(424, 352);
             this.Controls.Add(this.btnGradoLimpiar);
             this.Controls.Add(this.btnGradoGuardar);
             this.Controls.Add(this.lblComisionGrado);
@@ -112,6 +131,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtDescripcionGrado);
             this.Controls.Add(this.lblDescripcionGrado);
+            this.Controls.Add(this.shapeContainer1);
             this.Name = "altaGrado";
             this.Text = "Crear Grado";
             ((System.ComponentModel.ISupportInitialize)(this.numComisionGrado)).EndInit();
@@ -129,5 +149,7 @@
         private System.Windows.Forms.Label lblComisionGrado;
         private System.Windows.Forms.Button btnGradoLimpiar;
         private System.Windows.Forms.Button btnGradoGuardar;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
     }
 }

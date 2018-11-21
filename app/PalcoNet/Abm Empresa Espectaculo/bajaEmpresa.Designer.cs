@@ -37,11 +37,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtEmpresaID = new System.Windows.Forms.TextBox();
             this.lblEmpresaID = new System.Windows.Forms.Label();
+            this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.SuspendLayout();
             // 
             // btnEmpresaLimpiar
             // 
-            this.btnEmpresaLimpiar.Location = new System.Drawing.Point(308, 241);
+            this.btnEmpresaLimpiar.Location = new System.Drawing.Point(20, 241);
             this.btnEmpresaLimpiar.Name = "btnEmpresaLimpiar";
             this.btnEmpresaLimpiar.Size = new System.Drawing.Size(88, 30);
             this.btnEmpresaLimpiar.TabIndex = 17;
@@ -50,7 +52,7 @@
             // 
             // btnEmpresaBorrar
             // 
-            this.btnEmpresaBorrar.Location = new System.Drawing.Point(420, 241);
+            this.btnEmpresaBorrar.Location = new System.Drawing.Point(260, 241);
             this.btnEmpresaBorrar.Name = "btnEmpresaBorrar";
             this.btnEmpresaBorrar.Size = new System.Drawing.Size(88, 30);
             this.btnEmpresaBorrar.TabIndex = 16;
@@ -95,7 +97,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(156, 9);
+            this.label2.Location = new System.Drawing.Point(31, 27);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(192, 31);
@@ -119,11 +121,28 @@
             this.lblEmpresaID.TabIndex = 23;
             this.lblEmpresaID.Text = "Empresa ID: ";
             // 
+            // rectangleShape1
+            // 
+            this.rectangleShape1.Location = new System.Drawing.Point(19, 49);
+            this.rectangleShape1.Name = "rectangleShape1";
+            this.rectangleShape1.Size = new System.Drawing.Size(333, 145);
+            // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape1});
+            this.shapeContainer1.Size = new System.Drawing.Size(376, 300);
+            this.shapeContainer1.TabIndex = 25;
+            this.shapeContainer1.TabStop = false;
+            // 
             // bajaEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 295);
+            this.ClientSize = new System.Drawing.Size(376, 300);
             this.Controls.Add(this.txtEmpresaID);
             this.Controls.Add(this.lblEmpresaID);
             this.Controls.Add(this.label2);
@@ -133,6 +152,7 @@
             this.Controls.Add(this.lblEmpresaRS);
             this.Controls.Add(this.btnEmpresaLimpiar);
             this.Controls.Add(this.btnEmpresaBorrar);
+            this.Controls.Add(this.shapeContainer1);
             this.Name = "bajaEmpresa";
             this.Text = "Baja de Empresa";
             this.ResumeLayout(false);
@@ -151,5 +171,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtEmpresaID;
         private System.Windows.Forms.Label lblEmpresaID;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
     }
 }

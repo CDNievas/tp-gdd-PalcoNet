@@ -36,6 +36,8 @@
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.btnGradoLimpiar = new System.Windows.Forms.Button();
             this.btnGradoBuscar = new System.Windows.Forms.Button();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,11 +117,28 @@
             this.btnGradoBuscar.Text = "Canjear";
             this.btnGradoBuscar.UseVisualStyleBackColor = true;
             // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape1});
+            this.shapeContainer1.Size = new System.Drawing.Size(451, 477);
+            this.shapeContainer1.TabIndex = 22;
+            this.shapeContainer1.TabStop = false;
+            // 
+            // rectangleShape1
+            // 
+            this.rectangleShape1.Location = new System.Drawing.Point(17, 58);
+            this.rectangleShape1.Name = "rectangleShape1";
+            this.rectangleShape1.Size = new System.Drawing.Size(372, 348);
+            // 
             // canjearPuntos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 515);
+            this.ClientSize = new System.Drawing.Size(451, 477);
             this.Controls.Add(this.btnGradoLimpiar);
             this.Controls.Add(this.btnGradoBuscar);
             this.Controls.Add(this.checkedListBox1);
@@ -127,6 +146,7 @@
             this.Controls.Add(this.lblPuntosCliente);
             this.Controls.Add(this.puntos);
             this.Controls.Add(this.lblCanjearPuntos);
+            this.Controls.Add(this.shapeContainer1);
             this.Name = "canjearPuntos";
             this.Text = "canjearPuntos";
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet1)).EndInit();
@@ -145,5 +165,7 @@
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button btnGradoLimpiar;
         private System.Windows.Forms.Button btnGradoBuscar;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
     }
 }

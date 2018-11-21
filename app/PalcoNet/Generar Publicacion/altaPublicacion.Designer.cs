@@ -45,13 +45,15 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnGPLimpiar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(171, 26);
+            this.label2.Location = new System.Drawing.Point(53, 55);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(278, 31);
@@ -179,7 +181,7 @@
             // 
             // btnGPLimpiar
             // 
-            this.btnGPLimpiar.Location = new System.Drawing.Point(452, 480);
+            this.btnGPLimpiar.Location = new System.Drawing.Point(39, 480);
             this.btnGPLimpiar.Name = "btnGPLimpiar";
             this.btnGPLimpiar.Size = new System.Drawing.Size(88, 30);
             this.btnGPLimpiar.TabIndex = 43;
@@ -188,19 +190,36 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(564, 480);
+            this.button1.Location = new System.Drawing.Point(360, 480);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 30);
             this.button1.TabIndex = 42;
-            this.button1.Text = "Aceptar";
+            this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape1});
+            this.shapeContainer1.Size = new System.Drawing.Size(490, 533);
+            this.shapeContainer1.TabIndex = 44;
+            this.shapeContainer1.TabStop = false;
+            // 
+            // rectangleShape1
+            // 
+            this.rectangleShape1.Location = new System.Drawing.Point(39, 74);
+            this.rectangleShape1.Name = "rectangleShape1";
+            this.rectangleShape1.Size = new System.Drawing.Size(408, 390);
             // 
             // altaPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(689, 533);
+            this.ClientSize = new System.Drawing.Size(490, 533);
             this.Controls.Add(this.btnGPLimpiar);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
@@ -218,6 +237,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.shapeContainer1);
             this.Name = "altaPublicacion";
             this.Text = "Generar publicacion";
             this.ResumeLayout(false);
@@ -244,5 +264,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btnGPLimpiar;
         private System.Windows.Forms.Button button1;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
     }
 }

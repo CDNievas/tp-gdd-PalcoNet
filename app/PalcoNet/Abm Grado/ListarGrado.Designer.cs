@@ -40,6 +40,9 @@
             this.columnComisionGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnMod = new System.Windows.Forms.Button();
+            this.btnBaja = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numGradoId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblGradoBusqueda)).BeginInit();
             this.SuspendLayout();
@@ -131,7 +134,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(499, 461);
+            this.shapeContainer1.Size = new System.Drawing.Size(546, 532);
             this.shapeContainer1.TabIndex = 25;
             this.shapeContainer1.TabStop = false;
             // 
@@ -141,11 +144,43 @@
             this.rectangleShape1.Name = "rectangleShape1";
             this.rectangleShape1.Size = new System.Drawing.Size(369, 98);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(56, 8);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(175, 31);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Listar Grado";
+            // 
+            // btnMod
+            // 
+            this.btnMod.Location = new System.Drawing.Point(428, 223);
+            this.btnMod.Name = "btnMod";
+            this.btnMod.Size = new System.Drawing.Size(88, 30);
+            this.btnMod.TabIndex = 27;
+            this.btnMod.Text = "Modificar";
+            this.btnMod.UseVisualStyleBackColor = true;
+            // 
+            // btnBaja
+            // 
+            this.btnBaja.Location = new System.Drawing.Point(428, 288);
+            this.btnBaja.Name = "btnBaja";
+            this.btnBaja.Size = new System.Drawing.Size(88, 30);
+            this.btnBaja.TabIndex = 28;
+            this.btnBaja.Text = "Baja";
+            this.btnBaja.UseVisualStyleBackColor = true;
+            // 
             // ListarGrado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 461);
+            this.ClientSize = new System.Drawing.Size(546, 532);
+            this.Controls.Add(this.btnBaja);
+            this.Controls.Add(this.btnMod);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.tblGradoBusqueda);
             this.Controls.Add(this.numGradoId);
             this.Controls.Add(this.lblGradoComision);
@@ -177,5 +212,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnComisionGrado;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnMod;
+        private System.Windows.Forms.Button btnBaja;
     }
 }
