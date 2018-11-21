@@ -16,7 +16,19 @@ go
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
 go
 
+drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario
+go
+
 drop procedure COMPUMUNDOHIPERMEGARED.eliminar_rol
+go
+
+drop procedure COMPUMUNDOHIPERMEGARED.actualizarRol
+go
+
+drop procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario
+go
+
+drop procedure COMPUMUNDOHIPERMEGARED.intentar_logear
 go
 
 IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Publicacion', 'U') IS NOT NULL 

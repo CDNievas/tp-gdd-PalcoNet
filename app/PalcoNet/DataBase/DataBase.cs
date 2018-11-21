@@ -64,9 +64,5 @@ namespace PalcoNet
             return cmd;
         }
 
-        class ProcedureException : Exception {
-            public ProcedureException(string msg, Exception e) : base(msg, e) { }
-        }
-
     }
 }

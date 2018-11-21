@@ -105,13 +105,14 @@
     <Compile Include="Abm Rubro\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataBase.cs" />
+    <Compile Include="DataBase\DataBase.cs" />
     <Compile Include="Comprar\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Comprar\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\ProcedureException.cs" />
     <Compile Include="GD2C2018DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -143,7 +144,9 @@
     </Compile>
     <Compile Include="LoginUtils\Funcionalidad.cs" />
     <Compile Include="LoginUtils\Funcionalidades.cs" />
-    <Compile Include="Parametro.cs" />
+    <Compile Include="LoginUtils\Usuario.cs" />
+    <Compile Include="LoginUtils\Validador.cs" />
+    <Compile Include="DataBase\Parametro.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Abm Cliente\altaCliente.resx">

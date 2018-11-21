@@ -6,8 +6,8 @@ GO
 
 create table COMPUMUNDOHIPERMEGARED.Usuario(
 	id_usuario int identity(1,1) primary key,
-	username nvarchar(50),
-	password nvarchar(50),
+	username nvarchar(50) unique,
+	password nvarchar(64),
 	intentos tinyint,
 	habilitado bit,
 	eliminado bit default 0
@@ -346,6 +346,18 @@ begin
 end
 go
 
+create procedure COMPUMUNDOHIPERMEGARED.actualizarRol(@rol_id smallint, @listaFuncionalidad FuncionalidadList readonly)
+as
+begin
+	delete from COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad
+	where rol_id = @rol_id
+
+	insert into COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad(funcionalidad_id, rol_id)
+	select l.funcionalidad_id, @rol_id from @listaFuncionalidad l
+end
+go
+
+
 
 create procedure COMPUMUNDOHIPERMEGARED.crearRolesPrincipales
 as
@@ -499,3 +511,71 @@ exec COMPUMUNDOHIPERMEGARED.eliminar_rol 1
 select * from COMPUMUNDOHIPERMEGARED.Rol_Usuario 
 select * from COMPUMUNDOHIPERMEGARED.Rol
 */
+
+create procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario(@username nvarchar(50), @password nvarchar(50), @rol_id smallint)
+as
+begin
+	begin tran
+	if(@password is null)
+		rollback transaction
+
+	insert into COMPUMUNDOHIPERMEGARED.Usuario(username, password, intentos, habilitado)
+	values(@username, HASHBYTES('SHA2_256', @password), 0, 1)
+
+	declare @usuario_id int = @@IDENTITY
+
+	insert into COMPUMUNDOHIPERMEGARED.Rol_Usuario(id_rol, id_usario)
+	values(@rol_id, @usuario_id)
+
+	commit tran
+end
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.intentar_logear(@username nvarchar(50), @password nvarchar(50))
+as
+begin
+	declare @id_usuario int, @pass_usuario nvarchar(64), @esta_habilitado bit, @esta_eliminado bit, @intentos smallint
+
+	select @id_usuario = u.id_usuario,
+	@pass_usuario = u.password,
+	@esta_habilitado = u.habilitado,
+	@esta_eliminado = u.eliminado,
+	@intentos = u.intentos
+	from COMPUMUNDOHIPERMEGARED.Usuario u
+	where u.username = @username
+
+	if(@id_usuario is null)
+	begin
+		raiserror('El usuario no existe', 16, 1)
+		return
+	end
+
+	if(@esta_eliminado = 1 or @esta_habilitado = 0)
+	begin
+		raiserror('El usuario está eliminado o no está habilitado', 16, 1)
+		return
+	end
+
+	if(HASHBYTES('SHA2_256', @password) != @pass_usuario)
+	begin
+		if(@intentos + 1 >= 3)
+		begin
+			update COMPUMUNDOHIPERMEGARED.Usuario
+			set intentos = 0, habilitado = 0
+			where id_usuario = @id_usuario
+		end
+		else
+		begin
+			update COMPUMUNDOHIPERMEGARED.Usuario
+			set intentos = @intentos + 1
+			where id_usuario = @id_usuario
+		end
+		raiserror('El password es incorrecto', 16, 1)
+		return
+	end
+
+	update COMPUMUNDOHIPERMEGARED.Usuario
+	set intentos = 0
+	where id_usuario = @id_usuario
+end
+go
