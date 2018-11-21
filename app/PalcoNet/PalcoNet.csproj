@@ -52,6 +52,12 @@
     <Compile Include="Abm Cliente\altaCliente.Designer.cs">
       <DependentUpon>altaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Cliente\bajaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Cliente\bajaCliente.Designer.cs">
+      <DependentUpon>bajaCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Cliente\Buscador.cs" />
     <Compile Include="Abm Cliente\modificarCliente.cs">
       <SubType>Form</SubType>
@@ -106,12 +112,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="DataBasePackage\DataBase.cs" />
-    <Compile Include="Comprar\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Comprar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataBasePackage\DataRowUtils.cs" />
     <Compile Include="DataBasePackage\Pagina.cs" />
     <Compile Include="DataBasePackage\ProcedureException.cs" />
@@ -161,9 +161,11 @@
     <Compile Include="PublicacionesUtils\Rubro.cs" />
     <EmbeddedResource Include="Abm Cliente\altaCliente.resx">
       <DependentUpon>altaCliente.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Cliente\modificarCliente.resx">
       <DependentUpon>modificarCliente.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Canje Puntos\canjearPuntos.resx">
       <DependentUpon>canjearPuntos.cs</DependentUpon>
@@ -234,6 +236,7 @@
     <Compile Include="Abm Cliente\Cliente.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Comprar\" />
     <Folder Include="Editar Publicacion\" />
     <Folder Include="Registro de Usuario\" />
   </ItemGroup>
