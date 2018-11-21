@@ -46,3 +46,13 @@ TP GDD 2018
 - **25/11/2018** Entrega unica y obligatoria para poder tener instancias de recuperacion. **(Hasta 12 del mediodia)**
 - **##/##/####** Dos entregas mas para recuperacion, no tienen fecha fija.
 - **20/12/2018** Fecha limite de recuperacion.
+
+## Modelo email
+Curso: k3571<br>
+Número de grupo: 17<br>
+Nombre y legajo de todos los integrantes :<br>
+	Christian Dario Nievas, 155.900-0<br>
+	Lautaro Gomez Odriozola, 156.607-6<br>
+	Martín Gabriel Mallea Santagada, 159.093-5<br>
+	Fiorella Denise Altobelli, 159.092-3<br>
+Email del integrante responsable del grupo: cdnievas@hotmail.com
