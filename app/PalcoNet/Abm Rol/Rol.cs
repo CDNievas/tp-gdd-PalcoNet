@@ -43,6 +43,14 @@ namespace PalcoNet.Abm_Rol
         }
 
         public void Persistite() {
+            var dataTable = getFuncionalidadesTable();
+            DataBase.GetInstance().procedure("crearNuevoRol",
+                new Parametro("listaFuncionalidad", dataTable),
+                new Parametro("nombre", this.nombre));
+        }
+
+        private DataTable getFuncionalidadesTable()
+        {
             DataTable dataTable = new DataTable();
             DataColumn column;
             DataRow row;
@@ -52,22 +60,21 @@ namespace PalcoNet.Abm_Rol
             column.ColumnName = "funcionalidad_id";
             dataTable.Columns.Add(column);
 
-            foreach (Funcionalidad f in funcionalidades) {
+            foreach (Funcionalidad f in funcionalidades)
+            {
                 row = dataTable.NewRow();
                 row["funcionalidad_id"] = f.id;
                 dataTable.Rows.Add(row);
             }
+            return dataTable;
 
-            DataBase.GetInstance().procedure("crearNuevoRol",
-                new Parametro("listaFuncionalidad", dataTable),
-                new Parametro("nombre", this.nombre));
+        }
 
-            /*
-            var cmd = DataBase.GetInstance().GetStoreProcedureCmd("crearNuevoRol");
-            cmd.Parameters.AddWithValue("@listaFuncionalidad", dataTable);
-            cmd.Parameters.AddWithValue("@nombre", this.nombre);
-            cmd.ExecuteNonQuery();
-             */
+        public void Update() {
+            var funcionalidadesTable = getFuncionalidadesTable();
+            DataBase.GetInstance().procedure("actualizarRol",
+                new Parametro("rol_id", this.id),
+                new Parametro("listaFuncionalidad", funcionalidadesTable));
         }
     }
 }
