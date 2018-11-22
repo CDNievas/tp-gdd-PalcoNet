@@ -220,15 +220,19 @@ from gd_esquema.Maestra m
 go
 
 insert into COMPUMUNDOHIPERMEGARED.Publicacion
-(id_empresa, id_publicacion, descripcion, fecha_espectaculo, fecha_vencimiento, rubro_id, cod_estado)
+(id_empresa, id_publicacion, descripcion, fecha_espectaculo, fecha_vencimiento, rubro_id, cod_estado, estado)
 select e.id_empresa, m.Espectaculo_Cod, m.Espectaculo_Descripcion, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc,
 (select r.id_rubro from COMPUMUNDOHIPERMEGARED.Rubro r where r.descripcion like m.Espectaculo_Rubro_Descripcion),
-'U'
+case when lower(m.Espectaculo_Estado) like 'publicada' then 'P'
+when lower(m.Espectaculo_Estado) like 'borrador' then 'B'
+when lower(m.Espectaculo_Estado) like 'finalizada' then 'F'
+else 'U' end,
+m.Espectaculo_Estado
 from COMPUMUNDOHIPERMEGARED.Empresa e
 inner join gd_esquema.Maestra m
 on e.cuit = m.Espec_Empresa_Cuit and e.razon_social = m.Espec_Empresa_Razon_Social
 group by e.id_empresa, m.Espectaculo_Cod, m.Espectaculo_Descripcion, m.Espectaculo_Fecha,
-m.Espectaculo_Fecha_Venc, m.Espectaculo_Rubro_Descripcion
+m.Espectaculo_Fecha_Venc, m.Espectaculo_Rubro_Descripcion, m.Espectaculo_Estado
 
 --select * from COMPUMUNDOHIPERMEGARED.Publicacion
 go
@@ -329,16 +333,18 @@ create type COMPUMUNDOHIPERMEGARED.FuncionalidadList as table(
 )
 go
 
-create procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol(@nombre nvarchar(50), @listaFuncionalidad FuncionalidadList readonly)
+create procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol(@nombre nvarchar(50), @listaFuncionalidad FuncionalidadList readonly, @id_generado smallint output)
 as
 begin
 	insert into COMPUMUNDOHIPERMEGARED.Rol(habilitado, nombre)
 	values(1, @nombre)
 
-	declare @rol_id smallint = @@IDENTITY
+	set @id_generado = @@IDENTITY
 
 	insert into COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad(funcionalidad_id, rol_id)
-	select l.funcionalidad_id, @rol_id from @listaFuncionalidad l
+	select l.funcionalidad_id, @id_generado from @listaFuncionalidad l
+	
+	return
 end
 go
 
@@ -360,15 +366,15 @@ as
 begin
 	declare @funcionalidades_cliente COMPUMUNDOHIPERMEGARED.FuncionalidadList
 	insert into @funcionalidades_cliente values (8),(9),(10)
-	exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'CLIENTE', @funcionalidades_cliente
+	exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'CLIENTE', @funcionalidades_cliente, null
 
 	declare @funcionalidades_admin COMPUMUNDOHIPERMEGARED.FuncionalidadList
 	insert into @funcionalidades_admin values (1),(2),(3),(4),(11),(12)
-	exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'ADMINISTRADOR', @funcionalidades_admin
+	exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'ADMINISTRADOR', @funcionalidades_admin, null
 
 	declare @funcionalidades_empresa COMPUMUNDOHIPERMEGARED.FuncionalidadList
 	insert into @funcionalidades_empresa values (5),(6),(7)
-	exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'EMPRESA', @funcionalidades_empresa
+	exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'EMPRESA', @funcionalidades_empresa, null
 
 end
 go
@@ -595,4 +601,21 @@ values
 ('Alta', 25.00, 3),
 ('Media', 17.50, 2),
 ('Baja', 12.10, 1)
+go
+
+
+/*
+Creando al administrador General
+*/
+declare @tablaFunciones COMPUMUNDOHIPERMEGARED.FuncionalidadList
+
+insert into @tablaFunciones
+select id_funcionalidad from COMPUMUNDOHIPERMEGARED.Funcionalidad
+
+declare @id smallint
+
+exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'Administrador General', @tablaFunciones, @id_generado = @id output 
+
+exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario 'admin', 'w23', @id
+
 go
