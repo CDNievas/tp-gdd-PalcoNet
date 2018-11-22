@@ -144,6 +144,127 @@
     <Compile Include="Listado Estadistico\obtenerTop5.Designer.cs">
       <DependentUpon>obtenerTop5.cs</DependentUpon>
     </Compile>
+
+
+    <Compile Include="logIn.cs">
+		<SubType>Form</SubType>
+	</Compile>
+	<Compile Include="logIn.Designer.cs">
+		<DependentUpon>logIn.cs</DependentUpon>
+	</Compile>
+
+    <Compile Include="Comprar\Comprar.cs">
+		<SubType>Form</SubType>
+	</Compile>
+	<Compile Include="Comprar\Comprar.Designer.cs">
+		<DependentUpon>Comprar.cs</DependentUpon>
+	</Compile>
+
+	<Compile Include="Abm Cliente\ListarCliente.cs">
+		<SubType>Form</SubType>
+	</Compile>
+	<Compile Include="Abm Cliente\ListarCliente.Designer.cs">
+		<DependentUpon>ListarCliente.cs</DependentUpon>
+	</Compile>
+
+	<Compile Include="Abm Empresa Espectaculo\modificarEmpresa.cs">
+		<SubType>Form</SubType>
+	</Compile>
+	<Compile Include="Abm Empresa Espectaculo\modificarEmpresa.Designer.cs">
+		<DependentUpon>modificarEmpresa.cs</DependentUpon>
+	</Compile>
+
+	<Compile Include="Abm Empresa Espectaculo\ListarEmpresa.cs">
+		<SubType>Form</SubType>
+	</Compile>
+	<Compile Include="Abm Empresa Espectaculo\ListarEmpresa.Designer.cs">
+		<DependentUpon>ListarEmpresa.cs</DependentUpon>
+	</Compile>
+
+	<Compile Include="Abm Grado\modificarGrado.cs">
+		<SubType>Form</SubType>
+	</Compile>
+	<Compile Include="Abm Grado\modificarGrado.Designer.cs">
+		<DependentUpon>modificarGrado.cs</DependentUpon>
+	</Compile>
+
+	<Compile Include="Abm Rol\altaRol.cs">
+			  <SubType>Form</SubType>
+			</Compile>
+			<Compile Include="Abm Rol\altaRol.Designer.cs">
+			   <DependentUpon>altaRol.cs</DependentUpon>
+			</Compile>
+
+
+			<EmbeddedResource Include="Abm Rol\altaRol.resx">
+				<DependentUpon>altaRol.cs</DependentUpon>
+			</EmbeddedResource>
+
+	<Compile Include="Abm Rol\listadoRol.cs">
+			  <SubType>Form</SubType>
+			</Compile>
+			<Compile Include="Abm Rol\listadoRol.Designer.cs">
+			   <DependentUpon>listadoRol.cs</DependentUpon>
+			</Compile>
+
+
+			<EmbeddedResource Include="Abm Rol\listadoRol.resx">
+				<DependentUpon>listadoRol.cs</DependentUpon>
+			</EmbeddedResource>
+
+	<Compile Include="Abm Rol\ModificarRol.cs">
+			  <SubType>Form</SubType>
+			</Compile>
+			<Compile Include="Abm Rol\ModificarRol.Designer.cs">
+			   <DependentUpon>ModificarRol.cs</DependentUpon>
+			</Compile>
+
+
+			<EmbeddedResource Include="Abm Rol\ModificarRol.resx">
+				<DependentUpon>ModificarRol.cs</DependentUpon>
+			</EmbeddedResource>
+
+	<Compile Include="Editar Publicacion\editarPublicacion.cs">
+			  <SubType>Form</SubType>
+			</Compile>
+			<Compile Include="Editar Publicacion\editarPublicacion.Designer.cs">
+			   <DependentUpon>editarPublicacion.cs</DependentUpon>
+			</Compile>
+
+
+			<EmbeddedResource Include="Editar Publicacion\editarPublicacion.resx">
+				<DependentUpon>editarPublicacion.cs</DependentUpon>
+			</EmbeddedResource>
+
+	<Compile Include="Editar Publicacion\listarPublicacion.cs">
+			  <SubType>Form</SubType>
+			</Compile>
+			<Compile Include="Editar Publicacion\listarPublicacion.Designer.cs">
+			   <DependentUpon>listarPublicacion.cs</DependentUpon>
+			</Compile>
+
+
+			<EmbeddedResource Include="Editar Publicacion\listarPublicacion.resx">
+				<DependentUpon>listarPublicacion.cs</DependentUpon>
+			</EmbeddedResource>
+
+
+	<Compile Include="Registro de Usuario\crearUsuario.cs">
+			  <SubType>Form</SubType>
+			</Compile>
+			<Compile Include="Registro de Usuario\crearUsuario.Designer.cs">
+			   <DependentUpon>crearUsuario.cs</DependentUpon>
+			</Compile>
+
+
+			<EmbeddedResource Include="Registro de Usuario\crearUsuario.resx">
+				<DependentUpon>crearUsuario.cs</DependentUpon>
+			</EmbeddedResource>
+
+
+
+
+
     <Compile Include="LoginUtils\Funcionalidad.cs" />
     <Compile Include="LoginUtils\Funcionalidades.cs" />
     <Compile Include="LoginUtils\Usuario.cs" />
@@ -159,6 +280,31 @@
     <Compile Include="PublicacionesUtils\Publicaciones.cs" />
     <Compile Include="PublicacionesUtils\RangoFechas.cs" />
     <Compile Include="PublicacionesUtils\Rubro.cs" />
+
+    <EmbeddedResource Include="Abm Grado\modificarGrado.resx">
+		<DependentUpon>modificarGrado.cs</DependentUpon>
+	</EmbeddedResource>
+
+    <EmbeddedResource Include="Abm Empresa Espectaculo\modificarEmpresa.resx">
+		<DependentUpon>modificarEmpresa.cs</DependentUpon>
+	</EmbeddedResource>
+
+    <EmbeddedResource Include="Abm Empresa Espectaculo\ListarEmpresa.resx">
+		<DependentUpon>ListarEmpresa.cs</DependentUpon>
+	</EmbeddedResource>
+
+	<EmbeddedResource Include="logIn.resx">
+		<DependentUpon>logIn.cs</DependentUpon>
+	</EmbeddedResource>
+
+	<EmbeddedResource Include="Comprar\Comprar.resx">
+		<DependentUpon>Comprar.cs</DependentUpon>
+	</EmbeddedResource>
+
+	<EmbeddedResource Include="Abm Cliente\ListarCliente.resx">
+		<DependentUpon>ListarCliente.cs</DependentUpon>
+	</EmbeddedResource>
+
     <EmbeddedResource Include="Abm Cliente\altaCliente.resx">
       <DependentUpon>altaCliente.cs</DependentUpon>
       <SubType>Designer</SubType>
