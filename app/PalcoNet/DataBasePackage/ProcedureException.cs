@@ -9,5 +9,9 @@ namespace PalcoNet
     class ProcedureException : Exception
     {
         public ProcedureException(string msg, Exception e) : base(msg, e) { }
+
+        public String GetSqlErrorMessage(){
+            return this.InnerException.Message;
+        }
     }
 }

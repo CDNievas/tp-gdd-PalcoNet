@@ -18,7 +18,7 @@ namespace PalcoNet
         {   
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new logIn());
+            Application.Run(new LoginForm());
             
         }
     }

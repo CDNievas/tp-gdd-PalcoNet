@@ -70,225 +70,227 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(26, 25);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(20, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(218, 31);
+            this.label2.Size = new System.Drawing.Size(176, 25);
             this.label2.TabIndex = 0;
             this.label2.Text = "Nueva empresa";
             // 
             // lblEmpresaRS
             // 
             this.lblEmpresaRS.AutoSize = true;
-            this.lblEmpresaRS.Location = new System.Drawing.Point(29, 68);
-            this.lblEmpresaRS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaRS.Location = new System.Drawing.Point(22, 55);
             this.lblEmpresaRS.Name = "lblEmpresaRS";
-            this.lblEmpresaRS.Size = new System.Drawing.Size(97, 17);
+            this.lblEmpresaRS.Size = new System.Drawing.Size(74, 13);
             this.lblEmpresaRS.TabIndex = 1;
             this.lblEmpresaRS.Text = "Razón social: ";
             // 
             // lblEmpresaCUIT
             // 
             this.lblEmpresaCUIT.AutoSize = true;
-            this.lblEmpresaCUIT.Location = new System.Drawing.Point(29, 102);
-            this.lblEmpresaCUIT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaCUIT.Location = new System.Drawing.Point(22, 83);
             this.lblEmpresaCUIT.Name = "lblEmpresaCUIT";
-            this.lblEmpresaCUIT.Size = new System.Drawing.Size(36, 17);
+            this.lblEmpresaCUIT.Size = new System.Drawing.Size(28, 13);
             this.lblEmpresaCUIT.TabIndex = 2;
             this.lblEmpresaCUIT.Text = "Cuit:";
             // 
             // lblEmpresaEMAIL
             // 
             this.lblEmpresaEMAIL.AutoSize = true;
-            this.lblEmpresaEMAIL.Location = new System.Drawing.Point(29, 148);
-            this.lblEmpresaEMAIL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaEMAIL.Location = new System.Drawing.Point(22, 120);
             this.lblEmpresaEMAIL.Name = "lblEmpresaEMAIL";
-            this.lblEmpresaEMAIL.Size = new System.Drawing.Size(51, 17);
+            this.lblEmpresaEMAIL.Size = new System.Drawing.Size(38, 13);
             this.lblEmpresaEMAIL.TabIndex = 3;
             this.lblEmpresaEMAIL.Text = "E-mail:";
             // 
             // lblEmpresaCiudad
             // 
             this.lblEmpresaCiudad.AutoSize = true;
-            this.lblEmpresaCiudad.Location = new System.Drawing.Point(29, 258);
-            this.lblEmpresaCiudad.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaCiudad.Location = new System.Drawing.Point(22, 210);
             this.lblEmpresaCiudad.Name = "lblEmpresaCiudad";
-            this.lblEmpresaCiudad.Size = new System.Drawing.Size(56, 17);
+            this.lblEmpresaCiudad.Size = new System.Drawing.Size(43, 13);
             this.lblEmpresaCiudad.TabIndex = 4;
             this.lblEmpresaCiudad.Text = "Ciudad:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(36, 165);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(27, 134);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(0, 17);
+            this.label7.Size = new System.Drawing.Size(0, 13);
             this.label7.TabIndex = 5;
             // 
             // lblEmpresaCalle
             // 
             this.lblEmpresaCalle.AutoSize = true;
-            this.lblEmpresaCalle.Location = new System.Drawing.Point(29, 359);
-            this.lblEmpresaCalle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaCalle.Location = new System.Drawing.Point(22, 292);
             this.lblEmpresaCalle.Name = "lblEmpresaCalle";
-            this.lblEmpresaCalle.Size = new System.Drawing.Size(43, 17);
+            this.lblEmpresaCalle.Size = new System.Drawing.Size(33, 13);
             this.lblEmpresaCalle.TabIndex = 8;
             this.lblEmpresaCalle.Text = "Calle:";
             // 
             // lblEmpresaNRO
             // 
             this.lblEmpresaNRO.AutoSize = true;
-            this.lblEmpresaNRO.Location = new System.Drawing.Point(297, 359);
-            this.lblEmpresaNRO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaNRO.Location = new System.Drawing.Point(223, 292);
             this.lblEmpresaNRO.Name = "lblEmpresaNRO";
-            this.lblEmpresaNRO.Size = new System.Drawing.Size(35, 17);
+            this.lblEmpresaNRO.Size = new System.Drawing.Size(27, 13);
             this.lblEmpresaNRO.TabIndex = 9;
             this.lblEmpresaNRO.Text = "Nro:";
             // 
             // lblEmpresaDPTO
             // 
             this.lblEmpresaDPTO.AutoSize = true;
-            this.lblEmpresaDPTO.Location = new System.Drawing.Point(501, 359);
-            this.lblEmpresaDPTO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaDPTO.Location = new System.Drawing.Point(376, 292);
             this.lblEmpresaDPTO.Name = "lblEmpresaDPTO";
-            this.lblEmpresaDPTO.Size = new System.Drawing.Size(42, 17);
+            this.lblEmpresaDPTO.Size = new System.Drawing.Size(33, 13);
             this.lblEmpresaDPTO.TabIndex = 10;
             this.lblEmpresaDPTO.Text = "Dpto:";
             // 
             // lblEmpresaLocalidad
             // 
             this.lblEmpresaLocalidad.AutoSize = true;
-            this.lblEmpresaLocalidad.Location = new System.Drawing.Point(29, 307);
-            this.lblEmpresaLocalidad.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaLocalidad.Location = new System.Drawing.Point(22, 249);
             this.lblEmpresaLocalidad.Name = "lblEmpresaLocalidad";
-            this.lblEmpresaLocalidad.Size = new System.Drawing.Size(73, 17);
+            this.lblEmpresaLocalidad.Size = new System.Drawing.Size(56, 13);
             this.lblEmpresaLocalidad.TabIndex = 11;
             this.lblEmpresaLocalidad.Text = "Localidad:";
             // 
             // lblEmpresaCP
             // 
             this.lblEmpresaCP.AutoSize = true;
-            this.lblEmpresaCP.Location = new System.Drawing.Point(29, 401);
-            this.lblEmpresaCP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaCP.Location = new System.Drawing.Point(22, 326);
             this.lblEmpresaCP.Name = "lblEmpresaCP";
-            this.lblEmpresaCP.Size = new System.Drawing.Size(98, 17);
+            this.lblEmpresaCP.Size = new System.Drawing.Size(74, 13);
             this.lblEmpresaCP.TabIndex = 12;
             this.lblEmpresaCP.Text = "Codigo postal:";
             // 
             // lblEmpresaPISO
             // 
             this.lblEmpresaPISO.AutoSize = true;
-            this.lblEmpresaPISO.Location = new System.Drawing.Point(395, 359);
-            this.lblEmpresaPISO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaPISO.Location = new System.Drawing.Point(296, 292);
             this.lblEmpresaPISO.Name = "lblEmpresaPISO";
-            this.lblEmpresaPISO.Size = new System.Drawing.Size(38, 17);
+            this.lblEmpresaPISO.Size = new System.Drawing.Size(30, 13);
             this.lblEmpresaPISO.TabIndex = 13;
-            this.lblEmpresaPISO.Text = "piso:";
+            this.lblEmpresaPISO.Text = "Piso:";
             // 
             // btnEmpresaGuardar
             // 
-            this.btnEmpresaGuardar.Location = new System.Drawing.Point(512, 444);
+            this.btnEmpresaGuardar.Location = new System.Drawing.Point(384, 361);
+            this.btnEmpresaGuardar.Margin = new System.Windows.Forms.Padding(2);
             this.btnEmpresaGuardar.Name = "btnEmpresaGuardar";
-            this.btnEmpresaGuardar.Size = new System.Drawing.Size(88, 30);
+            this.btnEmpresaGuardar.Size = new System.Drawing.Size(66, 24);
             this.btnEmpresaGuardar.TabIndex = 14;
             this.btnEmpresaGuardar.Text = "Guardar";
             this.btnEmpresaGuardar.UseVisualStyleBackColor = true;
+            this.btnEmpresaGuardar.Click += new System.EventHandler(this.btnEmpresaGuardar_Click);
             // 
             // btnEmpresaLimpiar
             // 
-            this.btnEmpresaLimpiar.Location = new System.Drawing.Point(32, 444);
+            this.btnEmpresaLimpiar.Location = new System.Drawing.Point(24, 361);
+            this.btnEmpresaLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnEmpresaLimpiar.Name = "btnEmpresaLimpiar";
-            this.btnEmpresaLimpiar.Size = new System.Drawing.Size(88, 30);
+            this.btnEmpresaLimpiar.Size = new System.Drawing.Size(66, 24);
             this.btnEmpresaLimpiar.TabIndex = 15;
             this.btnEmpresaLimpiar.Text = "Limpiar";
             this.btnEmpresaLimpiar.UseVisualStyleBackColor = true;
+            this.btnEmpresaLimpiar.Click += new System.EventHandler(this.btnEmpresaLimpiar_Click);
             // 
             // txtEmpresaRS
             // 
-            this.txtEmpresaRS.Location = new System.Drawing.Point(130, 68);
+            this.txtEmpresaRS.Location = new System.Drawing.Point(98, 55);
+            this.txtEmpresaRS.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaRS.Name = "txtEmpresaRS";
-            this.txtEmpresaRS.Size = new System.Drawing.Size(124, 22);
+            this.txtEmpresaRS.Size = new System.Drawing.Size(94, 20);
             this.txtEmpresaRS.TabIndex = 16;
             // 
             // txtEmpresaCuit
             // 
-            this.txtEmpresaCuit.Location = new System.Drawing.Point(130, 102);
+            this.txtEmpresaCuit.Location = new System.Drawing.Point(98, 83);
+            this.txtEmpresaCuit.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaCuit.Name = "txtEmpresaCuit";
-            this.txtEmpresaCuit.Size = new System.Drawing.Size(124, 22);
+            this.txtEmpresaCuit.Size = new System.Drawing.Size(94, 20);
             this.txtEmpresaCuit.TabIndex = 17;
             // 
             // txtEmpresaEmail
             // 
-            this.txtEmpresaEmail.Location = new System.Drawing.Point(130, 148);
+            this.txtEmpresaEmail.Location = new System.Drawing.Point(98, 120);
+            this.txtEmpresaEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaEmail.Name = "txtEmpresaEmail";
-            this.txtEmpresaEmail.Size = new System.Drawing.Size(124, 22);
+            this.txtEmpresaEmail.Size = new System.Drawing.Size(94, 20);
             this.txtEmpresaEmail.TabIndex = 18;
             // 
             // txtEmpresaCalle
             // 
-            this.txtEmpresaCalle.Location = new System.Drawing.Point(130, 354);
+            this.txtEmpresaCalle.Location = new System.Drawing.Point(98, 288);
+            this.txtEmpresaCalle.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaCalle.Name = "txtEmpresaCalle";
-            this.txtEmpresaCalle.Size = new System.Drawing.Size(160, 22);
+            this.txtEmpresaCalle.Size = new System.Drawing.Size(121, 20);
             this.txtEmpresaCalle.TabIndex = 21;
             // 
             // txtEmpresaPiso
             // 
-            this.txtEmpresaPiso.Location = new System.Drawing.Point(432, 356);
+            this.txtEmpresaPiso.Location = new System.Drawing.Point(324, 289);
+            this.txtEmpresaPiso.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaPiso.Name = "txtEmpresaPiso";
-            this.txtEmpresaPiso.Size = new System.Drawing.Size(62, 22);
+            this.txtEmpresaPiso.Size = new System.Drawing.Size(48, 20);
             this.txtEmpresaPiso.TabIndex = 23;
             // 
             // txtEmpresaLocalidad
             // 
-            this.txtEmpresaLocalidad.Location = new System.Drawing.Point(130, 302);
+            this.txtEmpresaLocalidad.Location = new System.Drawing.Point(98, 245);
+            this.txtEmpresaLocalidad.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaLocalidad.Name = "txtEmpresaLocalidad";
-            this.txtEmpresaLocalidad.Size = new System.Drawing.Size(124, 22);
+            this.txtEmpresaLocalidad.Size = new System.Drawing.Size(94, 20);
             this.txtEmpresaLocalidad.TabIndex = 25;
             // 
             // txtEmpresaCP
             // 
-            this.txtEmpresaCP.Location = new System.Drawing.Point(130, 401);
+            this.txtEmpresaCP.Location = new System.Drawing.Point(98, 326);
+            this.txtEmpresaCP.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaCP.Name = "txtEmpresaCP";
-            this.txtEmpresaCP.Size = new System.Drawing.Size(124, 22);
+            this.txtEmpresaCP.Size = new System.Drawing.Size(94, 20);
             this.txtEmpresaCP.TabIndex = 26;
             // 
             // txtEmpresaNro
             // 
-            this.txtEmpresaNro.Location = new System.Drawing.Point(326, 356);
+            this.txtEmpresaNro.Location = new System.Drawing.Point(244, 289);
+            this.txtEmpresaNro.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaNro.Name = "txtEmpresaNro";
-            this.txtEmpresaNro.Size = new System.Drawing.Size(62, 22);
+            this.txtEmpresaNro.Size = new System.Drawing.Size(48, 20);
             this.txtEmpresaNro.TabIndex = 27;
             // 
             // txtEmpresaDpto
             // 
-            this.txtEmpresaDpto.Location = new System.Drawing.Point(538, 356);
+            this.txtEmpresaDpto.Location = new System.Drawing.Point(404, 289);
+            this.txtEmpresaDpto.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaDpto.Name = "txtEmpresaDpto";
-            this.txtEmpresaDpto.Size = new System.Drawing.Size(62, 22);
+            this.txtEmpresaDpto.Size = new System.Drawing.Size(48, 20);
             this.txtEmpresaDpto.TabIndex = 28;
             // 
             // txtEmpresaTelefono
             // 
-            this.txtEmpresaTelefono.Location = new System.Drawing.Point(130, 201);
+            this.txtEmpresaTelefono.Location = new System.Drawing.Point(98, 163);
+            this.txtEmpresaTelefono.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaTelefono.Name = "txtEmpresaTelefono";
-            this.txtEmpresaTelefono.Size = new System.Drawing.Size(124, 22);
+            this.txtEmpresaTelefono.Size = new System.Drawing.Size(94, 20);
             this.txtEmpresaTelefono.TabIndex = 30;
             // 
             // lblEmpresaTelefono
             // 
             this.lblEmpresaTelefono.AutoSize = true;
-            this.lblEmpresaTelefono.Location = new System.Drawing.Point(29, 204);
-            this.lblEmpresaTelefono.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmpresaTelefono.Location = new System.Drawing.Point(22, 166);
             this.lblEmpresaTelefono.Name = "lblEmpresaTelefono";
-            this.lblEmpresaTelefono.Size = new System.Drawing.Size(68, 17);
+            this.lblEmpresaTelefono.Size = new System.Drawing.Size(52, 13);
             this.lblEmpresaTelefono.TabIndex = 29;
             this.lblEmpresaTelefono.Text = "Telefono:";
             // 
             // txtEmpresaCiudad
             // 
-            this.txtEmpresaCiudad.Location = new System.Drawing.Point(130, 258);
+            this.txtEmpresaCiudad.Location = new System.Drawing.Point(98, 210);
+            this.txtEmpresaCiudad.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmpresaCiudad.Name = "txtEmpresaCiudad";
-            this.txtEmpresaCiudad.Size = new System.Drawing.Size(124, 22);
+            this.txtEmpresaCiudad.Size = new System.Drawing.Size(94, 20);
             this.txtEmpresaCiudad.TabIndex = 19;
             // 
             // rectangleShape1
@@ -304,15 +306,15 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(626, 502);
+            this.shapeContainer1.Size = new System.Drawing.Size(470, 408);
             this.shapeContainer1.TabIndex = 31;
             this.shapeContainer1.TabStop = false;
             // 
             // altaEmpresa
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(626, 502);
+            this.ClientSize = new System.Drawing.Size(470, 408);
             this.Controls.Add(this.txtEmpresaTelefono);
             this.Controls.Add(this.lblEmpresaTelefono);
             this.Controls.Add(this.txtEmpresaDpto);
@@ -340,7 +342,6 @@
             this.Controls.Add(this.lblEmpresaRS);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.shapeContainer1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "altaEmpresa";
             this.Text = "Alta de Empresa";
             this.Load += new System.EventHandler(this.altaEmpresa_Load);
