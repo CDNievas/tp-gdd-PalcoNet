@@ -65,7 +65,7 @@ namespace PalcoNet.Registro_de_Usuario
                     clienteAPersistir = form.ClienteActual;
                     
             }else if (texto.Equals("EMPRESA")){
-                new Abm_Empresa_Espectaculo.altaEmpresa().Show();
+                new Abm_Empresa_Espectaculo.AltaEmpresaForm(new Abm_Empresa_Espectaculo.Registro()).Show();
             }else{
                 MessageBox.Show("Este tipo de usuario no posee campos adicionales", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

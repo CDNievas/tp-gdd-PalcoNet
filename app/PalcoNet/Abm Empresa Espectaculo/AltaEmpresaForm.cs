@@ -11,10 +11,14 @@ using System.Windows.Forms;
 
 namespace PalcoNet.Abm_Empresa_Espectaculo
 {
-    public partial class altaEmpresa : Form
+    public partial class AltaEmpresaForm : Form
     {
-        public altaEmpresa()
+        private FuncionFormEmpresa funcion;
+        private Empresa empresaAPersistir = null;
+
+        public AltaEmpresaForm(FuncionFormEmpresa funcion)
         {
+            this.funcion = funcion;
             InitializeComponent();
         }
 
@@ -25,7 +29,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         private void altaEmpresa_Load(object sender, EventArgs e)
         {
-
+            funcion.Setup(this);
         }
 
         private void btnEmpresaLimpiar_Click(object sender, EventArgs e)
@@ -47,6 +51,22 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
                 MessageBox.Show(ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            if (empresaAPersistir == null)
+                empresaAPersistir = new Empresa();
+
+            empresaAPersistir.razonSocial = txtEmpresaRS.Text;
+            empresaAPersistir.cuit = txtEmpresaCuit.Text;
+            empresaAPersistir.mail = txtEmpresaEmail.Text;
+            empresaAPersistir.telefono = txtEmpresaTelefono.Text;
+            empresaAPersistir.ciudad = txtEmpresaCiudad.Text;
+            empresaAPersistir.localidad = txtEmpresaLocalidad.Text;
+            empresaAPersistir.domCalle = txtEmpresaCalle.Text;
+            empresaAPersistir.nroCalle = txtEmpresaNro.Text;
+            empresaAPersistir.piso = txtEmpresaPiso.Text.Trim().Equals("") ? null : (int?)Convert.ToInt32(txtEmpresaPiso.Text);
+            empresaAPersistir.codPostal = txtEmpresaCP.Text;
+
+            Console.WriteLine("Persistien3 " + empresaAPersistir); 
+            funcion.Guardar(this, empresaAPersistir);
             
         }
 
@@ -76,7 +96,21 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             }
         }
 
-      
-
+        internal void LlenateCon(Empresa empresa)
+        {
+            txtEmpresaRS.Text = empresa.razonSocial;
+            txtEmpresaCuit.Text = empresa.cuit;
+            txtEmpresaEmail.Text = empresa.mail;
+            txtEmpresaTelefono.Text = empresa.telefono;
+            txtEmpresaCiudad.Text = empresa.ciudad;
+            txtEmpresaLocalidad.Text = empresa.localidad;
+            txtEmpresaCalle.Text = empresa.domCalle;
+            txtEmpresaNro.Text = empresa.nroCalle;
+            txtEmpresaPiso.Text = empresa.piso == null? "" : empresa.piso.ToString();
+            txtEmpresaDpto.Text = empresa.depto;
+            txtEmpresaCP.Text = empresa.codPostal;
+            empresaAPersistir = empresa;
+            Console.WriteLine("Empresa a persistir " + empresaAPersistir);
         }
+    }
     }

@@ -67,6 +67,7 @@
       <DependentUpon>modificarCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\TipoDocumento.cs" />
+    <Compile Include="Abm Empresa Espectaculo\FuncionFormEmpresa.cs" />
     <Compile Include="Abm Rol\Rol.cs" />
     <Compile Include="Abm Rol\Roles.cs" />
     <Compile Include="Canje Puntos\canjearPuntos.cs">
@@ -81,11 +82,11 @@
     <Compile Include="Canje Puntos\ConsultaPuntos.Designer.cs">
       <DependentUpon>ConsultaPuntos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Empresa Espectaculo\altaEmpresa.cs">
+    <Compile Include="Abm Empresa Espectaculo\AltaEmpresaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Empresa Espectaculo\altaEmpresa.Designer.cs">
-      <DependentUpon>altaEmpresa.cs</DependentUpon>
+    <Compile Include="Abm Empresa Espectaculo\AltaEmpresaForm.Designer.cs">
+      <DependentUpon>AltaEmpresaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Empresa Espectaculo\bajaEmpresa.cs">
       <SubType>Form</SubType>
@@ -299,8 +300,8 @@
     <EmbeddedResource Include="Canje Puntos\ConsultaPuntos.resx">
       <DependentUpon>ConsultaPuntos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Empresa Espectaculo\altaEmpresa.resx">
-      <DependentUpon>altaEmpresa.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Empresa Espectaculo\AltaEmpresaForm.resx">
+      <DependentUpon>AltaEmpresaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Empresa Espectaculo\bajaEmpresa.resx">
       <DependentUpon>bajaEmpresa.cs</DependentUpon>

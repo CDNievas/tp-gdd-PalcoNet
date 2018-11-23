@@ -31,164 +31,127 @@
             this.components = new System.ComponentModel.Container();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.txtCuit = new System.Windows.Forms.TextBox();
-            this.txtId = new System.Windows.Forms.TextBox();
+            this.txtMail = new System.Windows.Forms.TextBox();
+            this.txtRazonSocial = new System.Windows.Forms.TextBox();
             this.lblEmpresaCuit = new System.Windows.Forms.Label();
-            this.lblEmpresaId = new System.Windows.Forms.Label();
+            this.lblRazonSocial = new System.Windows.Forms.Label();
             this.btnEmpresaBaja = new System.Windows.Forms.Button();
             this.btnEmpresaMod = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.empresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2018DataSet = new PalcoNet.GD2C2018DataSet();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.gD2C2018DataSet = new PalcoNet.GD2C2018DataSet();
-            this.empresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.empresaTableAdapter = new PalcoNet.GD2C2018DataSetTableAdapters.EmpresaTableAdapter();
-            this.cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.e_mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ciudad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.calle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dpto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codPostal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.razSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idempresaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cuitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.razonsocialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefonoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.localidadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.domcalleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nrocalleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pisoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deptoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codpostalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechacreacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rolusuarioidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
+            this.txtCuit = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnNueva = new System.Windows.Forms.Button();
+            this.empresasDataGrid = new System.Windows.Forms.DataGridView();
+            this.btnPagAnt = new System.Windows.Forms.Button();
+            this.btnPagSig = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.empresasDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(220, 160);
+            this.btnBuscar.Location = new System.Drawing.Point(423, 87);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(100, 40);
+            this.btnBuscar.Size = new System.Drawing.Size(75, 32);
             this.btnBuscar.TabIndex = 21;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(34, 160);
+            this.btnLimpiar.Location = new System.Drawing.Point(175, 87);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(100, 40);
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 32);
             this.btnLimpiar.TabIndex = 20;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // txtCuit
+            // txtMail
             // 
-            this.txtCuit.Location = new System.Drawing.Point(145, 90);
-            this.txtCuit.Name = "txtCuit";
-            this.txtCuit.Size = new System.Drawing.Size(100, 22);
-            this.txtCuit.TabIndex = 19;
+            this.txtMail.Location = new System.Drawing.Point(506, 50);
+            this.txtMail.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(125, 20);
+            this.txtMail.TabIndex = 19;
             // 
-            // txtId
+            // txtRazonSocial
             // 
-            this.txtId.Location = new System.Drawing.Point(145, 57);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(100, 22);
-            this.txtId.TabIndex = 18;
+            this.txtRazonSocial.Location = new System.Drawing.Point(121, 50);
+            this.txtRazonSocial.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRazonSocial.Name = "txtRazonSocial";
+            this.txtRazonSocial.Size = new System.Drawing.Size(143, 20);
+            this.txtRazonSocial.TabIndex = 18;
             // 
             // lblEmpresaCuit
             // 
             this.lblEmpresaCuit.AutoSize = true;
-            this.lblEmpresaCuit.Location = new System.Drawing.Point(64, 90);
+            this.lblEmpresaCuit.Location = new System.Drawing.Point(279, 53);
+            this.lblEmpresaCuit.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmpresaCuit.Name = "lblEmpresaCuit";
-            this.lblEmpresaCuit.Size = new System.Drawing.Size(36, 17);
+            this.lblEmpresaCuit.Size = new System.Drawing.Size(32, 13);
             this.lblEmpresaCuit.TabIndex = 17;
-            this.lblEmpresaCuit.Text = "Cuit:";
+            this.lblEmpresaCuit.Text = "CUIT";
             // 
-            // lblEmpresaId
+            // lblRazonSocial
             // 
-            this.lblEmpresaId.AutoSize = true;
-            this.lblEmpresaId.Location = new System.Drawing.Point(64, 62);
-            this.lblEmpresaId.Name = "lblEmpresaId";
-            this.lblEmpresaId.Size = new System.Drawing.Size(23, 17);
-            this.lblEmpresaId.TabIndex = 16;
-            this.lblEmpresaId.Text = "id:";
+            this.lblRazonSocial.AutoSize = true;
+            this.lblRazonSocial.Location = new System.Drawing.Point(49, 53);
+            this.lblRazonSocial.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRazonSocial.Name = "lblRazonSocial";
+            this.lblRazonSocial.Size = new System.Drawing.Size(68, 13);
+            this.lblRazonSocial.TabIndex = 16;
+            this.lblRazonSocial.Text = "Razón social";
             // 
             // btnEmpresaBaja
             // 
-            this.btnEmpresaBaja.Location = new System.Drawing.Point(472, 268);
+            this.btnEmpresaBaja.Location = new System.Drawing.Point(694, 276);
+            this.btnEmpresaBaja.Margin = new System.Windows.Forms.Padding(2);
             this.btnEmpresaBaja.Name = "btnEmpresaBaja";
-            this.btnEmpresaBaja.Size = new System.Drawing.Size(100, 46);
+            this.btnEmpresaBaja.Size = new System.Drawing.Size(75, 37);
             this.btnEmpresaBaja.TabIndex = 15;
             this.btnEmpresaBaja.Text = "Baja";
             this.btnEmpresaBaja.UseVisualStyleBackColor = true;
             // 
             // btnEmpresaMod
             // 
-            this.btnEmpresaMod.Location = new System.Drawing.Point(472, 206);
+            this.btnEmpresaMod.Location = new System.Drawing.Point(694, 220);
+            this.btnEmpresaMod.Margin = new System.Windows.Forms.Padding(2);
             this.btnEmpresaMod.Name = "btnEmpresaMod";
-            this.btnEmpresaMod.Size = new System.Drawing.Size(100, 40);
+            this.btnEmpresaMod.Size = new System.Drawing.Size(75, 37);
             this.btnEmpresaMod.TabIndex = 14;
-            this.btnEmpresaMod.Text = "modificar";
+            this.btnEmpresaMod.Text = "Modificar";
             this.btnEmpresaMod.UseVisualStyleBackColor = true;
+            this.btnEmpresaMod.Click += new System.EventHandler(this.btnEmpresaMod_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 23);
+            this.label1.Location = new System.Drawing.Point(32, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 17);
+            this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 13;
             this.label1.Text = "Filtrar Empresa";
             // 
-            // dataGridView1
+            // empresaBindingSource
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cuit,
-            this.e_mail,
-            this.telefono,
-            this.Ciudad,
-            this.localidad,
-            this.calle,
-            this.nro,
-            this.piso,
-            this.dpto,
-            this.codPostal,
-            this.razSocial,
-            this.idempresaDataGridViewTextBoxColumn,
-            this.cuitDataGridViewTextBoxColumn,
-            this.razonsocialDataGridViewTextBoxColumn,
-            this.mailDataGridViewTextBoxColumn,
-            this.telefonoDataGridViewTextBoxColumn,
-            this.ciudadDataGridViewTextBoxColumn,
-            this.localidadDataGridViewTextBoxColumn,
-            this.domcalleDataGridViewTextBoxColumn,
-            this.nrocalleDataGridViewTextBoxColumn,
-            this.pisoDataGridViewTextBoxColumn,
-            this.deptoDataGridViewTextBoxColumn,
-            this.codpostalDataGridViewTextBoxColumn,
-            this.fechacreacionDataGridViewTextBoxColumn,
-            this.rolusuarioidDataGridViewTextBoxColumn,
-            this.seleccionar});
-            this.dataGridView1.DataSource = this.empresaBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(33, 206);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(420, 285);
-            this.dataGridView1.TabIndex = 12;
+            this.empresaBindingSource.DataMember = "Empresa";
+            this.empresaBindingSource.DataSource = this.gD2C2018DataSet;
+            // 
+            // gD2C2018DataSet
+            // 
+            this.gD2C2018DataSet.DataSetName = "GD2C2018DataSet";
+            this.gD2C2018DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // shapeContainer1
             // 
@@ -197,7 +160,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(642, 503);
+            this.shapeContainer1.Size = new System.Drawing.Size(804, 511);
             this.shapeContainer1.TabIndex = 22;
             this.shapeContainer1.TabStop = false;
             // 
@@ -205,190 +168,93 @@
             // 
             this.rectangleShape1.Location = new System.Drawing.Point(35, 33);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(357, 96);
-            // 
-            // gD2C2018DataSet
-            // 
-            this.gD2C2018DataSet.DataSetName = "GD2C2018DataSet";
-            this.gD2C2018DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // empresaBindingSource
-            // 
-            this.empresaBindingSource.DataMember = "Empresa";
-            this.empresaBindingSource.DataSource = this.gD2C2018DataSet;
+            this.rectangleShape1.Size = new System.Drawing.Size(638, 96);
             // 
             // empresaTableAdapter
             // 
             this.empresaTableAdapter.ClearBeforeFill = true;
             // 
-            // cuit
+            // txtCuit
             // 
-            this.cuit.HeaderText = "Cuit";
-            this.cuit.Name = "cuit";
+            this.txtCuit.Location = new System.Drawing.Point(316, 50);
+            this.txtCuit.Name = "txtCuit";
+            this.txtCuit.Size = new System.Drawing.Size(100, 20);
+            this.txtCuit.TabIndex = 23;
             // 
-            // e_mail
+            // label2
             // 
-            this.e_mail.HeaderText = "e_mail";
-            this.e_mail.Name = "e_mail";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(460, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "E- mail";
             // 
-            // telefono
+            // btnNueva
             // 
-            this.telefono.HeaderText = "telefono";
-            this.telefono.Name = "telefono";
+            this.btnNueva.Location = new System.Drawing.Point(694, 168);
+            this.btnNueva.Name = "btnNueva";
+            this.btnNueva.Size = new System.Drawing.Size(75, 37);
+            this.btnNueva.TabIndex = 25;
+            this.btnNueva.Text = "Nueva";
+            this.btnNueva.UseVisualStyleBackColor = true;
             // 
-            // Ciudad
+            // empresasDataGrid
             // 
-            this.Ciudad.HeaderText = "ciudad";
-            this.Ciudad.Name = "Ciudad";
+            this.empresasDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.empresasDataGrid.Location = new System.Drawing.Point(35, 144);
+            this.empresasDataGrid.Name = "empresasDataGrid";
+            this.empresasDataGrid.Size = new System.Drawing.Size(639, 298);
+            this.empresasDataGrid.TabIndex = 26;
             // 
-            // localidad
+            // btnPagAnt
             // 
-            this.localidad.HeaderText = "localidad";
-            this.localidad.Name = "localidad";
+            this.btnPagAnt.Location = new System.Drawing.Point(92, 467);
+            this.btnPagAnt.Name = "btnPagAnt";
+            this.btnPagAnt.Size = new System.Drawing.Size(98, 23);
+            this.btnPagAnt.TabIndex = 27;
+            this.btnPagAnt.Text = "Pág. Anterior";
+            this.btnPagAnt.UseVisualStyleBackColor = true;
+            this.btnPagAnt.Click += new System.EventHandler(this.btnPagAnt_Click);
             // 
-            // calle
+            // btnPagSig
             // 
-            this.calle.HeaderText = "calle";
-            this.calle.Name = "calle";
-            // 
-            // nro
-            // 
-            this.nro.HeaderText = "nro";
-            this.nro.Name = "nro";
-            // 
-            // piso
-            // 
-            this.piso.HeaderText = "piso";
-            this.piso.Name = "piso";
-            // 
-            // dpto
-            // 
-            this.dpto.HeaderText = "dpto";
-            this.dpto.Name = "dpto";
-            // 
-            // codPostal
-            // 
-            this.codPostal.HeaderText = "codPostal";
-            this.codPostal.Name = "codPostal";
-            // 
-            // razSocial
-            // 
-            this.razSocial.HeaderText = "Razon Social";
-            this.razSocial.Name = "razSocial";
-            // 
-            // idempresaDataGridViewTextBoxColumn
-            // 
-            this.idempresaDataGridViewTextBoxColumn.DataPropertyName = "id_empresa";
-            this.idempresaDataGridViewTextBoxColumn.HeaderText = "id_empresa";
-            this.idempresaDataGridViewTextBoxColumn.Name = "idempresaDataGridViewTextBoxColumn";
-            this.idempresaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cuitDataGridViewTextBoxColumn
-            // 
-            this.cuitDataGridViewTextBoxColumn.DataPropertyName = "cuit";
-            this.cuitDataGridViewTextBoxColumn.HeaderText = "cuit";
-            this.cuitDataGridViewTextBoxColumn.Name = "cuitDataGridViewTextBoxColumn";
-            // 
-            // razonsocialDataGridViewTextBoxColumn
-            // 
-            this.razonsocialDataGridViewTextBoxColumn.DataPropertyName = "razon_social";
-            this.razonsocialDataGridViewTextBoxColumn.HeaderText = "razon_social";
-            this.razonsocialDataGridViewTextBoxColumn.Name = "razonsocialDataGridViewTextBoxColumn";
-            // 
-            // mailDataGridViewTextBoxColumn
-            // 
-            this.mailDataGridViewTextBoxColumn.DataPropertyName = "mail";
-            this.mailDataGridViewTextBoxColumn.HeaderText = "mail";
-            this.mailDataGridViewTextBoxColumn.Name = "mailDataGridViewTextBoxColumn";
-            // 
-            // telefonoDataGridViewTextBoxColumn
-            // 
-            this.telefonoDataGridViewTextBoxColumn.DataPropertyName = "telefono";
-            this.telefonoDataGridViewTextBoxColumn.HeaderText = "telefono";
-            this.telefonoDataGridViewTextBoxColumn.Name = "telefonoDataGridViewTextBoxColumn";
-            // 
-            // ciudadDataGridViewTextBoxColumn
-            // 
-            this.ciudadDataGridViewTextBoxColumn.DataPropertyName = "ciudad";
-            this.ciudadDataGridViewTextBoxColumn.HeaderText = "ciudad";
-            this.ciudadDataGridViewTextBoxColumn.Name = "ciudadDataGridViewTextBoxColumn";
-            // 
-            // localidadDataGridViewTextBoxColumn
-            // 
-            this.localidadDataGridViewTextBoxColumn.DataPropertyName = "localidad";
-            this.localidadDataGridViewTextBoxColumn.HeaderText = "localidad";
-            this.localidadDataGridViewTextBoxColumn.Name = "localidadDataGridViewTextBoxColumn";
-            // 
-            // domcalleDataGridViewTextBoxColumn
-            // 
-            this.domcalleDataGridViewTextBoxColumn.DataPropertyName = "dom_calle";
-            this.domcalleDataGridViewTextBoxColumn.HeaderText = "dom_calle";
-            this.domcalleDataGridViewTextBoxColumn.Name = "domcalleDataGridViewTextBoxColumn";
-            // 
-            // nrocalleDataGridViewTextBoxColumn
-            // 
-            this.nrocalleDataGridViewTextBoxColumn.DataPropertyName = "nro_calle";
-            this.nrocalleDataGridViewTextBoxColumn.HeaderText = "nro_calle";
-            this.nrocalleDataGridViewTextBoxColumn.Name = "nrocalleDataGridViewTextBoxColumn";
-            // 
-            // pisoDataGridViewTextBoxColumn
-            // 
-            this.pisoDataGridViewTextBoxColumn.DataPropertyName = "piso";
-            this.pisoDataGridViewTextBoxColumn.HeaderText = "piso";
-            this.pisoDataGridViewTextBoxColumn.Name = "pisoDataGridViewTextBoxColumn";
-            // 
-            // deptoDataGridViewTextBoxColumn
-            // 
-            this.deptoDataGridViewTextBoxColumn.DataPropertyName = "depto";
-            this.deptoDataGridViewTextBoxColumn.HeaderText = "depto";
-            this.deptoDataGridViewTextBoxColumn.Name = "deptoDataGridViewTextBoxColumn";
-            // 
-            // codpostalDataGridViewTextBoxColumn
-            // 
-            this.codpostalDataGridViewTextBoxColumn.DataPropertyName = "cod_postal";
-            this.codpostalDataGridViewTextBoxColumn.HeaderText = "cod_postal";
-            this.codpostalDataGridViewTextBoxColumn.Name = "codpostalDataGridViewTextBoxColumn";
-            // 
-            // fechacreacionDataGridViewTextBoxColumn
-            // 
-            this.fechacreacionDataGridViewTextBoxColumn.DataPropertyName = "fecha_creacion";
-            this.fechacreacionDataGridViewTextBoxColumn.HeaderText = "fecha_creacion";
-            this.fechacreacionDataGridViewTextBoxColumn.Name = "fechacreacionDataGridViewTextBoxColumn";
-            // 
-            // rolusuarioidDataGridViewTextBoxColumn
-            // 
-            this.rolusuarioidDataGridViewTextBoxColumn.DataPropertyName = "rol_usuario_id";
-            this.rolusuarioidDataGridViewTextBoxColumn.HeaderText = "rol_usuario_id";
-            this.rolusuarioidDataGridViewTextBoxColumn.Name = "rolusuarioidDataGridViewTextBoxColumn";
-            // 
-            // seleccionar
-            // 
-            this.seleccionar.HeaderText = "seleccionar";
-            this.seleccionar.Name = "seleccionar";
-            this.seleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btnPagSig.Location = new System.Drawing.Point(541, 467);
+            this.btnPagSig.Name = "btnPagSig";
+            this.btnPagSig.Size = new System.Drawing.Size(103, 23);
+            this.btnPagSig.TabIndex = 28;
+            this.btnPagSig.Text = "Pág. Siguiente";
+            this.btnPagSig.UseVisualStyleBackColor = true;
+            this.btnPagSig.Click += new System.EventHandler(this.btnPagSig_Click);
             // 
             // ListarEmpresa
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(642, 503);
+            this.ClientSize = new System.Drawing.Size(804, 511);
+            this.Controls.Add(this.btnPagSig);
+            this.Controls.Add(this.btnPagAnt);
+            this.Controls.Add(this.empresasDataGrid);
+            this.Controls.Add(this.btnNueva);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtCuit);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.txtCuit);
-            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.txtMail);
+            this.Controls.Add(this.txtRazonSocial);
             this.Controls.Add(this.lblEmpresaCuit);
-            this.Controls.Add(this.lblEmpresaId);
+            this.Controls.Add(this.lblRazonSocial);
             this.Controls.Add(this.btnEmpresaBaja);
             this.Controls.Add(this.btnEmpresaMod);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.shapeContainer1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ListarEmpresa";
             this.Text = "ListarEmpresa";
             this.Load += new System.EventHandler(this.ListarEmpresa_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.empresasDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -398,44 +264,23 @@
 
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.TextBox txtCuit;
-        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.TextBox txtMail;
+        private System.Windows.Forms.TextBox txtRazonSocial;
         private System.Windows.Forms.Label lblEmpresaCuit;
-        private System.Windows.Forms.Label lblEmpresaId;
+        private System.Windows.Forms.Label lblRazonSocial;
         private System.Windows.Forms.Button btnEmpresaBaja;
         private System.Windows.Forms.Button btnEmpresaMod;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private GD2C2018DataSet gD2C2018DataSet;
         private System.Windows.Forms.BindingSource empresaBindingSource;
         private GD2C2018DataSetTableAdapters.EmpresaTableAdapter empresaTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cuit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn e_mail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ciudad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn localidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn calle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nro;
-        private System.Windows.Forms.DataGridViewTextBoxColumn piso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dpto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codPostal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn razSocial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idempresaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cuitDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn razonsocialDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mailDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn telefonoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ciudadDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn localidadDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn domcalleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nrocalleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pisoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn deptoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codpostalDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechacreacionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rolusuarioidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn seleccionar;
+        private System.Windows.Forms.TextBox txtCuit;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnNueva;
+        private System.Windows.Forms.DataGridView empresasDataGrid;
+        private System.Windows.Forms.Button btnPagAnt;
+        private System.Windows.Forms.Button btnPagSig;
     }
 }

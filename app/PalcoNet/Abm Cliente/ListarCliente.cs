@@ -47,6 +47,11 @@ namespace PalcoNet.Abm_Cliente
 
             this.clientesDataGrid.DataSource = bindingSource;
             this.clientesDataGrid.Columns["id"].Visible = false;
+            this.clientesDataGrid.AllowUserToAddRows = false;
+            foreach (DataGridViewColumn c in clientesDataGrid.Columns)
+            {
+                c.ReadOnly = true;
+            }
         }
 
 
@@ -64,8 +69,11 @@ namespace PalcoNet.Abm_Cliente
 
         private void btnPagSig_Click(object sender, EventArgs e)
         {
-            paginaActual.Next();
-            ActualizarTabla();
+            if (clientesDataGrid.RowCount != 0)
+            {
+                paginaActual.Next();
+                ActualizarTabla();
+            }
         }
 
         private void btnPagAnt_Click(object sender, EventArgs e)
