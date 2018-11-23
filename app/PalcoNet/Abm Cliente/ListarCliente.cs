@@ -29,6 +29,7 @@ namespace PalcoNet.Abm_Cliente
         private void ListarCliente_Load(object sender, EventArgs e)
         {
             paginaActual = new Pagina(1, 25);
+            clientesDataGrid.MultiSelect = false;
             ActualizarTabla();
         }
 
@@ -70,6 +71,27 @@ namespace PalcoNet.Abm_Cliente
         private void btnPagAnt_Click(object sender, EventArgs e)
         {
             paginaActual.Previous();
+            ActualizarTabla();
+        }
+
+        private void btnClienteMod_Click(object sender, EventArgs e)
+        {
+            var cliente = (Cliente)clientesDataGrid.CurrentRow.DataBoundItem;
+            var form = new AltaClienteForm();
+            Console.WriteLine("Modificando cliente: " + cliente);
+            form.funcionForm = new Modificar(cliente);
+            try
+            {
+                var ignored = form.ShowDialog();
+                MessageBox.Show(String.Format("El cliente {0} {1} ha sido actualizado", cliente.nombre, cliente.apellido),
+                    "Cliente actualizado",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (ProcedureException ex)
+            {
+                MessageBox.Show(ex.GetSqlErrorMessage(), "Error al actualizar el cliente",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             ActualizarTabla();
         }
 

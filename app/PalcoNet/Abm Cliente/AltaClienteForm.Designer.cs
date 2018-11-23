@@ -442,6 +442,7 @@
             this.Controls.Add(this.shapeContainer1);
             this.Name = "AltaClienteForm";
             this.Text = "Alta de Cliente";
+            this.Load += new System.EventHandler(this.AltaClienteForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

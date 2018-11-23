@@ -107,17 +107,18 @@
             // btnClienteMod
             // 
             this.btnClienteMod.Location = new System.Drawing.Point(765, 293);
-            this.btnClienteMod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClienteMod.Margin = new System.Windows.Forms.Padding(2);
             this.btnClienteMod.Name = "btnClienteMod";
             this.btnClienteMod.Size = new System.Drawing.Size(75, 37);
             this.btnClienteMod.TabIndex = 4;
             this.btnClienteMod.Text = "Modificar";
             this.btnClienteMod.UseVisualStyleBackColor = true;
+            this.btnClienteMod.Click += new System.EventHandler(this.btnClienteMod_Click);
             // 
             // btnClienteBaja
             // 
             this.btnClienteBaja.Location = new System.Drawing.Point(765, 363);
-            this.btnClienteBaja.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClienteBaja.Margin = new System.Windows.Forms.Padding(2);
             this.btnClienteBaja.Name = "btnClienteBaja";
             this.btnClienteBaja.Size = new System.Drawing.Size(75, 37);
             this.btnClienteBaja.TabIndex = 5;
@@ -148,7 +149,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(119, 88);
-            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(109, 20);
             this.txtName.TabIndex = 8;
@@ -156,7 +157,7 @@
             // txtDocumento
             // 
             this.txtDocumento.Location = new System.Drawing.Point(119, 115);
-            this.txtDocumento.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDocumento.Margin = new System.Windows.Forms.Padding(2);
             this.txtDocumento.Name = "txtDocumento";
             this.txtDocumento.Size = new System.Drawing.Size(109, 20);
             this.txtDocumento.TabIndex = 9;
@@ -164,7 +165,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Location = new System.Drawing.Point(161, 150);
-            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(86, 32);
             this.btnLimpiar.TabIndex = 10;
@@ -175,7 +176,7 @@
             // btnBuscar
             // 
             this.btnBuscar.Location = new System.Drawing.Point(295, 150);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 32);
             this.btnBuscar.TabIndex = 11;
@@ -280,7 +281,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.shapeContainer1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ListarCliente";
             this.Text = "ListarCliente";
             this.Load += new System.EventHandler(this.ListarCliente_Load);

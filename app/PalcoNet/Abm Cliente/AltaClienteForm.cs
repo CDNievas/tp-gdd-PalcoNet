@@ -13,8 +13,8 @@ namespace PalcoNet.Abm_Cliente
 {
     public partial class AltaClienteForm : Form
     {
-        public Cliente Cliente { get; set; }
-        public LlamadoDesde llamadoDesde { get; set; }
+        public Cliente ClienteActual { get; set; }
+        public FuncionFormCliente funcionForm { get; set; }
 
         public AltaClienteForm()
         {
@@ -47,7 +47,7 @@ namespace PalcoNet.Abm_Cliente
             try
             {
                 ValidarInputs();
-                Cliente cliente = new Cliente();
+                Cliente cliente = ClienteActual == null? new Cliente() : ClienteActual;
                 cliente.cuil = txtClienteCuil.Text;
                 cliente.tipoDocumento = (TipoDocumento)comboTipoDoc.SelectedItem;
                 cliente.nroDocumento = txtClienteDoc.Text;
@@ -79,11 +79,11 @@ namespace PalcoNet.Abm_Cliente
                 cliente.fechaCreacion = Contexto.FechaActual;
 
                 Console.WriteLine(cliente);
-                llamadoDesde.apply(this, cliente);
+                funcionForm.Guardar(this, cliente);
             }
             catch (UserInputException ex)
             {
-                MessageBox.Show(ex.Message, "Error",
+                MessageBox.Show(ex.Message, "Error en el ingreso",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -107,8 +107,30 @@ namespace PalcoNet.Abm_Cliente
 
         }
 
+        private void AltaClienteForm_Load(object sender, EventArgs e)
+        {
+            funcionForm.Setup(this);
+        }
 
-
-        
+        internal void LlenateConDatosDe(Abm_Cliente.Cliente cliente)
+        {
+            txtClienteNombre.Text = cliente.nombre;
+            txtClienteApellido.Text = cliente.apellido;
+            comboTipoDoc.SelectedItem = cliente.tipoDocumento;
+            txtClienteDoc.Text = cliente.nroDocumento;
+            txtClienteCuil.Text = cliente.cuil;
+            txtClienteEmail.Text = cliente.mail;
+            txtClienteTelefono.Text = cliente.telefono;
+            txtClienteCalle.Text = cliente.nroCalle;
+            txtClienteNro.Text = cliente.nroCalle;
+            txtPiso.Text = cliente.piso.ToString();
+            txtClienteDpto.Text = cliente.depto;
+            txtClienteLoc.Text = cliente.localidad;
+            txtCiudad.Text = cliente.ciudad;
+            txtClienteCP.Text = cliente.codPostal;
+            if(cliente.fechaNacimiento != null)
+                fechaNacimiento.Value = (DateTime)cliente.fechaNacimiento;
+            this.ClienteActual = cliente;
+        }
     }
 }

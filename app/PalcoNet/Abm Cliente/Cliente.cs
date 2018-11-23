@@ -83,7 +83,8 @@ namespace PalcoNet.Abm_Cliente
             {
                 cliente.tipoDocumento = null;
             }
-            
+
+            cliente.cuil = data.StringValue("cuil");
             cliente.nroDocumento = data.StringValue("nro_documento");
             cliente.nombre = data.StringValue("nombre");
             cliente.apellido = data.StringValue("apellido");
@@ -102,5 +103,21 @@ namespace PalcoNet.Abm_Cliente
             return cliente;
         }
 
+
+        internal void Update()
+        {
+            String sql = String.Format
+                (@" update COMPUMUNDOHIPERMEGARED.Cliente
+                    set cuil = '{0}', tipo_documento = '{1}', nro_documento = '{2}',
+                    nombre = '{3}', apellido = '{4}', mail = '{5}', telefono = {6},
+                    ciudad = '{7}', localidad = '{8}', dom_calle = '{9}', num_calle = '{10}',
+                    depto = '{11}', piso = {12}, cod_postal = '{13}', fecha_nacimiento = '{14}',
+                    fecha_creacion = '{15}'
+                    where id_cliente = {16}",
+                     cuil, tipoDocumento.discriminator, nroDocumento, nombre, apellido,
+                     mail, telefono, ciudad, localidad, domCalle, nroCalle,
+                     depto, piso == null? "null" : piso.ToString(), codPostal, fechaNacimiento, fechaCreacion, id);
+            var ignored = DataBase.GetInstance().query(sql);
+        }
     }
 }

@@ -59,7 +59,7 @@
       <DependentUpon>bajaCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\Buscador.cs" />
-    <Compile Include="Abm Cliente\LlamadoDesde.cs" />
+    <Compile Include="Abm Cliente\FuncionFormCliente.cs" />
     <Compile Include="Abm Cliente\modificarCliente.cs">
       <SubType>Form</SubType>
     </Compile>

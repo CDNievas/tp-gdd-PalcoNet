@@ -59,10 +59,10 @@ namespace PalcoNet.Registro_de_Usuario
             if (texto.Equals("CLIENTE"))
             {
                 var form = new Abm_Cliente.AltaClienteForm();
-                form.llamadoDesde = new DesdeRegistro();
+                form.funcionForm = new Registrarse();
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
-                    clienteAPersistir = form.Cliente;
+                    clienteAPersistir = form.ClienteActual;
                     
             }else if (texto.Equals("EMPRESA")){
                 new Abm_Empresa_Espectaculo.altaEmpresa().Show();
