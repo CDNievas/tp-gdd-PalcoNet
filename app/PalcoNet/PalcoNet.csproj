@@ -66,6 +66,7 @@
     <Compile Include="Abm Cliente\modificarCliente.Designer.cs">
       <DependentUpon>modificarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Cliente\TipoDocumento.cs" />
     <Compile Include="Abm Rol\Rol.cs" />
     <Compile Include="Abm Rol\Roles.cs" />
     <Compile Include="Canje Puntos\canjearPuntos.cs">

@@ -12,7 +12,7 @@ namespace PalcoNet.Registro_de_Usuario
         public static void CrearNuevoCliente(Cliente cliente, String username, String pass, int rolID){
             DataBase.GetInstance().procedure("crear_usuario",
                 new ParametroIn("cuil", cliente.cuil),
-                new ParametroIn("tipo_doc", cliente.tipoDocumento),
+                new ParametroIn("tipo_doc", cliente.tipoDocumento.discriminator),
                 new ParametroIn("nro_documento", cliente.nroDocumento),
                 new ParametroIn("nombre", cliente.nombre),
                 new ParametroIn("apellido", cliente.apellido),

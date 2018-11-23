@@ -21,6 +21,10 @@ namespace PalcoNet.Abm_Cliente
             InitializeComponent();
             fechaNacimiento.MinDate = new DateTime(1880, 1, 1);
             fechaNacimiento.MaxDate = Contexto.FechaActual;
+
+            
+            comboTipoDoc.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboTipoDoc.DataSource = TipoDocumento.Todos();
         }
 
         private List<TextBox> TodosLosTextbox()
@@ -45,7 +49,7 @@ namespace PalcoNet.Abm_Cliente
                 ValidarInputs();
                 Cliente cliente = new Cliente();
                 cliente.cuil = txtClienteCuil.Text;
-                cliente.tipoDocumento = txtClienteTipoDoc.Text[0];
+                cliente.tipoDocumento = (TipoDocumento)comboTipoDoc.SelectedItem;
                 cliente.nroDocumento = txtClienteDoc.Text;
                 cliente.nombre = txtClienteNombre.Text;
                 cliente.apellido = txtClienteApellido.Text;

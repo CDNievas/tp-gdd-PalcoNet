@@ -51,13 +51,13 @@ create table COMPUMUNDOHIPERMEGARED.Empresa(
 	depto nvarchar(50),
 	cod_postal nvarchar(50),
 	fecha_creacion datetime,
-	rol_usuario_id int constraint FK_EMPRESA_ROLUSUARIO references COMPUMUNDOHIPERMEGARED.Rol_Usuario
+	usuario_id int constraint FK_EMPRESA_ROLUSUARIO references COMPUMUNDOHIPERMEGARED.Usuario
 )
 
 create table COMPUMUNDOHIPERMEGARED.Cliente(
 	id_cliente int identity(1,1) primary key,
 	cuil varchar(13),
-	tipo_documento char(1),
+	tipo_documento char(1) check(tipo_documento in('D', 'C', 'E')) not null,
 	nro_documento nvarchar(15) unique not null,
 	nombre nvarchar(255) not null,
 	apellido nvarchar(255) not null,

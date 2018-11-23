@@ -45,7 +45,6 @@
             this.lblClienteFechaNac = new System.Windows.Forms.Label();
             this.txtClienteNombre = new System.Windows.Forms.TextBox();
             this.txtClienteApellido = new System.Windows.Forms.TextBox();
-            this.txtClienteTipoDoc = new System.Windows.Forms.TextBox();
             this.txtClienteDoc = new System.Windows.Forms.TextBox();
             this.txtClienteCuil = new System.Windows.Forms.TextBox();
             this.txtClienteEmail = new System.Windows.Forms.TextBox();
@@ -66,6 +65,7 @@
             this.txtCiudad = new System.Windows.Forms.TextBox();
             this.labelPiso = new System.Windows.Forms.Label();
             this.txtPiso = new System.Windows.Forms.TextBox();
+            this.comboTipoDoc = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -217,14 +217,6 @@
             this.txtClienteApellido.Name = "txtClienteApellido";
             this.txtClienteApellido.Size = new System.Drawing.Size(110, 20);
             this.txtClienteApellido.TabIndex = 16;
-            // 
-            // txtClienteTipoDoc
-            // 
-            this.txtClienteTipoDoc.Location = new System.Drawing.Point(124, 136);
-            this.txtClienteTipoDoc.Margin = new System.Windows.Forms.Padding(2);
-            this.txtClienteTipoDoc.Name = "txtClienteTipoDoc";
-            this.txtClienteTipoDoc.Size = new System.Drawing.Size(66, 20);
-            this.txtClienteTipoDoc.TabIndex = 17;
             // 
             // txtClienteDoc
             // 
@@ -399,11 +391,20 @@
             this.txtPiso.Size = new System.Drawing.Size(34, 20);
             this.txtPiso.TabIndex = 37;
             // 
+            // comboTipoDoc
+            // 
+            this.comboTipoDoc.FormattingEnabled = true;
+            this.comboTipoDoc.Location = new System.Drawing.Point(136, 135);
+            this.comboTipoDoc.Name = "comboTipoDoc";
+            this.comboTipoDoc.Size = new System.Drawing.Size(54, 21);
+            this.comboTipoDoc.TabIndex = 38;
+            // 
             // AltaClienteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(568, 457);
+            this.Controls.Add(this.comboTipoDoc);
             this.Controls.Add(this.txtPiso);
             this.Controls.Add(this.labelPiso);
             this.Controls.Add(this.txtCiudad);
@@ -422,7 +423,6 @@
             this.Controls.Add(this.txtClienteEmail);
             this.Controls.Add(this.txtClienteCuil);
             this.Controls.Add(this.txtClienteDoc);
-            this.Controls.Add(this.txtClienteTipoDoc);
             this.Controls.Add(this.txtClienteApellido);
             this.Controls.Add(this.txtClienteNombre);
             this.Controls.Add(this.lblClienteFechaNac);
@@ -466,7 +466,6 @@
         private System.Windows.Forms.Label lblClienteFechaNac;
         private System.Windows.Forms.TextBox txtClienteNombre;
         private System.Windows.Forms.TextBox txtClienteApellido;
-        private System.Windows.Forms.TextBox txtClienteTipoDoc;
         private System.Windows.Forms.TextBox txtClienteDoc;
         private System.Windows.Forms.TextBox txtClienteCuil;
         private System.Windows.Forms.TextBox txtClienteEmail;
@@ -487,6 +486,7 @@
         private System.Windows.Forms.TextBox txtCiudad;
         private System.Windows.Forms.Label labelPiso;
         private System.Windows.Forms.TextBox txtPiso;
+        private System.Windows.Forms.ComboBox comboTipoDoc;
         // alta cliente tiene fecha de creacion --> ponerlo desde sql como fecha actual
 
     }

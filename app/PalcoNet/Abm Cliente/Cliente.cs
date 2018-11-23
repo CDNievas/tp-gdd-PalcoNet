@@ -12,7 +12,7 @@ namespace PalcoNet.Abm_Cliente
     {
         public long id { get; set; }
         public String cuil { get; set; }
-        public Char tipoDocumento { get; set; }
+        public TipoDocumento tipoDocumento { get; set; }
         public String nroDocumento { get; set; }
         public String nombre { get; set; }
         public String apellido { get; set; }
@@ -40,10 +40,17 @@ namespace PalcoNet.Abm_Cliente
             var data = new DataRowExtended(dr);
 
             cliente.id = data.LongValue("id_cliente");
-            var tipo = data.StringValue("tipo_documento");
-            if (tipo.Length != 0)
-                cliente.tipoDocumento = tipo[0];
-            else cliente.tipoDocumento = ' ';
+
+            try
+            {
+                var tipo = data.StringValue("tipo_documento")[0];
+                cliente.tipoDocumento = TipoDocumento.Parse(tipo);
+            }
+            catch (Exception)
+            {
+                cliente.tipoDocumento = null;
+            }
+            
             cliente.nroDocumento = data.StringValue("nro_documento");
             cliente.nombre = data.StringValue("nombre");
             cliente.apellido = data.StringValue("apellido");
