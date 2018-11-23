@@ -63,7 +63,7 @@ namespace PalcoNet.Abm_Rol
             foreach (Funcionalidad f in funcionalidades)
             {
                 row = dataTable.NewRow();
-                row["funcionalidad_id"] = f.id;
+                row["funcionalidad_id"] = f.Id;
                 dataTable.Rows.Add(row);
             }
             return dataTable;

@@ -36,7 +36,18 @@ namespace PalcoNet
                 var idUser = ValidadorLogin.ValidarLogin(username.Text, password.Text);
                 Contexto.idUsuarioLogueado = idUser;
                 Console.WriteLine("SE LOGUEO : " + idUser);
-                throw new NotImplementedException("debería dejarte acceder a tus funciones");
+                var funcionalidades = Funcionalidades.findFuncionalidadesByUsuarioId(idUser);
+                if (funcionalidades.Count == 1)
+                {
+                    throw new NotImplementedException("debería dejarte acceder a su funcion");
+                }
+                else
+                {
+                    var formSelector = new SelectorFuncionalidadForm();
+                    formSelector.Funcionalidades = funcionalidades;
+                    formSelector.Show();
+                }
+                
             }
             catch (ProcedureException ex)
             {

@@ -7,27 +7,29 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.LoginUtils
 {
-    class Funcionalidad
+    public class Funcionalidad
     {
-        public short id { get; set; }
-        public String descripcion { get; set; }
+        public short Id {get; private set;}
+        public String Descripcion {get; private set; }
 
-        private Funcionalidad()
+        private Funcionalidad(short unId, String d)
         {
+            Id = unId;
+            Descripcion = d;
         }
 
         public static Funcionalidad traerDe(DataRow dr)
         {
-            var funcionalidad = new Funcionalidad();
-            funcionalidad.id = Convert.ToInt16(dr["id_funcionalidad"]);
-            funcionalidad.descripcion = dr["descripcion"].ToString();
-
+            var id = Convert.ToInt16(dr["id_funcionalidad"]);
+            var desc = dr["descripcion"].ToString();
+            var funcionalidad = new Funcionalidad(id, desc);
+            
             return funcionalidad;
         }
 
         public override string ToString()
         {
-            return String.Format("Funcionalidad({0}, {1})", id, descripcion);
+            return String.Format("Funcionalidad({0}, {1})", Id, Descripcion);
         }
     }
 }
