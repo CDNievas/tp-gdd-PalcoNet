@@ -29,85 +29,51 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2018DataSet = new PalcoNet.GD2C2018DataSet();
             this.label2 = new System.Windows.Forms.Label();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClienteMod = new System.Windows.Forms.Button();
             this.btnClienteBaja = new System.Windows.Forms.Button();
-            this.lblClienteID = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
             this.lblClienteDoc = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
-            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtDocumento = new System.Windows.Forms.TextBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.gD2C2018DataSet = new PalcoNet.GD2C2018DataSet();
-            this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.clienteTableAdapter = new PalcoNet.GD2C2018DataSetTableAdapters.ClienteTableAdapter();
-            this.idclienteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cuilDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipodocumentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nrodocumentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apellidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefonoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.localidadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.domcalleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numcalleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deptoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pisoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codpostalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechanacimientoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechacreacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rolusuarioidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
+            this.lblApellido = new System.Windows.Forms.Label();
+            this.lblMail = new System.Windows.Forms.Label();
+            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.txtMail = new System.Windows.Forms.TextBox();
+            this.btnNuevo = new System.Windows.Forms.Button();
+            this.btnPagAnt = new System.Windows.Forms.Button();
+            this.btnPagSig = new System.Windows.Forms.Button();
+            this.clientesDataGrid = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientesDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // clienteBindingSource
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idclienteDataGridViewTextBoxColumn,
-            this.cuilDataGridViewTextBoxColumn,
-            this.tipodocumentoDataGridViewTextBoxColumn,
-            this.nrodocumentoDataGridViewTextBoxColumn,
-            this.nombreDataGridViewTextBoxColumn,
-            this.apellidoDataGridViewTextBoxColumn,
-            this.mailDataGridViewTextBoxColumn,
-            this.telefonoDataGridViewTextBoxColumn,
-            this.ciudadDataGridViewTextBoxColumn,
-            this.localidadDataGridViewTextBoxColumn,
-            this.domcalleDataGridViewTextBoxColumn,
-            this.numcalleDataGridViewTextBoxColumn,
-            this.deptoDataGridViewTextBoxColumn,
-            this.pisoDataGridViewTextBoxColumn,
-            this.codpostalDataGridViewTextBoxColumn,
-            this.fechanacimientoDataGridViewTextBoxColumn,
-            this.fechacreacionDataGridViewTextBoxColumn,
-            this.rolusuarioidDataGridViewTextBoxColumn,
-            this.Seleccionar});
-            this.dataGridView1.DataSource = this.clienteBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(35, 256);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(420, 285);
-            this.dataGridView1.TabIndex = 0;
+            this.clienteBindingSource.DataMember = "Cliente";
+            this.clienteBindingSource.DataSource = this.gD2C2018DataSet;
+            // 
+            // gD2C2018DataSet
+            // 
+            this.gD2C2018DataSet.DataSetName = "GD2C2018DataSet";
+            this.gD2C2018DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(29, 25);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(38, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(187, 31);
+            this.label2.Size = new System.Drawing.Size(152, 25);
             this.label2.TabIndex = 1;
             this.label2.Text = "Listar Cliente";
             // 
@@ -118,7 +84,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(656, 596);
+            this.shapeContainer1.Size = new System.Drawing.Size(866, 637);
             this.shapeContainer1.TabIndex = 2;
             this.shapeContainer1.TabStop = false;
             // 
@@ -126,236 +92,201 @@
             // 
             this.rectangleShape1.Location = new System.Drawing.Point(36, 84);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(285, 106);
+            this.rectangleShape1.Size = new System.Drawing.Size(690, 106);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 73);
+            this.label1.Location = new System.Drawing.Point(40, 61);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 17);
+            this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Filtrar Cliente";
+            this.label1.Text = "Filtrar Clientes";
             // 
             // btnClienteMod
             // 
-            this.btnClienteMod.Location = new System.Drawing.Point(474, 256);
+            this.btnClienteMod.Location = new System.Drawing.Point(765, 293);
+            this.btnClienteMod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnClienteMod.Name = "btnClienteMod";
-            this.btnClienteMod.Size = new System.Drawing.Size(100, 40);
+            this.btnClienteMod.Size = new System.Drawing.Size(75, 37);
             this.btnClienteMod.TabIndex = 4;
-            this.btnClienteMod.Text = "modificar";
+            this.btnClienteMod.Text = "Modificar";
             this.btnClienteMod.UseVisualStyleBackColor = true;
             // 
             // btnClienteBaja
             // 
-            this.btnClienteBaja.Location = new System.Drawing.Point(474, 318);
+            this.btnClienteBaja.Location = new System.Drawing.Point(765, 363);
+            this.btnClienteBaja.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnClienteBaja.Name = "btnClienteBaja";
-            this.btnClienteBaja.Size = new System.Drawing.Size(100, 46);
+            this.btnClienteBaja.Size = new System.Drawing.Size(75, 37);
             this.btnClienteBaja.TabIndex = 5;
             this.btnClienteBaja.Text = "Baja";
             this.btnClienteBaja.UseVisualStyleBackColor = true;
+            this.btnClienteBaja.Click += new System.EventHandler(this.btnClienteBaja_Click);
             // 
-            // lblClienteID
+            // lblNombre
             // 
-            this.lblClienteID.AutoSize = true;
-            this.lblClienteID.Location = new System.Drawing.Point(66, 112);
-            this.lblClienteID.Name = "lblClienteID";
-            this.lblClienteID.Size = new System.Drawing.Size(23, 17);
-            this.lblClienteID.TabIndex = 6;
-            this.lblClienteID.Text = "id:";
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(50, 91);
+            this.lblNombre.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(44, 13);
+            this.lblNombre.TabIndex = 6;
+            this.lblNombre.Text = "Nombre";
             // 
             // lblClienteDoc
             // 
             this.lblClienteDoc.AutoSize = true;
-            this.lblClienteDoc.Location = new System.Drawing.Point(45, 145);
+            this.lblClienteDoc.Location = new System.Drawing.Point(50, 118);
+            this.lblClienteDoc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClienteDoc.Name = "lblClienteDoc";
-            this.lblClienteDoc.Size = new System.Drawing.Size(88, 17);
+            this.lblClienteDoc.Size = new System.Drawing.Size(62, 13);
             this.lblClienteDoc.TabIndex = 7;
-            this.lblClienteDoc.Text = "Documento; ";
+            this.lblClienteDoc.Text = "Documento";
             // 
-            // txtId
+            // txtName
             // 
-            this.txtId.Location = new System.Drawing.Point(147, 107);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(100, 22);
-            this.txtId.TabIndex = 8;
+            this.txtName.Location = new System.Drawing.Point(119, 88);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(109, 20);
+            this.txtName.TabIndex = 8;
             // 
-            // txtNombre
+            // txtDocumento
             // 
-            this.txtNombre.Location = new System.Drawing.Point(147, 140);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 22);
-            this.txtNombre.TabIndex = 9;
+            this.txtDocumento.Location = new System.Drawing.Point(119, 115);
+            this.txtDocumento.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDocumento.Name = "txtDocumento";
+            this.txtDocumento.Size = new System.Drawing.Size(109, 20);
+            this.txtDocumento.TabIndex = 9;
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(36, 210);
+            this.btnLimpiar.Location = new System.Drawing.Point(161, 150);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(100, 40);
+            this.btnLimpiar.Size = new System.Drawing.Size(86, 32);
             this.btnLimpiar.TabIndex = 10;
-            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Text = "Limpiar filtros";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(222, 210);
+            this.btnBuscar.Location = new System.Drawing.Point(295, 150);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(100, 40);
+            this.btnBuscar.Size = new System.Drawing.Size(75, 32);
             this.btnBuscar.TabIndex = 11;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
-            // 
-            // gD2C2018DataSet
-            // 
-            this.gD2C2018DataSet.DataSetName = "GD2C2018DataSet";
-            this.gD2C2018DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // clienteBindingSource
-            // 
-            this.clienteBindingSource.DataMember = "Cliente";
-            this.clienteBindingSource.DataSource = this.gD2C2018DataSet;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // clienteTableAdapter
             // 
             this.clienteTableAdapter.ClearBeforeFill = true;
             // 
-            // idclienteDataGridViewTextBoxColumn
+            // lblApellido
             // 
-            this.idclienteDataGridViewTextBoxColumn.DataPropertyName = "id_cliente";
-            this.idclienteDataGridViewTextBoxColumn.HeaderText = "id_cliente";
-            this.idclienteDataGridViewTextBoxColumn.Name = "idclienteDataGridViewTextBoxColumn";
-            this.idclienteDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.Location = new System.Drawing.Point(292, 91);
+            this.lblApellido.Name = "lblApellido";
+            this.lblApellido.Size = new System.Drawing.Size(44, 13);
+            this.lblApellido.TabIndex = 12;
+            this.lblApellido.Text = "Apellido";
             // 
-            // cuilDataGridViewTextBoxColumn
+            // lblMail
             // 
-            this.cuilDataGridViewTextBoxColumn.DataPropertyName = "cuil";
-            this.cuilDataGridViewTextBoxColumn.HeaderText = "cuil";
-            this.cuilDataGridViewTextBoxColumn.Name = "cuilDataGridViewTextBoxColumn";
+            this.lblMail.AutoSize = true;
+            this.lblMail.Location = new System.Drawing.Point(292, 118);
+            this.lblMail.Name = "lblMail";
+            this.lblMail.Size = new System.Drawing.Size(35, 13);
+            this.lblMail.TabIndex = 13;
+            this.lblMail.Text = "E-mail";
             // 
-            // tipodocumentoDataGridViewTextBoxColumn
+            // txtApellido
             // 
-            this.tipodocumentoDataGridViewTextBoxColumn.DataPropertyName = "tipo_documento";
-            this.tipodocumentoDataGridViewTextBoxColumn.HeaderText = "tipo_documento";
-            this.tipodocumentoDataGridViewTextBoxColumn.Name = "tipodocumentoDataGridViewTextBoxColumn";
+            this.txtApellido.Location = new System.Drawing.Point(352, 91);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(117, 20);
+            this.txtApellido.TabIndex = 14;
             // 
-            // nrodocumentoDataGridViewTextBoxColumn
+            // txtMail
             // 
-            this.nrodocumentoDataGridViewTextBoxColumn.DataPropertyName = "nro_documento";
-            this.nrodocumentoDataGridViewTextBoxColumn.HeaderText = "nro_documento";
-            this.nrodocumentoDataGridViewTextBoxColumn.Name = "nrodocumentoDataGridViewTextBoxColumn";
+            this.txtMail.Location = new System.Drawing.Point(352, 118);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(117, 20);
+            this.txtMail.TabIndex = 15;
             // 
-            // nombreDataGridViewTextBoxColumn
+            // btnNuevo
             // 
-            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "nombre";
-            this.nombreDataGridViewTextBoxColumn.HeaderText = "nombre";
-            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            this.btnNuevo.Location = new System.Drawing.Point(765, 225);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(77, 37);
+            this.btnNuevo.TabIndex = 16;
+            this.btnNuevo.Text = "Crear nuevo";
+            this.btnNuevo.UseVisualStyleBackColor = true;
             // 
-            // apellidoDataGridViewTextBoxColumn
+            // btnPagAnt
             // 
-            this.apellidoDataGridViewTextBoxColumn.DataPropertyName = "apellido";
-            this.apellidoDataGridViewTextBoxColumn.HeaderText = "apellido";
-            this.apellidoDataGridViewTextBoxColumn.Name = "apellidoDataGridViewTextBoxColumn";
+            this.btnPagAnt.Location = new System.Drawing.Point(53, 590);
+            this.btnPagAnt.Name = "btnPagAnt";
+            this.btnPagAnt.Size = new System.Drawing.Size(110, 23);
+            this.btnPagAnt.TabIndex = 17;
+            this.btnPagAnt.Text = "Pág. anterior";
+            this.btnPagAnt.UseVisualStyleBackColor = true;
+            this.btnPagAnt.Click += new System.EventHandler(this.btnPagAnt_Click);
             // 
-            // mailDataGridViewTextBoxColumn
+            // btnPagSig
             // 
-            this.mailDataGridViewTextBoxColumn.DataPropertyName = "mail";
-            this.mailDataGridViewTextBoxColumn.HeaderText = "mail";
-            this.mailDataGridViewTextBoxColumn.Name = "mailDataGridViewTextBoxColumn";
+            this.btnPagSig.Location = new System.Drawing.Point(607, 590);
+            this.btnPagSig.Name = "btnPagSig";
+            this.btnPagSig.Size = new System.Drawing.Size(108, 23);
+            this.btnPagSig.TabIndex = 18;
+            this.btnPagSig.Text = "Pág. Siguiente";
+            this.btnPagSig.UseVisualStyleBackColor = true;
+            this.btnPagSig.Click += new System.EventHandler(this.btnPagSig_Click);
             // 
-            // telefonoDataGridViewTextBoxColumn
+            // clientesDataGrid
             // 
-            this.telefonoDataGridViewTextBoxColumn.DataPropertyName = "telefono";
-            this.telefonoDataGridViewTextBoxColumn.HeaderText = "telefono";
-            this.telefonoDataGridViewTextBoxColumn.Name = "telefonoDataGridViewTextBoxColumn";
-            // 
-            // ciudadDataGridViewTextBoxColumn
-            // 
-            this.ciudadDataGridViewTextBoxColumn.DataPropertyName = "ciudad";
-            this.ciudadDataGridViewTextBoxColumn.HeaderText = "ciudad";
-            this.ciudadDataGridViewTextBoxColumn.Name = "ciudadDataGridViewTextBoxColumn";
-            // 
-            // localidadDataGridViewTextBoxColumn
-            // 
-            this.localidadDataGridViewTextBoxColumn.DataPropertyName = "localidad";
-            this.localidadDataGridViewTextBoxColumn.HeaderText = "localidad";
-            this.localidadDataGridViewTextBoxColumn.Name = "localidadDataGridViewTextBoxColumn";
-            // 
-            // domcalleDataGridViewTextBoxColumn
-            // 
-            this.domcalleDataGridViewTextBoxColumn.DataPropertyName = "dom_calle";
-            this.domcalleDataGridViewTextBoxColumn.HeaderText = "dom_calle";
-            this.domcalleDataGridViewTextBoxColumn.Name = "domcalleDataGridViewTextBoxColumn";
-            // 
-            // numcalleDataGridViewTextBoxColumn
-            // 
-            this.numcalleDataGridViewTextBoxColumn.DataPropertyName = "num_calle";
-            this.numcalleDataGridViewTextBoxColumn.HeaderText = "num_calle";
-            this.numcalleDataGridViewTextBoxColumn.Name = "numcalleDataGridViewTextBoxColumn";
-            // 
-            // deptoDataGridViewTextBoxColumn
-            // 
-            this.deptoDataGridViewTextBoxColumn.DataPropertyName = "depto";
-            this.deptoDataGridViewTextBoxColumn.HeaderText = "depto";
-            this.deptoDataGridViewTextBoxColumn.Name = "deptoDataGridViewTextBoxColumn";
-            // 
-            // pisoDataGridViewTextBoxColumn
-            // 
-            this.pisoDataGridViewTextBoxColumn.DataPropertyName = "piso";
-            this.pisoDataGridViewTextBoxColumn.HeaderText = "piso";
-            this.pisoDataGridViewTextBoxColumn.Name = "pisoDataGridViewTextBoxColumn";
-            // 
-            // codpostalDataGridViewTextBoxColumn
-            // 
-            this.codpostalDataGridViewTextBoxColumn.DataPropertyName = "cod_postal";
-            this.codpostalDataGridViewTextBoxColumn.HeaderText = "cod_postal";
-            this.codpostalDataGridViewTextBoxColumn.Name = "codpostalDataGridViewTextBoxColumn";
-            // 
-            // fechanacimientoDataGridViewTextBoxColumn
-            // 
-            this.fechanacimientoDataGridViewTextBoxColumn.DataPropertyName = "fecha_nacimiento";
-            this.fechanacimientoDataGridViewTextBoxColumn.HeaderText = "fecha_nacimiento";
-            this.fechanacimientoDataGridViewTextBoxColumn.Name = "fechanacimientoDataGridViewTextBoxColumn";
-            // 
-            // fechacreacionDataGridViewTextBoxColumn
-            // 
-            this.fechacreacionDataGridViewTextBoxColumn.DataPropertyName = "fecha_creacion";
-            this.fechacreacionDataGridViewTextBoxColumn.HeaderText = "fecha_creacion";
-            this.fechacreacionDataGridViewTextBoxColumn.Name = "fechacreacionDataGridViewTextBoxColumn";
-            // 
-            // rolusuarioidDataGridViewTextBoxColumn
-            // 
-            this.rolusuarioidDataGridViewTextBoxColumn.DataPropertyName = "rol_usuario_id";
-            this.rolusuarioidDataGridViewTextBoxColumn.HeaderText = "rol_usuario_id";
-            this.rolusuarioidDataGridViewTextBoxColumn.Name = "rolusuarioidDataGridViewTextBoxColumn";
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
+            this.clientesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.clientesDataGrid.Location = new System.Drawing.Point(36, 214);
+            this.clientesDataGrid.Name = "clientesDataGrid";
+            this.clientesDataGrid.Size = new System.Drawing.Size(690, 328);
+            this.clientesDataGrid.TabIndex = 19;
             // 
             // ListarCliente
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 596);
+            this.ClientSize = new System.Drawing.Size(866, 637);
+            this.Controls.Add(this.clientesDataGrid);
+            this.Controls.Add(this.btnPagSig);
+            this.Controls.Add(this.btnPagAnt);
+            this.Controls.Add(this.btnNuevo);
+            this.Controls.Add(this.txtMail);
+            this.Controls.Add(this.txtApellido);
+            this.Controls.Add(this.lblMail);
+            this.Controls.Add(this.lblApellido);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.txtDocumento);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblClienteDoc);
-            this.Controls.Add(this.lblClienteID);
+            this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.btnClienteBaja);
             this.Controls.Add(this.btnClienteMod);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.shapeContainer1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ListarCliente";
             this.Text = "ListarCliente";
             this.Load += new System.EventHandler(this.ListarCliente_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientesDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,40 +294,28 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label2;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClienteMod;
         private System.Windows.Forms.Button btnClienteBaja;
-        private System.Windows.Forms.Label lblClienteID;
+        private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblClienteDoc;
-        private System.Windows.Forms.TextBox txtId;
-        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtDocumento;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnBuscar;
         private GD2C2018DataSet gD2C2018DataSet;
         private System.Windows.Forms.BindingSource clienteBindingSource;
         private GD2C2018DataSetTableAdapters.ClienteTableAdapter clienteTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idclienteDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cuilDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tipodocumentoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nrodocumentoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn apellidoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mailDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn telefonoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ciudadDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn localidadDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn domcalleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numcalleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn deptoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pisoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codpostalDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechanacimientoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechacreacionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rolusuarioidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
+        private System.Windows.Forms.Label lblApellido;
+        private System.Windows.Forms.Label lblMail;
+        private System.Windows.Forms.TextBox txtApellido;
+        private System.Windows.Forms.TextBox txtMail;
+        private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.Button btnPagAnt;
+        private System.Windows.Forms.Button btnPagSig;
+        private System.Windows.Forms.DataGridView clientesDataGrid;
     }
 }

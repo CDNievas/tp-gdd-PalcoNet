@@ -116,6 +116,7 @@
     <Compile Include="Contexto.cs" />
     <Compile Include="DataBasePackage\DataBase.cs" />
     <Compile Include="DataBasePackage\DataRowUtils.cs" />
+    <Compile Include="DataBasePackage\NullableInParameter.cs" />
     <Compile Include="DataBasePackage\Pagina.cs" />
     <Compile Include="DataBasePackage\Parametro.cs" />
     <Compile Include="DataBasePackage\ParametroOut.cs" />

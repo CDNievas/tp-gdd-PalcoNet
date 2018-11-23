@@ -1,4 +1,5 @@
 ﻿using PalcoNet.Abm_Cliente;
+using PalcoNet.DataBasePackage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,8 @@ namespace PalcoNet.Registro_de_Usuario
                 new ParametroIn("localidad", cliente.localidad),
                 new ParametroIn("dom_calle", cliente.domCalle),
                 new ParametroIn("num_calle", cliente.nroCalle),
-                new ParametroIn("depto", cliente.depto),
-                new ParametroIn("piso", cliente.piso),
+                new NullableInParameter("depto", cliente.depto),
+                new NullableInParameter("piso", cliente.piso),
                 new ParametroIn("cod_postal", cliente.codPostal),
                 new ParametroIn("fecha_nacimiento", cliente.fechaNacimiento),
                 new ParametroIn("fecha_creacion", cliente.fechaCreacion),

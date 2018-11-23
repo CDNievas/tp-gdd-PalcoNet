@@ -17,7 +17,7 @@ namespace PalcoNet
                     throw new NotImplementedException("ABM ROL");
                     break;
                 case 2:
-                    throw new NotImplementedException("ABM Clientes");
+                    new Abm_Cliente.ListarCliente().Show();
                     break;
                 case 3:
                     throw new NotImplementedException("ABM Empresa Espectáculos");

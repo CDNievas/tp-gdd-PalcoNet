@@ -21,5 +21,15 @@ namespace PalcoNet.DataBasePackage
             return (pageNumber - 1) * pageSize;
         }
 
+        public void Next()
+        {
+            this.pageNumber = pageNumber + 1;
+        }
+
+        public void Previous()
+        {
+            var r = pageNumber - 1;
+            this.pageNumber = r <= 0 ? 1 : r;
+        }
     }
 }
