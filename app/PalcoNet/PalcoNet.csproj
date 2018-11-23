@@ -59,6 +59,7 @@
       <DependentUpon>bajaCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\Buscador.cs" />
+    <Compile Include="Abm Cliente\LlamadoDesde.cs" />
     <Compile Include="Abm Cliente\modificarCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +190,7 @@
     <Compile Include="Abm Rol\altaRol.Designer.cs">
       <DependentUpon>altaRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registro de Usuario\CreadorDeUsuarios.cs" />
     <Compile Include="SelectorFuncionalidad.cs" />
     <Compile Include="SelectorFuncionalidadForm.cs">
       <SubType>Form</SubType>

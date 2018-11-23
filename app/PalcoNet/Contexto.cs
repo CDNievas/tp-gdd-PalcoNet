@@ -9,5 +9,7 @@ namespace PalcoNet
     static class Contexto
     {
         public static int? idUsuarioLogueado = null;
+
+        public static readonly DateTime FechaActual = DateTime.Now; // todo deberia caragarlo del archiov config
     }
 }

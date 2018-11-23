@@ -56,13 +56,13 @@ create table COMPUMUNDOHIPERMEGARED.Empresa(
 
 create table COMPUMUNDOHIPERMEGARED.Cliente(
 	id_cliente int identity(1,1) primary key,
-	cuil char(1), --wtf
+	cuil varchar(13),
 	tipo_documento char(1),
-	nro_documento nvarchar(15) unique,
-	nombre nvarchar(255),
-	apellido nvarchar(255),
+	nro_documento nvarchar(15) unique not null,
+	nombre nvarchar(255) not null,
+	apellido nvarchar(255) not null,
 	mail nvarchar(255),
-	telefono nvarchar(10),
+	telefono numeric(15),
 	ciudad nvarchar(25),
 	localidad nvarchar(255),
 	dom_calle nvarchar(255),
@@ -72,7 +72,7 @@ create table COMPUMUNDOHIPERMEGARED.Cliente(
 	cod_postal nvarchar(255),
 	fecha_nacimiento date,
 	fecha_creacion datetime,
-	rol_usuario_id int constraint FK_CLIENTE_ROLUSUARIO references COMPUMUNDOHIPERMEGARED.Rol_Usuario
+	usuario_id int constraint FK_CLIENTE_USUARIO references COMPUMUNDOHIPERMEGARED.Usuario
 )
 
 
@@ -187,9 +187,9 @@ CREATE UNIQUE INDEX index_dni
 ON COMPUMUNDOHIPERMEGARED.Cliente (nro_documento)
 go
 
-insert into COMPUMUNDOHIPERMEGARED.Cliente(nro_documento, apellido, nombre, fecha_nacimiento, mail, dom_calle,
+insert into COMPUMUNDOHIPERMEGARED.Cliente(tipo_documento, nro_documento, apellido, nombre, fecha_nacimiento, mail, dom_calle,
 num_calle, piso, depto, cod_postal)
-select distinct m.Cli_Dni, m.Cli_Apeliido, m.Cli_Nombre, m.Cli_Fecha_Nac, m.Cli_Mail, m.Cli_Dom_Calle,
+select distinct 'D', m.Cli_Dni, m.Cli_Apeliido, m.Cli_Nombre, m.Cli_Fecha_Nac, m.Cli_Mail, m.Cli_Dom_Calle,
 m.Cli_Nro_Calle, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal
 from gd_esquema.Maestra m
 where m.Cli_Dni is not null
@@ -514,7 +514,8 @@ select * from COMPUMUNDOHIPERMEGARED.Rol_Usuario
 select * from COMPUMUNDOHIPERMEGARED.Rol
 */
 
-create procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario(@username nvarchar(50), @password nvarchar(50), @rol_id smallint)
+create procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario
+(@username nvarchar(50), @password nvarchar(50), @rol_id smallint, @usuario_id int output)
 as
 begin
 	begin tran
@@ -524,12 +525,13 @@ begin
 	insert into COMPUMUNDOHIPERMEGARED.Usuario(username, password, intentos, habilitado)
 	values(@username, HASHBYTES('SHA2_256', @password), 0, 1)
 
-	declare @usuario_id int = @@IDENTITY
+	set @usuario_id = @@IDENTITY
 
 	insert into COMPUMUNDOHIPERMEGARED.Rol_Usuario(id_rol, id_usario)
 	values(@rol_id, @usuario_id)
 
 	commit tran
+	return
 end
 go
 
@@ -606,6 +608,28 @@ values
 go
 
 
+create procedure COMPUMUNDOHIPERMEGARED.crear_usuario
+(@cuil nvarchar(13), @tipo_doc char(1), @nro_documento nvarchar(15), @nombre nvarchar(255),
+@apellido nvarchar(255), @mail nvarchar(255), @telefono numeric(15), @ciudad nvarchar(25),
+@localidad nvarchar(25), @dom_calle nvarchar(255), @num_calle numeric(18),
+@depto nvarchar(255), @piso numeric(18), @cod_postal nvarchar(255), @fecha_nacimiento date,
+@fecha_creacion datetime, @rol_id int, @username nvarchar(50), @pass nvarchar(64))
+as
+begin
+	begin tran
+	declare @id_nuevo_usuario int
+	exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario @username, @pass, @rol_id, @usuario_id = @id_nuevo_usuario output
+	insert into Cliente
+	(cuil, tipo_documento, nro_documento, nombre, apellido, mail, telefono, ciudad, localidad,
+	dom_calle, num_calle, depto, piso, cod_postal, fecha_nacimiento, fecha_creacion, usuario_id)
+	values
+	(@cuil, @tipo_doc, @nro_documento, @nombre, @apellido, @mail, @telefono, @ciudad, @localidad,
+	@dom_calle, @num_calle, @depto, @piso, @cod_postal, @fecha_nacimiento, @fecha_creacion, @id_nuevo_usuario)
+	commit tran
+end
+go
+
+
 /*
 Creando al administrador General
 */
@@ -614,10 +638,10 @@ declare @tablaFunciones COMPUMUNDOHIPERMEGARED.FuncionalidadList
 insert into @tablaFunciones
 select id_funcionalidad from COMPUMUNDOHIPERMEGARED.Funcionalidad
 
-declare @id smallint
+declare @idRol smallint
 
-exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'Administrador General', @tablaFunciones, @id_generado = @id output 
+exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'Administrador General', @tablaFunciones, @id_generado = @idRol output 
 
-exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario 'admin', 'w23', @id
+exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario 'admin', 'w23', @idRol, null
 
 go

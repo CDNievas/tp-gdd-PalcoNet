@@ -62,6 +62,10 @@
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.fechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
+            this.labelCiudad = new System.Windows.Forms.Label();
+            this.txtCiudad = new System.Windows.Forms.TextBox();
+            this.labelPiso = new System.Windows.Forms.Label();
+            this.txtPiso = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -165,7 +169,7 @@
             // lblClienteDpto
             // 
             this.lblClienteDpto.AutoSize = true;
-            this.lblClienteDpto.Location = new System.Drawing.Point(301, 267);
+            this.lblClienteDpto.Location = new System.Drawing.Point(406, 266);
             this.lblClienteDpto.Name = "lblClienteDpto";
             this.lblClienteDpto.Size = new System.Drawing.Size(33, 13);
             this.lblClienteDpto.TabIndex = 10;
@@ -174,7 +178,7 @@
             // lblClienteLoc
             // 
             this.lblClienteLoc.AutoSize = true;
-            this.lblClienteLoc.Location = new System.Drawing.Point(405, 267);
+            this.lblClienteLoc.Location = new System.Drawing.Point(30, 304);
             this.lblClienteLoc.Name = "lblClienteLoc";
             this.lblClienteLoc.Size = new System.Drawing.Size(56, 13);
             this.lblClienteLoc.TabIndex = 11;
@@ -183,7 +187,7 @@
             // lblClienteCP
             // 
             this.lblClienteCP.AutoSize = true;
-            this.lblClienteCP.Location = new System.Drawing.Point(28, 304);
+            this.lblClienteCP.Location = new System.Drawing.Point(352, 304);
             this.lblClienteCP.Name = "lblClienteCP";
             this.lblClienteCP.Size = new System.Drawing.Size(74, 13);
             this.lblClienteCP.TabIndex = 12;
@@ -264,7 +268,7 @@
             // 
             // txtClienteCP
             // 
-            this.txtClienteCP.Location = new System.Drawing.Point(100, 301);
+            this.txtClienteCP.Location = new System.Drawing.Point(444, 301);
             this.txtClienteCP.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteCP.Name = "txtClienteCP";
             this.txtClienteCP.Size = new System.Drawing.Size(75, 20);
@@ -280,18 +284,18 @@
             // 
             // txtClienteDpto
             // 
-            this.txtClienteDpto.Location = new System.Drawing.Point(328, 265);
+            this.txtClienteDpto.Location = new System.Drawing.Point(456, 263);
             this.txtClienteDpto.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteDpto.Name = "txtClienteDpto";
-            this.txtClienteDpto.Size = new System.Drawing.Size(63, 20);
+            this.txtClienteDpto.Size = new System.Drawing.Size(46, 20);
             this.txtClienteDpto.TabIndex = 25;
             // 
             // txtClienteLoc
             // 
-            this.txtClienteLoc.Location = new System.Drawing.Point(457, 265);
+            this.txtClienteLoc.Location = new System.Drawing.Point(91, 301);
             this.txtClienteLoc.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteLoc.Name = "txtClienteLoc";
-            this.txtClienteLoc.Size = new System.Drawing.Size(62, 20);
+            this.txtClienteLoc.Size = new System.Drawing.Size(83, 20);
             this.txtClienteLoc.TabIndex = 26;
             // 
             // btnClienteLimpiar
@@ -363,11 +367,47 @@
             this.label3.TabIndex = 33;
             this.label3.Text = "Formato: XX-XXXXXXXX-X";
             // 
+            // labelCiudad
+            // 
+            this.labelCiudad.AutoSize = true;
+            this.labelCiudad.Location = new System.Drawing.Point(189, 304);
+            this.labelCiudad.Name = "labelCiudad";
+            this.labelCiudad.Size = new System.Drawing.Size(40, 13);
+            this.labelCiudad.TabIndex = 34;
+            this.labelCiudad.Text = "Ciudad";
+            // 
+            // txtCiudad
+            // 
+            this.txtCiudad.Location = new System.Drawing.Point(235, 301);
+            this.txtCiudad.Name = "txtCiudad";
+            this.txtCiudad.Size = new System.Drawing.Size(100, 20);
+            this.txtCiudad.TabIndex = 35;
+            // 
+            // labelPiso
+            // 
+            this.labelPiso.AutoSize = true;
+            this.labelPiso.Location = new System.Drawing.Point(308, 266);
+            this.labelPiso.Name = "labelPiso";
+            this.labelPiso.Size = new System.Drawing.Size(27, 13);
+            this.labelPiso.TabIndex = 36;
+            this.labelPiso.Text = "Piso";
+            // 
+            // txtPiso
+            // 
+            this.txtPiso.Location = new System.Drawing.Point(355, 264);
+            this.txtPiso.Name = "txtPiso";
+            this.txtPiso.Size = new System.Drawing.Size(34, 20);
+            this.txtPiso.TabIndex = 37;
+            // 
             // AltaClienteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(568, 457);
+            this.Controls.Add(this.txtPiso);
+            this.Controls.Add(this.labelPiso);
+            this.Controls.Add(this.txtCiudad);
+            this.Controls.Add(this.labelCiudad);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.fechaNacimiento);
             this.Controls.Add(this.btnDatosTarjeta);
@@ -443,6 +483,10 @@
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private System.Windows.Forms.DateTimePicker fechaNacimiento;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelCiudad;
+        private System.Windows.Forms.TextBox txtCiudad;
+        private System.Windows.Forms.Label labelPiso;
+        private System.Windows.Forms.TextBox txtPiso;
         // alta cliente tiene fecha de creacion --> ponerlo desde sql como fecha actual
 
     }

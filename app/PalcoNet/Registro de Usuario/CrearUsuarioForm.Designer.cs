@@ -164,7 +164,7 @@
             this.btnDisponible.Name = "btnDisponible";
             this.btnDisponible.Size = new System.Drawing.Size(76, 19);
             this.btnDisponible.TabIndex = 42;
-            this.btnDisponible.Text = "Disponible";
+            this.btnDisponible.Text = "Disponible?";
             this.btnDisponible.UseVisualStyleBackColor = true;
             this.btnDisponible.Click += new System.EventHandler(this.btnDisponible_Click);
             // 
@@ -174,9 +174,9 @@
             this.lblEstado.Location = new System.Drawing.Point(320, 52);
             this.lblEstado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(38, 13);
+            this.lblEstado.Size = new System.Drawing.Size(10, 13);
             this.lblEstado.TabIndex = 43;
-            this.lblEstado.Text = "SI/NO";
+            this.lblEstado.Text = " ";
             // 
             // lblCrearUsuario
             // 

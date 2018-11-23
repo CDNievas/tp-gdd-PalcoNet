@@ -21,5 +21,12 @@ namespace PalcoNet.LoginUtils
             Console.WriteLine(output.valorRetorno.ToString());
             return Convert.ToInt32(output.valorRetorno.ToString());
         }
+
+        public static Boolean EstaDisponible(String username)
+        {
+            var sql = String.Format(@"select 1 from COMPUMUNDOHIPERMEGARED.Usuario where username = '{0}'", username);
+            var dt = DataBase.GetInstance().query(sql);
+            return dt.Rows.Count == 0;
+        }
     }
 }

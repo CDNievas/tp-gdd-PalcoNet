@@ -7,6 +7,9 @@ go
 drop INDEX index_dni on COMPUMUNDOHIPERMEGARED.Cliente
 go
 
+drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario
+go
+
 drop procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol
 go
 

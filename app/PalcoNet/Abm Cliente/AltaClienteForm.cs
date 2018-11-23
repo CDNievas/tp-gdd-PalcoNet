@@ -13,11 +13,14 @@ namespace PalcoNet.Abm_Cliente
 {
     public partial class AltaClienteForm : Form
     {
+        public Cliente Cliente { get; set; }
+        public LlamadoDesde llamadoDesde { get; set; }
+
         public AltaClienteForm()
         {
             InitializeComponent();
             fechaNacimiento.MinDate = new DateTime(1880, 1, 1);
-            fechaNacimiento.MaxDate = DateTime.Now;
+            fechaNacimiento.MaxDate = Contexto.FechaActual;
         }
 
         private List<TextBox> TodosLosTextbox()
@@ -40,6 +43,39 @@ namespace PalcoNet.Abm_Cliente
             try
             {
                 ValidarInputs();
+                Cliente cliente = new Cliente();
+                cliente.cuil = txtClienteCuil.Text;
+                cliente.tipoDocumento = txtClienteTipoDoc.Text[0];
+                cliente.nroDocumento = txtClienteDoc.Text;
+                cliente.nombre = txtClienteNombre.Text;
+                cliente.apellido = txtClienteApellido.Text;
+                cliente.mail = txtClienteEmail.Text;
+                cliente.telefono = txtClienteTelefono.Text;
+                cliente.ciudad = txtCiudad.Text;
+                cliente.localidad = txtClienteLoc.Text;
+                cliente.domCalle = txtClienteCalle.Text;
+                cliente.nroCalle = txtClienteNro.Text;
+                cliente.codPostal = txtClienteCP.Text;
+
+                try
+                {
+                    cliente.piso = Convert.ToInt32(txtPiso.Text);
+                }
+                catch (Exception)
+                {
+                    cliente.piso = null;
+                }
+
+                if (txtClienteDpto.Text != null && !txtClienteDpto.Text.Trim().Equals(""))
+                    cliente.depto = txtClienteDpto.Text;
+                else
+                    cliente.depto = null;
+
+                cliente.fechaNacimiento = fechaNacimiento.Value;
+                cliente.fechaCreacion = Contexto.FechaActual;
+
+                Console.WriteLine(cliente);
+                llamadoDesde.apply(this, cliente);
             }
             catch (UserInputException ex)
             {
@@ -52,9 +88,12 @@ namespace PalcoNet.Abm_Cliente
         {
             foreach (TextBox t in TodosLosTextbox())
             {
-                if (t.Text.Trim().Equals(""))
-                    throw new UserInputException("Debe completar todos los campos");
+                if(!t.Equals(txtPiso) & !t.Equals(txtClienteDpto))
+                    if (t.Text.Trim().Equals(""))
+                        throw new UserInputException("Debe completar todos los campos");
             }
+            if (!txtPiso.Text.Trim().Equals("") && new ValidadorNumerico().IsInvalid(txtPiso.Text))
+                throw new UserInputException("Piso inválido");
             if (new ValidadorEmail().IsInvalid(this.txtClienteEmail.Text))
                 throw new UserInputException("E-mail inválido");
             if(new ValidadorNumerico().IsInvalid(txtClienteTelefono.Text))
@@ -65,5 +104,7 @@ namespace PalcoNet.Abm_Cliente
         }
 
 
+
+        
     }
 }

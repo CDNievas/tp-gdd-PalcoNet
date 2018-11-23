@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PalcoNet.Abm_Rol;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -7,25 +8,25 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.Abm_Cliente
 {
-    class Cliente
+    public class Cliente
     {
-        long id { get; set; }
-        String cuil { get; set; }
-        Char tipoDocumento { get; set; }
-        String nroDocumento { get; set; }
-        String nombre { get; set; }
-        String apellido { get; set; }
-        String mail { get; set; }
-        String telefono { get; set; }
-        String ciudad { get; set; }
-        String localidad { get; set; }
-        String domCalle { get; set; }
-        String nroCalle { get; set; }
-        int piso { get; set; }
-        String depto { get; set; }
-        String codPostal { get; set; }
-        DateTime? fechaNacimiento { get; set; }
-        DateTime? fechaCreacion { get; set; }
+        public long id { get; set; }
+        public String cuil { get; set; }
+        public Char tipoDocumento { get; set; }
+        public String nroDocumento { get; set; }
+        public String nombre { get; set; }
+        public String apellido { get; set; }
+        public String mail { get; set; }
+        public String telefono { get; set; }
+        public String ciudad { get; set; }
+        public String localidad { get; set; }
+        public String domCalle { get; set; }
+        public String nroCalle { get; set; }
+        public int? piso { get; set; }
+        public String depto { get; set; }
+        public String codPostal { get; set; }
+        public DateTime? fechaNacimiento { get; set; }
+        public DateTime? fechaCreacion { get; set; }
 
 
         public override string ToString()
@@ -36,26 +37,27 @@ namespace PalcoNet.Abm_Cliente
         public static Cliente traerDe(DataRow dr)
         {
             var cliente = new Cliente();
+            var data = new DataRowExtended(dr);
 
-            cliente.id = Convert.ToInt64(dr["id_cliente"].ToString());
-            var tipo = dr["tipo_documento"].ToString();
+            cliente.id = data.LongValue("id_cliente");
+            var tipo = data.StringValue("tipo_documento");
             if (tipo.Length != 0)
                 cliente.tipoDocumento = tipo[0];
             else cliente.tipoDocumento = ' ';
-            cliente.nroDocumento = dr["nro_documento"].ToString();
-            cliente.nombre = dr["nombre"].ToString();
-            cliente.apellido = dr["apellido"].ToString();
-            cliente.mail = dr["mail"].ToString();
-            cliente.telefono = dr["telefono"].ToString();
-            cliente.ciudad = dr["ciudad"].ToString();
-            cliente.localidad = dr["localidad"].ToString();
-            cliente.domCalle = dr["dom_calle"].ToString();
-            cliente.nroCalle = dr["num_calle"].ToString();
-            cliente.depto = dr["depto"].ToString();
-            cliente.piso = Convert.ToInt32(dr["piso"]);
-            cliente.codPostal = dr["cod_postal"].ToString();
-            cliente.fechaNacimiento = (DateTime?)dr["fecha_nacimiento"];
-            cliente.fechaCreacion = (DateTime?) (dr.IsNull("fecha_creacion")? null : dr["fecha_creacion"]);
+            cliente.nroDocumento = data.StringValue("nro_documento");
+            cliente.nombre = data.StringValue("nombre");
+            cliente.apellido = data.StringValue("apellido");
+            cliente.mail = data.StringValue("mail");
+            cliente.telefono = data.StringValue("telefono");
+            cliente.ciudad = data.StringValue("ciudad");
+            cliente.localidad = data.StringValue("localidad");
+            cliente.domCalle = data.StringValue("dom_calle");
+            cliente.nroCalle = data.StringValue("num_calle");
+            cliente.depto = data.StringValue("depto");
+            cliente.piso = data.IntValue("piso");
+            cliente.codPostal = data.StringValue("cod_postal");
+            cliente.fechaNacimiento = data.OrElse<DateTime?>("fecha_nacimiento", null);
+            cliente.fechaCreacion = data.OrElse<DateTime?>("fecha_creacion", null);
 
             return cliente;
         }
