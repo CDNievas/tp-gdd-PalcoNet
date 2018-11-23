@@ -26,9 +26,9 @@ namespace PalcoNet.LoginUtils
 
         public void Persistite() {
             DataBase.GetInstance().procedure("crear_nuevo_usuario",
-                new Parametro("username", this.username),
-                new Parametro("password", this.password),
-                new Parametro("rol_id", rol.id));
+                new ParametroIn("username", this.username),
+                new ParametroIn("password", this.password),
+                new ParametroIn("rol_id", rol.id));
         }
     }
 }

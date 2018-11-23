@@ -33,7 +33,9 @@ namespace PalcoNet
         {
             try
             {
-                ValidadorLogin.ValidarLogin(username.Text, password.Text);
+                var idUser = ValidadorLogin.ValidarLogin(username.Text, password.Text);
+                Contexto.idUsuarioLogueado = idUser;
+                Console.WriteLine("SE LOGUEO : " + idUser);
                 throw new NotImplementedException("debería dejarte acceder a tus funciones");
             }
             catch (ProcedureException ex)

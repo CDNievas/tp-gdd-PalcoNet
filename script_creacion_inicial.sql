@@ -533,10 +533,10 @@ begin
 end
 go
 
-create procedure COMPUMUNDOHIPERMEGARED.intentar_logear(@username nvarchar(50), @password nvarchar(50))
+create procedure COMPUMUNDOHIPERMEGARED.intentar_logear(@username nvarchar(50), @password nvarchar(50), @id_usuario int output)
 as
 begin
-	declare @id_usuario int, @pass_usuario nvarchar(64), @esta_habilitado bit, @esta_eliminado bit, @intentos smallint
+	declare @pass_usuario nvarchar(64), @esta_habilitado bit, @esta_eliminado bit, @intentos smallint
 
 	select @id_usuario = u.id_usuario,
 	@pass_usuario = u.password,
@@ -579,6 +579,8 @@ begin
 	update COMPUMUNDOHIPERMEGARED.Usuario
 	set intentos = 0
 	where id_usuario = @id_usuario
+
+	return
 end
 go
 

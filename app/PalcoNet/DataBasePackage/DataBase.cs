@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PalcoNet.DataBasePackage;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -47,10 +48,14 @@ namespace PalcoNet
             SqlCommand cmd = GetStoreProcedureCmd(procName);
             Console.WriteLine(cmd.CommandText);
             foreach (Parametro p in ps) {
-                cmd.Parameters.AddWithValue("@" + p.nombre, p.valor);
+                p.AgregateA(cmd);
             }
             try{
                 cmd.ExecuteNonQuery();
+                foreach (Parametro p in ps)
+                {
+                    p.ObteneResultadoDe(cmd);
+                }
             }catch(Exception ex){
                 Console.WriteLine(ex.Message);
                 throw new ProcedureException("Error al ejecutar el procedure " + procName, ex);

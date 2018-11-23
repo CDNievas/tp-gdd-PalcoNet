@@ -111,9 +111,12 @@
     <Compile Include="Abm Rubro\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Contexto.cs" />
     <Compile Include="DataBasePackage\DataBase.cs" />
     <Compile Include="DataBasePackage\DataRowUtils.cs" />
     <Compile Include="DataBasePackage\Pagina.cs" />
+    <Compile Include="DataBasePackage\Parametro.cs" />
+    <Compile Include="DataBasePackage\ParametroOut.cs" />
     <Compile Include="DataBasePackage\ProcedureException.cs" />
     <Compile Include="GD2C2018DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -241,8 +244,8 @@
     <Compile Include="LoginUtils\Funcionalidad.cs" />
     <Compile Include="LoginUtils\Funcionalidades.cs" />
     <Compile Include="LoginUtils\Usuario.cs" />
-    <Compile Include="LoginUtils\Validador.cs" />
-    <Compile Include="DataBasePackage\Parametro.cs" />
+    <Compile Include="LoginUtils\ValidadorLogin.cs" />
+    <Compile Include="DataBasePackage\ParametroIn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicacionesUtils\Estado.cs" />
