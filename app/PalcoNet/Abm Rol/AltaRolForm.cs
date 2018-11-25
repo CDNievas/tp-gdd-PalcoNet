@@ -14,6 +14,7 @@ namespace PalcoNet.Abm_Rol
     public partial class AltaRolForm : Form
     {
         private FuncionRolForm funcion;
+        private Rol rol;
 
         public AltaRolForm(FuncionRolForm funcion)
         {
@@ -23,12 +24,18 @@ namespace PalcoNet.Abm_Rol
 
         private void AltaRolForm_Load(object sender, EventArgs e)
         {
+            LoadFuncionalidades();
+            funcion.Setup(this);
+        }
+
+        private void LoadFuncionalidades()
+        {
             var listaFun = Funcionalidades.TraerTodas();
             funcionalidadesCheckList.Items.AddRange(listaFun.ToArray());
             funcionalidadesCheckList.DisplayMember = "Descripcion";
             funcionalidadesCheckList.CheckOnClick = true;
-            funcion.Setup(this);
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -47,10 +54,36 @@ namespace PalcoNet.Abm_Rol
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var funcionalidades = funcionalidadesCheckList.CheckedItems.OfType<Funcionalidad>().ToList();;
-            var rol = new Rol(txtNombre.Text.Trim(), funcionalidades);
+            var funcionalidades = funcionalidadesCheckList.CheckedItems.OfType<Funcionalidad>().ToList();
+            if(this.rol == null)
+                this.rol = new Rol();
+            rol.nombre = txtNombre.Text;
+            rol.funcionalidades = funcionalidades;
 
-            funcion.Guardar(this, rol);
+            try
+            {
+                funcion.Guardar(this, rol);
+                this.Close();
+            }
+            catch (ProcedureException ex)
+            {
+                MessageBox.Show(ex.GetSqlErrorMessage(), "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        internal void LlenateCon(Rol rol)
+        {
+            txtNombre.Text = rol.nombre;
+
+            for (int a = 0; a < funcionalidadesCheckList.Items.Count; a++)
+            {
+                var unaFuncionalidad = funcionalidadesCheckList.Items[a];
+                if(rol.funcionalidades.Contains(unaFuncionalidad))
+                    funcionalidadesCheckList.SetItemChecked(a, true);
+            }
+            this.rol = rol;
+                
         }
     }
 }

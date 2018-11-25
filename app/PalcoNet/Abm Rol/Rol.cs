@@ -47,7 +47,7 @@ namespace PalcoNet.Abm_Rol
             return this.nombre.ToLower().Equals("administrador");
         }
 
-        private Rol() { }
+        public Rol() { }
 
         public static Rol TraerDe(DataRow dr)
         {

@@ -43,6 +43,7 @@
             this.rolTableAdapter = new PalcoNet.GD2C2018DataSetTableAdapters.RolTableAdapter();
             this.rolesDataGrid = new System.Windows.Forms.DataGridView();
             this.btnNuevo = new System.Windows.Forms.Button();
+            this.btnHabilitar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rolBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolesDataGrid)).BeginInit();
@@ -50,13 +51,14 @@
             // 
             // btnBaja
             // 
-            this.btnBaja.Location = new System.Drawing.Point(272, 370);
+            this.btnBaja.Location = new System.Drawing.Point(306, 370);
             this.btnBaja.Margin = new System.Windows.Forms.Padding(2);
             this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(66, 24);
+            this.btnBaja.Size = new System.Drawing.Size(87, 24);
             this.btnBaja.TabIndex = 34;
-            this.btnBaja.Text = "Baja";
+            this.btnBaja.Text = "Deshabilitar";
             this.btnBaja.UseVisualStyleBackColor = true;
+            this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
             // 
             // btnMod
             // 
@@ -67,6 +69,7 @@
             this.btnMod.TabIndex = 33;
             this.btnMod.Text = "Modificar";
             this.btnMod.UseVisualStyleBackColor = true;
+            this.btnMod.Click += new System.EventHandler(this.btnMod_Click);
             // 
             // label2
             // 
@@ -168,11 +171,22 @@
             this.btnNuevo.UseVisualStyleBackColor = true;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
+            // btnHabilitar
+            // 
+            this.btnHabilitar.Location = new System.Drawing.Point(173, 370);
+            this.btnHabilitar.Name = "btnHabilitar";
+            this.btnHabilitar.Size = new System.Drawing.Size(75, 23);
+            this.btnHabilitar.TabIndex = 40;
+            this.btnHabilitar.Text = "Habilitar";
+            this.btnHabilitar.UseVisualStyleBackColor = true;
+            this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
+            // 
             // ListadoRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 405);
+            this.Controls.Add(this.btnHabilitar);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.rolesDataGrid);
             this.Controls.Add(this.txtRolAlta);
@@ -211,5 +225,6 @@
         private GD2C2018DataSetTableAdapters.RolTableAdapter rolTableAdapter;
         private System.Windows.Forms.DataGridView rolesDataGrid;
         private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.Button btnHabilitar;
     }
 }

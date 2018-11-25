@@ -23,4 +23,23 @@ namespace PalcoNet.Abm_Rol
             rol.Persistite();
         }
     }
+
+    public class ModificarRol : FuncionRolForm
+    {
+        private Rol rol;
+
+        public ModificarRol(Rol rol)
+        {
+            this.rol = rol;
+        }
+
+        public void Setup(AltaRolForm form)
+        {
+            form.LlenateCon(rol);
+        }
+        public void Guardar(AltaRolForm form, Rol rol)
+        {
+            rol.Update();
+        }
+    }
 }

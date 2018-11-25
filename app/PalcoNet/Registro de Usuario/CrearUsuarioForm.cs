@@ -35,7 +35,7 @@ namespace PalcoNet.Registro_de_Usuario
         private void SetupComboRoles()
         {
             var roles = Roles.TraerTodos()
-                .Where(r => r.EsCliente() || r.EsEmpresa()).ToList();
+                .Where(r => (r.EsCliente() || r.EsEmpresa()) & r.habilitado).ToList();
 
             comboTipo.DataSource = roles;
             comboTipo.DisplayMember = "nombre";

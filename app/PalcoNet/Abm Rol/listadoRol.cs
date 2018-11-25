@@ -15,6 +15,10 @@ namespace PalcoNet.Abm_Rol
         public ListadoRol()
         {
             InitializeComponent();
+            rolesDataGrid.MultiSelect = false;
+            rolesDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            rolesDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            rolesDataGrid.AllowUserToResizeColumns = true;
         }
 
         private void listadoRol_Load(object sender, EventArgs e){
@@ -29,14 +33,60 @@ namespace PalcoNet.Abm_Rol
 
             rolesDataGrid.DataSource = bindingSource;
             rolesDataGrid.Columns["id"].Visible = false;
-            rolesDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            rolesDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-            rolesDataGrid.AllowUserToResizeColumns = true;
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             var ignored = new AltaRolForm(new NuevoRol()).ShowDialog();
+            ActualizarRoles();
+        }
+
+        private void btnMod_Click(object sender, EventArgs e)
+        {
+            var rol = (Rol)rolesDataGrid.CurrentRow.DataBoundItem;
+            var ignored = new AltaRolForm(new ModificarRol(rol)).ShowDialog();
+            ActualizarRoles();
+        }
+
+        private void btnBaja_Click(object sender, EventArgs e)
+        {
+            var rol = (Rol)rolesDataGrid.CurrentRow.DataBoundItem;
+            if (!rol.habilitado)
+            {
+                MessageBox.Show("Este rol ya se encuentra deshabilitado", "Error al deshabilitar el rol",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var confirmResult = MessageBox.Show("Está seguro de deshabilitar el rol " + rol.nombre,
+                                     "Solicitud de confirmación",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                rol.Eliminate();
+                ActualizarRoles();
+            }
+        }
+
+        private void btnHabilitar_Click(object sender, EventArgs e)
+        {
+            var rol = (Rol)rolesDataGrid.CurrentRow.DataBoundItem;
+            if (rol.habilitado)
+            {
+                MessageBox.Show("Este rol ya se encuentra habilitado", "Error al habilitar el rol",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            
+                rol.habilitado = true;
+                String sql = String.Format(@"update COMPUMUNDOHIPERMEGARED.Rol
+                                            set habilitado = 1
+                                            where id_rol = {0}", rol.id);
+
+                DataBase.GetInstance().Query(sql);
+                ActualizarRoles();
+            
         }
     }
 }

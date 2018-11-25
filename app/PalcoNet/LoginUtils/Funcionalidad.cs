@@ -31,5 +31,17 @@ namespace PalcoNet.LoginUtils
         {
             return String.Format("Funcionalidad({0}, {1})", Id, Descripcion);
         }
+
+        public override bool Equals(object obj)
+        {
+            if(!(obj is Funcionalidad))
+                return false;
+            return ((Funcionalidad)obj).Id.Equals(this.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
     }
 }

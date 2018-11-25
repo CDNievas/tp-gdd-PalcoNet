@@ -649,6 +649,18 @@ begin
 end
 go
 
+create procedure COMPUMUNDOHIPERMEGARED.eliminar_rol(@id_rol smallint)
+as
+begin
+	update Rol
+	set habilitado = 0
+	where id_rol = @id_rol
+
+	delete from Rol_Usuario
+	where rol_id = @id_rol
+end
+go
+
 PRINT 'Todes les procedures y les funciones creades'
 
 PRINT 'Creando al admin default'
