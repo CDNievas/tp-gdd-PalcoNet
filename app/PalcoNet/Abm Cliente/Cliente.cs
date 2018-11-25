@@ -117,7 +117,7 @@ namespace PalcoNet.Abm_Cliente
                      cuil, tipoDocumento.discriminator, nroDocumento, nombre, apellido,
                      mail, telefono, ciudad, localidad, domCalle, nroCalle,
                      depto, piso == null? "null" : piso.ToString(), codPostal, fechaNacimiento, fechaCreacion, id);
-            var ignored = DataBase.GetInstance().query(sql);
+            var ignored = DataBase.GetInstance().Query(sql);
         }
     }
 }

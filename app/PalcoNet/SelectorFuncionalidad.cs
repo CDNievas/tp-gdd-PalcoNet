@@ -41,7 +41,7 @@ namespace PalcoNet
                     throw new NotImplementedException("Historial cliente");
                     break;
                 case 10:
-                    throw new NotImplementedException("Puntos cliente");
+                    throw new NotImplementedException("Canje puntos");
                     break;
                 case 11:
                     throw new NotImplementedException("Rendición comisiones");

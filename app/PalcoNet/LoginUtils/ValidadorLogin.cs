@@ -14,7 +14,7 @@ namespace PalcoNet.LoginUtils
         // tira excepción si el login es incorrecto
         public static int ValidarLogin(String username, String password){
             var output = new ParametroOut("id_usuario", SqlDbType.Int);
-            DataBase.GetInstance().procedure("intentar_logear",
+            DataBase.GetInstance().Procedure("intentar_logear",
                 new ParametroIn("username", username),
                 new ParametroIn("password", password),
                 output);
@@ -25,7 +25,7 @@ namespace PalcoNet.LoginUtils
         public static Boolean EstaDisponible(String username)
         {
             var sql = String.Format(@"select 1 from COMPUMUNDOHIPERMEGARED.Usuario where username = '{0}'", username);
-            var dt = DataBase.GetInstance().query(sql);
+            var dt = DataBase.GetInstance().Query(sql);
             return dt.Rows.Count == 0;
         }
     }

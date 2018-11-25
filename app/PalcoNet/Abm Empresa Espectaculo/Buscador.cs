@@ -12,7 +12,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
     {
         public List<Empresa> filtrarEmpresas(String razonSocial, String cuit, String email, Pagina pag)
         {
-            var dt = DataBase.GetInstance().query(this.getBusquedaQuery(razonSocial, cuit, email, pag));
+            var dt = DataBase.GetInstance().Query(this.getBusquedaQuery(razonSocial, cuit, email, pag));
 
             var lista = new List<Empresa>();
 

@@ -12,19 +12,19 @@ namespace PalcoNet.LoginUtils
         public static List<Funcionalidad> findFuncionalidadesByRolId(int rolId)
         {
             String sql = String.Format("select * from COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol({0})", rolId);
-            DataTable dt = DataBase.GetInstance().query(sql);
+            DataTable dt = DataBase.GetInstance().Query(sql);
             return funcionalidadesFromDataTable(dt);
         }
 
         public static List<Funcionalidad> findFuncionalidadesByUsuarioId(int usuarioId)
         {
             String sql = String.Format("select * from COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario({0})", usuarioId);
-            DataTable dt = DataBase.GetInstance().query(sql);
+            DataTable dt = DataBase.GetInstance().Query(sql);
             return funcionalidadesFromDataTable(dt);
         }
 
         public static List<Funcionalidad> TraerTodas() {
-            return funcionalidadesFromDataTable(DataBase.GetInstance().query("select * from COMPUMUNDOHIPERMEGARED.Funcionalidad"));
+            return funcionalidadesFromDataTable(DataBase.GetInstance().Query("select * from COMPUMUNDOHIPERMEGARED.Funcionalidad"));
         }
 
 

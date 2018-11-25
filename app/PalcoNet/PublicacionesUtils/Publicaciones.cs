@@ -11,7 +11,7 @@ namespace PalcoNet.PublicacionesUtils
     class Publicaciones
     {
         public static List<Publicacion> TraerTodas() {
-            var dt = DataBase.GetInstance().query("select * from COMPUMUNDOHIPERMEGARED.PublicacionesView");
+            var dt = DataBase.GetInstance().Query("select * from COMPUMUNDOHIPERMEGARED.PublicacionesView");
             return PublicacionesFromDataTable(dt);
         }
 
@@ -19,7 +19,7 @@ namespace PalcoNet.PublicacionesUtils
             String sql = String.Format( @"select * from COMPUMUNDOHIPERMEGARED.PublicacionesView where id_empresa = {0}
                                         ORDER BY id_publicacion desc, fecha_espectaculo desc OFFSET {1} ROWS FETCH NEXT {2} ROWS ONLY",
                                         idEmpresa, pag.FirstResultIndex(), pag.pageSize);
-            var dt = DataBase.GetInstance().query(sql);
+            var dt = DataBase.GetInstance().Query(sql);
             return PublicacionesFromDataTable(dt);
         }
 
@@ -29,7 +29,7 @@ namespace PalcoNet.PublicacionesUtils
                 pag = new Pagina(1, 10);
 
             String sql = GetBusquedaQuery(descripcion, rango, rubros, pag);
-            var dt = DataBase.GetInstance().query(sql);
+            var dt = DataBase.GetInstance().Query(sql);
             return PublicacionesFromDataTable(dt);
         }
 

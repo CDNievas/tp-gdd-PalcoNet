@@ -40,7 +40,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             {
                 c.ReadOnly = true;
             }
-            //this.empresasDataGrid.Columns["id"].Visible = false;
+            this.empresasDataGrid.Columns["id"].Visible = false;
         }
 
         private void ListarEmpresa_Load(object sender, EventArgs e)

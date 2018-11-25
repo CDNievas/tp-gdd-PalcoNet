@@ -14,7 +14,7 @@ namespace PalcoNet.Abm_Cliente
         {
             pag = pag == null ? new Pagina(1, 10) : pag;
 
-            var dt = DataBase.GetInstance().query(this.getBusquedaQuery(nombre, apellido, dni, email, pag));
+            var dt = DataBase.GetInstance().Query(this.getBusquedaQuery(nombre, apellido, dni, email, pag));
 
             var lista = new List<Cliente>();
 

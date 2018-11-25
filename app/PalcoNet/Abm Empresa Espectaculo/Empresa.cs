@@ -88,7 +88,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
              ciudad, localidad, domCalle, nroCalle,
              piso == null? null : piso, depto, codPostal,
              id);
-            var ignored = DataBase.GetInstance().query(sql);
+            var ignored = DataBase.GetInstance().Query(sql);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace PalcoNet.Abm_Rol
     {
         public static List<Rol> traerTodos(){
             String sql = "select * from COMPUMUNDOHIPERMEGARED.Rol";
-            var dt = DataBase.GetInstance().query(sql);
+            var dt = DataBase.GetInstance().Query(sql);
             var roles = new List<Rol>();
             foreach (DataRow dr in dt.Rows) {
                 roles.Add(Rol.traerDe(dr));

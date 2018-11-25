@@ -9,14 +9,14 @@ PRINT '----- Empezando a crear tablas -----'
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Usuario( -- MIGRADO
 	id_usuario int IDENTITY(1,1) PRIMARY KEY,
 	username nvarchar(50) NOT NULL,
-	password char(32) NOT NULL,
+	password binary(32) NOT NULL,
 	intentos tinyint DEFAULT 0,
 	habilitado bit DEFAULT 1,
 	eliminado bit DEFAULT 0
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Funcionalidad( -- MIGRADO
-	id_funcionalidad int IDENTITY(1,1) PRIMARY KEY,
+	id_funcionalidad int PRIMARY KEY,
 	descripcion nvarchar(50) NOT NULL
 )
 
@@ -206,20 +206,19 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Empresa (cuit, razon_social, mail, dom_calle,
 PRINT 'Migre Empresas'
 GO
 
-INSERT INTO COMPUMUNDOHIPERMEGARED.Funcionalidad(descripcion) VALUES
-	('REGISTRO'),
-	('ABM USUARIOS'),
-	('ABM CLIENTES'),
-	('ABM ROL'),
-	('ABM EMPRESA ESPECTACULOS'),
-	('ABM RUBRO'),
-	('ABM GRADO PUBLICACION'),
-	('AM PUBLICACION'),
-	('COMPRAR'),
-	('HISTORIAL COMPRAS'),
-	('CANJE'),
-	('RENDICION COMISIONES'),
-	('LISTADO ESTADISTICO')
+INSERT INTO COMPUMUNDOHIPERMEGARED.Funcionalidad(descripcion, id_funcionalidad) VALUES
+	('ABM ROL', 1),
+	('ABM CLIENTES', 2),
+	('ABM EMPRESA ESPECTACULOS', 3),
+	('ABM RUBRO', 4),
+	('ABM GRADO PUBLICACION', 5),
+	('GENERAR PUBLICACION', 6),
+	('EDITAR PUBLICACION', 7),
+	('COMPRAR', 8),
+	('HISTORIAL CLIENTE', 9),
+	('CANJE PUNTOS', 10),
+	('RENDICION COMISIONES', 11),
+	('LISTADO ESTADÍSTICO', 12)
 PRINT 'Migre Funcionalidad'
 GO
 

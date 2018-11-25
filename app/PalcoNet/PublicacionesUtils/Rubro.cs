@@ -39,7 +39,7 @@ namespace PalcoNet.PublicacionesUtils
 
         public static Rubro FindById(int rubroId)
         {
-            return FromDataRow(DataBase.GetInstance().query(
+            return FromDataRow(DataBase.GetInstance().Query(
                 String.Format(
                 @"select * from COMPUMUNDOHIPERMEGARED.Rubro
                 where id_rubro = {0}", rubroId)).Rows[0]);

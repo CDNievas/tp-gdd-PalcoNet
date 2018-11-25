@@ -11,7 +11,7 @@ namespace PalcoNet.Registro_de_Usuario
     class CreadorDeUsuarios
     {
         public static void CrearNuevoCliente(Cliente cliente, String username, String pass, int rolID){
-            DataBase.GetInstance().procedure("crear_usuario",
+            DataBase.GetInstance().Procedure("crear_usuario",
                 new ParametroIn("cuil", cliente.cuil),
                 new ParametroIn("tipo_doc", cliente.tipoDocumento.discriminator),
                 new ParametroIn("nro_documento", cliente.nroDocumento),

@@ -39,12 +39,12 @@ namespace PalcoNet.Abm_Rol
         }
 
         public void eliminate(){
-            DataBase.GetInstance().procedure("eliminar_rol", new ParametroIn("id_rol", id));
+            DataBase.GetInstance().Procedure("eliminar_rol", new ParametroIn("id_rol", id));
         }
 
         public void Persistite() {
             var dataTable = getFuncionalidadesTable();
-            DataBase.GetInstance().procedure("crearNuevoRol",
+            DataBase.GetInstance().Procedure("crearNuevoRol",
                 new ParametroIn("listaFuncionalidad", dataTable),
                 new ParametroIn("nombre", this.nombre));
         }
@@ -72,7 +72,7 @@ namespace PalcoNet.Abm_Rol
 
         public void Update() {
             var funcionalidadesTable = getFuncionalidadesTable();
-            DataBase.GetInstance().procedure("actualizarRol",
+            DataBase.GetInstance().Procedure("actualizarRol",
                 new ParametroIn("rol_id", this.id),
                 new ParametroIn("listaFuncionalidad", funcionalidadesTable));
         }

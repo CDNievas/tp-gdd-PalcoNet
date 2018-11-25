@@ -11,7 +11,7 @@ namespace PalcoNet.PublicacionesUtils
     {
         public static List<Grado> Todos()
         {
-            var dt = DataBase.GetInstance().query(@"select * from COMPUMUNDOHIPERMEGARED.Grado");
+            var dt = DataBase.GetInstance().Query(@"select * from COMPUMUNDOHIPERMEGARED.Grado");
             return GradosFromDataTable(dt);
         }
 
@@ -28,7 +28,7 @@ namespace PalcoNet.PublicacionesUtils
         public static Grado FindGradoById(int gradoId)
         {
             String sql = String.Format("select * from COMPUMUNDOHIPERMEGARED.Grado where id_grado = {0}", gradoId);
-            var dt = DataBase.GetInstance().query(sql);
+            var dt = DataBase.GetInstance().Query(sql);
             return Grado.FromDataRow(dt.Rows[0]);
         }
     }

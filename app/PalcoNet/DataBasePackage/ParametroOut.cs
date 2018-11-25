@@ -10,13 +10,6 @@ namespace PalcoNet.DataBasePackage
 {
     class ParametroOut:Parametro
     {
-        /*
-         * SqlParameter retval = new SqlParameter("@ReturnValue", System.Data.SqlDbType.Int);
-        retval.Direction = System.Data.ParameterDirection.ReturnValue;
-        cmd.Parameters.Add(retval);
-        db.ExecuteNonQuery(cmd);
-        object o = cmd.Parameters["@ReturnValue"].Value;
-         */
         private String nombre;
         private SqlDbType tipo;
         public Object valorRetorno;
@@ -37,7 +30,6 @@ namespace PalcoNet.DataBasePackage
             var self = new SqlParameter(ParameterName(), tipo);
             self.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(self);
-            Console.WriteLine("AGREGA3: '{0}'", ParameterName());
         }
 
         public void ObteneResultadoDe(SqlCommand cmd)

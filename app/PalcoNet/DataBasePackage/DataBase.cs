@@ -28,7 +28,7 @@ namespace PalcoNet
             return instance;
         }
 
-        public DataTable query(String sql)
+        public DataTable Query(String sql)
         {
             Console.WriteLine("::::QUERY::::");
             Console.WriteLine(sql);
@@ -43,7 +43,7 @@ namespace PalcoNet
             return dt;
         }
 
-        public void procedure(String procName, params Parametro[] ps){
+        public void Procedure(String procName, params Parametro[] ps){
             Console.WriteLine("::::STORE PROCEDURE::::");
             SqlCommand cmd = GetStoreProcedureCmd(procName);
             Console.WriteLine(cmd.CommandText);
