@@ -26,16 +26,16 @@ namespace PalcoNet.Registro_de_Usuario
         private Cliente clienteAPersistir;
         private Empresa empresaAPersistir;
 
-        private String GetSelectedText()
+        private Rol GetSelectedRol()
         {
-            return ((Rol)comboTipo.SelectedItem).nombre;
+            return (Rol)comboTipo.SelectedItem;
         }
         
 
         private void SetupComboRoles()
         {
-            var roles = Roles.traerTodos()
-                .Where(r => r.nombre.ToUpper().Equals("CLIENTE") || r.nombre.ToUpper().Equals("EMPRESA")).ToList();
+            var roles = Roles.TraerTodos()
+                .Where(r => r.EsCliente() || r.EsEmpresa()).ToList();
 
             comboTipo.DataSource = roles;
             comboTipo.DisplayMember = "nombre";
@@ -55,17 +55,31 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void btnAgregarInfo_Click(object sender, EventArgs e)
         {
-            var texto = GetSelectedText();
-            if (texto.Equals("CLIENTE"))
+            var rol = GetSelectedRol();
+            if (rol.EsCliente())
             {
                 var form = new Abm_Cliente.AltaClienteForm();
                 form.funcionForm = new Registrarse();
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                     clienteAPersistir = form.ClienteActual;
+                else
+                {
+                    clienteAPersistir = null;
+                    empresaAPersistir = null;
+                }
                     
-            }else if (texto.Equals("EMPRESA")){
-                new Abm_Empresa_Espectaculo.AltaEmpresaForm(new Abm_Empresa_Espectaculo.Registro()).Show();
+            }else if (rol.EsEmpresa()){
+                var form = new Abm_Empresa_Espectaculo.AltaEmpresaForm(new Abm_Empresa_Espectaculo.Registro());
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                    empresaAPersistir = form.empresaAPersistir;
+                else
+                {
+                    clienteAPersistir = null;
+                    empresaAPersistir = null;
+                }
+
             }else{
                 MessageBox.Show("Este tipo de usuario no posee campos adicionales", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -89,34 +103,44 @@ namespace PalcoNet.Registro_de_Usuario
                 {
                     throw new UserInputException("El password no se corresponde con la confirmacion");
                 }
-                if (GetSelectedText().ToUpper().Equals("EMPRESA"))
+                if (GetSelectedRol().EsEmpresa())
                 {
-                    throw new NotImplementedException();
+                    if (empresaAPersistir == null)
+                        throw new UserInputException("Debe cargar los datos de la empresa");
+                    PersistirEmpresa();
                 }
-                else if (GetSelectedText().ToUpper().Equals("CLIENTE"))
+                else if (GetSelectedRol().EsCliente())
                 {
+                    if (clienteAPersistir == null)
+                        throw new UserInputException("Debe cargar los datos del cliente");
                     PersistirCliente();
                 }
+                this.Close();
+                MessageBox.Show("Se ha creado el usuario " + txtUsuario.Text,
+                        "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      
             }
             catch (UserInputException ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (ProcedureException ex)
+            {
+                MessageBox.Show(ex.GetSqlErrorMessage(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void PersistirEmpresa()
+        {
+            CreadorDeUsuarios.CrearNuevaEmpresa(empresaAPersistir, txtUsuario.Text, password.Text,
+                GetSelectedRol().id);
         }
 
         private void PersistirCliente()
         {
-            try
-            {
-                CreadorDeUsuarios.CrearNuevoCliente(clienteAPersistir, txtUsuario.Text, password.Text,
-                    Convert.ToInt32(comboTipo.SelectedValue.ToString()));
-            }
-            catch (ProcedureException e)
-            {
-                MessageBox.Show(e.GetSqlErrorMessage(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            CreadorDeUsuarios.CrearNuevoCliente(clienteAPersistir, txtUsuario.Text, password.Text,
+            GetSelectedRol().id);
 
-            Console.WriteLine("PERSISTI3");
         }
 
 

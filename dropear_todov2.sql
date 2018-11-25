@@ -29,6 +29,7 @@ drop procedure COMPUMUNDOHIPERMEGARED.actualizarRol
 drop procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario
 drop procedure COMPUMUNDOHIPERMEGARED.intentar_logear
 drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_cliente
+drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_empresa
 
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario

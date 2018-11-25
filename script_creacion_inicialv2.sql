@@ -8,7 +8,7 @@ GO
 PRINT '----- Empezando a crear tablas -----'
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Usuario( -- MIGRADO
 	id_usuario int IDENTITY(1,1) PRIMARY KEY,
-	username nvarchar(50) NOT NULL,
+	username nvarchar(50) UNIQUE NOT NULL,
 	password binary(32) NOT NULL,
 	intentos tinyint DEFAULT 0,
 	habilitado bit DEFAULT 1,
@@ -63,7 +63,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Cliente( -- MIGRADO
 	nombre nvarchar(255),
 	apellido nvarchar(255),
 	tipo_documento char(1) CHECK(tipo_documento IN('D','C','E')) NOT NULL,
-	nro_documento nvarchar(30) NOT NULL,
+	nro_documento nvarchar(30) UNIQUE NOT NULL,
 	mail nvarchar(255),
 	telefono nvarchar(30),
 	ciudad nvarchar(255),
@@ -618,6 +618,35 @@ begin
 	select distinct t.id_funcionalidad, t.descripcion from @funcionalidades_temp t
 	return
 	end
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.crear_usuario_empresa
+(	@cuit nvarchar(255),
+	@razon_social nvarchar(255),
+	@mail nvarchar(50),
+	@telefono nvarchar(30),
+	@ciudad nvarchar(255),
+	@localidad nvarchar(255),
+	@dom_calle nvarchar(50),
+	@nro_calle numeric(18,0),
+	@piso numeric(18,0),
+	@depto nvarchar(50),
+	@cod_postal nvarchar(50),
+	@fecha_creacion datetime,
+	@rol_id int,
+	@pass nvarchar(64),
+	@username nvarchar(50))
+as
+begin
+	begin tran
+	declare @id_nuevo_usuario int
+	exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario @username, @pass, @rol_id, @usuario_id = @id_nuevo_usuario output
+	insert into Empresa(cuit, razon_social, mail, telefono, ciudad, localidad, dom_calle,
+	nro_calle, piso, depto, cod_postal, fecha_creacion, usuario_id)
+	values(@cuit, @razon_social, @mail, @telefono, @ciudad, @localidad, @dom_calle,
+	@nro_calle, @piso, @depto, @cod_postal, @fecha_creacion, @id_nuevo_usuario)
+	commit tran
+end
 go
 
 PRINT 'Todes les procedures y les funciones creades'

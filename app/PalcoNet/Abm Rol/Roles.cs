@@ -9,14 +9,15 @@ namespace PalcoNet.Abm_Rol
 {
     class Roles
     {
-        public static List<Rol> traerTodos(){
+        public static List<Rol> TraerTodos(){
             String sql = "select * from COMPUMUNDOHIPERMEGARED.Rol";
             var dt = DataBase.GetInstance().Query(sql);
             var roles = new List<Rol>();
             foreach (DataRow dr in dt.Rows) {
-                roles.Add(Rol.traerDe(dr));
+                roles.Add(Rol.TraerDe(dr));
             }
             return roles;
         }
+
     }
 }

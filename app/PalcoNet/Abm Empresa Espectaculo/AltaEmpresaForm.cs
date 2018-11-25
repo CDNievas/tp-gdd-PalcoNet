@@ -14,7 +14,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
     public partial class AltaEmpresaForm : Form
     {
         private FuncionFormEmpresa funcion;
-        private Empresa empresaAPersistir = null;
+        public Empresa empresaAPersistir = null;
 
         public AltaEmpresaForm(FuncionFormEmpresa funcion)
         {
@@ -45,28 +45,30 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             try
             {
                 ValidarInputs();
+                if (empresaAPersistir == null)
+                    empresaAPersistir = new Empresa();
+
+                empresaAPersistir.razonSocial = txtEmpresaRS.Text;
+                empresaAPersistir.cuit = txtEmpresaCuit.Text;
+                empresaAPersistir.mail = txtEmpresaEmail.Text;
+                empresaAPersistir.telefono = txtEmpresaTelefono.Text;
+                empresaAPersistir.ciudad = txtEmpresaCiudad.Text;
+                empresaAPersistir.localidad = txtEmpresaLocalidad.Text;
+                empresaAPersistir.domCalle = txtEmpresaCalle.Text;
+                empresaAPersistir.nroCalle = txtEmpresaNro.Text;
+                empresaAPersistir.piso = txtEmpresaPiso.Text.Trim().Equals("") ? null : (int?)Convert.ToInt32(txtEmpresaPiso.Text);
+                empresaAPersistir.codPostal = txtEmpresaCP.Text;
+                empresaAPersistir.fechaCreacion = Contexto.FechaActual;
+
+                Console.WriteLine("Persistien3 " + empresaAPersistir);
+                funcion.Guardar(this, empresaAPersistir);
             }
             catch (UserInputException ex)
             {
                 MessageBox.Show(ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            if (empresaAPersistir == null)
-                empresaAPersistir = new Empresa();
-
-            empresaAPersistir.razonSocial = txtEmpresaRS.Text;
-            empresaAPersistir.cuit = txtEmpresaCuit.Text;
-            empresaAPersistir.mail = txtEmpresaEmail.Text;
-            empresaAPersistir.telefono = txtEmpresaTelefono.Text;
-            empresaAPersistir.ciudad = txtEmpresaCiudad.Text;
-            empresaAPersistir.localidad = txtEmpresaLocalidad.Text;
-            empresaAPersistir.domCalle = txtEmpresaCalle.Text;
-            empresaAPersistir.nroCalle = txtEmpresaNro.Text;
-            empresaAPersistir.piso = txtEmpresaPiso.Text.Trim().Equals("") ? null : (int?)Convert.ToInt32(txtEmpresaPiso.Text);
-            empresaAPersistir.codPostal = txtEmpresaCP.Text;
-
-            Console.WriteLine("Persistien3 " + empresaAPersistir); 
-            funcion.Guardar(this, empresaAPersistir);
+            
             
         }
 
@@ -74,8 +76,9 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         {
             foreach (TextBox t in TodosLosTextbox())
             {
-                if (t.Text.Trim().Equals(""))
-                    throw new UserInputException("Debe completar todos los campos");
+                if(!t.Equals(txtEmpresaDpto) && !t.Equals(txtEmpresaPiso))
+                    if (t.Text.Trim().Equals(""))
+                        throw new UserInputException("Debe completar todos los campos");
             }
 
             if (this.txtEmpresaCuit.Text.Trim().Equals("")) // todo validar posta

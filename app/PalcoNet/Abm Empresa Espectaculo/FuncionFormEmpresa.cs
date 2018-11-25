@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace PalcoNet.Abm_Empresa_Espectaculo
 {
@@ -43,7 +44,8 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         public void Guardar(AltaEmpresaForm form, Empresa empresa)
         {
-            throw new NotImplementedException();
+            form.DialogResult = DialogResult.OK;
+            form.Close();
         }
     }
 }

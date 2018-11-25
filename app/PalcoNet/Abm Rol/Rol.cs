@@ -21,9 +21,21 @@ namespace PalcoNet.Abm_Rol
             this.habilitado = true;
         }
 
+        public Boolean EsCliente(){
+            return this.nombre.ToLower().Equals("cliente");
+        }
+
+        public Boolean EsEmpresa(){
+            return this.nombre.ToLower().Equals("empresa");
+        }
+
+        public Boolean EsAdministrador(){
+            return this.nombre.ToLower().Equals("administrador");
+        }
+
         private Rol() { }
 
-        public static Rol traerDe(DataRow dr)
+        public static Rol TraerDe(DataRow dr)
         {
             var rol = new Rol();
             rol.id = Convert.ToInt16(dr["id_rol"]);
@@ -38,18 +50,18 @@ namespace PalcoNet.Abm_Rol
             return String.Format("Rol({0}, {1}, {2})", id, nombre, habilitado);
         }
 
-        public void eliminate(){
+        public void Eliminate(){
             DataBase.GetInstance().Procedure("eliminar_rol", new ParametroIn("id_rol", id));
         }
 
         public void Persistite() {
-            var dataTable = getFuncionalidadesTable();
+            var dataTable = GetFuncionalidadesTable();
             DataBase.GetInstance().Procedure("crearNuevoRol",
                 new ParametroIn("listaFuncionalidad", dataTable),
                 new ParametroIn("nombre", this.nombre));
         }
 
-        private DataTable getFuncionalidadesTable()
+        private DataTable GetFuncionalidadesTable()
         {
             DataTable dataTable = new DataTable();
             DataColumn column;
@@ -71,7 +83,7 @@ namespace PalcoNet.Abm_Rol
         }
 
         public void Update() {
-            var funcionalidadesTable = getFuncionalidadesTable();
+            var funcionalidadesTable = GetFuncionalidadesTable();
             DataBase.GetInstance().Procedure("actualizarRol",
                 new ParametroIn("rol_id", this.id),
                 new ParametroIn("listaFuncionalidad", funcionalidadesTable));
