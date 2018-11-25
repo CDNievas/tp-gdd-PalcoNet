@@ -9,7 +9,7 @@ PRINT '----- Empezando a crear tablas -----'
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Usuario( -- MIGRADO
 	id_usuario int IDENTITY(1,1) PRIMARY KEY,
 	username nvarchar(50) NOT NULL,
-	password varbinary(32) NOT NULL,
+	password char(32) NOT NULL,
 	intentos tinyint DEFAULT 0,
 	habilitado bit DEFAULT 1,
 	eliminado bit DEFAULT 0
@@ -54,7 +54,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Empresa( -- MIGRADO
 	depto nvarchar(50),
 	cod_postal nvarchar(50),
 	fecha_creacion datetime NOT NULL,
-	rol_usuario_id int CONSTRAINT FK_EMPRESA_ROLUSUARIO REFERENCES COMPUMUNDOHIPERMEGARED.Rol_Usuario(id_rol_usuario)
+	usuario_id int CONSTRAINT FK_EMPRESA_USUARIO REFERENCES COMPUMUNDOHIPERMEGARED.Usuario(id_usuario)
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Cliente( -- MIGRADO
@@ -62,7 +62,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Cliente( -- MIGRADO
 	cuil nvarchar(13),
 	nombre nvarchar(255),
 	apellido nvarchar(255),
-	tipo_documento nvarchar(3) CHECK(tipo_documento IN('DNI','LC')) NOT NULL,
+	tipo_documento char(1) CHECK(tipo_documento IN('D','C','E')) NOT NULL,
 	nro_documento nvarchar(30) NOT NULL,
 	mail nvarchar(255),
 	telefono nvarchar(30),
@@ -76,7 +76,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Cliente( -- MIGRADO
 	cant_puntos int DEFAULT 0,
 	fecha_nacimiento datetime,
 	fecha_creacion datetime,
-	rol_usuario_id int CONSTRAINT FK_CLIENTE_ROLUSUARIO REFERENCES COMPUMUNDOHIPERMEGARED.Rol_Usuario(id_rol_usuario)
+	usuario_id int CONSTRAINT FK_CLIENTE_USUARIO REFERENCES COMPUMUNDOHIPERMEGARED.Usuario(id_usuario)
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Rubro( -- MIGRADO
@@ -88,6 +88,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Grado( -- MIGRADO
 	id_grado int IDENTITY(1,1) PRIMARY KEY,
 	descripcion nvarchar(10) NOT NULL,
 	comision numeric(5,2) DEFAULT 0,
+	prioridad smallint not null
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Tarjeta( -- MIGRADO
@@ -190,7 +191,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Puntos(
 PRINT '----- Empezando a migrar datos -----'
 DECLARE @fecha_creacion datetime = GETUTCDATE()
 INSERT INTO COMPUMUNDOHIPERMEGARED.Cliente (tipo_documento, nro_documento, apellido, nombre, fecha_nacimiento, fecha_creacion, mail, dom_calle, num_calle, piso, depto, cod_postal)
-	SELECT DISTINCT 'DNI', m.Cli_Dni, m.Cli_Apeliido, m.Cli_Nombre, m.Cli_Fecha_Nac, @fecha_creacion, m.Cli_Mail, m.Cli_Dom_Calle, m.Cli_Nro_Calle, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal
+	SELECT DISTINCT 'D', m.Cli_Dni, m.Cli_Apeliido, m.Cli_Nombre, m.Cli_Fecha_Nac, @fecha_creacion, m.Cli_Mail, m.Cli_Dom_Calle, m.Cli_Nro_Calle, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal
 		FROM gd_esquema.Maestra m
 		ORDER BY m.Cli_Dni
 		OFFSET 1 ROWS
@@ -203,18 +204,6 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Empresa (cuit, razon_social, mail, dom_calle,
 		FROM gd_esquema.Maestra m
 		ORDER BY m.Espec_Empresa_Cuit
 PRINT 'Migre Empresas'
-GO
-
-INSERT INTO COMPUMUNDOHIPERMEGARED.Usuario (username, password)
-	SELECT m.nro_documento, HASHBYTES('SHA2_256',m.nro_documento)
-		FROM COMPUMUNDOHIPERMEGARED.Cliente m
-		ORDER BY m.nro_documento
-
-INSERT INTO COMPUMUNDOHIPERMEGARED.Usuario (username, password)
-	SELECT m.cuit , HASHBYTES('SHA2_256',m.cuit)
-		FROM COMPUMUNDOHIPERMEGARED.Empresa m
-		ORDER BY m.cuit
-PRINT 'Migre Usuarios'
 GO
 
 INSERT INTO COMPUMUNDOHIPERMEGARED.Funcionalidad(descripcion) VALUES
@@ -234,19 +223,40 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Funcionalidad(descripcion) VALUES
 PRINT 'Migre Funcionalidad'
 GO
 
-INSERT INTO COMPUMUNDOHIPERMEGARED.Rol(nombre) VALUES
-	('Cliente'),
-	('Empresa'),
-	('Administrador')
-PRINT 'Migre Roles'
-GO
+create type COMPUMUNDOHIPERMEGARED.FuncionalidadList as table(
+	funcionalidad_id tinyint
+)
+go
 
-INSERT INTO COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad(rol_id, funcionalidad_id) VALUES
-	(1,1), (1,9), (1,10), (1,11),
-	(2,1), (2,8),
-	(3,2), (3,3), (3,4), (3,5), (3,6), (3,7), (3,12), (3,13)
-PRINT 'Migre Roles_Funcionalidad'
-GO
+create procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol(@nombre nvarchar(50), @listaFuncionalidad FuncionalidadList readonly, @id_generado smallint output)
+as
+begin
+	insert into COMPUMUNDOHIPERMEGARED.Rol(habilitado, nombre)
+	values(1, @nombre)
+
+	set @id_generado = @@IDENTITY
+
+	insert into COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad(funcionalidad_id, rol_id)
+	select l.funcionalidad_id, @id_generado from @listaFuncionalidad l
+	
+	return
+end
+go
+
+declare @funcionalidades_cliente COMPUMUNDOHIPERMEGARED.FuncionalidadList
+insert into @funcionalidades_cliente values (8),(9),(10)
+exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'CLIENTE', @funcionalidades_cliente, null
+
+declare @funcionalidades_admin COMPUMUNDOHIPERMEGARED.FuncionalidadList
+insert into @funcionalidades_admin values (1),(2),(3),(4),(11),(12)
+exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'ADMINISTRADOR', @funcionalidades_admin, null
+
+declare @funcionalidades_empresa COMPUMUNDOHIPERMEGARED.FuncionalidadList
+insert into @funcionalidades_empresa values (5),(6),(7)
+exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'EMPRESA', @funcionalidades_empresa, null
+PRINT 'Roles principales creados'
+go
+
 
 INSERT INTO COMPUMUNDOHIPERMEGARED.Rol_Usuario(usuario_id, rol_id)
 	SELECT u.id_usuario, 1
@@ -260,11 +270,65 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Rol_Usuario(usuario_id, rol_id)
 PRINT 'Migre Rol_Usuario'
 GO
 
-INSERT INTO COMPUMUNDOHIPERMEGARED.Grado(descripcion, comision) VALUES
-	('NINGUNO',0),
-	('BAJA', 2.0),
-	('MEDIA', 5.0),
-	('ALTA', 10.0)
+PRINT 'Creando usuarios de las empresas'
+	declare @id_rol_empresa smallint = (select id_rol from COMPUMUNDOHIPERMEGARED.Rol where nombre = 'EMPRESA')
+	declare c1 cursor for select e.cuit, e.id_empresa from COMPUMUNDOHIPERMEGARED.Empresa e
+	open c1
+	declare @cuit nvarchar(255), @empresa_id int
+	fetch next from c1 into @cuit, @empresa_id
+
+	while @@FETCH_STATUS = 0
+	begin
+		insert into COMPUMUNDOHIPERMEGARED.Usuario(username, password)
+		values(@cuit, HASHBYTES('SHA2_256',@cuit))
+		declare @id_usuario int = @@IDENTITY
+		insert into COMPUMUNDOHIPERMEGARED.Rol_Usuario(rol_id, usuario_id)
+		values(@id_rol_empresa, @id_usuario)
+		update COMPUMUNDOHIPERMEGARED.Empresa
+		set usuario_id = @id_usuario
+		where id_empresa = @empresa_id
+
+		fetch next from c1 into @cuit, @empresa_id
+	end
+
+	close c1
+	deallocate c1
+PRINT 'Usuarios y Rol_Usuarios de empresas creados'
+go
+
+PRINT 'Creando usuarios de los clientes'
+	declare @id_rol_cliente smallint = (select id_rol from COMPUMUNDOHIPERMEGARED.Rol where nombre = 'CLIENTE')
+	declare c1 cursor for select c.nro_documento, c.id_cliente from COMPUMUNDOHIPERMEGARED.Cliente c
+	open c1
+	declare @dni nvarchar(255), @cliente_id int
+	fetch next from c1 into @dni, @cliente_id
+
+	while @@FETCH_STATUS = 0
+	begin
+		insert into COMPUMUNDOHIPERMEGARED.Usuario(username, password)
+		values(@dni, HASHBYTES('SHA2_256',@dni))
+		declare @id_usuario int = @@IDENTITY
+		insert into COMPUMUNDOHIPERMEGARED.Rol_Usuario(rol_id, usuario_id)
+		values(@id_rol_cliente, @id_usuario)
+
+		update COMPUMUNDOHIPERMEGARED.Cliente
+		set usuario_id = @id_usuario
+		where id_cliente = @cliente_id
+
+		fetch next from c1 into @dni, @cliente_id
+	end
+
+	close c1
+	deallocate c1
+PRINT 'Usuarios y Rol_Usuarios de clientes creados'
+go
+
+
+INSERT INTO COMPUMUNDOHIPERMEGARED.Grado(descripcion, comision, prioridad) VALUES
+	('NINGUNO',0, 1),
+	('BAJA', 2.0, 2),
+	('MEDIA', 5.0, 3),
+	('ALTA', 10.0, 4)
 PRINT 'Migre Grados'
 GO
 
@@ -391,3 +455,184 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Puntos(cant_puntos,cliente_id,compra_id)
 	WHERE u.compra_id IS NOT NULL
 PRINT 'Migre Puntos'
 GO
+
+/*
+	CREANDO CONFIGURACIONES INICIALES
+*/
+
+
+create procedure COMPUMUNDOHIPERMEGARED.actualizarRol(@rol_id smallint, @listaFuncionalidad FuncionalidadList readonly)
+as
+begin
+	delete from COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad
+	where rol_id = @rol_id
+
+	insert into COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad(funcionalidad_id, rol_id)
+	select l.funcionalidad_id, @rol_id from @listaFuncionalidad l
+end
+go
+
+
+create procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario
+(@username nvarchar(50), @password nvarchar(50), @rol_id smallint, @usuario_id int output)
+as
+begin
+	begin tran
+	if(@password is null)
+		rollback transaction
+
+	insert into COMPUMUNDOHIPERMEGARED.Usuario(username, password, intentos, habilitado)
+	values(@username, HASHBYTES('SHA2_256', @password), 0, 1)
+
+	set @usuario_id = @@IDENTITY
+
+	insert into COMPUMUNDOHIPERMEGARED.Rol_Usuario(rol_id, usuario_id)
+	values(@rol_id, @usuario_id)
+
+	commit tran
+	return
+end
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.intentar_logear(@username nvarchar(50), @password nvarchar(50), @id_usuario int output)
+as
+begin
+	declare @pass_usuario nvarchar(64), @esta_habilitado bit, @esta_eliminado bit, @intentos smallint
+
+	select @id_usuario = u.id_usuario,
+	@pass_usuario = u.password,
+	@esta_habilitado = u.habilitado,
+	@esta_eliminado = u.eliminado,
+	@intentos = u.intentos
+	from COMPUMUNDOHIPERMEGARED.Usuario u
+	where u.username = @username
+
+	if(@id_usuario is null)
+	begin
+		raiserror('El usuario no existe', 16, 1)
+		return
+	end
+
+	if(@esta_eliminado = 1 or @esta_habilitado = 0)
+	begin
+		raiserror('El usuario está eliminado o no está habilitado', 16, 1)
+		return
+	end
+
+	if(HASHBYTES('SHA2_256', @password) != @pass_usuario)
+	begin
+		if(@intentos + 1 >= 3)
+		begin
+			update COMPUMUNDOHIPERMEGARED.Usuario
+			set intentos = 0, habilitado = 0
+			where id_usuario = @id_usuario
+		end
+		else
+		begin
+			update COMPUMUNDOHIPERMEGARED.Usuario
+			set intentos = @intentos + 1
+			where id_usuario = @id_usuario
+		end
+		raiserror('El password es incorrecto', 16, 1)
+		return
+	end
+
+	update COMPUMUNDOHIPERMEGARED.Usuario
+	set intentos = 0
+	where id_usuario = @id_usuario
+
+	return
+end
+go
+
+create view COMPUMUNDOHIPERMEGARED.PublicacionesView as
+SELECT p.id_publicacion, p.descripcion, p.fecha_creacion as fecha_publicacion,
+p.fecha_vencimiento, p.fecha_espectaculo,
+p.estado, p.ciudad, p.localidad, p.dom_calle, p.num_calle, p.cod_postal,
+p.empresa_id as id_empresa,
+r.id_rubro as rubro_id, r.descripcion as rubro_descripcion,
+g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision, g.prioridad
+FROM COMPUMUNDOHIPERMEGARED.Publicacion p
+left join COMPUMUNDOHIPERMEGARED.Rubro r
+on r.id_rubro = p.rubro_id
+left join COMPUMUNDOHIPERMEGARED.Grado g
+on g.id_grado = p.grado_id
+WITH CHECK OPTION
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.crear_usuario_cliente
+(@cuil nvarchar(13), @tipo_doc char(1), @nro_documento nvarchar(15), @nombre nvarchar(255),
+@apellido nvarchar(255), @mail nvarchar(255), @telefono numeric(15), @ciudad nvarchar(25),
+@localidad nvarchar(25), @dom_calle nvarchar(255), @num_calle numeric(18),
+@depto nvarchar(255), @piso numeric(18), @cod_postal nvarchar(255), @fecha_nacimiento date,
+@fecha_creacion datetime, @rol_id int, @username nvarchar(50), @pass nvarchar(64))
+as
+begin
+	begin tran
+	declare @id_nuevo_usuario int
+	exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario @username, @pass, @rol_id, @usuario_id = @id_nuevo_usuario output
+	insert into Cliente
+	(cuil, tipo_documento, nro_documento, nombre, apellido, mail, telefono, ciudad, localidad,
+	dom_calle, num_calle, depto, piso, cod_postal, fecha_nacimiento, fecha_creacion, usuario_id)
+	values
+	(@cuil, @tipo_doc, @nro_documento, @nombre, @apellido, @mail, @telefono, @ciudad, @localidad,
+	@dom_calle, @num_calle, @depto, @piso, @cod_postal, @fecha_nacimiento, @fecha_creacion, @id_nuevo_usuario)
+	commit tran
+end
+go
+
+create function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol(@rol_id smallint)
+returns @funcionalidades table(id_funcionalidad tinyint, descripcion varchar(30))
+as
+begin
+	insert into @funcionalidades
+	select f.id_funcionalidad, f.descripcion
+	from COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad rf
+	inner join COMPUMUNDOHIPERMEGARED.Funcionalidad f
+	on rf.rol_id = @rol_id and f.id_funcionalidad = rf.funcionalidad_id
+	return
+end
+go
+
+create function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario(@usuario_id int)
+returns @funcionalidades table(id_funcionalidad tinyint, descripcion varchar(30))
+as
+begin
+	declare c1 cursor for select r.rol_id from Rol_Usuario r
+	where r.usuario_id = @usuario_id
+	declare @id_rol smallint
+	declare @funcionalidades_temp table(id_funcionalidad tinyint, descripcion varchar(30))
+
+	open c1
+	fetch next from c1 into @id_rol
+
+	while @@FETCH_STATUS = 0
+	begin
+		insert into @funcionalidades_temp
+		select * from COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol(@id_rol)
+		fetch next from c1 into @id_rol
+	end
+
+	close c1
+	deallocate c1
+	insert into @funcionalidades
+	select distinct t.id_funcionalidad, t.descripcion from @funcionalidades_temp t
+	return
+	end
+go
+
+PRINT 'Todes les procedures y les funciones creades'
+
+PRINT 'Creando al admin default'
+declare @tablaFunciones COMPUMUNDOHIPERMEGARED.FuncionalidadList
+
+insert into @tablaFunciones
+select id_funcionalidad from COMPUMUNDOHIPERMEGARED.Funcionalidad
+
+declare @idRol smallint
+
+exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'Administrador General', @tablaFunciones, @id_generado = @idRol output 
+
+exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario 'admin', 'w23', @idRol, null
+PRINT 'Administrador general creado'
+go

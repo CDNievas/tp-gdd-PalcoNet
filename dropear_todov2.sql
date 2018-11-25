@@ -23,10 +23,25 @@ DROP TABLE COMPUMUNDOHIPERMEGARED.Rubro
 
 drop table COMPUMUNDOHIPERMEGARED.#UbicacionTemp
 drop table COMPUMUNDOHIPERMEGARED.#CompraTemp
+
+drop procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol
+drop procedure COMPUMUNDOHIPERMEGARED.actualizarRol
+drop procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario
+drop procedure COMPUMUNDOHIPERMEGARED.intentar_logear
+drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_cliente
+
+drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
+drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario
+
+drop type COMPUMUNDOHIPERMEGARED.FuncionalidadList 
+
+drop view COMPUMUNDOHIPERMEGARED.PublicacionesView
+
 drop SEQUENCE COMPUMUNDOHIPERMEGARED.CompraSequence
 drop SEQUENCE COMPUMUNDOHIPERMEGARED.UbicacionSequence
 
-DROP SCHEMA COMPUMUNDOHIPERMEGARED*/
+DROP SCHEMA COMPUMUNDOHIPERMEGARED
+*/
 
 /* DROP FOREIGN KEYS */
 PRINT '----- Empezando a borrar constraints/foreign keys -----'
