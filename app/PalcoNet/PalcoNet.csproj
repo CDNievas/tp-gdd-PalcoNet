@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Abm Cliente\TipoDocumento.cs" />
     <Compile Include="Abm Empresa Espectaculo\FuncionFormEmpresa.cs" />
+    <Compile Include="Abm Rol\FuncionRolForm.cs" />
     <Compile Include="Abm Rol\Rol.cs" />
     <Compile Include="Abm Rol\Roles.cs" />
     <Compile Include="Canje Puntos\canjearPuntos.cs">
@@ -187,11 +188,11 @@
     <Compile Include="Abm Grado\modificarGrado.Designer.cs">
       <DependentUpon>modificarGrado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\altaRol.cs">
+    <Compile Include="Abm Rol\AltaRolForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\altaRol.Designer.cs">
-      <DependentUpon>altaRol.cs</DependentUpon>
+    <Compile Include="Abm Rol\AltaRolForm.Designer.cs">
+      <DependentUpon>AltaRolForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro de Usuario\CreadorDeUsuarios.cs" />
     <Compile Include="SelectorFuncionalidad.cs" />
@@ -205,17 +206,17 @@
     <Compile Include="Validadores\Validador.cs" />
     <Compile Include="Validadores\ValidadorEmail.cs" />
     <Compile Include="Validadores\ValidadorNumerico.cs" />
-    <EmbeddedResource Include="Abm Rol\altaRol.resx">
-      <DependentUpon>altaRol.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\AltaRolForm.resx">
+      <DependentUpon>AltaRolForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Abm Rol\listadoRol.cs">
+    <Compile Include="Abm Rol\ListadoRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\listadoRol.Designer.cs">
-      <DependentUpon>listadoRol.cs</DependentUpon>
+    <Compile Include="Abm Rol\ListadoRol.Designer.cs">
+      <DependentUpon>ListadoRol.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Abm Rol\listadoRol.resx">
-      <DependentUpon>listadoRol.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\ListadoRol.resx">
+      <DependentUpon>ListadoRol.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Abm Rol\ModificarRol.cs">
       <SubType>Form</SubType>

@@ -1,6 +1,7 @@
 ﻿using PalcoNet.LoginUtils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,24 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.Abm_Rol
 {
-    class Rol
+    public class Rol
     {
-        public short id {get; set; }
-        public List<Funcionalidad> funcionalidades {get; set; }
-        public String nombre {get; set; }
+        public short id {get; private set; }
+
+        [DisplayName("Nombre")]
+        public String nombre { get; set; }
+
+        public List<Funcionalidad> funcionalidades { get; set; }
+
+        [DisplayName("Funcionalidades")]
+        public String funcionalidadesString {
+            get{
+                var stringArr = funcionalidades.Select(x => x.Descripcion).ToArray<String>();
+                return string.Join(",", stringArr);
+            }
+        }
+
+        [DisplayName("Habilitado?")]
         public Boolean habilitado {get; set; }
 
         public Rol(String nombre, List<Funcionalidad> funcionalidades) {

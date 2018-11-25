@@ -227,7 +227,7 @@ create type COMPUMUNDOHIPERMEGARED.FuncionalidadList as table(
 )
 go
 
-create procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol(@nombre nvarchar(50), @listaFuncionalidad FuncionalidadList readonly, @id_generado smallint output)
+create procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol(@nombre nvarchar(50), @listaFuncionalidad FuncionalidadList readonly, @id_generado smallint = null output)
 as
 begin
 	insert into COMPUMUNDOHIPERMEGARED.Rol(habilitado, nombre)

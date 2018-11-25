@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Abm_Rol
 {
-    partial class listadoRol
+    partial class ListadoRol
     {
         /// <summary>
         /// Required designer variable.
@@ -32,45 +32,38 @@
             this.btnBaja = new System.Windows.Forms.Button();
             this.btnMod = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.tblGradoBusqueda = new System.Windows.Forms.DataGridView();
+            this.rolBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2018DataSet = new PalcoNet.GD2C2018DataSet();
             this.btnGradoLimpiar = new System.Windows.Forms.Button();
             this.btnGradoBuscar = new System.Windows.Forms.Button();
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.txtRolAlta = new System.Windows.Forms.TextBox();
             this.lblRolNombre = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.gD2C2018DataSet = new PalcoNet.GD2C2018DataSet();
-            this.rolBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rolTableAdapter = new PalcoNet.GD2C2018DataSetTableAdapters.RolTableAdapter();
-            this.columnIDGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.funcionalidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idrolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.listaFuncionalidadDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.habilitadoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.tblGradoBusqueda)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
+            this.rolesDataGrid = new System.Windows.Forms.DataGridView();
+            this.btnNuevo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rolBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rolesDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBaja
             // 
-            this.btnBaja.Location = new System.Drawing.Point(405, 289);
+            this.btnBaja.Location = new System.Drawing.Point(272, 370);
+            this.btnBaja.Margin = new System.Windows.Forms.Padding(2);
             this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(88, 30);
+            this.btnBaja.Size = new System.Drawing.Size(66, 24);
             this.btnBaja.TabIndex = 34;
             this.btnBaja.Text = "Baja";
             this.btnBaja.UseVisualStyleBackColor = true;
             // 
             // btnMod
             // 
-            this.btnMod.Location = new System.Drawing.Point(405, 224);
+            this.btnMod.Location = new System.Drawing.Point(51, 370);
+            this.btnMod.Margin = new System.Windows.Forms.Padding(2);
             this.btnMod.Name = "btnMod";
-            this.btnMod.Size = new System.Drawing.Size(88, 30);
+            this.btnMod.Size = new System.Drawing.Size(66, 24);
             this.btnMod.TabIndex = 33;
             this.btnMod.Text = "Modificar";
             this.btnMod.UseVisualStyleBackColor = true;
@@ -79,58 +72,47 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(33, 18);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(25, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(139, 31);
+            this.label2.Size = new System.Drawing.Size(113, 25);
             this.label2.TabIndex = 32;
             this.label2.Text = "Listar Rol";
             // 
-            // tblGradoBusqueda
+            // rolBindingSource
             // 
-            this.tblGradoBusqueda.AutoGenerateColumns = false;
-            this.tblGradoBusqueda.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tblGradoBusqueda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tblGradoBusqueda.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.columnIDGrado,
-            this.habilitado,
-            this.funcionalidades,
-            this.idrolDataGridViewTextBoxColumn,
-            this.nombreDataGridViewTextBoxColumn,
-            this.listaFuncionalidadDataGridViewImageColumn,
-            this.habilitadoDataGridViewCheckBoxColumn,
-            this.seleccionar});
-            this.tblGradoBusqueda.DataSource = this.rolBindingSource;
-            this.tblGradoBusqueda.GridColor = System.Drawing.SystemColors.InactiveCaption;
-            this.tblGradoBusqueda.Location = new System.Drawing.Point(39, 224);
-            this.tblGradoBusqueda.Name = "tblGradoBusqueda";
-            this.tblGradoBusqueda.RowTemplate.Height = 24;
-            this.tblGradoBusqueda.Size = new System.Drawing.Size(343, 208);
-            this.tblGradoBusqueda.TabIndex = 31;
+            this.rolBindingSource.DataMember = "Rol";
+            this.rolBindingSource.DataSource = this.gD2C2018DataSet;
+            // 
+            // gD2C2018DataSet
+            // 
+            this.gD2C2018DataSet.DataSetName = "GD2C2018DataSet";
+            this.gD2C2018DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btnGradoLimpiar
             // 
-            this.btnGradoLimpiar.Location = new System.Drawing.Point(22, 164);
+            this.btnGradoLimpiar.Location = new System.Drawing.Point(51, 106);
+            this.btnGradoLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnGradoLimpiar.Name = "btnGradoLimpiar";
-            this.btnGradoLimpiar.Size = new System.Drawing.Size(88, 30);
+            this.btnGradoLimpiar.Size = new System.Drawing.Size(66, 24);
             this.btnGradoLimpiar.TabIndex = 30;
             this.btnGradoLimpiar.Text = "Limpiar";
             this.btnGradoLimpiar.UseVisualStyleBackColor = true;
             // 
             // btnGradoBuscar
             // 
-            this.btnGradoBuscar.Location = new System.Drawing.Point(325, 164);
+            this.btnGradoBuscar.Location = new System.Drawing.Point(272, 106);
+            this.btnGradoBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnGradoBuscar.Name = "btnGradoBuscar";
-            this.btnGradoBuscar.Size = new System.Drawing.Size(88, 30);
+            this.btnGradoBuscar.Size = new System.Drawing.Size(66, 24);
             this.btnGradoBuscar.TabIndex = 29;
             this.btnGradoBuscar.Text = "Buscar";
             this.btnGradoBuscar.UseVisualStyleBackColor = true;
             // 
             // rectangleShape1
             // 
-            this.rectangleShape1.Location = new System.Drawing.Point(31, 42);
+            this.rectangleShape1.Location = new System.Drawing.Point(17, 42);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(369, 98);
+            this.rectangleShape1.Size = new System.Drawing.Size(670, 98);
             // 
             // shapeContainer1
             // 
@@ -139,123 +121,75 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(515, 498);
+            this.shapeContainer1.Size = new System.Drawing.Size(703, 405);
             this.shapeContainer1.TabIndex = 35;
             this.shapeContainer1.TabStop = false;
             // 
             // txtRolAlta
             // 
-            this.txtRolAlta.Location = new System.Drawing.Point(151, 77);
+            this.txtRolAlta.Location = new System.Drawing.Point(138, 56);
+            this.txtRolAlta.Margin = new System.Windows.Forms.Padding(2);
             this.txtRolAlta.Name = "txtRolAlta";
-            this.txtRolAlta.Size = new System.Drawing.Size(115, 22);
+            this.txtRolAlta.Size = new System.Drawing.Size(87, 20);
             this.txtRolAlta.TabIndex = 37;
             // 
             // lblRolNombre
             // 
             this.lblRolNombre.AutoSize = true;
-            this.lblRolNombre.Location = new System.Drawing.Point(52, 77);
+            this.lblRolNombre.Location = new System.Drawing.Point(48, 59);
+            this.lblRolNombre.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRolNombre.Name = "lblRolNombre";
-            this.lblRolNombre.Size = new System.Drawing.Size(62, 17);
+            this.lblRolNombre.Size = new System.Drawing.Size(47, 13);
             this.lblRolNombre.TabIndex = 36;
             this.lblRolNombre.Text = "Nombre:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(151, 108);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(115, 22);
-            this.textBox1.TabIndex = 39;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 108);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(23, 17);
-            this.label1.TabIndex = 38;
-            this.label1.Text = "id:";
-            // 
-            // gD2C2018DataSet
-            // 
-            this.gD2C2018DataSet.DataSetName = "GD2C2018DataSet";
-            this.gD2C2018DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // rolBindingSource
-            // 
-            this.rolBindingSource.DataMember = "Rol";
-            this.rolBindingSource.DataSource = this.gD2C2018DataSet;
             // 
             // rolTableAdapter
             // 
             this.rolTableAdapter.ClearBeforeFill = true;
             // 
-            // columnIDGrado
+            // rolesDataGrid
             // 
-            this.columnIDGrado.HeaderText = "ID";
-            this.columnIDGrado.Name = "columnIDGrado";
+            this.rolesDataGrid.AllowUserToAddRows = false;
+            this.rolesDataGrid.AllowUserToDeleteRows = false;
+            this.rolesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.rolesDataGrid.Location = new System.Drawing.Point(17, 148);
+            this.rolesDataGrid.Name = "rolesDataGrid";
+            this.rolesDataGrid.ReadOnly = true;
+            this.rolesDataGrid.Size = new System.Drawing.Size(671, 208);
+            this.rolesDataGrid.TabIndex = 38;
             // 
-            // habilitado
+            // btnNuevo
             // 
-            this.habilitado.HeaderText = "habilitado";
-            this.habilitado.Name = "habilitado";
+            this.btnNuevo.Location = new System.Drawing.Point(460, 370);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(79, 24);
+            this.btnNuevo.TabIndex = 39;
+            this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
-            // funcionalidades
+            // ListadoRol
             // 
-            this.funcionalidades.HeaderText = "Column1";
-            this.funcionalidades.Name = "funcionalidades";
-            // 
-            // idrolDataGridViewTextBoxColumn
-            // 
-            this.idrolDataGridViewTextBoxColumn.DataPropertyName = "id_rol";
-            this.idrolDataGridViewTextBoxColumn.HeaderText = "id_rol";
-            this.idrolDataGridViewTextBoxColumn.Name = "idrolDataGridViewTextBoxColumn";
-            this.idrolDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // nombreDataGridViewTextBoxColumn
-            // 
-            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "nombre";
-            this.nombreDataGridViewTextBoxColumn.HeaderText = "nombre";
-            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
-            // 
-            // listaFuncionalidadDataGridViewImageColumn
-            // 
-            this.listaFuncionalidadDataGridViewImageColumn.DataPropertyName = "listaFuncionalidad";
-            this.listaFuncionalidadDataGridViewImageColumn.HeaderText = "listaFuncionalidad";
-            this.listaFuncionalidadDataGridViewImageColumn.Name = "listaFuncionalidadDataGridViewImageColumn";
-            // 
-            // habilitadoDataGridViewCheckBoxColumn
-            // 
-            this.habilitadoDataGridViewCheckBoxColumn.DataPropertyName = "habilitado";
-            this.habilitadoDataGridViewCheckBoxColumn.HeaderText = "habilitado";
-            this.habilitadoDataGridViewCheckBoxColumn.Name = "habilitadoDataGridViewCheckBoxColumn";
-            // 
-            // seleccionar
-            // 
-            this.seleccionar.HeaderText = "seleccionar";
-            this.seleccionar.Name = "seleccionar";
-            // 
-            // listadoRol
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 498);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(703, 405);
+            this.Controls.Add(this.btnNuevo);
+            this.Controls.Add(this.rolesDataGrid);
             this.Controls.Add(this.txtRolAlta);
             this.Controls.Add(this.lblRolNombre);
             this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnMod);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.tblGradoBusqueda);
             this.Controls.Add(this.btnGradoLimpiar);
             this.Controls.Add(this.btnGradoBuscar);
             this.Controls.Add(this.shapeContainer1);
-            this.Name = "listadoRol";
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "ListadoRol";
             this.Text = "listadoRol";
             this.Load += new System.EventHandler(this.listadoRol_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.tblGradoBusqueda)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rolesDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,25 +200,16 @@
         private System.Windows.Forms.Button btnBaja;
         private System.Windows.Forms.Button btnMod;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView tblGradoBusqueda;
         private System.Windows.Forms.Button btnGradoLimpiar;
         private System.Windows.Forms.Button btnGradoBuscar;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private System.Windows.Forms.TextBox txtRolAlta;
         private System.Windows.Forms.Label lblRolNombre;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
         private GD2C2018DataSet gD2C2018DataSet;
         private System.Windows.Forms.BindingSource rolBindingSource;
         private GD2C2018DataSetTableAdapters.RolTableAdapter rolTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnIDGrado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn habilitado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn funcionalidades;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idrolDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewImageColumn listaFuncionalidadDataGridViewImageColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn habilitadoDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn seleccionar;
+        private System.Windows.Forms.DataGridView rolesDataGrid;
+        private System.Windows.Forms.Button btnNuevo;
     }
 }

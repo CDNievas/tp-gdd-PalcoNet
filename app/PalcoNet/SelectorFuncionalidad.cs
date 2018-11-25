@@ -14,7 +14,7 @@ namespace PalcoNet
             switch (idFuncionalidad)
             {
                 case 1:
-                    throw new NotImplementedException("ABM ROL");
+                    new Abm_Rol.ListadoRol().Show();
                     break;
                 case 2:
                     new Abm_Cliente.ListarCliente().Show();
