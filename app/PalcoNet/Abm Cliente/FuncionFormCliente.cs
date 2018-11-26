@@ -10,18 +10,18 @@ namespace PalcoNet.Abm_Cliente
 {
     public interface FuncionFormCliente
     {
-        void Guardar(AltaClienteForm form, Cliente cliente);
-        void Setup(AltaClienteForm form);
+        void Guardar(AltaCliente form, Cliente cliente);
+        void Setup(AltaCliente form);
     }
 
     public class Alta : FuncionFormCliente
     {
-        public void Guardar(AltaClienteForm form, Cliente cliente)
+        public void Guardar(AltaCliente form, Cliente cliente)
         {
             throw new NotImplementedException();
         }
 
-        public void Setup(AltaClienteForm form)
+        public void Setup(AltaCliente form)
         {
             // No hace nada
         }
@@ -36,13 +36,13 @@ namespace PalcoNet.Abm_Cliente
             this.cliente = cliente;
         }
 
-        public void Guardar(AltaClienteForm form, Cliente cliente)
+        public void Guardar(AltaCliente form, Cliente cliente)
         {
             cliente.Update();   
             form.Close();
         }
 
-        public void Setup(AltaClienteForm form)
+        public void Setup(AltaCliente form)
         {
             form.LlenateConDatosDe(cliente);
         }
@@ -50,14 +50,14 @@ namespace PalcoNet.Abm_Cliente
 
     public class Registrarse : FuncionFormCliente
     {
-        public void Guardar(AltaClienteForm form, Cliente cliente)
+        public void Guardar(AltaCliente form, Cliente cliente)
         {
             form.ClienteActual = cliente;
             form.DialogResult = DialogResult.OK;
             form.Close();
         }
 
-        public void Setup(AltaClienteForm form)
+        public void Setup(AltaCliente form)
         {
             // No hace nada
         }

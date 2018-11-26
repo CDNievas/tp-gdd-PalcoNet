@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace PalcoNet.Abm_Cliente
 {
-    public partial class AltaClienteForm : Form
+    public partial class AltaCliente : Form
     {
         public Cliente ClienteActual { get; set; }
         public FuncionFormCliente funcionForm { get; set; }
 
-        public AltaClienteForm()
+        public AltaCliente()
         {
             InitializeComponent();
             fechaNacimiento.MinDate = new DateTime(1880, 1, 1);

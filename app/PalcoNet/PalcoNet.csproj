@@ -46,11 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm Cliente\AltaClienteForm.cs">
+    <Compile Include="Abm Cliente\AltaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Cliente\AltaClienteForm.Designer.cs">
-      <DependentUpon>AltaClienteForm.cs</DependentUpon>
+    <Compile Include="Abm Cliente\AltaCliente.Designer.cs">
+      <DependentUpon>AltaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Cliente\altaTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Cliente\altaTarjeta.Designer.cs">
+      <DependentUpon>altaTarjeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\bajaCliente.cs">
       <SubType>Form</SubType>
@@ -60,13 +66,16 @@
     </Compile>
     <Compile Include="Abm Cliente\Buscador.cs" />
     <Compile Include="Abm Cliente\FuncionFormCliente.cs" />
+    <Compile Include="Abm Cliente\FuncionFormTarjeta.cs" />
     <Compile Include="Abm Cliente\modificarCliente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Cliente\modificarCliente.Designer.cs">
       <DependentUpon>modificarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Cliente\Tarjeta.cs" />
     <Compile Include="Abm Cliente\TipoDocumento.cs" />
+    <Compile Include="Abm Cliente\TipoTarjeta.cs" />
     <Compile Include="Abm Empresa Espectaculo\FuncionFormEmpresa.cs" />
     <Compile Include="Abm Rol\FuncionRolForm.cs" />
     <Compile Include="Abm Rol\Rol.cs" />
@@ -134,11 +143,11 @@
     <Compile Include="Generar Publicacion\altaPublicacion.Designer.cs">
       <DependentUpon>altaPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Rendicion Comisiones\Form1.cs">
+    <Compile Include="Generar Rendicion Comisiones\rendicionComisiones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Rendicion Comisiones\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Generar Rendicion Comisiones\rendicionComisiones.Designer.cs">
+      <DependentUpon>rendicionComisiones.cs</DependentUpon>
     </Compile>
     <Compile Include="Historial Cliente\historialClienteCompras.cs">
       <SubType>Form</SubType>
@@ -206,6 +215,9 @@
     <Compile Include="Validadores\Validador.cs" />
     <Compile Include="Validadores\ValidadorEmail.cs" />
     <Compile Include="Validadores\ValidadorNumerico.cs" />
+    <EmbeddedResource Include="Abm Cliente\altaTarjeta.resx">
+      <DependentUpon>altaTarjeta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\AltaRolForm.resx">
       <DependentUpon>AltaRolForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -242,6 +254,9 @@
     <Compile Include="Registro de Usuario\CrearUsuarioForm.Designer.cs">
       <DependentUpon>CrearUsuarioForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Generar Rendicion Comisiones\rendicionComisiones.resx">
+      <DependentUpon>rendicionComisiones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\CrearUsuarioForm.resx">
       <DependentUpon>CrearUsuarioForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -278,8 +293,8 @@
     <EmbeddedResource Include="Abm Cliente\ListarCliente.resx">
       <DependentUpon>ListarCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Cliente\AltaClienteForm.resx">
-      <DependentUpon>AltaClienteForm.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Cliente\AltaCliente.resx">
+      <DependentUpon>AltaCliente.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Cliente\modificarCliente.resx">

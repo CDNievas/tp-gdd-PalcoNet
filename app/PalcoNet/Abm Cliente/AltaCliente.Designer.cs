@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Abm_Cliente
 {
-    partial class AltaClienteForm
+    partial class AltaCliente
     {
         /// <summary>
         /// Required designer variable.

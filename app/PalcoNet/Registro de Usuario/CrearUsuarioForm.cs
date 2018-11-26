@@ -58,7 +58,7 @@ namespace PalcoNet.Registro_de_Usuario
             var rol = GetSelectedRol();
             if (rol.EsCliente())
             {
-                var form = new Abm_Cliente.AltaClienteForm();
+                var form = new Abm_Cliente.AltaCliente();
                 form.funcionForm = new Registrarse();
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)

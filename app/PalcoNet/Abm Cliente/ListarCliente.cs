@@ -85,7 +85,7 @@ namespace PalcoNet.Abm_Cliente
         private void btnClienteMod_Click(object sender, EventArgs e)
         {
             var cliente = (Cliente)clientesDataGrid.CurrentRow.DataBoundItem;
-            var form = new AltaClienteForm();
+            var form = new AltaCliente();
             Console.WriteLine("Modificando cliente: " + cliente);
             form.funcionForm = new Modificar(cliente);
             try
