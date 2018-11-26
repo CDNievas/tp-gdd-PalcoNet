@@ -39,7 +39,8 @@ namespace PalcoNet.Abm_Cliente
 
         private void btnDatosTarjeta_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException("Registrar targeta");
+            altaTarjeta altaTarjeta = new altaTarjeta();
+            altaTarjeta.Show();
         }
 
         private void btnClienteGuardar_Click(object sender, EventArgs e)

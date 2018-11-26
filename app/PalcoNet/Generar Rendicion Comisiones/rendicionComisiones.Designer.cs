@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Generar_Rendicion_Comisiones
 {
-    partial class Form1
+    partial class rendicionComisiones
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // rendicionComisiones
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(760, 659);
+            this.Name = "rendicionComisiones";
+            this.Text = "Rendicion de Comisiones";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

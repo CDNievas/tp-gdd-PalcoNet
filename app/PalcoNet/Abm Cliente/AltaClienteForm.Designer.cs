@@ -79,7 +79,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(28, 18);
+            this.label2.Location = new System.Drawing.Point(28, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(156, 25);
             this.label2.TabIndex = 0;
@@ -314,7 +314,7 @@
             // 
             // btnDatosTarjeta
             // 
-            this.btnDatosTarjeta.Location = new System.Drawing.Point(381, 334);
+            this.btnDatosTarjeta.Location = new System.Drawing.Point(381, 338);
             this.btnDatosTarjeta.Margin = new System.Windows.Forms.Padding(2);
             this.btnDatosTarjeta.Name = "btnDatosTarjeta";
             this.btnDatosTarjeta.Size = new System.Drawing.Size(138, 22);
@@ -329,15 +329,15 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(568, 457);
+            this.shapeContainer1.Size = new System.Drawing.Size(608, 510);
             this.shapeContainer1.TabIndex = 31;
             this.shapeContainer1.TabStop = false;
             // 
             // rectangleShape1
             // 
-            this.rectangleShape1.Location = new System.Drawing.Point(30, 35);
+            this.rectangleShape1.Location = new System.Drawing.Point(17, 35);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(693, 446);
+            this.rectangleShape1.Size = new System.Drawing.Size(562, 446);
             // 
             // fechaNacimiento
             // 
@@ -403,7 +403,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 457);
+            this.ClientSize = new System.Drawing.Size(608, 510);
             this.Controls.Add(this.comboTipoDoc);
             this.Controls.Add(this.txtPiso);
             this.Controls.Add(this.labelPiso);
