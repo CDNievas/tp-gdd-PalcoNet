@@ -27,7 +27,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         private void ActualizarTabla()
         {
-            var _lista = new Buscador()
+            var _lista = new BuscadorEmpresas()
                 .filtrarEmpresas(razonSocial: txtRazonSocial.Text, cuit: txtCuit.Text, email: txtMail.Text, pag: paginaActual);
             _lista.ForEach(e => Console.WriteLine(e));
             var lista = new BindingList<Empresa>(_lista);

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PalcoNet.Generar_Publicacion
 {
-    public partial class altaPublicacion : Form
+    public partial class AltaPublicacion : Form
     {
-        public altaPublicacion()
+        public AltaPublicacion()
         {
             InitializeComponent();
         }

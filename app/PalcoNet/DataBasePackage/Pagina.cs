@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.DataBasePackage
 {
-    class Pagina
+    public class Pagina
     {
         public int pageNumber { get; set; }
         public int pageSize { get; set; }

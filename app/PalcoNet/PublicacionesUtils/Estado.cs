@@ -5,16 +5,18 @@ using System.Text;
 
 namespace PalcoNet.PublicacionesUtils
 {
-    abstract class Estado
+    public abstract class Estado
     {
         public abstract String Name();
-        public abstract char Codigo();
+        public abstract String Codigo();
         public override bool Equals(object obj)
         {
             if (!(obj is Estado))
                 return false;
             return ((Estado)obj).Codigo().Equals(this.Codigo());
         }
+
+        public abstract bool PuedeModificarse();
 
         public override int GetHashCode()
         {
@@ -27,56 +29,56 @@ namespace PalcoNet.PublicacionesUtils
         }
     }
 
-    class Borrador : Estado
+    public class Borrador : Estado
     {
         public override String Name()
         {
             return "Borrador";
         }
 
-        public override char Codigo()
+        public override String Codigo()
         {
-            return 'B';
+            return "BORRADOR";
         }
 
-        
-    }
-
-    class Publicado : Estado
-    {
-        public override String Name()
+        public override bool PuedeModificarse()
         {
-            return "Publicado";
-        }
-
-        public override char Codigo()
-        {
-            return 'P';
-        }
-    }
-    class Finalizado : Estado
-    {
-        public override String Name()
-        {
-            return "Finalizado";
-        }
-
-        public override char Codigo()
-        {
-            return 'F';
+            return true;
         }
     }
 
-    class Indefinido : Estado
+    public class Publicado : Estado
     {
         public override String Name()
         {
-            return "Indefinido";
+            return "Publicada";
         }
 
-        public override char Codigo()
+        public override String Codigo()
         {
-            return 'U';
+            return "PUBLICADA";
+        }
+
+        public override bool PuedeModificarse()
+        {
+            return false;
+        }
+    }
+    public class Finalizado : Estado
+    {
+        public override String Name()
+        {
+            return "Finalizada";
+        }
+
+        public override String Codigo()
+        {
+            return "FINALIZADA";
+        }
+
+        public override bool PuedeModificarse()
+        {
+            return false;
         }
     }
 }
