@@ -151,7 +151,7 @@
             this.btnAgregarInfo.Location = new System.Drawing.Point(22, 226);
             this.btnAgregarInfo.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregarInfo.Name = "btnAgregarInfo";
-            this.btnAgregarInfo.Size = new System.Drawing.Size(130, 19);
+            this.btnAgregarInfo.Size = new System.Drawing.Size(130, 23);
             this.btnAgregarInfo.TabIndex = 41;
             this.btnAgregarInfo.Text = "Agregar info especifica";
             this.btnAgregarInfo.UseVisualStyleBackColor = true;
@@ -195,7 +195,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(366, 327);
+            this.shapeContainer1.Size = new System.Drawing.Size(493, 361);
             this.shapeContainer1.TabIndex = 45;
             this.shapeContainer1.TabStop = false;
             // 
@@ -209,7 +209,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 327);
+            this.ClientSize = new System.Drawing.Size(493, 361);
             this.Controls.Add(this.lblCrearUsuario);
             this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.btnDisponible);

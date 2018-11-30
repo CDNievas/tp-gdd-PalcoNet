@@ -15,6 +15,7 @@ namespace PalcoNet.Abm_Cliente
     {
         public Cliente ClienteActual { get; set; }
         public FuncionFormCliente funcionForm { get; set; }
+        public Tarjeta tarjetaAGuardar { get; set; }
 
         public AltaCliente()
         {
@@ -40,7 +41,14 @@ namespace PalcoNet.Abm_Cliente
         private void btnDatosTarjeta_Click(object sender, EventArgs e)
         {
             altaTarjeta altaTarjeta = new altaTarjeta();
-            altaTarjeta.Show();
+            altaTarjeta.funcionForm = new RegistrarTarjeta();
+            var resultado = altaTarjeta.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+            {
+                this.tarjetaAGuardar = altaTarjeta.TarjetaActual;
+            }
+
         }
 
         private void btnClienteGuardar_Click(object sender, EventArgs e)

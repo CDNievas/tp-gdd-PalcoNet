@@ -20,6 +20,8 @@ namespace PalcoNet.Abm_Cliente
         {
             InitializeComponent();
             dateTimeVencimiento.MinDate = Contexto.FechaActual;
+            this.comboTipoTarjeta.DataSource = TipoTarjeta.Todos();
+            comboTipoTarjeta.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private List<TextBox> TodosLosTextbox()
