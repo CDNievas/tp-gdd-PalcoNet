@@ -26,7 +26,7 @@ namespace PalcoNet.Abm_Cliente
         }
     }
 
-    public class Registrar : FuncionFormTarjeta
+    public class RegistrarTarjeta : FuncionFormTarjeta
     {
         public void Guardar(altaTarjeta form, Tarjeta tarjeta)
         {

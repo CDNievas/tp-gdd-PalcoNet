@@ -25,6 +25,7 @@ namespace PalcoNet.Registro_de_Usuario
 
         private Cliente clienteAPersistir;
         private Empresa empresaAPersistir;
+        private Tarjeta tarjetaAPersistir;
 
         private Rol GetSelectedRol()
         {
@@ -62,7 +63,10 @@ namespace PalcoNet.Registro_de_Usuario
                 form.funcionForm = new Registrarse();
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
+                {
                     clienteAPersistir = form.ClienteActual;
+                    tarjetaAPersistir = form.tarjetaAGuardar;
+                }
                 else
                 {
                     clienteAPersistir = null;
@@ -138,8 +142,11 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void PersistirCliente()
         {
-            CreadorDeUsuarios.CrearNuevoCliente(clienteAPersistir, txtUsuario.Text, password.Text,
+            int idCliente = CreadorDeUsuarios.CrearNuevoCliente(clienteAPersistir, txtUsuario.Text, password.Text,
             GetSelectedRol().id);
+
+            this.tarjetaAPersistir.Insert(idCliente);
+            
 
         }
 

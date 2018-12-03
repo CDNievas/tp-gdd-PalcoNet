@@ -11,7 +11,10 @@ namespace PalcoNet.Registro_de_Usuario
 {
     class CreadorDeUsuarios
     {
-        public static void CrearNuevoCliente(Cliente cliente, String username, String pass, int rolID){
+        public static int CrearNuevoCliente(Cliente cliente, String username, String pass, int rolID){
+
+            var param = new ParametroOut("cliente_id", System.Data.SqlDbType.Int);
+
             DataBase.GetInstance().Procedure("crear_usuario_cliente",
                 new ParametroIn("cuil", cliente.cuil),
                 new ParametroIn("tipo_doc", cliente.tipoDocumento.discriminator),
@@ -31,7 +34,11 @@ namespace PalcoNet.Registro_de_Usuario
                 new ParametroIn("fecha_creacion", cliente.fechaCreacion),
                 new ParametroIn("rol_id", rolID),
                 new ParametroIn("username", username),
-                new ParametroIn("pass", pass));
+                new ParametroIn("pass", pass),
+                param);
+
+            return (int)param.valorRetorno;
+
         }
 
         public static void CrearNuevaEmpresa(Empresa empresa, String username, String pass, int rolId)

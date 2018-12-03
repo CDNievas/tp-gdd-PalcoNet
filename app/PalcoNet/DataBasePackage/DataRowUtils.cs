@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet
 {
-    class DataRowExtended
+    public class DataRowExtended
     {
         private DataRow dr;
 
@@ -19,6 +19,12 @@ namespace PalcoNet
         public DataRowExtended(DataRow dr)
         {
             this.dr = dr;
+        }
+
+
+        public Boolean BoolValue(String columnName)
+        {
+            return Convert.ToBoolean(dr[columnName]);
         }
 
         public T OrElse<T>(String columnName, T elseValue){
@@ -37,7 +43,7 @@ namespace PalcoNet
             }
         }
 
-        public T TryGet<T>(String columnName, T ifNull, Func<DataRowExtended, T> f)
+        public T TryGet<T>(T ifNull, Func<DataRowExtended, T> f)
         {
             try
             {

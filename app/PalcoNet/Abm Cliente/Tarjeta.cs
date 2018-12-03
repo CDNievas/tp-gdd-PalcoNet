@@ -25,7 +25,7 @@ namespace PalcoNet.Abm_Cliente
         public DateTime? fechaVencimiento { get; set; }
         
         /*[DisplayName("Habilitacion")]
-        public varchar habilitado { get; set; }*/
+        public Bit habilitado { get; set; }*/
 
         public static Tarjeta traerDe(DataRow dr)
         {
@@ -51,15 +51,25 @@ namespace PalcoNet.Abm_Cliente
             return tarjeta;
         }
 
-        /*internal void Update()
+        internal void Update()
         {
             String sql = String.Format
                 (@" update COMPUMUNDOHIPERMEGARED.Tarjeta
                     set nro_tarjeta = '{0}', tipo_tarjeta = '{1}', ccv = '{2}',
-                    fecha_vencimiento = '{3}' where id_tarjeta = {4}",
-                     nroTarjeta, tipoTarjeta.discriminator, codigoSeguridad, fechaVencimiento, id);
+                    fecha_vencimiento = '{3}', habilitado = '{4}'  where id_tarjeta = {4}",
+                     nroTarjeta, tipoTarjeta.discriminator, codigoSeguridad, fechaVencimiento, 1 , id);
             var ignored = DataBase.GetInstance().Query(sql);
-        }*/         // ME FALTA VER COMO HAGO LO DE HABILITADO
+        }
+
+        public void Insert(int idCliente)
+        {
+            String sql = String.Format
+                (@" INSERT INTO COMPUMUNDOHIPERMEGARED.Tarjeta(nro_tarjeta, tipo, ccv, fecha_vencimiento, cliente_id)
+                    VALUES('{0}', '{1}', '{2}', CONVERT(datetime,'{3}', 131),{4})",
+                    nroTarjeta, tipoTarjeta.discriminator, codigoSeguridad, fechaVencimiento, idCliente);
+
+            var ignored = DataBase.GetInstance().Query(sql);
+        }
 
     }
 }

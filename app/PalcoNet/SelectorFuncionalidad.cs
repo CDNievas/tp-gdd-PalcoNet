@@ -32,7 +32,7 @@ namespace PalcoNet
                     throw new NotImplementedException("Generar Publicación");
                     break;
                 case 7:
-                    throw new NotImplementedException("Editar Publiación");
+                    new Editar_Publicacion.ListarPublicacion().Show();
                     break;
                 case 8:
                     new Comprar.Comprar().Show();

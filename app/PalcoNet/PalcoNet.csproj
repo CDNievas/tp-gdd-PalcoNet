@@ -104,7 +104,7 @@
     <Compile Include="Abm Empresa Espectaculo\bajaEmpresa.Designer.cs">
       <DependentUpon>bajaEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Empresa Espectaculo\Buscador.cs" />
+    <Compile Include="Abm Empresa Espectaculo\BuscadorEmpresas.cs" />
     <Compile Include="Abm Empresa Espectaculo\Empresa.cs" />
     <Compile Include="Abm Grado\altaGrado.cs">
       <SubType>Form</SubType>
@@ -133,16 +133,19 @@
     <Compile Include="DataBasePackage\Parametro.cs" />
     <Compile Include="DataBasePackage\ParametroOut.cs" />
     <Compile Include="DataBasePackage\ProcedureException.cs" />
+    <Compile Include="Editar Publicacion\FuncionFormPublicacion.cs" />
+    <Compile Include="Editar Publicacion\TipoUbicacion.cs" />
+    <Compile Include="Editar Publicacion\Ubicacion.cs" />
     <Compile Include="GD2C2018DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GD2C2018DataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicacion\altaPublicacion.cs">
+    <Compile Include="Generar Publicacion\AltaPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Publicacion\altaPublicacion.Designer.cs">
-      <DependentUpon>altaPublicacion.cs</DependentUpon>
+    <Compile Include="Generar Publicacion\AltaPublicacion.Designer.cs">
+      <DependentUpon>AltaPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Generar Rendicion Comisiones\rendicionComisiones.cs">
       <SubType>Form</SubType>
@@ -231,23 +234,23 @@
     <EmbeddedResource Include="Abm Rol\ListadoRol.resx">
       <DependentUpon>ListadoRol.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Editar Publicacion\editarPublicacion.cs">
+    <Compile Include="Editar Publicacion\EditarPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editar Publicacion\editarPublicacion.Designer.cs">
-      <DependentUpon>editarPublicacion.cs</DependentUpon>
+    <Compile Include="Editar Publicacion\EditarPublicacion.Designer.cs">
+      <DependentUpon>EditarPublicacion.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Editar Publicacion\editarPublicacion.resx">
-      <DependentUpon>editarPublicacion.cs</DependentUpon>
+    <EmbeddedResource Include="Editar Publicacion\EditarPublicacion.resx">
+      <DependentUpon>EditarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Editar Publicacion\listarPublicacion.cs">
+    <Compile Include="Editar Publicacion\ListarPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editar Publicacion\listarPublicacion.Designer.cs">
-      <DependentUpon>listarPublicacion.cs</DependentUpon>
+    <Compile Include="Editar Publicacion\ListarPublicacion.Designer.cs">
+      <DependentUpon>ListarPublicacion.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Editar Publicacion\listarPublicacion.resx">
-      <DependentUpon>listarPublicacion.cs</DependentUpon>
+    <EmbeddedResource Include="Editar Publicacion\ListarPublicacion.resx">
+      <DependentUpon>ListarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Registro de Usuario\CrearUsuarioForm.cs">
       <SubType>Form</SubType>
@@ -323,8 +326,8 @@
     <EmbeddedResource Include="Abm Rubro\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Generar Publicacion\altaPublicacion.resx">
-      <DependentUpon>altaPublicacion.cs</DependentUpon>
+    <EmbeddedResource Include="Generar Publicacion\AltaPublicacion.resx">
+      <DependentUpon>AltaPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Historial Cliente\historialClienteCompras.resx">
       <DependentUpon>historialClienteCompras.cs</DependentUpon>

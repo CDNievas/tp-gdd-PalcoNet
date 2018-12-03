@@ -94,7 +94,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Grado( -- MIGRADO
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Tarjeta( -- MIGRADO
 	id_tarjeta int IDENTITY(1,1) PRIMARY KEY,
 	nro_tarjeta nvarchar(50) NOT NULL,
-	tipo nvarchar(10) NOT NULL CHECK(tipo IN('DEBITO','CREDITO')),
+	tipo nvarchar(1) NOT NULL CHECK(tipo IN('V','M','A')),
 	ccv nvarchar(5) NOT NULL,
 	fecha_vencimiento date NOT NULL,
 	eliminado bit DEFAULT 0,
@@ -564,7 +564,7 @@ create procedure COMPUMUNDOHIPERMEGARED.crear_usuario_cliente
 @apellido nvarchar(255), @mail nvarchar(255), @telefono numeric(15), @ciudad nvarchar(25),
 @localidad nvarchar(25), @dom_calle nvarchar(255), @num_calle numeric(18),
 @depto nvarchar(255), @piso numeric(18), @cod_postal nvarchar(255), @fecha_nacimiento date,
-@fecha_creacion datetime, @rol_id int, @username nvarchar(50), @pass nvarchar(64))
+@fecha_creacion datetime, @rol_id int, @username nvarchar(50), @pass nvarchar(64), @cliente_id int output)
 as
 begin
 	begin tran
@@ -577,6 +577,8 @@ begin
 	(@cuil, @tipo_doc, @nro_documento, @nombre, @apellido, @mail, @telefono, @ciudad, @localidad,
 	@dom_calle, @num_calle, @depto, @piso, @cod_postal, @fecha_nacimiento, @fecha_creacion, @id_nuevo_usuario)
 	commit tran
+	set @cliente_id = @@IDENTITY
+	return
 end
 go
 

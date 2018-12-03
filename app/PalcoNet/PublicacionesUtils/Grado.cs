@@ -6,24 +6,41 @@ using System.Text;
 
 namespace PalcoNet.PublicacionesUtils
 {
-    class Grado
+    public class Grado
     {
-        private int idGrado;
-        private string descripcion1;
-        private string comision1;
-
-        public Grado(int idGrado, string descripcion1, string comision1)
+        public Grado(int idGrado, string descripcion1, Double comision1)
         {
-            this.idGrado = idGrado;
-            this.descripcion1 = descripcion1;
-            this.comision1 = comision1;
+            this.id = idGrado;
+            this.descripcion = descripcion1;
+            this.comision = comision1;
         }
 
         public Grado() { }
 
+        public override bool Equals(object obj)
+        {
+            if(obj is Grado)
+                return ((Grado)obj).id.Equals(this.id);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return id.GetHashCode();
+        }
+
         public int id {get; set;}
         public String descripcion { get; set; }
         public Double comision { get; set; }
+
+        public String Show
+        {
+            get
+            {
+                return String.Format("{0} Comisión: {1}", descripcion, comision);
+            }
+        }
+
 
         public static Grado FromDataRow(DataRow _dr)
         {

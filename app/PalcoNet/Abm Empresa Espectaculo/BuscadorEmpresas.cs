@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.Abm_Empresa_Espectaculo
 {
-    class Buscador
+    public class BuscadorEmpresas
     {
         public List<Empresa> filtrarEmpresas(String razonSocial, String cuit, String email, Pagina pag)
         {
@@ -52,6 +52,20 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
                 pag.FirstResultIndex(), pag.pageSize);
 
             return sql;
+        }
+
+        public Empresa FindEmpresaById(int id)
+        {
+            var sql = String.Format("select * from COMPUMUNDOHIPERMEGARED.Empresa e where e.id_empresa = {0}", id);
+            var dt = DataBase.GetInstance().Query(sql);
+            return Empresa.traerDe(dt.Rows[0]);
+        }
+
+        public Empresa FindEmpresaByUsuarioId(int usuarioId)
+        {
+            var sql = String.Format("select * from COMPUMUNDOHIPERMEGARED.Empresa e where e.usuario_id = {0}", usuarioId);
+            var dt = DataBase.GetInstance().Query(sql);
+            return Empresa.traerDe(dt.Rows[0]);
         }
     }
 }

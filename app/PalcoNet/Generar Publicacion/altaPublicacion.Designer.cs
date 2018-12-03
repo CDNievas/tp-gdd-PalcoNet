@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Generar_Publicacion
 {
-    partial class altaPublicacion
+    partial class AltaPublicacion
     {
         /// <summary>
         /// Required designer variable.
