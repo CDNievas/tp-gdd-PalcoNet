@@ -35,7 +35,7 @@ namespace PalcoNet
                     throw new NotImplementedException("Editar Publiación");
                     break;
                 case 8:
-                    throw new NotImplementedException("Comprar");
+                    new Comprar.Comprar().Show();
                     break;
                 case 9:
                     throw new NotImplementedException("Historial cliente");

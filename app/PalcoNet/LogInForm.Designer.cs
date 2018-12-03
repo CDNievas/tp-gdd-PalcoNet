@@ -40,46 +40,44 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(74, 26);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(99, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.Size = new System.Drawing.Size(70, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "USUARIO";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 118);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(80, 145);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 13);
+            this.label2.Size = new System.Drawing.Size(103, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "CONTRASEÑA";
             // 
             // username
             // 
-            this.username.Location = new System.Drawing.Point(44, 70);
-            this.username.Margin = new System.Windows.Forms.Padding(2);
+            this.username.Location = new System.Drawing.Point(59, 86);
+            this.username.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.username.Name = "username";
-            this.username.Size = new System.Drawing.Size(111, 20);
+            this.username.Size = new System.Drawing.Size(147, 22);
             this.username.TabIndex = 2;
             // 
             // password
             // 
-            this.password.Location = new System.Drawing.Point(44, 154);
-            this.password.Margin = new System.Windows.Forms.Padding(2);
+            this.password.Location = new System.Drawing.Point(59, 190);
+            this.password.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.password.Name = "password";
             this.password.PasswordChar = '●';
-            this.password.Size = new System.Drawing.Size(111, 20);
+            this.password.Size = new System.Drawing.Size(147, 22);
             this.password.TabIndex = 3;
             // 
             // btnIngresarLogIn
             // 
-            this.btnIngresarLogIn.Location = new System.Drawing.Point(116, 197);
-            this.btnIngresarLogIn.Margin = new System.Windows.Forms.Padding(2);
+            this.btnIngresarLogIn.Location = new System.Drawing.Point(155, 242);
+            this.btnIngresarLogIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnIngresarLogIn.Name = "btnIngresarLogIn";
-            this.btnIngresarLogIn.Size = new System.Drawing.Size(78, 19);
+            this.btnIngresarLogIn.Size = new System.Drawing.Size(104, 23);
             this.btnIngresarLogIn.TabIndex = 4;
             this.btnIngresarLogIn.Text = "INGRESAR";
             this.btnIngresarLogIn.UseVisualStyleBackColor = true;
@@ -87,10 +85,10 @@
             // 
             // btnLimpiarLogIn
             // 
-            this.btnLimpiarLogIn.Location = new System.Drawing.Point(16, 197);
-            this.btnLimpiarLogIn.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLimpiarLogIn.Location = new System.Drawing.Point(21, 242);
+            this.btnLimpiarLogIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLimpiarLogIn.Name = "btnLimpiarLogIn";
-            this.btnLimpiarLogIn.Size = new System.Drawing.Size(78, 19);
+            this.btnLimpiarLogIn.Size = new System.Drawing.Size(104, 23);
             this.btnLimpiarLogIn.TabIndex = 5;
             this.btnLimpiarLogIn.Text = "LIMPIAR";
             this.btnLimpiarLogIn.UseVisualStyleBackColor = true;
@@ -98,10 +96,10 @@
             // 
             // crearUsuario
             // 
-            this.crearUsuario.Location = new System.Drawing.Point(175, 20);
-            this.crearUsuario.Margin = new System.Windows.Forms.Padding(2);
+            this.crearUsuario.Location = new System.Drawing.Point(233, 25);
+            this.crearUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.crearUsuario.Name = "crearUsuario";
-            this.crearUsuario.Size = new System.Drawing.Size(78, 25);
+            this.crearUsuario.Size = new System.Drawing.Size(104, 31);
             this.crearUsuario.TabIndex = 6;
             this.crearUsuario.Text = "Crear Usuario";
             this.crearUsuario.UseVisualStyleBackColor = true;
@@ -109,9 +107,10 @@
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(262, 241);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(349, 297);
             this.Controls.Add(this.crearUsuario);
             this.Controls.Add(this.btnLimpiarLogIn);
             this.Controls.Add(this.btnIngresarLogIn);
@@ -120,7 +119,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "LoginForm";
             this.Text = "Inicio de sesión";
             this.Load += new System.EventHandler(this.logIn_Load);

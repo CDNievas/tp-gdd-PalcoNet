@@ -124,6 +124,7 @@
     <Compile Include="Abm Rubro\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comprar\buscadorCompras.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="DataBasePackage\DataBase.cs" />
     <Compile Include="DataBasePackage\DataRowUtils.cs" />

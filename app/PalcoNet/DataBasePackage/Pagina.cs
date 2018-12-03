@@ -31,5 +31,14 @@ namespace PalcoNet.DataBasePackage
             var r = pageNumber - 1;
             this.pageNumber = r <= 0 ? 1 : r;
         }
+
+       public void Last()
+       {
+           this.pageNumber= this.pageSize;
+        }
+       public void First()
+       {
+           this.pageNumber = 1;
+       }
     }
 }
