@@ -16,8 +16,8 @@ namespace PalcoNet.Editar_Publicacion
     {
         private Publicacion publicacion;
         private FuncionFormPublicacion funcion;
-        private List<SectorNumerado> sectoresNumerados;
-        private List<SectorSinNumerar> sectoresSinNumerar;
+        public List<SectorNumerado> sectoresNumerados { get; set; }
+        public List<SectorSinNumerar> sectoresSinNumerar { get; set; }
 
         public EditarPublicacion(FuncionFormPublicacion funcion)
         {
@@ -58,7 +58,7 @@ namespace PalcoNet.Editar_Publicacion
         {
             fechaPublicacion.Text = publicacion.fechaPublicacion != null ? publicacion.fechaPublicacion.ToString() : "-";
             fechaVencimiento.Text = publicacion.fechaVencimiento != null ? publicacion.fechaVencimiento.ToString() : "-";
-            fechaEspectaculo.Value = (DateTime)publicacion.fechaPublicacion;
+            fechaEspectaculo.Value = publicacion.fechaPublicacion.GetValueOrDefault(Contexto.FechaActual);
             
             txtCiudad.Text = publicacion.ciudad;
             txtLocalidad.Text = publicacion.localidad;
@@ -109,13 +109,36 @@ namespace PalcoNet.Editar_Publicacion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            publicacion.estado = new Borrador();
-            Persistir();
+            try
+            {
+                publicacion = publicacion == null ? new Publicacion() : publicacion;
+                publicacion.estado = new Borrador();
+                LlenarPublicacion();
+                Persistir();
+                this.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo guardar");
+            }
+        }
+
+        private void LlenarPublicacion()
+        {
+            publicacion.fechaEspectaculo = fechaEspectaculo.Value;
+            publicacion.grado = comboGrado.SelectedItem as Grado;
+            publicacion.rubro = comboRubro.SelectedItem as Rubro;
+            publicacion.ciudad = txtCiudad.Text;
+            publicacion.localidad = txtLocalidad.Text;
+            publicacion.calle = txtCalle.Text;
+            publicacion.nroCalle = txtNroCalle.Text;
+            publicacion.codigoPostal = txtCodPostal.Text;
+            publicacion.descripcion = txtDescripción.Text;
         }
 
         private void Persistir()
         {
-            funcion.Guardar(this, publicacion);
+            funcion.GuardarBorrador(this, publicacion);
         }
 
         private void btnPublicar_Click(object sender, EventArgs e)
@@ -179,6 +202,16 @@ namespace PalcoNet.Editar_Publicacion
             {
                 MessageBox.Show("No se seleccionó un sector sin numerar");
             }
+        }
+
+        public void GuardarSectores()
+        {
+            this.SectoresPublicacion().ForEach(s => s.PersistiteParaUn(this.publicacion.id));
+        }
+
+        public List<Sector> SectoresPublicacion()
+        {
+            return this.sectoresNumerados.Concat<Sector>(this.sectoresSinNumerar).ToList();
         }
     }
 }

@@ -20,6 +20,7 @@ DROP TABLE COMPUMUNDOHIPERMEGARED.CanjeUsuario
 DROP TABLE COMPUMUNDOHIPERMEGARED.Factura
 DROP TABLE COMPUMUNDOHIPERMEGARED.Item_Factura
 DROP TABLE COMPUMUNDOHIPERMEGARED.Rubro
+DROP TABLE COMPUMUNDOHIPERMEGARED.Sector
 
 drop table COMPUMUNDOHIPERMEGARED.#UbicacionTemp
 drop table COMPUMUNDOHIPERMEGARED.#CompraTemp
@@ -31,6 +32,7 @@ drop procedure COMPUMUNDOHIPERMEGARED.intentar_logear
 drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_cliente
 drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_empresa
 drop procedure COMPUMUNDOHIPERMEGARED.eliminar_rol
+drop procedure COMPUMUNDOHIPERMEGARED.crear_borrador
 
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario

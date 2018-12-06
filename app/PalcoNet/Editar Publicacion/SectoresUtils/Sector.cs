@@ -49,7 +49,7 @@ namespace PalcoNet.Editar_Publicacion
             }
         }
 
-        public abstract void PersistiteParaUn(int idBorrador);
+        public abstract void PersistiteParaUn(long idBorrador);
     }
 
     public class SectorNumerado : Sector
@@ -73,7 +73,7 @@ namespace PalcoNet.Editar_Publicacion
             this.asientoHasta = asientoHasta;
         }
 
-        override public void PersistiteParaUn(int idBorrador)
+        override public void PersistiteParaUn(long idBorrador)
         {
             var sql = String.Format(
             @"insert into COMPUMUNDOHIPERMEGARED.Sector(id_borrador, numerado, tipo_ubicacion_id,
@@ -96,7 +96,7 @@ namespace PalcoNet.Editar_Publicacion
             this.cantidad = cantidad;
         }
 
-        override public void PersistiteParaUn(int idBorrador)
+        override public void PersistiteParaUn(long idBorrador)
         {
             var sql = String.Format(
                 @"insert into COMPUMUNDOHIPERMEGARED.Sector(id_borrador, numerado, tipo_ubicacion_id, cantidad, precio)

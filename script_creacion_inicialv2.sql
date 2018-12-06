@@ -267,19 +267,6 @@ exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'EMPRESA', @funcionalidades_empresa, n
 PRINT 'Roles principales creados'
 go
 
-
-INSERT INTO COMPUMUNDOHIPERMEGARED.Rol_Usuario(usuario_id, rol_id)
-	SELECT u.id_usuario, 1
-	FROM COMPUMUNDOHIPERMEGARED.Usuario u
-	WHERE u.username IN (SELECT m.nro_documento FROM COMPUMUNDOHIPERMEGARED.Cliente m)
-
-INSERT INTO COMPUMUNDOHIPERMEGARED.Rol_Usuario(usuario_id, rol_id)
-	SELECT u.id_usuario, 2
-	FROM COMPUMUNDOHIPERMEGARED.Usuario u
-	WHERE u.username IN (SELECT m.cuit FROM COMPUMUNDOHIPERMEGARED.Empresa m)
-PRINT 'Migre Rol_Usuario'
-GO
-
 PRINT 'Creando usuarios de las empresas'
 	declare @id_rol_empresa smallint = (select id_rol from COMPUMUNDOHIPERMEGARED.Rol where nombre = 'EMPRESA')
 	declare c1 cursor for select e.cuit, e.id_empresa from COMPUMUNDOHIPERMEGARED.Empresa e
@@ -671,6 +658,31 @@ begin
 
 	delete from Rol_Usuario
 	where rol_id = @id_rol
+end
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.crear_borrador(
+	@descripcion nvarchar(255),
+	@fecha_espectaculo datetime,
+	@estado nvarchar(10),
+	@ciudad nvarchar(255),
+	@localidad nvarchar(255),
+	@dom_calle nvarchar(50),
+	@num_calle numeric(18,0),
+	@cod_postal nvarchar(50),
+	@empresa_id int,
+	@rubro_id int,
+	@grado_id int,
+	@borrador_id int output)
+as
+begin
+	insert into COMPUMUNDOHIPERMEGARED.Publicacion
+	(descripcion, fecha_espectaculo, estado, ciudad, localidad, dom_calle,
+	num_calle, cod_postal, empresa_id, rubro_id, grado_id)
+	values(@descripcion, @fecha_espectaculo, @estado, @ciudad, @localidad, @dom_calle,
+	@num_calle, @cod_postal, @empresa_id, @rubro_id, @grado_id)
+	set @borrador_id = @@IDENTITY
+	return
 end
 go
 

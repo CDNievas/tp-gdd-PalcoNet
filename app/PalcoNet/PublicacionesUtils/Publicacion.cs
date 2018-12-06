@@ -1,4 +1,5 @@
-﻿using PalcoNet.Editar_Publicacion;
+﻿using PalcoNet.DataBasePackage;
+using PalcoNet.Editar_Publicacion;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -135,6 +136,76 @@ namespace PalcoNet.PublicacionesUtils
         public bool PuedeModificarse()
         {
             return this.estado.PuedeModificarse();
+        }
+
+        public void UpdateBorrador(long empresaId)
+        {
+            if(!this.PuedeModificarse())
+                throw new Exception("Esta publicación no puede modificarse");
+            this.BorrarSectoresBorrador();
+            DataBase.GetInstance()
+                .TypedQuery(@"update COMPUMUNDOHIPERMEGARED.Publicacion
+                              set descripcion = @descripcion,
+                              fecha_espectaculo = @fecha_espectaculo, estado = @estado,
+                              ciudad = @ciudad, localidad = @localidad, dom_calle = @dom_calle,
+                              num_calle = @num_calle, cod_postal = @cod_postal, empresa_id = @empresa_id,
+                              rubro_id = @rubro_id, grado_id = @grado_id
+                              where id_publicacion = @id_publicacion",
+                              new QueryParameter("descripcion", SqlDbType.NVarChar, this.descripcion),
+                              new QueryParameter("fecha_espectaculo", SqlDbType.DateTime, this.fechaEspectaculo),
+                              new QueryParameter("estado", SqlDbType.NVarChar, this.estado.Codigo()),
+                              new QueryParameter("ciudad", SqlDbType.NVarChar, this.ciudad),
+                              new QueryParameter("localidad", SqlDbType.NVarChar, this.localidad),
+                              new QueryParameter("dom_calle", SqlDbType.NVarChar, this.calle),
+                              new QueryParameter("num_calle", SqlDbType.Decimal, GetNumeroCalle(this.nroCalle)),
+                              new QueryParameter("cod_postal", SqlDbType.NVarChar, this.codigoPostal),
+                              new QueryParameter("empresa_id", SqlDbType.Int, empresaId),
+                              new QueryParameter("rubro_id", SqlDbType.Int, this.rubro != null? rubro.id as int? : null),
+                              new QueryParameter("grado_id", SqlDbType.Int, this.grado.id),
+                              new QueryParameter("id_publicacion", SqlDbType.Int, this.id));
+        }
+
+        public void GuardarBorrador(long empresaId)
+        {
+            if (!this.PuedeModificarse())
+                throw new Exception("Esta publicación no puede modificarse");
+            var returnPar = new ParametroOut("borrador_id", SqlDbType.Int);
+
+            this.estado = new Borrador();
+
+            DataBase.GetInstance()
+                .Procedure("crear_borrador",
+                              new NullableInParameter("descripcion", this.descripcion),
+                              new NullableInParameter("fecha_espectaculo", this.fechaEspectaculo),
+                              new NullableInParameter("estado", this.estado.Codigo()),
+                              new NullableInParameter("ciudad", this.ciudad),
+                              new NullableInParameter("localidad", this.localidad),
+                              new NullableInParameter("dom_calle", this.calle),
+                              new NullableInParameter("num_calle", GetNumeroCalle(this.nroCalle)),
+                              new NullableInParameter("cod_postal", this.codigoPostal),
+                              new NullableInParameter("empresa_id", empresaId),
+                              new NullableInParameter("rubro_id", this.rubro != null ? this.rubro.id as int? : null),
+                              new NullableInParameter("grado_id", this.grado.id),
+                              returnPar);
+            this.id = (int)returnPar.valorRetorno;
+        }
+
+        private int? GetNumeroCalle(String s)
+        {
+            try
+            {
+                return Convert.ToInt32(s);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public void BorrarSectoresBorrador(){
+            DataBase.GetInstance()
+                .Query(@"delete from COMPUMUNDOHIPERMEGARED.Sector
+                              where id_borrador = " + this.id);
         }
 
     }

@@ -29,7 +29,7 @@ namespace PalcoNet
                     throw new NotImplementedException("ABM Grado Publicación");
                     break;
                 case 6:
-                    throw new NotImplementedException("Generar Publicación");
+                    new Editar_Publicacion.EditarPublicacion(new Editar_Publicacion.FuncionCrearPublicacion()).Show();
                     break;
                 case 7:
                     new Editar_Publicacion.ListarPublicacion().Show();

@@ -43,6 +43,26 @@ namespace PalcoNet
             return dt;
         }
 
+        public DataTable TypedQuery(String sql, params QueryParameter[] ps)
+        {
+            Console.WriteLine("::::TYPED QUERY::::");
+            Console.WriteLine(sql);
+            DataTable dt = new DataTable();
+            int rowsReturned;
+            SqlCommand cmd = connection.CreateCommand();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+
+            foreach (QueryParameter p in ps)
+            {
+                p.AgregateA(cmd);
+            }
+            rowsReturned = sda.Fill(dt);
+            Console.WriteLine("{0} Rows returned", rowsReturned);
+            return dt;
+        }
+
         public void Procedure(String procName, params Parametro[] ps){
             Console.WriteLine("::::STORE PROCEDURE::::");
             SqlCommand cmd = GetStoreProcedureCmd(procName);

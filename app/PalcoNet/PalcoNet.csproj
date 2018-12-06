@@ -133,6 +133,7 @@
     <Compile Include="DataBasePackage\Parametro.cs" />
     <Compile Include="DataBasePackage\ParametroOut.cs" />
     <Compile Include="DataBasePackage\ProcedureException.cs" />
+    <Compile Include="DataBasePackage\QueryParameter.cs" />
     <Compile Include="Editar Publicacion\FuncionFormPublicacion.cs" />
     <Compile Include="Editar Publicacion\SectoresUtils\Sector.cs" />
     <Compile Include="Editar Publicacion\SectoresUtils\Sectores.cs" />

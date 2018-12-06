@@ -9,7 +9,8 @@ namespace PalcoNet.Editar_Publicacion
     public interface FuncionFormPublicacion
     {
         void Setup(EditarPublicacion form);
-        void Guardar(EditarPublicacion form, Publicacion publicacion);
+        void GuardarBorrador(EditarPublicacion form, Publicacion publicacion);
+//        void Publicar(EditarPublicacion form, Publicacion publicacion)
     }
 
     public class FuncionModificarPublicacion : FuncionFormPublicacion
@@ -26,9 +27,24 @@ namespace PalcoNet.Editar_Publicacion
             form.LlenateCon(publicacion);
         }
 
-        public void Guardar(EditarPublicacion form, Publicacion publicacion)
+        public void GuardarBorrador(EditarPublicacion form, Publicacion publicacion)
         {
-            throw new NotImplementedException();
+            publicacion.UpdateBorrador(Contexto.GetEmpresaLogeadaId());
+            form.GuardarSectores();
+        }
+    }
+
+    public class FuncionCrearPublicacion : FuncionFormPublicacion
+    {
+        public void Setup(EditarPublicacion form)
+        {
+            form.CargarSectoresVacios();
+        }
+
+        public void GuardarBorrador(EditarPublicacion form, Publicacion publicacion)
+        {
+            publicacion.GuardarBorrador(Contexto.GetEmpresaLogeadaId());
+            form.GuardarSectores();
         }
     }
 }
