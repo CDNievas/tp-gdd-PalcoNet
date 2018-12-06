@@ -134,6 +134,20 @@
     <Compile Include="DataBasePackage\ParametroOut.cs" />
     <Compile Include="DataBasePackage\ProcedureException.cs" />
     <Compile Include="Editar Publicacion\FuncionFormPublicacion.cs" />
+    <Compile Include="Editar Publicacion\SectoresUtils\Sector.cs" />
+    <Compile Include="Editar Publicacion\SectoresUtils\Sectores.cs" />
+    <Compile Include="Editar Publicacion\SectoresUtils\SectorNumeradoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editar Publicacion\SectoresUtils\SectorNumeradoForm.Designer.cs">
+      <DependentUpon>SectorNumeradoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editar Publicacion\SectoresUtils\SectorSinNumerarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editar Publicacion\SectoresUtils\SectorSinNumerarForm.Designer.cs">
+      <DependentUpon>SectorSinNumerarForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editar Publicacion\TipoUbicacion.cs" />
     <Compile Include="Editar Publicacion\Ubicacion.cs" />
     <Compile Include="GD2C2018DataSet.Designer.cs">
@@ -258,6 +272,12 @@
     <Compile Include="Registro de Usuario\CrearUsuarioForm.Designer.cs">
       <DependentUpon>CrearUsuarioForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Editar Publicacion\SectoresUtils\SectorNumeradoForm.resx">
+      <DependentUpon>SectorNumeradoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editar Publicacion\SectoresUtils\SectorSinNumerarForm.resx">
+      <DependentUpon>SectorSinNumerarForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generar Rendicion Comisiones\rendicionComisiones.resx">
       <DependentUpon>rendicionComisiones.cs</DependentUpon>
     </EmbeddedResource>

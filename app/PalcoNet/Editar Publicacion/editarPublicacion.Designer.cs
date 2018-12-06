@@ -56,9 +56,16 @@
             this.fechaPublicacion = new System.Windows.Forms.Label();
             this.fechaVencimiento = new System.Windows.Forms.Label();
             this.fechaEspectaculo = new System.Windows.Forms.DateTimePicker();
-            this.ubicacionesDataGrid = new System.Windows.Forms.DataGridView();
+            this.numeradosDataGrid = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.ubicacionesDataGrid)).BeginInit();
+            this.label5 = new System.Windows.Forms.Label();
+            this.noNumeradasDataGrid = new System.Windows.Forms.DataGridView();
+            this.btnBorrarNumerado = new System.Windows.Forms.Button();
+            this.btnNuevoNumerado = new System.Windows.Forms.Button();
+            this.btnBorrarSinNumerar = new System.Windows.Forms.Button();
+            this.btnNuevoSinNumerar = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.numeradosDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noNumeradasDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // txtDescripción
@@ -191,7 +198,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(878, 580);
+            this.shapeContainer1.Size = new System.Drawing.Size(895, 580);
             this.shapeContainer1.TabIndex = 59;
             this.shapeContainer1.TabStop = false;
             // 
@@ -199,7 +206,7 @@
             // 
             this.rectangleShape1.Location = new System.Drawing.Point(22, 44);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(833, 517);
+            this.rectangleShape1.Size = new System.Drawing.Size(853, 517);
             // 
             // btnLimpiar
             // 
@@ -312,30 +319,99 @@
             this.fechaEspectaculo.Size = new System.Drawing.Size(200, 20);
             this.fechaEspectaculo.TabIndex = 71;
             // 
-            // ubicacionesDataGrid
+            // numeradosDataGrid
             // 
-            this.ubicacionesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ubicacionesDataGrid.Location = new System.Drawing.Point(421, 105);
-            this.ubicacionesDataGrid.Name = "ubicacionesDataGrid";
-            this.ubicacionesDataGrid.Size = new System.Drawing.Size(398, 373);
-            this.ubicacionesDataGrid.TabIndex = 72;
+            this.numeradosDataGrid.AllowUserToAddRows = false;
+            this.numeradosDataGrid.AllowUserToDeleteRows = false;
+            this.numeradosDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.numeradosDataGrid.Location = new System.Drawing.Point(408, 91);
+            this.numeradosDataGrid.Name = "numeradosDataGrid";
+            this.numeradosDataGrid.ReadOnly = true;
+            this.numeradosDataGrid.Size = new System.Drawing.Size(374, 150);
+            this.numeradosDataGrid.TabIndex = 72;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(431, 74);
+            this.label4.Location = new System.Drawing.Point(405, 75);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.Size = new System.Drawing.Size(104, 13);
             this.label4.TabIndex = 73;
-            this.label4.Text = "Ubicaciones:";
+            this.label4.Text = "Sectores numerados";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(405, 266);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(106, 13);
+            this.label5.TabIndex = 74;
+            this.label5.Text = "Sectores sin numerar";
+            // 
+            // noNumeradasDataGrid
+            // 
+            this.noNumeradasDataGrid.AllowUserToAddRows = false;
+            this.noNumeradasDataGrid.AllowUserToDeleteRows = false;
+            this.noNumeradasDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.noNumeradasDataGrid.Location = new System.Drawing.Point(408, 282);
+            this.noNumeradasDataGrid.Name = "noNumeradasDataGrid";
+            this.noNumeradasDataGrid.ReadOnly = true;
+            this.noNumeradasDataGrid.Size = new System.Drawing.Size(374, 200);
+            this.noNumeradasDataGrid.TabIndex = 75;
+            // 
+            // btnBorrarNumerado
+            // 
+            this.btnBorrarNumerado.Location = new System.Drawing.Point(788, 105);
+            this.btnBorrarNumerado.Name = "btnBorrarNumerado";
+            this.btnBorrarNumerado.Size = new System.Drawing.Size(75, 23);
+            this.btnBorrarNumerado.TabIndex = 76;
+            this.btnBorrarNumerado.Text = "Borrar";
+            this.btnBorrarNumerado.UseVisualStyleBackColor = true;
+            this.btnBorrarNumerado.Click += new System.EventHandler(this.btnBorrarNumerado_Click);
+            // 
+            // btnNuevoNumerado
+            // 
+            this.btnNuevoNumerado.Location = new System.Drawing.Point(788, 146);
+            this.btnNuevoNumerado.Name = "btnNuevoNumerado";
+            this.btnNuevoNumerado.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevoNumerado.TabIndex = 77;
+            this.btnNuevoNumerado.Text = "Nuevo";
+            this.btnNuevoNumerado.UseVisualStyleBackColor = true;
+            this.btnNuevoNumerado.Click += new System.EventHandler(this.btnNuevoNumerado_Click);
+            // 
+            // btnBorrarSinNumerar
+            // 
+            this.btnBorrarSinNumerar.Location = new System.Drawing.Point(788, 312);
+            this.btnBorrarSinNumerar.Name = "btnBorrarSinNumerar";
+            this.btnBorrarSinNumerar.Size = new System.Drawing.Size(75, 23);
+            this.btnBorrarSinNumerar.TabIndex = 78;
+            this.btnBorrarSinNumerar.Text = "Borrar";
+            this.btnBorrarSinNumerar.UseVisualStyleBackColor = true;
+            this.btnBorrarSinNumerar.Click += new System.EventHandler(this.btnBorrarSinNumerar_Click);
+            // 
+            // btnNuevoSinNumerar
+            // 
+            this.btnNuevoSinNumerar.Location = new System.Drawing.Point(788, 356);
+            this.btnNuevoSinNumerar.Name = "btnNuevoSinNumerar";
+            this.btnNuevoSinNumerar.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevoSinNumerar.TabIndex = 79;
+            this.btnNuevoSinNumerar.Text = "Nuevo";
+            this.btnNuevoSinNumerar.UseVisualStyleBackColor = true;
+            this.btnNuevoSinNumerar.Click += new System.EventHandler(this.btnNuevoSinNumerar_Click);
             // 
             // EditarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(878, 580);
+            this.ClientSize = new System.Drawing.Size(895, 580);
+            this.Controls.Add(this.btnNuevoSinNumerar);
+            this.Controls.Add(this.btnBorrarSinNumerar);
+            this.Controls.Add(this.btnNuevoNumerado);
+            this.Controls.Add(this.btnBorrarNumerado);
+            this.Controls.Add(this.noNumeradasDataGrid);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.ubicacionesDataGrid);
+            this.Controls.Add(this.numeradosDataGrid);
             this.Controls.Add(this.fechaEspectaculo);
             this.Controls.Add(this.fechaVencimiento);
             this.Controls.Add(this.fechaPublicacion);
@@ -367,7 +443,8 @@
             this.Name = "EditarPublicacion";
             this.Text = "editarPublicacion";
             this.Load += new System.EventHandler(this.EditarPublicacion_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.ubicacionesDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeradosDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noNumeradasDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -403,7 +480,13 @@
         private System.Windows.Forms.Label fechaPublicacion;
         private System.Windows.Forms.Label fechaVencimiento;
         private System.Windows.Forms.DateTimePicker fechaEspectaculo;
-        private System.Windows.Forms.DataGridView ubicacionesDataGrid;
+        private System.Windows.Forms.DataGridView numeradosDataGrid;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridView noNumeradasDataGrid;
+        private System.Windows.Forms.Button btnBorrarNumerado;
+        private System.Windows.Forms.Button btnNuevoNumerado;
+        private System.Windows.Forms.Button btnBorrarSinNumerar;
+        private System.Windows.Forms.Button btnNuevoSinNumerar;
     }
 }

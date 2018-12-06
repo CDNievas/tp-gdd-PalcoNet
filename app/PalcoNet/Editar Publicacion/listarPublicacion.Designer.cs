@@ -124,7 +124,7 @@
             // 
             // btnPublicacionBuscar
             // 
-            this.btnPublicacionBuscar.Location = new System.Drawing.Point(381, 66);
+            this.btnPublicacionBuscar.Location = new System.Drawing.Point(379, 66);
             this.btnPublicacionBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnPublicacionBuscar.Name = "btnPublicacionBuscar";
             this.btnPublicacionBuscar.Size = new System.Drawing.Size(66, 24);
@@ -139,7 +139,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(896, 602);
+            this.shapeContainer1.Size = new System.Drawing.Size(896, 555);
             this.shapeContainer1.TabIndex = 50;
             this.shapeContainer1.TabStop = false;
             // 
@@ -166,12 +166,12 @@
             this.publicacionesDataGrid.Location = new System.Drawing.Point(23, 122);
             this.publicacionesDataGrid.Name = "publicacionesDataGrid";
             this.publicacionesDataGrid.ReadOnly = true;
-            this.publicacionesDataGrid.Size = new System.Drawing.Size(791, 428);
+            this.publicacionesDataGrid.Size = new System.Drawing.Size(791, 375);
             this.publicacionesDataGrid.TabIndex = 51;
             // 
             // btnPagAnt
             // 
-            this.btnPagAnt.Location = new System.Drawing.Point(115, 567);
+            this.btnPagAnt.Location = new System.Drawing.Point(115, 521);
             this.btnPagAnt.Name = "btnPagAnt";
             this.btnPagAnt.Size = new System.Drawing.Size(108, 23);
             this.btnPagAnt.TabIndex = 52;
@@ -181,7 +181,7 @@
             // 
             // btnPagSig
             // 
-            this.btnPagSig.Location = new System.Drawing.Point(534, 567);
+            this.btnPagSig.Location = new System.Drawing.Point(536, 520);
             this.btnPagSig.Name = "btnPagSig";
             this.btnPagSig.Size = new System.Drawing.Size(105, 23);
             this.btnPagSig.TabIndex = 53;
@@ -204,7 +204,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 602);
+            this.ClientSize = new System.Drawing.Size(896, 555);
             this.Controls.Add(this.checkBorrador);
             this.Controls.Add(this.btnPagSig);
             this.Controls.Add(this.btnPagAnt);

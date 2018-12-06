@@ -19,7 +19,7 @@ namespace PalcoNet.Editar_Publicacion
         public ListarPublicacion()
         {
             InitializeComponent();
-            PaginaActual = new Pagina(1, 25);
+            PaginaActual = new Pagina(1, 15);
             publicacionesDataGrid.MultiSelect = false;
         }
 

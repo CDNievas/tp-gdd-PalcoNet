@@ -186,6 +186,17 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Puntos(
 	canje_id int CONSTRAINT FK_PUNTOS_CANJEUSUARIO references COMPUMUNDOHIPERMEGARED.CanjeUsuario(id_canje_usuario)
 )
 
+CREATE TABLE COMPUMUNDOHIPERMEGARED.Sector(
+	id_borrador int CONSTRAINT FK_SECTOR_PUBLICACION references COMPUMUNDOHIPERMEGARED.Publicacion,
+	numerado bit,
+	tipo_ubicacion_id int CONSTRAINT FK_SECTOR_TIPOUBICACION references COMPUMUNDOHIPERMEGARED.TipoUbicacion,
+	fila_desde char(1),
+	fila_hasta char(1),
+	asiento_desde int,
+	asiento_hasta int,
+	cantidad int,
+	precio numeric(18,0)
+)
 
 /* MIGRACION DATOS */
 PRINT '----- Empezando a migrar datos -----'
