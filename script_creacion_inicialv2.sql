@@ -686,6 +686,54 @@ begin
 end
 go
 
+create procedure COMPUMUNDOHIPERMEGARED.generar_ubicaciones_de(@id_publicacion int)
+as
+begin
+	declare c1 cursor for select numerado, tipo_ubicacion_id, fila_desde, fila_hasta, asiento_desde,
+	asiento_hasta, cantidad, precio
+	from COMPUMUNDOHIPERMEGARED.Sector s where s.id_borrador = @id_publicacion
+	declare @numerado bit, @tipo_ubicacion_id int, @fila_desde char(1), @fila_hasta char(1), @asiento_desde int,
+	@asiento_hasta int, @cantidad int, @precio numeric(18,0)
+
+	open c1
+	fetch next from c1 into @numerado, @tipo_ubicacion_id, @fila_desde, @fila_hasta, @asiento_desde,
+	@asiento_hasta, @cantidad, @precio
+
+	while @@FETCH_STATUS = 0
+	begin
+		if @numerado = 0
+		begin
+			declare @contador int = 0
+			while @contador < @cantidad
+			begin
+				insert into Ubicacion(id_ubicacion, precio, sin_numerar, tipo_ubicacion_id, publicacion_id)
+				values(next value for COMPUMUNDOHIPERMEGARED.UbicacionSequence, @precio, 1, @tipo_ubicacion_id, @id_publicacion)
+				set @contador = @contador + 1
+			end
+		end
+		else
+		begin
+			declare @letra_actual char(1) = @fila_desde
+			while ASCII(@letra_actual) <= ASCII(@fila_hasta)
+			begin
+				declare @numero_actual int = @asiento_desde
+				while @numero_actual <= @asiento_hasta
+				begin
+					insert into Ubicacion(id_ubicacion, fila, asiento, precio, sin_numerar, tipo_ubicacion_id, publicacion_id)
+					values(next value for COMPUMUNDOHIPERMEGARED.UbicacionSequence, @letra_actual, @numero_actual, @precio, 0, @tipo_ubicacion_id, @id_publicacion)
+					set @numero_actual = @numero_actual + 1
+				end
+				set @letra_actual = CHAR(ASCII(@letra_actual)+1) 
+			end
+		end
+		fetch next from c1 into @numerado, @tipo_ubicacion_id, @fila_desde, @fila_hasta, @asiento_desde,
+		@asiento_hasta, @cantidad, @precio
+	end
+	close c1
+	deallocate c1
+end
+go
+
 PRINT 'Todes les procedures y les funciones creades'
 
 PRINT 'Creando al admin default'

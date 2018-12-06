@@ -208,6 +208,18 @@ namespace PalcoNet.PublicacionesUtils
                               where id_borrador = " + this.id);
         }
 
+
+        public void Publicarse(List<Sector> sectores)
+        {
+            DataBase.GetInstance()
+                .TypedQuery(@"update COMPUMUNDOHIPERMEGARED.Publicacion
+                              set fecha_creacion = @fecha, estado = 'PUBLICADA'"
+                , new QueryParameter("fecha", SqlDbType.DateTime, Contexto.FechaActual));
+            this.estado = new Publicado();
+            DataBase.GetInstance()
+                .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", this.id));
+
+        }
     }
    
 }

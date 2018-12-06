@@ -104,6 +104,5 @@ namespace PalcoNet.Editar_Publicacion
                 , idBorrador, tipoUbicacion.id, cantidad, precio);
             DataBase.GetInstance().Query(sql);
         }
-        
     }
 }

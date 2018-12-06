@@ -114,7 +114,7 @@ namespace PalcoNet.Editar_Publicacion
                 publicacion = publicacion == null ? new Publicacion() : publicacion;
                 publicacion.estado = new Borrador();
                 LlenarPublicacion();
-                Persistir();
+                GuardarBorrador();
                 this.Close();
             }
             catch (Exception)
@@ -136,15 +136,25 @@ namespace PalcoNet.Editar_Publicacion
             publicacion.descripcion = txtDescripción.Text;
         }
 
-        private void Persistir()
+        private void GuardarBorrador()
         {
             funcion.GuardarBorrador(this, publicacion);
         }
 
         private void btnPublicar_Click(object sender, EventArgs e)
         {
-            publicacion.estado = new Publicado();
-            Persistir();
+            try
+            {
+                GuardarBorrador();
+                publicacion.Publicarse(this.SectoresPublicacion());
+                Close();
+                MessageBox.Show("Se ha publicado el evento");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void EditarPublicacion_Load(object sender, EventArgs e)
