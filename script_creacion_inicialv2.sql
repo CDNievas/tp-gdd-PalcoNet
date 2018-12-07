@@ -101,21 +101,26 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Tarjeta( -- MIGRADO
 	cliente_id int CONSTRAINT FK_TARJETA_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente(id_cliente)
 )
 
-CREATE TABLE COMPUMUNDOHIPERMEGARED.Publicacion( -- MIGRADO
-	id_publicacion int IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE COMPUMUNDOHIPERMEGARED.Espectaculo( -- MIGRADO
+	id_espectaculo int IDENTITY(1,1) PRIMARY KEY,
 	codigo numeric(18,0),
 	descripcion nvarchar(255),
-	fecha_creacion datetime,
-	fecha_vencimiento datetime,
-	fecha_espectaculo datetime,
-	estado nvarchar(10) NOT NULL CHECK(estado IN('BORRADOR','PUBLICADA','FINALIZADA')),
 	ciudad nvarchar(255),
 	localidad nvarchar(255),
 	dom_calle nvarchar(50),
 	num_calle numeric(18,0),
 	cod_postal nvarchar(50),
-	empresa_id int CONSTRAINT FK_PUBLICACION_EMPRESA references COMPUMUNDOHIPERMEGARED.Empresa(id_empresa),
-	rubro_id int CONSTRAINT FK_PUBLICACION_RUBRO references COMPUMUNDOHIPERMEGARED.Rubro(id_rubro),
+	empresa_id int CONSTRAINT FK_ESPECTACULO_EMPRESA references COMPUMUNDOHIPERMEGARED.Empresa(id_empresa),
+	rubro_id int CONSTRAINT FK_ESPECTACULO_RUBRO references COMPUMUNDOHIPERMEGARED.Rubro(id_rubro),
+)
+
+CREATE TABLE COMPUMUNDOHIPERMEGARED.Publicacion(
+	id_publicacion bigint IDENTITY(1,1) PRIMARY KEY,
+	espectaculo_id int CONSTRAINT FK_PUBLICACION_ESPECTACULO references COMPUMUNDOHIPERMEGARED.Espectaculo,
+	fecha_creacion datetime,
+	fecha_vencimiento datetime,
+	fecha_espectaculo datetime,
+	estado char(1) not null check(estado in('B', 'P', 'F')),
 	grado_id int CONSTRAINT FK_PUBLICACION_GRADO references COMPUMUNDOHIPERMEGARED.Grado(id_grado)
 )
 
@@ -142,7 +147,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Ubicacion(
 	ocupado bit default 0,
 	compra_id int CONSTRAINT FK_UBICACION_COMPRA references COMPUMUNDOHIPERMEGARED.Compra(id_compra),
 	tipo_ubicacion_id int CONSTRAINT FK_UBICACION_TIPOUBICACION references COMPUMUNDOHIPERMEGARED.TipoUbicacion(id_tipo_ubicacion),
-	publicacion_id int CONSTRAINT FK_UBICACION_PUBLICACION references COMPUMUNDOHIPERMEGARED.Publicacion(id_publicacion)
+	publicacion_id bigint CONSTRAINT FK_UBICACION_PUBLICACION references COMPUMUNDOHIPERMEGARED.Publicacion(id_publicacion)
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Factura( -- MIGRADO
@@ -187,7 +192,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Puntos(
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Sector(
-	id_borrador int CONSTRAINT FK_SECTOR_PUBLICACION references COMPUMUNDOHIPERMEGARED.Publicacion,
+	id_borrador int CONSTRAINT FK_SECTOR_PUBLICACION references COMPUMUNDOHIPERMEGARED.Espectaculo,
 	numerado bit,
 	tipo_ubicacion_id int CONSTRAINT FK_SECTOR_TIPOUBICACION references COMPUMUNDOHIPERMEGARED.TipoUbicacion,
 	fila_desde char(1),
@@ -329,14 +334,51 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Grado(descripcion, comision, prioridad) VALUE
 PRINT 'Migre Grados'
 GO
 
-DECLARE @fecha_creacion datetime = GETUTCDATE()
-INSERT INTO COMPUMUNDOHIPERMEGARED.Publicacion(codigo, descripcion, fecha_creacion, fecha_vencimiento, fecha_espectaculo, estado, empresa_id, grado_id)
-	SELECT DISTINCT m.Espectaculo_Cod, m.Espectaculo_Descripcion, @fecha_creacion, m.Espectaculo_Fecha_Venc, m.Espectaculo_Fecha, UPPER(m.Espectaculo_Estado),
-		(SELECT e.id_empresa FROM COMPUMUNDOHIPERMEGARED.Empresa e WHERE m.Espec_Empresa_Cuit = e.cuit), 
-		1
-	FROM gd_esquema.Maestra m
+insert into COMPUMUNDOHIPERMEGARED.Rubro(descripcion)
+select distinct Espectaculo_Rubro_Descripcion from gd_esquema.Maestra
+
+PRINT 'Migre Rubro'
+go
+
+insert into COMPUMUNDOHIPERMEGARED.Espectaculo(codigo, descripcion, rubro_id)
+select distinct m.Espectaculo_Cod, m.Espectaculo_Descripcion, r.id_rubro
+from gd_esquema.Maestra m
+left outer join COMPUMUNDOHIPERMEGARED.Rubro r
+on r.descripcion = m.Espectaculo_Rubro_Descripcion
+PRINT 'Migre Espectaculo'
+GO
+
+insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_espectaculo, fecha_vencimiento, estado, grado_id)
+select e.id_espectaculo, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc,
+case when lower(m.Espectaculo_Estado) like 'publicada' then 'P'
+when lower(m.Espectaculo_Estado) like 'borrador' then 'B'
+when lower(m.Espectaculo_Estado) like 'finalizada' then 'F' end,
+1
+from gd_esquema.Maestra m
+inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
+on e.codigo = m.Espectaculo_Cod
+group by e.id_espectaculo, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc, m.Espectaculo_Estado
 PRINT 'Migre Publicacion'
 GO
+
+create view COMPUMUNDOHIPERMEGARED.PublicacionesView as
+SELECT p.id_publicacion as id_publicacion, e.descripcion as descripcion,
+p.fecha_creacion as fecha_publicacion, p.fecha_vencimiento as fecha_vencimiento,
+p.fecha_espectaculo as fecha_espectaculo, p.estado as estado, e.ciudad as ciudad,
+e.localidad as localidad, e.dom_calle as dom_calle, e.num_calle as num_calle, e.cod_postal as cod_postal,
+e.empresa_id as id_empresa, r.id_rubro as rubro_id, r.descripcion as rubro_descripcion,
+g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision, g.prioridad as prioridad
+FROM COMPUMUNDOHIPERMEGARED.Publicacion p
+inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
+on e.id_espectaculo = p.id_publicacion
+left outer join COMPUMUNDOHIPERMEGARED.Rubro r
+on r.id_rubro = e.rubro_id
+left outer join COMPUMUNDOHIPERMEGARED.Grado g
+on g.id_grado = p.grado_id
+WITH CHECK OPTION
+go
+PRINT 'View de publicaciones creadas'
+
 
 INSERT INTO COMPUMUNDOHIPERMEGARED.TipoUbicacion(descripcion,codigo)
 	SELECT DISTINCT m.Ubicacion_Tipo_Descripcion, m.Ubicacion_Tipo_Codigo
@@ -350,8 +392,9 @@ create SEQUENCE COMPUMUNDOHIPERMEGARED.UbicacionSequence
     INCREMENT BY 1  
     NO CYCLE
 ;
+go
 
-create table COMPUMUNDOHIPERMEGARED.#UbicacionTemp(
+create table COMPUMUNDOHIPERMEGARED.##UbicacionTemp(
 id_ubicacion bigint,
 fila varchar(3),
 asiento numeric(18,0),
@@ -359,15 +402,23 @@ precio numeric(18,0),
 sin_numerar bit,
 ubicacion_tipo_codigo int,
 espectaculo_cod int,
-dni_comprador varchar(13))
+dni_comprador varchar(13),
+publicacion_id bigint)
+PRINT 'Tabla temporal ubicaciones creada'
+go
 
-insert into COMPUMUNDOHIPERMEGARED.#UbicacionTemp(id_ubicacion, fila, asiento, sin_numerar, precio, ubicacion_tipo_codigo, espectaculo_cod, dni_comprador)
+insert into COMPUMUNDOHIPERMEGARED.##UbicacionTemp(id_ubicacion, fila, asiento, sin_numerar, precio, ubicacion_tipo_codigo, espectaculo_cod, dni_comprador, publicacion_id)
 select next value for COMPUMUNDOHIPERMEGARED.UbicacionSequence, m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar,
 m.Ubicacion_Precio, m.Ubicacion_Tipo_Codigo, m.Espectaculo_Cod,
-max(Cli_Dni)
+max(Cli_Dni), p.id_publicacion
 from gd_esquema.Maestra m
+inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
+on e.codigo = m.Espectaculo_Cod
+inner join COMPUMUNDOHIPERMEGARED.Publicacion p
+on p.espectaculo_id = e.id_espectaculo
 group by m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar,
-m.Ubicacion_Precio, m.Ubicacion_Tipo_Codigo, m.Espectaculo_Cod
+m.Ubicacion_Precio, m.Ubicacion_Tipo_Codigo, m.Espectaculo_Cod, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc, p.id_publicacion
+go
 
 create SEQUENCE COMPUMUNDOHIPERMEGARED.CompraSequence 
     AS int   
@@ -376,7 +427,9 @@ create SEQUENCE COMPUMUNDOHIPERMEGARED.CompraSequence
     NO CYCLE
 ;
 
-create table COMPUMUNDOHIPERMEGARED.#CompraTemp(
+go
+
+create table COMPUMUNDOHIPERMEGARED.##CompraTemp(
 compra_id int,
 id_ubicacion bigint,
 fecha datetime,
@@ -384,10 +437,12 @@ cantidad numeric(18),
 cliente_id int
 )
 
-insert into COMPUMUNDOHIPERMEGARED.#CompraTemp
+go
+
+insert into COMPUMUNDOHIPERMEGARED.##CompraTemp
 select next value for COMPUMUNDOHIPERMEGARED.CompraSequence, u.id_ubicacion ubicacion_id, m.Compra_Fecha fecha, m.Compra_Cantidad cantidad,
 c.id_cliente id_cliente
-from COMPUMUNDOHIPERMEGARED.#UbicacionTemp u
+from COMPUMUNDOHIPERMEGARED.##UbicacionTemp u
 inner join gd_esquema.Maestra m
 on m.Ubicacion_Fila = u.fila and m.Ubicacion_Asiento = u.asiento and m.Ubicacion_Precio = u.precio
 and m.Ubicacion_Sin_numerar = u.sin_numerar and m.Ubicacion_Tipo_Codigo = u.ubicacion_tipo_codigo
@@ -397,20 +452,23 @@ on c.nro_documento = m.Cli_Dni
 where m.Compra_Cantidad is not null or m.Compra_Fecha is not null
 group by u.id_ubicacion, m.Compra_Fecha, m.Compra_Cantidad, c.id_cliente
 
+go
+
 insert into COMPUMUNDOHIPERMEGARED.Compra(id_compra, fecha, cantidad, cliente_id)
 select c.compra_id, c.fecha, c.cantidad, c.cliente_id
-from COMPUMUNDOHIPERMEGARED.#CompraTemp c
+from COMPUMUNDOHIPERMEGARED.##CompraTemp c
+
+go
 
 insert into COMPUMUNDOHIPERMEGARED.Ubicacion(id_ubicacion, fila, asiento, precio, sin_numerar,
 tipo_ubicacion_id, publicacion_id, compra_id, ocupado)
 select t.id_ubicacion, t.fila, t.asiento, t.precio, t.sin_numerar,
-tu.id_tipo_ubicacion, p.id_publicacion, c.compra_id, case when c.compra_id is null then 0 else 1 end
-from COMPUMUNDOHIPERMEGARED.#UbicacionTemp t
-left join COMPUMUNDOHIPERMEGARED.#CompraTemp c on c.id_ubicacion = t.id_ubicacion
+tu.id_tipo_ubicacion, t.publicacion_id, c.compra_id, case when c.compra_id is null then 0 else 1 end
+from COMPUMUNDOHIPERMEGARED.##UbicacionTemp t
+left join COMPUMUNDOHIPERMEGARED.##CompraTemp c on c.id_ubicacion = t.id_ubicacion
 join COMPUMUNDOHIPERMEGARED.TipoUbicacion tu on tu.codigo = t.ubicacion_tipo_codigo
-join COMPUMUNDOHIPERMEGARED.Publicacion p on p.codigo = t.espectaculo_cod
 
-drop table COMPUMUNDOHIPERMEGARED.#CompraTemp
+drop table COMPUMUNDOHIPERMEGARED.##CompraTemp
 
 PRINT 'Migre Ubicaciones y Compras'
 go
@@ -430,12 +488,12 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Item_Factura(item_factura_monto, item_factura
 	f.id_factura, u.id_ubicacion
 	FROM gd_esquema.Maestra m
 	join COMPUMUNDOHIPERMEGARED.Factura f on f.numero = m.Factura_Nro
-	join COMPUMUNDOHIPERMEGARED.#UbicacionTemp u on u.fila = m.Ubicacion_Fila and u.asiento = m.Ubicacion_Asiento
+	join COMPUMUNDOHIPERMEGARED.##UbicacionTemp u on u.fila = m.Ubicacion_Fila and u.asiento = m.Ubicacion_Asiento
 	and u.precio = m.Ubicacion_Precio and u.sin_numerar = m.Ubicacion_Sin_numerar
 	and u.ubicacion_tipo_codigo = m.Ubicacion_Tipo_Codigo and u.espectaculo_cod = m.Espectaculo_Cod
 	WHERE m.Item_Factura_Cantidad IS NOT NULL
 
-drop table COMPUMUNDOHIPERMEGARED.#UbicacionTemp
+drop table COMPUMUNDOHIPERMEGARED.##UbicacionTemp
 PRINT 'Migre Item_Factura'
 GO
 
@@ -540,21 +598,6 @@ begin
 
 	return
 end
-go
-
-create view COMPUMUNDOHIPERMEGARED.PublicacionesView as
-SELECT p.id_publicacion, p.descripcion, p.fecha_creacion as fecha_publicacion,
-p.fecha_vencimiento, p.fecha_espectaculo,
-p.estado, p.ciudad, p.localidad, p.dom_calle, p.num_calle, p.cod_postal,
-p.empresa_id as id_empresa,
-r.id_rubro as rubro_id, r.descripcion as rubro_descripcion,
-g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision, g.prioridad
-FROM COMPUMUNDOHIPERMEGARED.Publicacion p
-left join COMPUMUNDOHIPERMEGARED.Rubro r
-on r.id_rubro = p.rubro_id
-left join COMPUMUNDOHIPERMEGARED.Grado g
-on g.id_grado = p.grado_id
-WITH CHECK OPTION
 go
 
 create procedure COMPUMUNDOHIPERMEGARED.crear_usuario_cliente
