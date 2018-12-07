@@ -18,7 +18,7 @@ namespace PalcoNet.PublicacionesUtils
         public static List<Publicacion> PublicacionesByEmpresaId(long idEmpresa, Pagina pag, Boolean soloBorradores) {
             String condicionWhereBorrador = "";
             if (soloBorradores)
-                condicionWhereBorrador = "and estado = 'BORRADOR'";
+                condicionWhereBorrador = "and estado = '"+ new Borrador().Codigo() +"'";
 
             String sql = String.Format( @"select * from COMPUMUNDOHIPERMEGARED.PublicacionesView where id_empresa = {0}
                                         {3}

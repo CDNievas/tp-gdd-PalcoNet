@@ -327,10 +327,9 @@ go
 
 
 INSERT INTO COMPUMUNDOHIPERMEGARED.Grado(descripcion, comision, prioridad) VALUES
-	('NINGUNO',0, 1),
-	('BAJA', 2.0, 2),
-	('MEDIA', 5.0, 3),
-	('ALTA', 10.0, 4)
+	('BAJA', 2.0, 1),
+	('MEDIA', 5.0, 2),
+	('ALTA', 10.0, 3)
 PRINT 'Migre Grados'
 GO
 
@@ -340,20 +339,21 @@ select distinct Espectaculo_Rubro_Descripcion from gd_esquema.Maestra
 PRINT 'Migre Rubro'
 go
 
-insert into COMPUMUNDOHIPERMEGARED.Espectaculo(codigo, descripcion, rubro_id)
-select distinct m.Espectaculo_Cod, m.Espectaculo_Descripcion, r.id_rubro
+insert into COMPUMUNDOHIPERMEGARED.Espectaculo(codigo, descripcion, rubro_id, empresa_id)
+select distinct m.Espectaculo_Cod, m.Espectaculo_Descripcion, r.id_rubro, e.id_empresa
 from gd_esquema.Maestra m
 left outer join COMPUMUNDOHIPERMEGARED.Rubro r
 on r.descripcion = m.Espectaculo_Rubro_Descripcion
+inner join COMPUMUNDOHIPERMEGARED.Empresa e
+on m.Espec_Empresa_Cuit = e.cuit
 PRINT 'Migre Espectaculo'
 GO
 
-insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_espectaculo, fecha_vencimiento, estado, grado_id)
+insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_espectaculo, fecha_vencimiento, estado)
 select e.id_espectaculo, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc,
 case when lower(m.Espectaculo_Estado) like 'publicada' then 'P'
 when lower(m.Espectaculo_Estado) like 'borrador' then 'B'
-when lower(m.Espectaculo_Estado) like 'finalizada' then 'F' end,
-1
+when lower(m.Espectaculo_Estado) like 'finalizada' then 'F' end
 from gd_esquema.Maestra m
 inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
 on e.codigo = m.Espectaculo_Cod
@@ -707,7 +707,7 @@ go
 create procedure COMPUMUNDOHIPERMEGARED.crear_borrador(
 	@descripcion nvarchar(255),
 	@fecha_espectaculo datetime,
-	@estado nvarchar(10),
+	@estado nvarchar(10) = null,-- warning esto está ignorado
 	@ciudad nvarchar(255),
 	@localidad nvarchar(255),
 	@dom_calle nvarchar(50),
@@ -719,12 +719,17 @@ create procedure COMPUMUNDOHIPERMEGARED.crear_borrador(
 	@borrador_id int output)
 as
 begin
+	begin tran
+	insert into COMPUMUNDOHIPERMEGARED.Espectaculo
+	(descripcion, ciudad, localidad, num_calle, cod_postal, empresa_id, rubro_id)
+	values(@descripcion, @ciudad, @localidad, @num_calle, @cod_postal, @empresa_id, @rubro_id)
+	declare @id_espectaculo int = @@IDENTITY
+	
 	insert into COMPUMUNDOHIPERMEGARED.Publicacion
-	(descripcion, fecha_espectaculo, estado, ciudad, localidad, dom_calle,
-	num_calle, cod_postal, empresa_id, rubro_id, grado_id)
-	values(@descripcion, @fecha_espectaculo, @estado, @ciudad, @localidad, @dom_calle,
-	@num_calle, @cod_postal, @empresa_id, @rubro_id, @grado_id)
+	(espectaculo_id, fecha_espectaculo, estado, grado_id)
+	values(@id_espectaculo, @fecha_espectaculo, 'B', @grado_id)
 	set @borrador_id = @@IDENTITY
+	commit tran
 	return
 end
 go
@@ -775,6 +780,36 @@ begin
 	close c1
 	deallocate c1
 end
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.update_datos_borrador(
+	@descripcion nvarchar(255),
+	@fecha_espectaculo datetime,
+	@ciudad nvarchar(255),
+	@localidad nvarchar(255),
+	@dom_calle nvarchar(50),
+	@num_calle numeric(18,0),
+	@cod_postal nvarchar(50),
+	@empresa_id int,
+	@rubro_id int,
+	@grado_id int,
+	@id_publicacion bigint
+)
+as
+	update COMPUMUNDOHIPERMEGARED.Publicacion
+	set fecha_espectaculo = @fecha_espectaculo, estado = 'B', grado_id = @grado_id
+	where id_publicacion = @id_publicacion
+
+	declare @id_espectaculo int = (
+	select e.id_espectaculo
+	from COMPUMUNDOHIPERMEGARED.Publicacion p
+	inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
+	on p.id_publicacion = @id_publicacion and p.espectaculo_id = e.id_espectaculo
+	)
+
+	update COMPUMUNDOHIPERMEGARED.Espectaculo
+	set descripcion = @descripcion, ciudad = @ciudad, localidad = @localidad, dom_calle = @dom_calle,
+	num_calle = @num_calle, cod_postal = @cod_postal, empresa_id = @empresa_id, rubro_id = @rubro_id
 go
 
 PRINT 'Todes les procedures y les funciones creades'

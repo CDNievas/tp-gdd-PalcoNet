@@ -30,37 +30,55 @@ namespace PalcoNet
 
         public DataTable Query(String sql)
         {
-            Console.WriteLine("::::QUERY::::");
-            Console.WriteLine(sql);
-            DataTable dt = new DataTable();
-            int rowsReturned;
-            SqlCommand cmd = connection.CreateCommand();
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            cmd.CommandText = sql;
-            cmd.CommandType = CommandType.Text;
-            rowsReturned = sda.Fill(dt);
-            Console.WriteLine("{0} Rows returned", rowsReturned);
-            return dt;
+            try
+            {
+                Console.WriteLine("::::QUERY::::");
+                Console.WriteLine(sql);
+                DataTable dt = new DataTable();
+                int rowsReturned;
+                SqlCommand cmd = connection.CreateCommand();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                cmd.CommandText = sql;
+                cmd.CommandType = CommandType.Text;
+                rowsReturned = sda.Fill(dt);
+                Console.WriteLine("{0} Rows returned", rowsReturned);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                throw new QueryException("Query error", ex);
+            }
         }
 
         public DataTable TypedQuery(String sql, params QueryParameter[] ps)
         {
-            Console.WriteLine("::::TYPED QUERY::::");
-            Console.WriteLine(sql);
-            DataTable dt = new DataTable();
-            int rowsReturned;
-            SqlCommand cmd = connection.CreateCommand();
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            cmd.CommandText = sql;
-            cmd.CommandType = CommandType.Text;
-
-            foreach (QueryParameter p in ps)
+            try
             {
-                p.AgregateA(cmd);
+                Console.WriteLine("::::TYPED QUERY::::");
+                Console.WriteLine(sql);
+                DataTable dt = new DataTable();
+                int rowsReturned;
+                SqlCommand cmd = connection.CreateCommand();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                cmd.CommandText = sql;
+                cmd.CommandType = CommandType.Text;
+
+                foreach (QueryParameter p in ps)
+                {
+                    p.AgregateA(cmd);
+                }
+                rowsReturned = sda.Fill(dt);
+                Console.WriteLine("{0} Rows returned", rowsReturned);
+                return dt;
             }
-            rowsReturned = sda.Fill(dt);
-            Console.WriteLine("{0} Rows returned", rowsReturned);
-            return dt;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                throw new QueryException("Query error", ex);
+            }
         }
 
         public void Procedure(String procName, params Parametro[] ps){
@@ -78,6 +96,7 @@ namespace PalcoNet
                 }
             }catch(Exception ex){
                 Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
                 throw new ProcedureException("Error al ejecutar el procedure " + procName, ex);
             }
         }

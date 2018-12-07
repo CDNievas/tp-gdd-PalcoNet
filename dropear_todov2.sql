@@ -35,6 +35,7 @@ drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_empresa
 drop procedure COMPUMUNDOHIPERMEGARED.eliminar_rol
 drop procedure COMPUMUNDOHIPERMEGARED.crear_borrador
 drop procedure COMPUMUNDOHIPERMEGARED.generar_ubicaciones_de
+drop procedure COMPUMUNDOHIPERMEGARED.update_datos_borrador
 
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario

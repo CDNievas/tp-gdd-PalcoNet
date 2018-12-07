@@ -38,7 +38,7 @@ namespace PalcoNet.PublicacionesUtils
 
         public override String Codigo()
         {
-            return "BORRADOR";
+            return "B";
         }
 
         public override bool PuedeModificarse()
@@ -56,7 +56,7 @@ namespace PalcoNet.PublicacionesUtils
 
         public override String Codigo()
         {
-            return "PUBLICADA";
+            return "P";
         }
 
         public override bool PuedeModificarse()
@@ -73,7 +73,7 @@ namespace PalcoNet.PublicacionesUtils
 
         public override String Codigo()
         {
-            return "FINALIZADA";
+            return "F";
         }
 
         public override bool PuedeModificarse()
