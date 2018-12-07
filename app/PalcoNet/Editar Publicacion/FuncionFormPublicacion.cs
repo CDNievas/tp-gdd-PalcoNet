@@ -10,7 +10,6 @@ namespace PalcoNet.Editar_Publicacion
     {
         void Setup(EditarPublicacion form);
         void GuardarBorrador(EditarPublicacion form, Publicacion publicacion);
-//        void Publicar(EditarPublicacion form, Publicacion publicacion)
     }
 
     public class FuncionModificarPublicacion : FuncionFormPublicacion

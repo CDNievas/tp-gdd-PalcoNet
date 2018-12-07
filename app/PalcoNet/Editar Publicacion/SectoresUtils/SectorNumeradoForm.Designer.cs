@@ -124,6 +124,7 @@
             // txtFilaDesde
             // 
             this.txtFilaDesde.Location = new System.Drawing.Point(132, 81);
+            this.txtFilaDesde.MaxLength = 1;
             this.txtFilaDesde.Name = "txtFilaDesde";
             this.txtFilaDesde.Size = new System.Drawing.Size(58, 20);
             this.txtFilaDesde.TabIndex = 10;
@@ -131,6 +132,7 @@
             // txtFilaHasta
             // 
             this.txtFilaHasta.Location = new System.Drawing.Point(230, 81);
+            this.txtFilaHasta.MaxLength = 1;
             this.txtFilaHasta.Name = "txtFilaHasta";
             this.txtFilaHasta.Size = new System.Drawing.Size(58, 20);
             this.txtFilaHasta.TabIndex = 10;

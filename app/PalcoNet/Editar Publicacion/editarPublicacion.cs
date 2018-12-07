@@ -111,9 +111,6 @@ namespace PalcoNet.Editar_Publicacion
         {
             try
             {
-                publicacion = publicacion == null ? new Publicacion() : publicacion;
-                publicacion.estado = new Borrador();
-                LlenarPublicacion();
                 GuardarBorrador();
                 this.Close();
             }
@@ -138,6 +135,9 @@ namespace PalcoNet.Editar_Publicacion
 
         private void GuardarBorrador()
         {
+            publicacion = publicacion == null ? new Publicacion() : publicacion;
+            publicacion.estado = new Borrador();
+            LlenarPublicacion();
             funcion.GuardarBorrador(this, publicacion);
         }
 
