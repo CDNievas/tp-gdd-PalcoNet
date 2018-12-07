@@ -66,6 +66,14 @@ namespace PalcoNet.PublicacionesUtils
             }
         }
 
+        private int _idEspectaculo;
+        public int GetIdEspectaculo()
+        {
+            return this._idEspectaculo;
+        }
+
+
+
         private List<Ubicacion> ubicaciones = null;
         public List<Ubicacion> Ubicaciones
         {
@@ -99,6 +107,7 @@ namespace PalcoNet.PublicacionesUtils
             publicacion.estado = Estados.Parse(dataRow.StringValue("estado"));
             SetRubro(publicacion, dataRow);
             SetGrado(publicacion, dataRow);
+            publicacion._idEspectaculo = dataRow.IntValue("id_espectaculo");
 
             return publicacion;
         }
@@ -204,17 +213,55 @@ namespace PalcoNet.PublicacionesUtils
 
         public void Publicarse(List<Sector> sectores)
         {
-            DataBase.GetInstance()
-                .TypedQuery(@"update COMPUMUNDOHIPERMEGARED.Publicacion
+            DataBase.GetInstance().WithTransaction(() =>
+            {
+                DataBase.GetInstance()
+                    .TypedQuery(@"update COMPUMUNDOHIPERMEGARED.Publicacion
                               set fecha_creacion = @fecha, estado = @estado
                               where id_publicacion = @id"
-                , new QueryParameter("fecha", SqlDbType.DateTime, Contexto.FechaActual)
-                , new QueryParameter("estado", SqlDbType.Char, new Publicado().Codigo())
-                , new QueryParameter("id", SqlDbType.BigInt, this.id));
+                    , new QueryParameter("fecha", SqlDbType.DateTime, Contexto.FechaActual)
+                    , new QueryParameter("estado", SqlDbType.Char, new Publicado().Codigo())
+                    , new QueryParameter("id", SqlDbType.BigInt, this.id));
+                DataBase.GetInstance()
+                    .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", this.id));
+            });
             this.estado = new Publicado();
-            DataBase.GetInstance()
-                .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", this.id));
+        }
 
+        // esto esta horrible porque si le pasas un null en el ultimo parametro se crea una nueva y si no no
+        private static void Publicar(Publicacion publicacion, List<Sector> sectores, long? publicacionID)
+        {
+            var self = publicacion;
+            var salida = new ParametroOut("id_publicacion_generado", SqlDbType.BigInt);
+            DataBase.GetInstance()
+                    .Procedure("publicar_fecha"
+                    , new ParametroIn("fecha_creacion", Contexto.FechaActual)
+                    , new ParametroIn("fecha_espectaculo", self.fechaEspectaculo)
+                    , new ParametroIn("grado_id", self.grado.id)
+                    , new ParametroIn("id_espectaculo", self.GetIdEspectaculo())
+                    , new ParametroIn("id_publicacion", publicacionID)
+                    , salida);
+            DataBase.GetInstance()
+                .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", self.id));
+
+            if (publicacionID != null && Convert.ToInt64(salida.valorRetorno) != publicacionID)
+                throw new Exception("Esto no tenía que pasar");
+
+            self.estado = new Publicado();
+        }
+
+        public static void PublicarFechas(Publicacion publicacion, List<DateTime> fechas, List<Sector> sectores)
+        {
+            DataBase.GetInstance().WithTransaction(() =>
+            {
+                long? id = publicacion.id;
+                foreach (DateTime fecha in fechas)
+                {
+                    publicacion.fechaPublicacion = fecha;
+                    Publicar(publicacion, sectores, id);
+                    id = null;
+                }
+            });
         }
     }
    

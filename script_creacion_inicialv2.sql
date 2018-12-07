@@ -367,7 +367,8 @@ p.fecha_creacion as fecha_publicacion, p.fecha_vencimiento as fecha_vencimiento,
 p.fecha_espectaculo as fecha_espectaculo, p.estado as estado, e.ciudad as ciudad,
 e.localidad as localidad, e.dom_calle as dom_calle, e.num_calle as num_calle, e.cod_postal as cod_postal,
 e.empresa_id as id_empresa, r.id_rubro as rubro_id, r.descripcion as rubro_descripcion,
-g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision, g.prioridad as prioridad
+g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision, g.prioridad as prioridad,
+e.id_espectaculo as id_espectaculo
 FROM COMPUMUNDOHIPERMEGARED.Publicacion p
 inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
 on e.id_espectaculo = p.id_publicacion
@@ -721,8 +722,8 @@ as
 begin
 	begin tran
 	insert into COMPUMUNDOHIPERMEGARED.Espectaculo
-	(descripcion, ciudad, localidad, num_calle, cod_postal, empresa_id, rubro_id)
-	values(@descripcion, @ciudad, @localidad, @num_calle, @cod_postal, @empresa_id, @rubro_id)
+	(descripcion, ciudad, localidad, dom_calle, num_calle, cod_postal, empresa_id, rubro_id)
+	values(@descripcion, @ciudad, @localidad, @dom_calle, @num_calle, @cod_postal, @empresa_id, @rubro_id)
 	declare @id_espectaculo int = @@IDENTITY
 	
 	insert into COMPUMUNDOHIPERMEGARED.Publicacion
@@ -810,6 +811,31 @@ as
 	update COMPUMUNDOHIPERMEGARED.Espectaculo
 	set descripcion = @descripcion, ciudad = @ciudad, localidad = @localidad, dom_calle = @dom_calle,
 	num_calle = @num_calle, cod_postal = @cod_postal, empresa_id = @empresa_id, rubro_id = @rubro_id
+	where id_espectaculo = @id_espectaculo
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.publicar_fecha(
+	@fecha_creacion datetime,
+	@fecha_espectaculo datetime,
+	@grado_id int,
+	@id_publicacion bigint = null,
+	@id_espectaculo int,
+	@id_publicacion_generado bigint output
+)
+as
+	if @id_publicacion is not null
+	begin
+		update COMPUMUNDOHIPERMEGARED.Publicacion
+		set espectaculo_id = @id_espectaculo, fecha_creacion = @fecha_creacion, fecha_espectaculo = @fecha_espectaculo,
+		estado = 'P', grado_id = @grado_id
+		set @id_publicacion_generado = @id_publicacion
+		return
+	end
+
+	insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_creacion, fecha_espectaculo, estado, grado_id)
+	values (@id_espectaculo, @fecha_creacion, @fecha_espectaculo, 'P', @grado_id)
+	set @id_publicacion_generado = @@IDENTITY
+	return
 go
 
 PRINT 'Todes les procedures y les funciones creades'
@@ -826,4 +852,16 @@ exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'Administrador General', @tablaFuncion
 
 exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario 'admin', 'w23', @idRol, null
 PRINT 'Administrador general creado'
+go
+
+create trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
+on COMPUMUNDOHIPERMEGARED.Publicacion
+after update
+as
+	if exists (select * from inserted i join deleted d on i.id_publicacion = d.id_publicacion where d.estado = 'P' or d.estado = 'F')
+	begin
+		raiserror('La publicacion no es modificable', 16, 1)
+		rollback transaction
+	end
+
 go

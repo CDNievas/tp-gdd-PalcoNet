@@ -163,6 +163,18 @@
     <Compile Include="Generar Publicacion\AltaPublicacion.Designer.cs">
       <DependentUpon>AltaPublicacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Generar Publicacion\DateTimeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Publicacion\DateTimeForm.Designer.cs">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Publicacion\PublicacionMultiFechaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Publicacion\PublicacionMultiFechaForm.Designer.cs">
+      <DependentUpon>PublicacionMultiFechaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Generar Rendicion Comisiones\rendicionComisiones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,6 +291,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editar Publicacion\SectoresUtils\SectorSinNumerarForm.resx">
       <DependentUpon>SectorSinNumerarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\DateTimeForm.resx">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\PublicacionMultiFechaForm.resx">
+      <DependentUpon>PublicacionMultiFechaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Rendicion Comisiones\rendicionComisiones.resx">
       <DependentUpon>rendicionComisiones.cs</DependentUpon>

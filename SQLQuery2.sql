@@ -11,4 +11,7 @@ select count(*) from COMPUMUNDOHIPERMEGARED.Ubicacion
 
 select * from COMPUMUNDOHIPERMEGARED.Empresa
 
-select * from COMPUMUNDOHIPERMEGARED.PublicacionesView
+select * from COMPUMUNDOHIPERMEGARED.PublicacionesView where descripcion = 'adfs'
+
+select * from COMPUMUNDOHIPERMEGARED.Ubicacion
+where publicacion_id = 7809
