@@ -192,7 +192,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Puntos(
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Sector(
-	id_borrador int CONSTRAINT FK_SECTOR_PUBLICACION references COMPUMUNDOHIPERMEGARED.Espectaculo,
+	id_espectaculo int CONSTRAINT FK_SECTOR_ESPECTACULO references COMPUMUNDOHIPERMEGARED.Espectaculo,
 	numerado bit,
 	tipo_ubicacion_id int CONSTRAINT FK_SECTOR_TIPOUBICACION references COMPUMUNDOHIPERMEGARED.TipoUbicacion,
 	fila_desde char(1),
@@ -371,7 +371,7 @@ g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_
 e.id_espectaculo as id_espectaculo
 FROM COMPUMUNDOHIPERMEGARED.Publicacion p
 inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
-on e.id_espectaculo = p.id_publicacion
+on e.id_espectaculo = p.espectaculo_id
 left outer join COMPUMUNDOHIPERMEGARED.Rubro r
 on r.id_rubro = e.rubro_id
 left outer join COMPUMUNDOHIPERMEGARED.Grado g
@@ -713,7 +713,7 @@ begin
 			from COMPUMUNDOHIPERMEGARED.Publicacion p
 			join COMPUMUNDOHIPERMEGARED.Espectaculo e
 			on e.id_espectaculo = p.espectaculo_id
-			and p.id_publicacion = 1)
+			and p.id_publicacion = @publicacion_id)
 end
 go
 
@@ -729,7 +729,7 @@ create procedure COMPUMUNDOHIPERMEGARED.crear_borrador(
 	@empresa_id int,
 	@rubro_id int,
 	@grado_id int,
-	@borrador_id int output)
+	@publicacion_id_generado bigint output)
 as
 begin
 	begin tran
@@ -741,7 +741,8 @@ begin
 	insert into COMPUMUNDOHIPERMEGARED.Publicacion
 	(espectaculo_id, fecha_espectaculo, estado, grado_id)
 	values(@id_espectaculo, @fecha_espectaculo, 'B', @grado_id)
-	set @borrador_id = @@IDENTITY
+
+	set @publicacion_id_generado = @@IDENTITY
 	commit tran
 	return
 end
@@ -752,7 +753,7 @@ as
 begin
 	declare c1 cursor for select numerado, tipo_ubicacion_id, fila_desde, fila_hasta, asiento_desde,
 	asiento_hasta, cantidad, precio
-	from COMPUMUNDOHIPERMEGARED.Sector s where s.id_borrador = @id_publicacion
+	from COMPUMUNDOHIPERMEGARED.Sector s where s.id_espectaculo = COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion(@id_publicacion)
 	declare @numerado bit, @tipo_ubicacion_id int, @fila_desde char(1), @fila_hasta char(1), @asiento_desde int,
 	@asiento_hasta int, @cantidad int, @precio numeric(18,0)
 
@@ -835,6 +836,8 @@ as
 		update COMPUMUNDOHIPERMEGARED.Publicacion
 		set espectaculo_id = @id_espectaculo, fecha_creacion = @fecha_creacion, fecha_espectaculo = @fecha_espectaculo,
 		estado = 'P', grado_id = @grado_id
+		where id_publicacion = @id_publicacion
+
 		set @id_publicacion_generado = @id_publicacion
 		return
 	end

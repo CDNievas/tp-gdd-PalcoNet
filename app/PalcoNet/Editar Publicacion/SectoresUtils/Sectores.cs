@@ -15,7 +15,7 @@ namespace PalcoNet.Editar_Publicacion
                 @"select * from COMPUMUNDOHIPERMEGARED.Sector s
                   inner join COMPUMUNDOHIPERMEGARED.TipoUbicacion t
                   on t.id_tipo_ubicacion = s.tipo_ubicacion_id
-                  where s.id_borrador = {0} and s.numerado = {1}", publicacionId, numerados? 1: 0);
+                  where s.id_espectaculo = {0} and s.numerado = {1}", publicacionId, numerados? 1: 0);
             var dataTable = DataBase.GetInstance().Query(sql);
 
             var sectores = new List<Sector>();

@@ -76,7 +76,7 @@ namespace PalcoNet.Editar_Publicacion
         override public void PersistiteParaUn(long idBorrador)
         {
             var sql = String.Format(
-            @"insert into COMPUMUNDOHIPERMEGARED.Sector(id_borrador, numerado, tipo_ubicacion_id,
+            @"insert into COMPUMUNDOHIPERMEGARED.Sector(id_espectaculo, numerado, tipo_ubicacion_id,
               fila_desde, fila_hasta, asiento_desde, asiento_hasta, precio)
               values({0}, 1, {1}, '{2}', '{3}', {4}, {5}, {6})"
             , idBorrador, tipoUbicacion.id, filaDesde, filaHasta, asientoDesde, asientoHasta, precio);
@@ -99,7 +99,7 @@ namespace PalcoNet.Editar_Publicacion
         override public void PersistiteParaUn(long idBorrador)
         {
             var sql = String.Format(
-                @"insert into COMPUMUNDOHIPERMEGARED.Sector(id_borrador, numerado, tipo_ubicacion_id, cantidad, precio)
+                @"insert into COMPUMUNDOHIPERMEGARED.Sector(id_espectaculo, numerado, tipo_ubicacion_id, cantidad, precio)
                   values({0}, 0, {1}, {2}, {3})"
                 , idBorrador, tipoUbicacion.id, cantidad, precio);
             DataBase.GetInstance().Query(sql);

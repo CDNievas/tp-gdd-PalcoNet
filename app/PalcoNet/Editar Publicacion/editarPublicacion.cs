@@ -72,12 +72,6 @@ namespace PalcoNet.Editar_Publicacion
             comboRubro.SelectedItem = publicacion.rubro;
             comboGrado.SelectedItem = publicacion.grado;
 
-            var lista = new BindingList<Ubicacion>(publicacion.Ubicaciones);
-            var bindingSource = new BindingSource(lista, null);
-
-            this.numeradosDataGrid.DataSource = bindingSource;
-            this.numeradosDataGrid.Columns["id"].Visible = false;
-
             this.CargarSectoresDe(publicacion.id);
 
             this.publicacion = publicacion;
@@ -115,8 +109,9 @@ namespace PalcoNet.Editar_Publicacion
                 GuardarBorrador();
                 this.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message + "\n" + ex.StackTrace);
                 MessageBox.Show("No se pudo guardar");
             }
         }
@@ -177,6 +172,7 @@ namespace PalcoNet.Editar_Publicacion
         {
             CargarGrados();
             CargarRubros();
+            fechaEspectaculo.MinDate = Contexto.FechaActual;
             funcion.Setup(this);
         }
 

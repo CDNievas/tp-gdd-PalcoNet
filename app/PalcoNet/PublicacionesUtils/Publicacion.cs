@@ -176,7 +176,7 @@ namespace PalcoNet.PublicacionesUtils
         {
             if (!this.PuedeModificarse())
                 throw new Exception("Esta publicación no puede modificarse");
-            var returnPar = new ParametroOut("borrador_id", SqlDbType.Int);
+            var returnPar = new ParametroOut("publicacion_id_generado", SqlDbType.BigInt);
 
             this.estado = new Borrador();
 
@@ -194,7 +194,8 @@ namespace PalcoNet.PublicacionesUtils
                               new NullableInParameter("rubro_id", this.rubro != null ? this.rubro.id as int? : null),
                               new NullableInParameter("grado_id", this.grado.id),
                               returnPar);
-            this.id = (int)returnPar.valorRetorno;
+            this.id = (long)returnPar.valorRetorno;
+            Console.WriteLine("Publicacion generada id: " + this.id);
         }
 
         private int? GetNumeroCalle(String s)
@@ -212,7 +213,7 @@ namespace PalcoNet.PublicacionesUtils
         public void BorrarSectoresBorrador(){
             DataBase.GetInstance()
                 .Query(@"delete from COMPUMUNDOHIPERMEGARED.Sector
-                              where id_borrador = " + this.id);
+                              where id_espectaculo = " + this.GetIdEspectaculo());
         }
 
 
@@ -244,17 +245,20 @@ namespace PalcoNet.PublicacionesUtils
                     , new ParametroIn("fecha_espectaculo", self.fechaEspectaculo)
                     , new ParametroIn("grado_id", self.grado.id)
                     , new ParametroIn("id_espectaculo", self.GetIdEspectaculo())
-                    , new ParametroIn("id_publicacion", publicacionID)
+                    , new ParametroIn("id_publicacion", publicacionID == null ? (Object)DBNull.Value : (Object)publicacionID)
                     , salida);
+            var unString = publicacionID == null ? "NULL" : publicacionID.ToString();
+            Console.WriteLine("publicacionID = " + unString);
 
             var nuevoID = Convert.ToInt64(salida.valorRetorno);
 
             if (publicacionID != null && nuevoID != publicacionID)
                 throw new Exception("Esto no tenía que pasar");
 
+            Console.WriteLine("publicacion_id = " + nuevoID);
             DataBase.GetInstance()
                 .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", nuevoID));
-
+            
             self.estado = new Publicado();
         }
 
@@ -265,7 +269,7 @@ namespace PalcoNet.PublicacionesUtils
                 long? id = publicacion.id;
                 foreach (DateTime fecha in fechas)
                 {
-                    publicacion.fechaPublicacion = fecha;
+                    publicacion.fechaEspectaculo = fecha;
                     Publicar(publicacion, sectores, id);
                     id = null;
                 }
