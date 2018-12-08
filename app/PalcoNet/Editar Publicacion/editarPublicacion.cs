@@ -232,7 +232,7 @@ namespace PalcoNet.Editar_Publicacion
 
         public void GuardarSectores()
         {
-            this.SectoresPublicacion().ForEach(s => s.PersistiteParaUn(this.publicacion.id));
+            this.SectoresPublicacion().ForEach(s => s.PersistiteParaUn(this.publicacion.GetIdEspectaculo()));
         }
 
         public List<Sector> SectoresPublicacion()

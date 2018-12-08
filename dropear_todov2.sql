@@ -40,6 +40,7 @@ drop procedure COMPUMUNDOHIPERMEGARED.publicar_fecha
 
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario
+drop function COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion
 
 drop trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
 

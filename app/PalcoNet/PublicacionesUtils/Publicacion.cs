@@ -66,10 +66,15 @@ namespace PalcoNet.PublicacionesUtils
             }
         }
 
-        private int _idEspectaculo;
+        private int? _idEspectaculo = null;
         public int GetIdEspectaculo()
         {
-            return this._idEspectaculo;
+            if (_idEspectaculo == null)
+            {
+                var dt = DataBase.GetInstance().Query("select COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion(" + this.id +") as value");
+                _idEspectaculo = new DataRowExtended(dt.Rows[0]).IntValue("value");
+            }
+            return (int)this._idEspectaculo;
         }
 
 
@@ -241,11 +246,14 @@ namespace PalcoNet.PublicacionesUtils
                     , new ParametroIn("id_espectaculo", self.GetIdEspectaculo())
                     , new ParametroIn("id_publicacion", publicacionID)
                     , salida);
-            DataBase.GetInstance()
-                .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", self.id));
 
-            if (publicacionID != null && Convert.ToInt64(salida.valorRetorno) != publicacionID)
+            var nuevoID = Convert.ToInt64(salida.valorRetorno);
+
+            if (publicacionID != null && nuevoID != publicacionID)
                 throw new Exception("Esto no tenía que pasar");
+
+            DataBase.GetInstance()
+                .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", nuevoID));
 
             self.estado = new Publicado();
         }

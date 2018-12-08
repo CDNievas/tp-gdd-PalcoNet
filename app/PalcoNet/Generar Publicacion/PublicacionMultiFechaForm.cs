@@ -47,7 +47,7 @@ namespace PalcoNet.Generar_Publicacion
 
             try
             {
-                Publicacion.PublicarFechas(publicacion, fechas, null);
+                Publicacion.PublicarFechas(publicacion, fechas, sectores);
                 Close();
                 MessageBox.Show("Se han realizado las publicaciones");
             }

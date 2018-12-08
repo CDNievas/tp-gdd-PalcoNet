@@ -705,6 +705,18 @@ begin
 end
 go
 
+create function COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion(@publicacion_id bigint)
+returns int
+as
+begin
+	return (select e.id_espectaculo
+			from COMPUMUNDOHIPERMEGARED.Publicacion p
+			join COMPUMUNDOHIPERMEGARED.Espectaculo e
+			on e.id_espectaculo = p.espectaculo_id
+			and p.id_publicacion = 1)
+end
+go
+
 create procedure COMPUMUNDOHIPERMEGARED.crear_borrador(
 	@descripcion nvarchar(255),
 	@fecha_espectaculo datetime,
@@ -801,12 +813,7 @@ as
 	set fecha_espectaculo = @fecha_espectaculo, estado = 'B', grado_id = @grado_id
 	where id_publicacion = @id_publicacion
 
-	declare @id_espectaculo int = (
-	select e.id_espectaculo
-	from COMPUMUNDOHIPERMEGARED.Publicacion p
-	inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
-	on p.id_publicacion = @id_publicacion and p.espectaculo_id = e.id_espectaculo
-	)
+	declare @id_espectaculo int = COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion(@id_publicacion)
 
 	update COMPUMUNDOHIPERMEGARED.Espectaculo
 	set descripcion = @descripcion, ciudad = @ciudad, localidad = @localidad, dom_calle = @dom_calle,
@@ -834,6 +841,7 @@ as
 
 	insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_creacion, fecha_espectaculo, estado, grado_id)
 	values (@id_espectaculo, @fecha_creacion, @fecha_espectaculo, 'P', @grado_id)
+
 	set @id_publicacion_generado = @@IDENTITY
 	return
 go
@@ -858,9 +866,11 @@ create trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
 on COMPUMUNDOHIPERMEGARED.Publicacion
 after update
 as
-	if exists (select * from inserted i join deleted d on i.id_publicacion = d.id_publicacion where d.estado = 'P' or d.estado = 'F')
+	if exists ( select * from inserted i join deleted d on i.id_publicacion = d.id_publicacion
+				where (d.estado like 'P' and i.estado like 'B')
+				or (d.estado like 'F' and i.estado not like 'F'))
 	begin
-		raiserror('La publicacion no es modificable', 16, 1)
+		raiserror('Transición de estados no válida', 16, 1)
 		rollback transaction
 	end
 
