@@ -133,7 +133,8 @@ namespace PalcoNet.PublicacionesUtils
                 var idGrado = dr.IntValue("grado_id");
                 var descripcion = dr.StringValue("grado_descripcion");
                 var comision = dr.DoubleValue("grado_comision");
-                p.grado = new Grado(idGrado, descripcion, comision);
+                var eliminado = dr.BoolValue("eliminado");
+                p.grado = new Grado(idGrado, descripcion, comision, eliminado);
             }catch(Exception){
                 p.grado = null;
             }

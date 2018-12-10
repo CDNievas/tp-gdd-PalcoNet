@@ -87,8 +87,8 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Rubro( -- MIGRADO
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Grado( -- MIGRADO
 	id_grado int IDENTITY(1,1) PRIMARY KEY,
 	descripcion nvarchar(10) NOT NULL,
-	comision numeric(5,2) DEFAULT 0,
-	prioridad smallint not null
+	comision numeric(5,2) NOT NULL,
+	eliminado bit default 0 NOT NULL
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Tarjeta( -- MIGRADO
@@ -263,11 +263,11 @@ insert into @funcionalidades_cliente values (8),(9),(10)
 exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'CLIENTE', @funcionalidades_cliente, null
 
 declare @funcionalidades_admin COMPUMUNDOHIPERMEGARED.FuncionalidadList
-insert into @funcionalidades_admin values (1),(2),(3),(4),(11),(12)
+insert into @funcionalidades_admin values (1),(2),(3),(4),(5),(11),(12)
 exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'ADMINISTRADOR', @funcionalidades_admin, null
 
 declare @funcionalidades_empresa COMPUMUNDOHIPERMEGARED.FuncionalidadList
-insert into @funcionalidades_empresa values (5),(6),(7)
+insert into @funcionalidades_empresa values (6),(7)
 exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'EMPRESA', @funcionalidades_empresa, null
 PRINT 'Roles principales creados'
 go
@@ -326,10 +326,10 @@ PRINT 'Usuarios y Rol_Usuarios de clientes creados'
 go
 
 
-INSERT INTO COMPUMUNDOHIPERMEGARED.Grado(descripcion, comision, prioridad) VALUES
-	('BAJA', 2.0, 1),
-	('MEDIA', 5.0, 2),
-	('ALTA', 10.0, 3)
+INSERT INTO COMPUMUNDOHIPERMEGARED.Grado(descripcion, comision) VALUES
+	('BAJA', 2.0),
+	('MEDIA', 5.0),
+	('ALTA', 10.0)
 PRINT 'Migre Grados'
 GO
 
@@ -367,7 +367,7 @@ p.fecha_creacion as fecha_publicacion, p.fecha_vencimiento as fecha_vencimiento,
 p.fecha_espectaculo as fecha_espectaculo, p.estado as estado, e.ciudad as ciudad,
 e.localidad as localidad, e.dom_calle as dom_calle, e.num_calle as num_calle, e.cod_postal as cod_postal,
 e.empresa_id as id_empresa, r.id_rubro as rubro_id, r.descripcion as rubro_descripcion,
-g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision, g.prioridad as prioridad,
+g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision,
 e.id_espectaculo as id_espectaculo
 FROM COMPUMUNDOHIPERMEGARED.Publicacion p
 inner join COMPUMUNDOHIPERMEGARED.Espectaculo e

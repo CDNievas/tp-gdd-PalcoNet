@@ -106,11 +106,11 @@
     </Compile>
     <Compile Include="Abm Empresa Espectaculo\BuscadorEmpresas.cs" />
     <Compile Include="Abm Empresa Espectaculo\Empresa.cs" />
-    <Compile Include="Abm Grado\altaGrado.cs">
+    <Compile Include="Abm Grado\AltaGrado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Grado\altaGrado.Designer.cs">
-      <DependentUpon>altaGrado.cs</DependentUpon>
+    <Compile Include="Abm Grado\AltaGrado.Designer.cs">
+      <DependentUpon>AltaGrado.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Grado\ListarGrado.cs">
       <SubType>Form</SubType>
@@ -223,11 +223,11 @@
     <Compile Include="Abm Empresa Espectaculo\ListarEmpresa.Designer.cs">
       <DependentUpon>ListarEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Grado\modificarGrado.cs">
+    <Compile Include="Abm Grado\ActualizarGrado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Grado\modificarGrado.Designer.cs">
-      <DependentUpon>modificarGrado.cs</DependentUpon>
+    <Compile Include="Abm Grado\ActualizarGrado.Designer.cs">
+      <DependentUpon>ActualizarGrado.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\AltaRolForm.cs">
       <SubType>Form</SubType>
@@ -247,6 +247,7 @@
     <Compile Include="Validadores\Validador.cs" />
     <Compile Include="Validadores\ValidadorEmail.cs" />
     <Compile Include="Validadores\ValidadorNumerico.cs" />
+    <Compile Include="Validadores\ValidadorNumeroComa.cs" />
     <EmbeddedResource Include="Abm Cliente\altaTarjeta.resx">
       <DependentUpon>altaTarjeta.cs</DependentUpon>
     </EmbeddedResource>
@@ -319,8 +320,8 @@
     <Compile Include="PublicacionesUtils\Publicaciones.cs" />
     <Compile Include="PublicacionesUtils\RangoFechas.cs" />
     <Compile Include="PublicacionesUtils\Rubro.cs" />
-    <EmbeddedResource Include="Abm Grado\modificarGrado.resx">
-      <DependentUpon>modificarGrado.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Grado\ActualizarGrado.resx">
+      <DependentUpon>ActualizarGrado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Empresa Espectaculo\modificarEmpresa.resx">
       <DependentUpon>modificarEmpresa.cs</DependentUpon>
@@ -357,8 +358,8 @@
     <EmbeddedResource Include="Abm Empresa Espectaculo\bajaEmpresa.resx">
       <DependentUpon>bajaEmpresa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Grado\altaGrado.resx">
-      <DependentUpon>altaGrado.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Grado\AltaGrado.resx">
+      <DependentUpon>AltaGrado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Grado\ListarGrado.resx">
       <DependentUpon>ListarGrado.cs</DependentUpon>

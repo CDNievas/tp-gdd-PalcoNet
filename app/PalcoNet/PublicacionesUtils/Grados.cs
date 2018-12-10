@@ -9,9 +9,12 @@ namespace PalcoNet.PublicacionesUtils
 {
     class Grados
     {
-        public static List<Grado> Todos()
+        public static List<Grado> Todos(Boolean eliminados = false)
         {
-            var dt = DataBase.GetInstance().Query(@"select * from COMPUMUNDOHIPERMEGARED.Grado");
+            String sql = @"select * from COMPUMUNDOHIPERMEGARED.Grado";
+            if (!eliminados)
+                sql += " where eliminado = 0";
+            var dt = DataBase.GetInstance().Query(sql);
             return GradosFromDataTable(dt);
         }
 
