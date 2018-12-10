@@ -35,7 +35,22 @@ namespace PalcoNet.Abm_Cliente
 
         private void btnClienteBaja_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var cliente = (Cliente)clientesDataGrid.CurrentRow.DataBoundItem;
+            DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea deshabilitar el cliente "
+                + cliente.nombre + " " + cliente.apellido + "?",
+                "Solicitud de confirmación", MessageBoxButtons.YesNo);
+            try
+            {
+                if (dialogResult == DialogResult.Yes)
+                {
+                    cliente.Habilitado = false;
+                    cliente.Update();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error: " + ex.Message);
+            }
         }
 
         private void ActualizarTabla()
@@ -91,9 +106,7 @@ namespace PalcoNet.Abm_Cliente
             try
             {
                 var ignored = form.ShowDialog();
-                MessageBox.Show(String.Format("El cliente {0} {1} ha sido actualizado", cliente.nombre, cliente.apellido),
-                    "Cliente actualizado",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
             }
             catch (ProcedureException ex)
             {

@@ -28,6 +28,12 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             }
         }
 
+        public CheckBox CheckHabilitado
+        {
+            get { return checkHabilitado; }
+        }
+
+
         public AltaEmpresaForm(FuncionFormEmpresa funcion)
         {
             this.funcion = funcion;
@@ -124,6 +130,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             txtEmpresaPiso.Text = empresa.piso == null? "" : empresa.piso.ToString();
             txtEmpresaDpto.Text = empresa.depto;
             txtEmpresaCP.Text = empresa.codPostal;
+            checkHabilitado.Checked = empresa.Habilitado;
             empresaAPersistir = empresa;
             Console.WriteLine("Empresa a persistir " + empresaAPersistir);
         }

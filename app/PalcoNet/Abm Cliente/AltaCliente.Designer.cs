@@ -66,6 +66,7 @@
             this.labelPiso = new System.Windows.Forms.Label();
             this.txtPiso = new System.Windows.Forms.TextBox();
             this.comboTipoDoc = new System.Windows.Forms.ComboBox();
+            this.checkHabilitado = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -205,7 +206,7 @@
             // txtClienteNombre
             // 
             this.txtClienteNombre.Location = new System.Drawing.Point(80, 63);
-            this.txtClienteNombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteNombre.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteNombre.Name = "txtClienteNombre";
             this.txtClienteNombre.Size = new System.Drawing.Size(110, 20);
             this.txtClienteNombre.TabIndex = 15;
@@ -213,7 +214,7 @@
             // txtClienteApellido
             // 
             this.txtClienteApellido.Location = new System.Drawing.Point(80, 100);
-            this.txtClienteApellido.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteApellido.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteApellido.Name = "txtClienteApellido";
             this.txtClienteApellido.Size = new System.Drawing.Size(110, 20);
             this.txtClienteApellido.TabIndex = 16;
@@ -221,7 +222,7 @@
             // txtClienteDoc
             // 
             this.txtClienteDoc.Location = new System.Drawing.Point(296, 136);
-            this.txtClienteDoc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteDoc.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteDoc.Name = "txtClienteDoc";
             this.txtClienteDoc.Size = new System.Drawing.Size(110, 20);
             this.txtClienteDoc.TabIndex = 18;
@@ -229,7 +230,7 @@
             // txtClienteCuil
             // 
             this.txtClienteCuil.Location = new System.Drawing.Point(80, 167);
-            this.txtClienteCuil.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteCuil.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteCuil.Name = "txtClienteCuil";
             this.txtClienteCuil.Size = new System.Drawing.Size(110, 20);
             this.txtClienteCuil.TabIndex = 19;
@@ -237,7 +238,7 @@
             // txtClienteEmail
             // 
             this.txtClienteEmail.Location = new System.Drawing.Point(80, 194);
-            this.txtClienteEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteEmail.Name = "txtClienteEmail";
             this.txtClienteEmail.Size = new System.Drawing.Size(139, 20);
             this.txtClienteEmail.TabIndex = 20;
@@ -245,7 +246,7 @@
             // txtClienteTelefono
             // 
             this.txtClienteTelefono.Location = new System.Drawing.Point(80, 231);
-            this.txtClienteTelefono.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteTelefono.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteTelefono.Name = "txtClienteTelefono";
             this.txtClienteTelefono.Size = new System.Drawing.Size(110, 20);
             this.txtClienteTelefono.TabIndex = 21;
@@ -253,7 +254,7 @@
             // txtClienteCalle
             // 
             this.txtClienteCalle.Location = new System.Drawing.Point(80, 263);
-            this.txtClienteCalle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteCalle.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteCalle.Name = "txtClienteCalle";
             this.txtClienteCalle.Size = new System.Drawing.Size(110, 20);
             this.txtClienteCalle.TabIndex = 22;
@@ -261,7 +262,7 @@
             // txtClienteCP
             // 
             this.txtClienteCP.Location = new System.Drawing.Point(444, 301);
-            this.txtClienteCP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteCP.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteCP.Name = "txtClienteCP";
             this.txtClienteCP.Size = new System.Drawing.Size(75, 20);
             this.txtClienteCP.TabIndex = 23;
@@ -269,7 +270,7 @@
             // txtClienteNro
             // 
             this.txtClienteNro.Location = new System.Drawing.Point(226, 263);
-            this.txtClienteNro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteNro.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteNro.Name = "txtClienteNro";
             this.txtClienteNro.Size = new System.Drawing.Size(63, 20);
             this.txtClienteNro.TabIndex = 24;
@@ -277,7 +278,7 @@
             // txtClienteDpto
             // 
             this.txtClienteDpto.Location = new System.Drawing.Point(456, 263);
-            this.txtClienteDpto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteDpto.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteDpto.Name = "txtClienteDpto";
             this.txtClienteDpto.Size = new System.Drawing.Size(46, 20);
             this.txtClienteDpto.TabIndex = 25;
@@ -285,7 +286,7 @@
             // txtClienteLoc
             // 
             this.txtClienteLoc.Location = new System.Drawing.Point(91, 301);
-            this.txtClienteLoc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClienteLoc.Margin = new System.Windows.Forms.Padding(2);
             this.txtClienteLoc.Name = "txtClienteLoc";
             this.txtClienteLoc.Size = new System.Drawing.Size(83, 20);
             this.txtClienteLoc.TabIndex = 26;
@@ -293,7 +294,7 @@
             // btnClienteLimpiar
             // 
             this.btnClienteLimpiar.Location = new System.Drawing.Point(35, 410);
-            this.btnClienteLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClienteLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnClienteLimpiar.Name = "btnClienteLimpiar";
             this.btnClienteLimpiar.Size = new System.Drawing.Size(66, 24);
             this.btnClienteLimpiar.TabIndex = 30;
@@ -304,7 +305,7 @@
             // btnClienteGuardar
             // 
             this.btnClienteGuardar.Location = new System.Drawing.Point(473, 410);
-            this.btnClienteGuardar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClienteGuardar.Margin = new System.Windows.Forms.Padding(2);
             this.btnClienteGuardar.Name = "btnClienteGuardar";
             this.btnClienteGuardar.Size = new System.Drawing.Size(66, 24);
             this.btnClienteGuardar.TabIndex = 29;
@@ -315,7 +316,7 @@
             // btnDatosTarjeta
             // 
             this.btnDatosTarjeta.Location = new System.Drawing.Point(381, 338);
-            this.btnDatosTarjeta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDatosTarjeta.Margin = new System.Windows.Forms.Padding(2);
             this.btnDatosTarjeta.Name = "btnDatosTarjeta";
             this.btnDatosTarjeta.Size = new System.Drawing.Size(138, 22);
             this.btnDatosTarjeta.TabIndex = 30;
@@ -399,11 +400,22 @@
             this.comboTipoDoc.Size = new System.Drawing.Size(54, 21);
             this.comboTipoDoc.TabIndex = 38;
             // 
+            // checkHabilitado
+            // 
+            this.checkHabilitado.AutoSize = true;
+            this.checkHabilitado.Location = new System.Drawing.Point(33, 375);
+            this.checkHabilitado.Name = "checkHabilitado";
+            this.checkHabilitado.Size = new System.Drawing.Size(85, 17);
+            this.checkHabilitado.TabIndex = 39;
+            this.checkHabilitado.Text = "¿Habilitado?";
+            this.checkHabilitado.UseVisualStyleBackColor = true;
+            // 
             // AltaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 451);
+            this.Controls.Add(this.checkHabilitado);
             this.Controls.Add(this.comboTipoDoc);
             this.Controls.Add(this.txtPiso);
             this.Controls.Add(this.labelPiso);
@@ -489,6 +501,7 @@
         private System.Windows.Forms.Label labelPiso;
         private System.Windows.Forms.TextBox txtPiso;
         private System.Windows.Forms.ComboBox comboTipoDoc;
+        private System.Windows.Forms.CheckBox checkHabilitado;
         // alta cliente tiene fecha de creacion --> ponerlo desde sql como fecha actual
 
     }

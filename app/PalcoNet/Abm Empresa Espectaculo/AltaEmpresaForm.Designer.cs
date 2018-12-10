@@ -57,6 +57,7 @@
             this.txtEmpresaCiudad = new System.Windows.Forms.TextBox();
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.checkHabilitado = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -310,11 +311,22 @@
             this.shapeContainer1.TabIndex = 31;
             this.shapeContainer1.TabStop = false;
             // 
+            // checkHabilitado
+            // 
+            this.checkHabilitado.AutoSize = true;
+            this.checkHabilitado.Location = new System.Drawing.Point(246, 328);
+            this.checkHabilitado.Name = "checkHabilitado";
+            this.checkHabilitado.Size = new System.Drawing.Size(85, 17);
+            this.checkHabilitado.TabIndex = 32;
+            this.checkHabilitado.Text = "¿Habilitado?";
+            this.checkHabilitado.UseVisualStyleBackColor = true;
+            // 
             // AltaEmpresaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 408);
+            this.Controls.Add(this.checkHabilitado);
             this.Controls.Add(this.txtEmpresaTelefono);
             this.Controls.Add(this.lblEmpresaTelefono);
             this.Controls.Add(this.txtEmpresaDpto);
@@ -381,6 +393,7 @@
         private System.Windows.Forms.TextBox txtEmpresaCiudad;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        private System.Windows.Forms.CheckBox checkHabilitado;
 
     }
 }

@@ -16,6 +16,13 @@ namespace PalcoNet.Abm_Cliente
         public Cliente ClienteActual { get; set; }
         public FuncionFormCliente funcionForm { get; set; }
         public Tarjeta tarjetaAGuardar { get; set; }
+        public CheckBox CheckHabilitado
+        {
+            get
+            {
+                return checkHabilitado;
+            }
+        }
 
         public String Titulo
         {
@@ -133,7 +140,7 @@ namespace PalcoNet.Abm_Cliente
             funcionForm.Setup(this);
         }
 
-        internal void LlenateConDatosDe(Abm_Cliente.Cliente cliente)
+        public void LlenateConDatosDe(Abm_Cliente.Cliente cliente)
         {
             txtClienteNombre.Text = cliente.nombre;
             txtClienteApellido.Text = cliente.apellido;
@@ -151,6 +158,7 @@ namespace PalcoNet.Abm_Cliente
             txtClienteCP.Text = cliente.codPostal;
             if(cliente.fechaNacimiento != null)
                 fechaNacimiento.Value = (DateTime)cliente.fechaNacimiento;
+            checkHabilitado.Checked = cliente.Habilitado;
             this.ClienteActual = cliente;
         }
     }

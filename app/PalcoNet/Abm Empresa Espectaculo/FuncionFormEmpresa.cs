@@ -26,12 +26,14 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         {
             form.Text = "Modificación de empresa";
             form.Titulo = "Modificar empresa";
+            form.CheckHabilitado.Visible = true;
             form.LlenateCon(empresa);
         }
 
         public void Guardar(AltaEmpresaForm form, Empresa empresa)
         {
             Console.WriteLine("Updating empresa con ID " + empresa.id);
+            empresa.Habilitado = form.CheckHabilitado.Checked;
             empresa.Update();
             form.Close();
         }
@@ -44,6 +46,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         {
             form.Text = "Registro de Empresa";
             form.Titulo = "Registrar empresa";
+            form.CheckHabilitado.Visible = false;
         }
 
         public void Guardar(AltaEmpresaForm form, Empresa empresa)
@@ -59,6 +62,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         {
             form.Text = "Alta de Empresa";
             form.Titulo = "Nueva empresa";
+            form.CheckHabilitado.Visible = false;
         }
 
         public void Guardar(AltaEmpresaForm form, Empresa empresa)

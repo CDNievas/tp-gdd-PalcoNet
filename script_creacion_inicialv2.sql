@@ -55,7 +55,8 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Empresa( -- MIGRADO
 	depto nvarchar(50),
 	cod_postal nvarchar(50),
 	fecha_creacion datetime NOT NULL,
-	usuario_id int CONSTRAINT FK_EMPRESA_USUARIO REFERENCES COMPUMUNDOHIPERMEGARED.Usuario(id_usuario)
+	usuario_id int CONSTRAINT FK_EMPRESA_USUARIO REFERENCES COMPUMUNDOHIPERMEGARED.Usuario(id_usuario),
+	habilitado bit default 1 not null
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Cliente( -- MIGRADO
@@ -77,7 +78,8 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Cliente( -- MIGRADO
 	cant_puntos int DEFAULT 0,
 	fecha_nacimiento datetime,
 	fecha_creacion datetime,
-	usuario_id int CONSTRAINT FK_CLIENTE_USUARIO REFERENCES COMPUMUNDOHIPERMEGARED.Usuario(id_usuario)
+	usuario_id int CONSTRAINT FK_CLIENTE_USUARIO REFERENCES COMPUMUNDOHIPERMEGARED.Usuario(id_usuario),
+	habilitado bit default 1 not null
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Rubro( -- MIGRADO
