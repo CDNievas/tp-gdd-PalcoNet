@@ -58,6 +58,7 @@
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.checkHabilitado = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -321,11 +322,22 @@
             this.checkHabilitado.Text = "¿Habilitado?";
             this.checkHabilitado.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label3.Location = new System.Drawing.Point(223, 86);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(134, 13);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "Formato: XX-XXXXXXXX-X";
+            // 
             // AltaEmpresaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 408);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.checkHabilitado);
             this.Controls.Add(this.txtEmpresaTelefono);
             this.Controls.Add(this.lblEmpresaTelefono);
@@ -394,6 +406,7 @@
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private System.Windows.Forms.CheckBox checkHabilitado;
+        private System.Windows.Forms.Label label3;
 
     }
 }

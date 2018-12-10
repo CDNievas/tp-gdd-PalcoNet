@@ -99,7 +99,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
                         throw new UserInputException("Debe completar todos los campos");
             }
 
-            if (this.txtEmpresaCuit.Text.Trim().Equals("")) // todo validar posta
+            if (new ValidadorCuil().IsInvalid(txtEmpresaCuit.Text)) // todo validar posta
             {
                 throw new UserInputException("Cuit inválido");
             }

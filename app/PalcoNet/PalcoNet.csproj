@@ -245,6 +245,7 @@
     </Compile>
     <Compile Include="Validadores\UserInputException.cs" />
     <Compile Include="Validadores\Validador.cs" />
+    <Compile Include="Validadores\ValidadorCuil.cs" />
     <Compile Include="Validadores\ValidadorEmail.cs" />
     <Compile Include="Validadores\ValidadorNumerico.cs" />
     <Compile Include="Validadores\ValidadorNumeroComa.cs" />

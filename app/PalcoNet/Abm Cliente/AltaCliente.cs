@@ -132,7 +132,12 @@ namespace PalcoNet.Abm_Cliente
                 throw new UserInputException("El teléfono debe ser numérico");
             if (new ValidadorNumerico().IsInvalid(txtClienteNro.Text))
                 throw new UserInputException("El numéro de calle debe ser numérico");
+            if (new ValidadorCuil().IsInvalid(txtClienteCuil.Text))
+                throw new UserInputException("Cuil inválido");
 
+            string dniFromCuil = txtClienteCuil.Text.Split(new[] { "-" }, StringSplitOptions.None)[1];
+            if (!dniFromCuil.Equals(txtClienteDoc.Text))
+                throw new UserInputException("El CUIL y el DNI no coinciden");
         }
 
         private void AltaClienteForm_Load(object sender, EventArgs e)
