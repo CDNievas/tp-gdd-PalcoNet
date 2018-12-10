@@ -10,9 +10,10 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Usuario( -- MIGRADO
 	id_usuario int IDENTITY(1,1) PRIMARY KEY,
 	username nvarchar(50) UNIQUE NOT NULL,
 	password binary(32) NOT NULL,
-	intentos tinyint DEFAULT 0,
+	intentos tinyint DEFAULT 0 not null,
 	habilitado bit DEFAULT 1,
-	eliminado bit DEFAULT 0
+	eliminado bit DEFAULT 0,
+	solicitud_cambio_pass bit default 0 not null
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Funcionalidad( -- MIGRADO
@@ -530,15 +531,15 @@ go
 
 
 create procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario
-(@username nvarchar(50), @password nvarchar(50), @rol_id smallint, @usuario_id int output)
+(@username nvarchar(50), @password nvarchar(50), @rol_id smallint, @solicitud_cambio_pass bit = 0, @usuario_id int = null output)
 as
 begin
 	begin tran
 	if(@password is null)
 		rollback transaction
 
-	insert into COMPUMUNDOHIPERMEGARED.Usuario(username, password, intentos, habilitado)
-	values(@username, HASHBYTES('SHA2_256', @password), 0, 1)
+	insert into COMPUMUNDOHIPERMEGARED.Usuario(username, password, intentos, habilitado, solicitud_cambio_pass)
+	values(@username, HASHBYTES('SHA2_256', @password), 0, 1, @solicitud_cambio_pass)
 
 	set @usuario_id = @@IDENTITY
 
@@ -606,12 +607,13 @@ create procedure COMPUMUNDOHIPERMEGARED.crear_usuario_cliente
 @apellido nvarchar(255), @mail nvarchar(255), @telefono numeric(15), @ciudad nvarchar(25),
 @localidad nvarchar(25), @dom_calle nvarchar(255), @num_calle numeric(18),
 @depto nvarchar(255), @piso numeric(18), @cod_postal nvarchar(255), @fecha_nacimiento date,
-@fecha_creacion datetime, @rol_id int, @username nvarchar(50), @pass nvarchar(64), @cliente_id int output)
+@fecha_creacion datetime, @rol_id int, @username nvarchar(50), @pass nvarchar(64), @solicitud_cambio_pass bit,
+@cliente_id int output)
 as
 begin
 	begin tran
 	declare @id_nuevo_usuario int
-	exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario @username, @pass, @rol_id, @usuario_id = @id_nuevo_usuario output
+	exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario @username, @pass, @rol_id, @solicitud_cambio_pass, @usuario_id = @id_nuevo_usuario output
 	insert into Cliente
 	(cuil, tipo_documento, nro_documento, nombre, apellido, mail, telefono, ciudad, localidad,
 	dom_calle, num_calle, depto, piso, cod_postal, fecha_nacimiento, fecha_creacion, usuario_id)
@@ -679,12 +681,13 @@ create procedure COMPUMUNDOHIPERMEGARED.crear_usuario_empresa
 	@fecha_creacion datetime,
 	@rol_id int,
 	@pass nvarchar(64),
-	@username nvarchar(50))
+	@username nvarchar(50),
+	@solicitud_cambio_pass bit)
 as
 begin
 	begin tran
 	declare @id_nuevo_usuario int
-	exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario @username, @pass, @rol_id, @usuario_id = @id_nuevo_usuario output
+	exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario @username, @pass, @rol_id, @solicitud_cambio_pass, @usuario_id = @id_nuevo_usuario output
 	insert into Empresa(cuit, razon_social, mail, telefono, ciudad, localidad, dom_calle,
 	nro_calle, piso, depto, cod_postal, fecha_creacion, usuario_id)
 	values(@cuit, @razon_social, @mail, @telefono, @ciudad, @localidad, @dom_calle,
@@ -861,7 +864,7 @@ declare @idRol smallint
 
 exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'Administrador General', @tablaFunciones, @id_generado = @idRol output 
 
-exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario 'admin', 'w23', @idRol, null
+exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario 'admin', 'w23', @idRol
 PRINT 'Administrador general creado'
 go
 

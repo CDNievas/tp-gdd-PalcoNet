@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.titulo = new System.Windows.Forms.Label();
             this.lblEmpresaRS = new System.Windows.Forms.Label();
             this.lblEmpresaCUIT = new System.Windows.Forms.Label();
             this.lblEmpresaEMAIL = new System.Windows.Forms.Label();
@@ -66,15 +66,15 @@
             this.label1.Size = new System.Drawing.Size(100, 23);
             this.label1.TabIndex = 0;
             // 
-            // label2
+            // titulo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(20, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(176, 25);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Nueva empresa";
+            this.titulo.AutoSize = true;
+            this.titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titulo.Location = new System.Drawing.Point(20, 20);
+            this.titulo.Name = "titulo";
+            this.titulo.Size = new System.Drawing.Size(176, 25);
+            this.titulo.TabIndex = 0;
+            this.titulo.Text = "Nueva empresa";
             // 
             // lblEmpresaRS
             // 
@@ -297,7 +297,7 @@
             // 
             this.rectangleShape1.Location = new System.Drawing.Point(12, 50);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(606, 384);
+            this.rectangleShape1.Size = new System.Drawing.Size(481, 345);
             // 
             // shapeContainer1
             // 
@@ -306,15 +306,15 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(470, 408);
+            this.shapeContainer1.Size = new System.Drawing.Size(504, 408);
             this.shapeContainer1.TabIndex = 31;
             this.shapeContainer1.TabStop = false;
             // 
-            // altaEmpresa
+            // AltaEmpresaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 408);
+            this.ClientSize = new System.Drawing.Size(504, 408);
             this.Controls.Add(this.txtEmpresaTelefono);
             this.Controls.Add(this.lblEmpresaTelefono);
             this.Controls.Add(this.txtEmpresaDpto);
@@ -340,9 +340,9 @@
             this.Controls.Add(this.lblEmpresaEMAIL);
             this.Controls.Add(this.lblEmpresaCUIT);
             this.Controls.Add(this.lblEmpresaRS);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.titulo);
             this.Controls.Add(this.shapeContainer1);
-            this.Name = "altaEmpresa";
+            this.Name = "AltaEmpresaForm";
             this.Text = "Alta de Empresa";
             this.Load += new System.EventHandler(this.altaEmpresa_Load);
             this.ResumeLayout(false);
@@ -353,7 +353,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label titulo;
         private System.Windows.Forms.Label lblEmpresaRS;
         private System.Windows.Forms.Label lblEmpresaCUIT;
         private System.Windows.Forms.Label lblEmpresaEMAIL;

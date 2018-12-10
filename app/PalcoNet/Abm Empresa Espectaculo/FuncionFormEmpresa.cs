@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PalcoNet.Registro_de_Usuario;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         public void Setup(AltaEmpresaForm form)
         {
+            form.Text = "Modificación de empresa";
+            form.Titulo = "Modificar empresa";
             form.LlenateCon(empresa);
         }
 
@@ -39,12 +42,33 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         public void Setup(AltaEmpresaForm form)
         {
-            // no hace nada
+            form.Text = "Registro de Empresa";
+            form.Titulo = "Registrar empresa";
         }
 
         public void Guardar(AltaEmpresaForm form, Empresa empresa)
         {
             form.DialogResult = DialogResult.OK;
+            form.Close();
+        }
+    }
+
+    public class AltaEmpresa : FuncionFormEmpresa
+    {
+        public void Setup(AltaEmpresaForm form)
+        {
+            form.Text = "Alta de Empresa";
+            form.Titulo = "Nueva empresa";
+        }
+
+        public void Guardar(AltaEmpresaForm form, Empresa empresa)
+        {
+            DialogResult dialogResult = MessageBox.Show("Al dar de alta la empresa autogenerará un usuario para la misma. ¿Desea continuar?",
+                "Solicitud de confirmación", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                CreadorDeUsuarios.CrearNuevaEmpresa(empresa, empresa.cuit, empresa.cuit, true);
+            }
             form.Close();
         }
     }

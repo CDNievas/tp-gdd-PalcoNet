@@ -1,4 +1,5 @@
-﻿using PalcoNet.Registro_de_Usuario;
+﻿using PalcoNet.Abm_Rol;
+using PalcoNet.Registro_de_Usuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,19 @@ namespace PalcoNet.Abm_Cliente
     {
         public void Guardar(AltaCliente form, Cliente cliente)
         {
-            throw new NotImplementedException();
+            DialogResult dialogResult = MessageBox.Show("Al crear este cliente autogenerará su usuario y contraseña. ¿Desea continuar?",
+                "Solicitud de confirmación", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                CreadorDeUsuarios.CrearNuevoCliente(cliente, cliente.nroDocumento, cliente.nroDocumento, true);
+                form.Close();
+            }
         }
 
         public void Setup(AltaCliente form)
         {
-            // No hace nada
+            form.Text = "Alta de cliente";
+            form.Titulo = "Nuevo Cliente";
         }
     }
 
@@ -44,6 +52,8 @@ namespace PalcoNet.Abm_Cliente
 
         public void Setup(AltaCliente form)
         {
+            form.Text = "Modifición de cliente";
+            form.Titulo = "Modificar Cliente";
             form.LlenateConDatosDe(cliente);
         }
     }
@@ -59,7 +69,8 @@ namespace PalcoNet.Abm_Cliente
 
         public void Setup(AltaCliente form)
         {
-            // No hace nada
+            form.Text = "Registro de cliente";
+            form.Titulo = "Registrarse";
         }
 
     }

@@ -103,6 +103,13 @@ namespace PalcoNet.Abm_Cliente
             ActualizarTabla();
         }
 
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            var form = new AltaCliente();
+            form.funcionForm = new Alta();
+            form.ShowDialog();
+        }
+
        
 
         

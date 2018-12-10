@@ -17,6 +17,18 @@ namespace PalcoNet.Abm_Cliente
         public FuncionFormCliente funcionForm { get; set; }
         public Tarjeta tarjetaAGuardar { get; set; }
 
+        public String Titulo
+        {
+            get
+            {
+                return this.titulo.Text;
+            }
+            set
+            {
+                this.titulo.Text = value;
+            }
+        }
+
         public AltaCliente()
         {
             InitializeComponent();

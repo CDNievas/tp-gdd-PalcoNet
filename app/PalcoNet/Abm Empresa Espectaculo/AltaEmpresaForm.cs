@@ -16,6 +16,18 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         private FuncionFormEmpresa funcion;
         public Empresa empresaAPersistir = null;
 
+        public String Titulo
+        {
+            get
+            {
+                return titulo.Text;
+            }
+            set
+            {
+                titulo.Text = value;
+            }
+        }
+
         public AltaEmpresaForm(FuncionFormEmpresa funcion)
         {
             this.funcion = funcion;

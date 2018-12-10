@@ -83,6 +83,18 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             var empresa = (Empresa)empresasDataGrid.CurrentRow.DataBoundItem;
             Console.WriteLine("Modificando " + empresa);
             var ignored = new AltaEmpresaForm(new Modificacion(empresa)).ShowDialog();
+            ActualizarTabla();
+        }
+
+        private void btnNueva_Click(object sender, EventArgs e)
+        {
+            new AltaEmpresaForm(new AltaEmpresa()).ShowDialog();
+            ActualizarTabla();
+        }
+
+        private void btnEmpresaBaja_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

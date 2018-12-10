@@ -228,6 +228,7 @@
             this.btnNuevo.TabIndex = 16;
             this.btnNuevo.Text = "Crear nuevo";
             this.btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnPagAnt
             // 

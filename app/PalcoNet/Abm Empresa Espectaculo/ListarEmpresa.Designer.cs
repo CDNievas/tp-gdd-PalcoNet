@@ -121,6 +121,7 @@
             this.btnEmpresaBaja.TabIndex = 15;
             this.btnEmpresaBaja.Text = "Baja";
             this.btnEmpresaBaja.UseVisualStyleBackColor = true;
+            this.btnEmpresaBaja.Click += new System.EventHandler(this.btnEmpresaBaja_Click);
             // 
             // btnEmpresaMod
             // 
@@ -198,6 +199,7 @@
             this.btnNueva.TabIndex = 25;
             this.btnNueva.Text = "Nueva";
             this.btnNueva.UseVisualStyleBackColor = true;
+            this.btnNueva.Click += new System.EventHandler(this.btnNueva_Click);
             // 
             // empresasDataGrid
             // 
