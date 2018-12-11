@@ -172,26 +172,32 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Item_Factura( -- MIGRADO
 )
 
 
-CREATE TABLE COMPUMUNDOHIPERMEGARED.CanjeDisponible( -- MIGRADO
-	id_canje_disponible int IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE COMPUMUNDOHIPERMEGARED.PremioDisponible( -- MIGRADO
+	id_premio int IDENTITY(1,1) PRIMARY KEY,
 	descripcion nvarchar(60),
-	cant_puntos int DEFAULT 0
+	cant_puntos int
 )
 
-CREATE TABLE  COMPUMUNDOHIPERMEGARED.CanjeUsuario( -- MIGRADO
-	id_canje_usuario int IDENTITY(1,1) PRIMARY KEY,
-	fecha_generado datetime,
-	fecha_usado datetime,
-	cliente_id int CONSTRAINT FK_CANJEUSUARIO_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente(id_cliente),
-	canje_disponible_id int CONSTRAINT FK_CANJEUSUARIO_CANJEDISPONIBLE references COMPUMUNDOHIPERMEGARED.CanjeDisponible(id_canje_disponible)
+CREATE TABLE  COMPUMUNDOHIPERMEGARED.Canje( -- MIGRADO
+	id_canje int IDENTITY(1,1) PRIMARY KEY,
+	fecha_canjeado datetime not null,
+	cliente_id int CONSTRAINT FK_Canje_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente not null,
+	premio_id int CONSTRAINT FK_Canje_PremioDisponible references COMPUMUNDOHIPERMEGARED.PremioDisponible not null
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Puntos( 
 	id_puntos int IDENTITY(1,1) primary key,
-	cant_puntos int DEFAULT 0,
-	cliente_id int CONSTRAINT FK_PUNTOS_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente(id_cliente),
-	compra_id int CONSTRAINT FK_PUNTOS_COMPRA references COMPUMUNDOHIPERMEGARED.Compra(id_compra),
-	canje_id int CONSTRAINT FK_PUNTOS_CANJEUSUARIO references COMPUMUNDOHIPERMEGARED.CanjeUsuario(id_canje_usuario)
+	cant_puntos int not null,
+	cant_usada int default 0 not null,
+	fecha_creacion datetime not null,
+	cliente_id int CONSTRAINT FK_PUNTOS_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente not null,
+	compra_id int CONSTRAINT FK_PUNTOS_COMPRA references COMPUMUNDOHIPERMEGARED.Compra
+)
+
+CREATE TABLE COMPUMUNDOHIPERMEGARED.Puntos_Canje(
+	id_puntos int CONSTRAINT FK_PUNTOSCANJE_PUNTOS references COMPUMUNDOHIPERMEGARED.Puntos not null,
+	id_canje int CONSTRAINT FK_PUNTOSCANJE_CANJE references COMPUMUNDOHIPERMEGARED.Canje not null,
+	puntos_canjeados int not null
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Sector(
@@ -501,14 +507,15 @@ drop table COMPUMUNDOHIPERMEGARED.##UbicacionTemp
 PRINT 'Migre Item_Factura'
 GO
 
-INSERT INTO COMPUMUNDOHIPERMEGARED.CanjeDisponible(descripcion,cant_puntos) VALUES
+INSERT INTO COMPUMUNDOHIPERMEGARED.PremioDisponible(descripcion,cant_puntos) VALUES
 	('Lavadora automatica que nos muestra el adorable Smithers', 20000),
-	('La caja', 20000)
-PRINT 'Migre CanjeDisponible'
+	('La caja', 20000),
+	('Llavero especial PalcoNET', 1000)
+PRINT 'Migre PremioDisponible'
 GO
 
-INSERT INTO COMPUMUNDOHIPERMEGARED.Puntos(cant_puntos,cliente_id,compra_id)
-	SELECT u.precio, c.cliente_id, c.id_compra
+INSERT INTO COMPUMUNDOHIPERMEGARED.Puntos(cant_puntos, fecha_creacion, cliente_id, compra_id)
+	SELECT ROUND(u.precio/3, 0, 1), c.fecha, c.cliente_id, c.id_compra
 	FROM COMPUMUNDOHIPERMEGARED.Compra c
 	JOIN COMPUMUNDOHIPERMEGARED.Ubicacion u ON c.id_compra = u.compra_id
 	WHERE u.compra_id IS NOT NULL
@@ -852,6 +859,71 @@ as
 
 	set @id_publicacion_generado = @@IDENTITY
 	return
+go
+
+--=================================================
+--|			CANJE DE PUNTOS                       |
+--=================================================
+
+create function COMPUMUNDOHIPERMEGARED.puntosDeCliente(@cliente_id int, @fecha datetime)
+returns int
+as
+begin
+	return isnull((select isnull(sum(p.cant_puntos - p.cant_usada), 0) from COMPUMUNDOHIPERMEGARED.Puntos p
+			where p.fecha_creacion <= @fecha and
+			DATEDIFF(MONTH, p.fecha_creacion, @fecha) <= 3 and p.cant_puntos > p.cant_usada
+			and p.cliente_id = @cliente_id
+			group by p.cliente_id), 0)
+end
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.realizarCanje(@cliente_id int, @premio_id int, @fecha_actual datetime)
+as
+	declare @puntos_a_gastar int = (select cant_puntos from PremioDisponible where id_premio = @premio_id)
+	declare @puntos_disponibles int = COMPUMUNDOHIPERMEGARED.puntosDeCliente(@cliente_id, @fecha_actual)
+	if(@puntos_a_gastar > @puntos_disponibles)
+	begin
+		raiserror('El cliente no tiene suficientes puntos', 13, 1)
+		rollback tran
+		return
+	end
+	
+	declare c1 cursor for
+	select id_puntos, cant_puntos - cant_usada from Puntos p
+	where p.fecha_creacion <= @fecha_actual and
+	DATEDIFF(MONTH, p.fecha_creacion, @fecha_actual) <= 3 and p.cant_puntos > p.cant_usada
+	and p.cliente_id = @cliente_id
+	order by p.fecha_creacion asc
+
+	insert into Canje(fecha_canjeado, cliente_id, premio_id)
+	values(@fecha_actual, @cliente_id, @premio_id)
+
+	declare @canje_id int = @@IDENTITY
+
+	declare @id_puntos int, @cant_puntos int
+	declare @cant_restante int = @puntos_a_gastar
+
+	open c1
+	fetch next from c1 into @id_puntos, @cant_puntos
+	while @@FETCH_STATUS = 0 and @cant_restante > 0
+	begin
+		declare @a_gastar int
+		if @cant_restante >= @cant_puntos
+			set @a_gastar = @cant_puntos
+		else
+			set @a_gastar = @cant_restante
+		update Puntos
+		set cant_usada = cant_usada + @a_gastar
+		where id_puntos = @id_puntos
+
+		insert into Puntos_Canje(id_puntos, id_canje, puntos_canjeados)
+		values(@id_puntos, @canje_id, @a_gastar)
+
+		set @cant_restante = @cant_restante - @a_gastar
+		fetch next from c1 into @id_puntos, @cant_puntos
+	end
+	close c1
+	deallocate c1
 go
 
 PRINT 'Todes les procedures y les funciones creades'

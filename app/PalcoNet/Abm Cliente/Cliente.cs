@@ -64,6 +64,11 @@ namespace PalcoNet.Abm_Cliente
 
         public Boolean Habilitado { get; set; }
 
+        public static Cliente FindByUserId(int userID)
+        {
+            var dt = DataBase.GetInstance().Query("select * from COMPUMUNDOHIPERMEGARED.Cliente where usuario_id = " + userID);
+            return traerDe(dt.Rows[0]);
+        }
 
         public override string ToString()
         {
@@ -137,6 +142,15 @@ namespace PalcoNet.Abm_Cliente
                 , new QueryParameter("habilitado", SqlDbType.Bit, Habilitado ? 1 : 0)
                 , new QueryParameter("id", SqlDbType.Int, id));
 
+        }
+
+        public int GetPuntos()
+        {
+            var dt = DataBase.GetInstance().TypedQuery("select COMPUMUNDOHIPERMEGARED.puntosDeCliente(@clienteId, @fecha) as result",
+                new QueryParameter("clienteID", SqlDbType.Int, this.id),
+                new QueryParameter("fecha", SqlDbType.DateTime, Contexto.FechaActual));
+            var dr = dt.Rows[0];
+            return new DataRowExtended(dr).IntValue("result");
         }
     }
 }

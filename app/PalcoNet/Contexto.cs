@@ -1,4 +1,5 @@
-﻿using PalcoNet.Abm_Empresa_Espectaculo;
+﻿using PalcoNet.Abm_Cliente;
+using PalcoNet.Abm_Empresa_Espectaculo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,5 +32,21 @@ namespace PalcoNet
                 empresaLogeada = value;
             }
         }
+
+        private static Cliente clienteLogeado = null;
+        public static Cliente ClienteLogeado
+        {
+            get
+            {
+                if (clienteLogeado == null)
+                    clienteLogeado = Cliente.FindByUserId((int) idUsuarioLogueado);
+                return clienteLogeado;
+            }
+            set
+            {
+                clienteLogeado = value;
+            }
+        }
+
     }
 }

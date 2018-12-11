@@ -7,6 +7,8 @@ select * from COMPUMUNDOHIPERMEGARED.Sector s
 
 select * from COMPUMUNDOHIPERMEGARED.Empresa
 
+select * from COMPUMUNDOHIPERMEGARED.Cliente
+
 select * from COMPUMUNDOHIPERMEGARED.Empresa e
 inner join COMPUMUNDOHIPERMEGARED.Publicacion p
 on e.id_empresa = p.empresa_id
@@ -29,3 +31,16 @@ select * from COMPUMUNDOHIPERMEGARED.Ubicacion u
 inner join COMPUMUNDOHIPERMEGARED.TipoUbicacion t
 on t.id_tipo_ubicacion = u.tipo_ubicacion_id
 where u.publicacion_id = 7804
+
+select * from COMPUMUNDOHIPERMEGARED.Puntos
+
+select * from COMPUMUNDOHIPERMEGARED.PremioDisponible order by cant_puntos desc
+
+select * from COMPUMUNDOHIPERMEGARED.Canje c
+inner join COMPUMUNDOHIPERMEGARED.PremioDisponible p
+on c.premio_id = p.id_premio
+inner join COMPUMUNDOHIPERMEGARED.Puntos_Canje pc
+on c.id_canje = pc.id_canje
+
+select sum(puntos_canjeados) from COMPUMUNDOHIPERMEGARED.Puntos_Canje
+

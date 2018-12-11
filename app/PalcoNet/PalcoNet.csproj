@@ -80,11 +80,11 @@
     <Compile Include="Abm Rol\FuncionRolForm.cs" />
     <Compile Include="Abm Rol\Rol.cs" />
     <Compile Include="Abm Rol\Roles.cs" />
-    <Compile Include="Canje Puntos\canjearPuntos.cs">
+    <Compile Include="Canje Puntos\CanjearPuntos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Canje Puntos\canjearPuntos.Designer.cs">
-      <DependentUpon>canjearPuntos.cs</DependentUpon>
+    <Compile Include="Canje Puntos\CanjearPuntos.Designer.cs">
+      <DependentUpon>CanjearPuntos.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje Puntos\ConsultaPuntos.cs">
       <SubType>Form</SubType>
@@ -124,6 +124,7 @@
     <Compile Include="Abm Rubro\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Canje Puntos\Premio.cs" />
     <Compile Include="Comprar\buscadorCompras.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="DataBasePackage\DataBase.cs" />
@@ -347,8 +348,8 @@
       <DependentUpon>modificarCliente.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Canje Puntos\canjearPuntos.resx">
-      <DependentUpon>canjearPuntos.cs</DependentUpon>
+    <EmbeddedResource Include="Canje Puntos\CanjearPuntos.resx">
+      <DependentUpon>CanjearPuntos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Canje Puntos\ConsultaPuntos.resx">
       <DependentUpon>ConsultaPuntos.cs</DependentUpon>
