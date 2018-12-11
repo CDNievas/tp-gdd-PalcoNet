@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Abm_Cliente
 {
-    partial class altaTarjeta
+    partial class AltaTarjeta
     {
         /// <summary>
         /// Required designer variable.
@@ -144,6 +144,7 @@
             this.Controls.Add(this.label1);
             this.Name = "altaTarjeta";
             this.Text = "Datos tarjeta";
+            this.Load += new System.EventHandler(this.altaTarjeta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

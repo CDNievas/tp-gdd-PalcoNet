@@ -19,13 +19,10 @@ namespace PalcoNet.Abm_Cliente
         public TipoTarjeta tipoTarjeta { get; set; }
 
         [DisplayName("Codigo Seguridad")]
-        public String codigoSeguridad { get; set; }
+        public int codigoSeguridad { get; set; }
 
         [DisplayName("Vencimiento")]
-        public DateTime? fechaVencimiento { get; set; }
-        
-        /*[DisplayName("Habilitacion")]
-        public Bit habilitado { get; set; }*/
+        public DateTime fechaVencimiento { get; set; }
 
         public static Tarjeta traerDe(DataRow dr)
         {
@@ -36,40 +33,36 @@ namespace PalcoNet.Abm_Cliente
 
             try
             {
-                var tipo = data.StringValue("tipo_tarjeta")[0];
+                var tipo = data.StringValue("tipo")[0];
                 tarjeta.tipoTarjeta = TipoTarjeta.Parse(tipo);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 tarjeta.tipoTarjeta = null;
             }
 
             tarjeta.nroTarjeta = data.StringValue("nro_tarjeta");
-            tarjeta.codigoSeguridad = data.StringValue("ccv");
-            tarjeta.fechaVencimiento = data.OrElse<DateTime?>("fecha_vencimiento", null);
+            tarjeta.codigoSeguridad = data.IntValue("ccv");
+            tarjeta.fechaVencimiento = data.At<DateTime>("fecha_vencimiento");
 
             return tarjeta;
         }
 
-        internal void Update()
+        public void SerAsignadaA(int idCliente)
         {
-            String sql = String.Format
-                (@" update COMPUMUNDOHIPERMEGARED.Tarjeta
-                    set nro_tarjeta = '{0}', tipo_tarjeta = '{1}', ccv = '{2}',
-                    fecha_vencimiento = '{3}', habilitado = '{4}'  where id_tarjeta = {4}",
-                     nroTarjeta, tipoTarjeta.discriminator, codigoSeguridad, fechaVencimiento, 1 , id);
-            var ignored = DataBase.GetInstance().Query(sql);
+            DataBase.GetInstance()
+                .Procedure("AsignarTarjetaA",
+                new ParametroIn("cliente_id", idCliente),
+                new ParametroIn("nro_tarjeta", this.nroTarjeta),
+                new ParametroIn("tipo", this.tipoTarjeta.discriminator),
+                new ParametroIn("ccv", this.codigoSeguridad),
+                new ParametroIn("fecha_vencimiento", this.fechaVencimiento));
         }
 
-        public void Insert(int idCliente)
+        public Boolean FueModificadaRespectoA(Tarjeta otra)
         {
-            String sql = String.Format
-                (@" INSERT INTO COMPUMUNDOHIPERMEGARED.Tarjeta(nro_tarjeta, tipo, ccv, fecha_vencimiento, cliente_id)
-                    VALUES('{0}', '{1}', '{2}', CONVERT(datetime,'{3}', 131),{4})",
-                    nroTarjeta, tipoTarjeta.discriminator, codigoSeguridad, fechaVencimiento, idCliente);
-
-            var ignored = DataBase.GetInstance().Query(sql);
+            return !(this.nroTarjeta.Equals(otra.nroTarjeta) && this.tipoTarjeta.Equals(otra.tipoTarjeta) && this.codigoSeguridad.Equals(otra.codigoSeguridad) && this.fechaVencimiento.Equals(otra.fechaVencimiento));
         }
-
     }
 }

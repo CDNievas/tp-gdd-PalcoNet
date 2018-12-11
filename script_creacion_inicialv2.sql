@@ -79,7 +79,8 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Cliente( -- MIGRADO
 	fecha_nacimiento datetime,
 	fecha_creacion datetime,
 	usuario_id int CONSTRAINT FK_CLIENTE_USUARIO REFERENCES COMPUMUNDOHIPERMEGARED.Usuario(id_usuario),
-	habilitado bit default 1 not null
+	habilitado bit default 1 not null,
+	tarjeta_actual_id int
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Rubro( -- MIGRADO
@@ -97,10 +98,9 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Grado( -- MIGRADO
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Tarjeta( -- MIGRADO
 	id_tarjeta int IDENTITY(1,1) PRIMARY KEY,
 	nro_tarjeta nvarchar(50) NOT NULL,
-	tipo nvarchar(1) NOT NULL CHECK(tipo IN('V','M','A')),
-	ccv nvarchar(5) NOT NULL,
+	tipo char(1) NOT NULL CHECK(tipo IN('V','M','A')),
+	ccv numeric(5, 0) NOT NULL,
 	fecha_vencimiento date NOT NULL,
-	eliminado bit DEFAULT 0,
 	cliente_id int CONSTRAINT FK_TARJETA_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente(id_cliente)
 )
 
@@ -211,6 +211,9 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Sector(
 	cantidad int,
 	precio numeric(18,0)
 )
+
+alter table COMPUMUNDOHIPERMEGARED.Cliente
+add constraint FK_CLIENTE_TARJETA foreign key(tarjeta_actual_id) references COMPUMUNDOHIPERMEGARED.Tarjeta
 
 /* MIGRACION DATOS */
 PRINT '----- Empezando a migrar datos -----'
@@ -924,6 +927,30 @@ as
 	end
 	close c1
 	deallocate c1
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.AsignarTarjetaA(
+	@cliente_id int,
+	@nro_tarjeta nvarchar(50),
+	@tipo char(1),
+	@ccv numeric(5, 0),
+	@fecha_vencimiento date
+)
+as
+begin
+	begin tran
+	insert into COMPUMUNDOHIPERMEGARED.Tarjeta(nro_tarjeta, tipo, ccv, fecha_vencimiento, cliente_id)
+	values (@nro_tarjeta, @tipo, @ccv, @fecha_vencimiento, @cliente_id)
+
+	declare @id_tarjeta int = @@IDENTITY
+
+	update COMPUMUNDOHIPERMEGARED.Cliente
+	set tarjeta_actual_id = @id_tarjeta
+	where id_cliente = @cliente_id
+
+	commit tran
+end
+
 go
 
 PRINT 'Todes les procedures y les funciones creades'

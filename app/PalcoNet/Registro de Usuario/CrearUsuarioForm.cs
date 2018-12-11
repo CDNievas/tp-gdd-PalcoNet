@@ -23,9 +23,9 @@ namespace PalcoNet.Registro_de_Usuario
             
         }
 
-        private Cliente clienteAPersistir;
-        private Empresa empresaAPersistir;
-        private Tarjeta tarjetaAPersistir;
+        private Cliente clienteAPersistir = null;
+        private Empresa empresaAPersistir = null;
+        private Tarjeta tarjetaAPersistir = null;
 
         private Rol GetSelectedRol()
         {
@@ -59,6 +59,7 @@ namespace PalcoNet.Registro_de_Usuario
             var rol = GetSelectedRol();
             if (rol.EsCliente())
             {
+                empresaAPersistir = null;
                 var form = new Abm_Cliente.AltaCliente();
                 form.funcionForm = new Registrarse();
                 var result = form.ShowDialog();
@@ -67,22 +68,14 @@ namespace PalcoNet.Registro_de_Usuario
                     clienteAPersistir = form.ClienteActual;
                     tarjetaAPersistir = form.tarjetaAGuardar;
                 }
-                else
-                {
-                    clienteAPersistir = null;
-                    empresaAPersistir = null;
-                }
                     
             }else if (rol.EsEmpresa()){
+                clienteAPersistir = null;
+                tarjetaAPersistir = null;
                 var form = new Abm_Empresa_Espectaculo.AltaEmpresaForm(new Abm_Empresa_Espectaculo.Registro());
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                     empresaAPersistir = form.empresaAPersistir;
-                else
-                {
-                    clienteAPersistir = null;
-                    empresaAPersistir = null;
-                }
 
             }else{
                 MessageBox.Show("Este tipo de usuario no posee campos adicionales", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -117,12 +110,14 @@ namespace PalcoNet.Registro_de_Usuario
                 {
                     if (clienteAPersistir == null)
                         throw new UserInputException("Debe cargar los datos del cliente");
+                    if (tarjetaAPersistir == null)
+                        throw new UserInputException("Debe cargar los datos de la tarjeta");
                     PersistirCliente();
                 }
                 this.Close();
                 MessageBox.Show("Se ha creado el usuario " + txtUsuario.Text,
                         "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-      
+
             }
             catch (UserInputException ex)
             {
@@ -131,6 +126,11 @@ namespace PalcoNet.Registro_de_Usuario
             catch (ProcedureException ex)
             {
                 MessageBox.Show(ex.GetSqlErrorMessage(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Ha ocurrido un error");
             }
         }
 
@@ -141,11 +141,12 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void PersistirCliente()
         {
-            int idCliente = CreadorDeUsuarios.CrearNuevoCliente(clienteAPersistir, txtUsuario.Text, password.Text);
-
-            this.tarjetaAPersistir.Insert(idCliente);
+            DataBase.GetInstance().WithTransaction(() =>
+            {
+                int idCliente = CreadorDeUsuarios.CrearNuevoCliente(clienteAPersistir, txtUsuario.Text, password.Text);
+                tarjetaAPersistir.SerAsignadaA(idCliente);
+            });
             
-
         }
 
 

@@ -26,7 +26,11 @@ namespace PalcoNet.Abm_Cliente
             {
                 var user = cliente.nroDocumento;
                 var password = PassGenerator.CreateRandomPassword(20);
-                CreadorDeUsuarios.CrearNuevoCliente(cliente, user, password, true);
+                DataBase.GetInstance().WithTransaction(() =>
+                {
+                    var idCliente = CreadorDeUsuarios.CrearNuevoCliente(cliente, user, password, true);
+                    form.tarjetaAGuardar.SerAsignadaA(idCliente);
+                });
                 form.Close();
                 new UsuarioPassForm(user, password).ShowDialog();
             }
@@ -37,6 +41,8 @@ namespace PalcoNet.Abm_Cliente
             form.CheckHabilitado.Visible = false;
             form.Text = "Alta de cliente";
             form.Titulo = "Nuevo Cliente";
+            form.DebeGuardarTarjeta = true;
+            form.tarjetaAGuardar = null;
         }
     }
 
@@ -51,8 +57,13 @@ namespace PalcoNet.Abm_Cliente
 
         public void Guardar(AltaCliente form, Cliente cliente)
         {
-            cliente.Habilitado = form.CheckHabilitado.Checked;
-            cliente.Update();   
+            DataBase.GetInstance().WithTransaction(() =>
+            {
+                cliente.Habilitado = form.CheckHabilitado.Checked;
+                cliente.Update();
+                if (form.DebeGuardarTarjeta)
+                    form.tarjetaAGuardar.SerAsignadaA((int)cliente.id);
+            });
             form.Close();
             MessageBox.Show(String.Format("El cliente {0} {1} ha sido actualizado", cliente.nombre, cliente.apellido),
                     "Cliente actualizado",
@@ -65,6 +76,8 @@ namespace PalcoNet.Abm_Cliente
             form.Titulo = "Modificar Cliente";
             form.CheckHabilitado.Visible = true;
             form.LlenateConDatosDe(cliente);
+            form.DebeGuardarTarjeta = false;
+            form.tarjetaAGuardar = cliente.GetTarjeta();
         }
     }
 
@@ -82,6 +95,8 @@ namespace PalcoNet.Abm_Cliente
             form.CheckHabilitado.Visible = false;
             form.Text = "Registro de cliente";
             form.Titulo = "Registrarse";
+            form.DebeGuardarTarjeta = true;
+            form.tarjetaAGuardar = null;
         }
 
     }

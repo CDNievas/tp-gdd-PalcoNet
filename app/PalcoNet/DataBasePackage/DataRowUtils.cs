@@ -11,9 +11,9 @@ namespace PalcoNet
     {
         private DataRow dr;
 
-        public Object At(String columnName)
+        public T At<T>(String columnName)
         {
-            return dr[columnName];
+            return (T)dr[columnName];
         }
 
         public DataRowExtended(DataRow dr)

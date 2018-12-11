@@ -16,6 +16,7 @@ drop procedure COMPUMUNDOHIPERMEGARED.generar_ubicaciones_de
 drop procedure COMPUMUNDOHIPERMEGARED.update_datos_borrador
 drop procedure COMPUMUNDOHIPERMEGARED.publicar_fecha
 drop procedure COMPUMUNDOHIPERMEGARED.realizarCanje
+drop procedure COMPUMUNDOHIPERMEGARED.AsignarTarjetaA
 
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario

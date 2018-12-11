@@ -52,11 +52,11 @@
     <Compile Include="Abm Cliente\AltaCliente.Designer.cs">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Cliente\altaTarjeta.cs">
+    <Compile Include="Abm Cliente\AltaTarjeta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Cliente\altaTarjeta.Designer.cs">
-      <DependentUpon>altaTarjeta.cs</DependentUpon>
+    <Compile Include="Abm Cliente\AltaTarjeta.Designer.cs">
+      <DependentUpon>AltaTarjeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\bajaCliente.cs">
       <SubType>Form</SubType>
@@ -66,7 +66,6 @@
     </Compile>
     <Compile Include="Abm Cliente\Buscador.cs" />
     <Compile Include="Abm Cliente\FuncionFormCliente.cs" />
-    <Compile Include="Abm Cliente\FuncionFormTarjeta.cs" />
     <Compile Include="Abm Cliente\modificarCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,8 +262,8 @@
     <Compile Include="Validadores\ValidadorEmail.cs" />
     <Compile Include="Validadores\ValidadorNumerico.cs" />
     <Compile Include="Validadores\ValidadorNumeroComa.cs" />
-    <EmbeddedResource Include="Abm Cliente\altaTarjeta.resx">
-      <DependentUpon>altaTarjeta.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Cliente\AltaTarjeta.resx">
+      <DependentUpon>AltaTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\AltaRolForm.resx">
       <DependentUpon>AltaRolForm.cs</DependentUpon>

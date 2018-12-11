@@ -152,5 +152,20 @@ namespace PalcoNet.Abm_Cliente
             var dr = dt.Rows[0];
             return new DataRowExtended(dr).IntValue("result");
         }
+
+        public Tarjeta GetTarjeta()
+        {
+            var dt = DataBase.GetInstance().TypedQuery(@"select * from COMPUMUNDOHIPERMEGARED.Tarjeta t
+                    inner join COMPUMUNDOHIPERMEGARED.Cliente c on c.tarjeta_actual_id = t.id_tarjeta and c.id_cliente = @id"
+                , new QueryParameter("id", SqlDbType.Int, this.id));
+            try
+            {
+                return Tarjeta.traerDe(dt.Rows[0]);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

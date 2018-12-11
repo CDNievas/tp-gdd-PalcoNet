@@ -11,17 +11,29 @@ using System.Windows.Forms;
 
 namespace PalcoNet.Abm_Cliente
 {
-    public partial class altaTarjeta : Form
+    public partial class AltaTarjeta : Form
     {
-        public Tarjeta TarjetaActual { get; set; }
-        public FuncionFormTarjeta funcionForm { get; set; }
+        public Tarjeta TarjetaInicial { get; set; }
+        public Tarjeta TarjetaFinal { get; set; }
+        public Boolean DebeActualizarTarjeta { get; private set; }
 
-        public altaTarjeta()
+        public AltaTarjeta(Tarjeta tarjeta = null, Boolean debeActualizar = true)
         {
             InitializeComponent();
             dateTimeVencimiento.MinDate = Contexto.FechaActual;
             this.comboTipoTarjeta.DataSource = TipoTarjeta.Todos();
             comboTipoTarjeta.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.TarjetaInicial = tarjeta;
+            this.DebeActualizarTarjeta = debeActualizar;
+            if (debeActualizar)
+                this.TarjetaFinal = this.TarjetaInicial;
+            if (tarjeta != null)
+                this.LlenateConDatosDe(tarjeta);
+        }
+
+        private void altaTarjeta_Load(object sender, EventArgs e)
+        {
+
         }
 
         private List<TextBox> TodosLosTextbox()
@@ -34,15 +46,20 @@ namespace PalcoNet.Abm_Cliente
             try
             {
                 ValidarInputs();
-                Tarjeta tarjeta = TarjetaActual == null ? new Tarjeta() : TarjetaActual;
-                tarjeta.nroTarjeta = txtNroTarjeta.Text;
-                tarjeta.codigoSeguridad = txtCCV.Text;
-                tarjeta.tipoTarjeta = (TipoTarjeta)comboTipoTarjeta.SelectedItem;
-                tarjeta.fechaVencimiento = dateTimeVencimiento.Value;
+                Tarjeta nuevaTarjeta = new Tarjeta();
+                nuevaTarjeta.nroTarjeta = txtNroTarjeta.Text;
+                nuevaTarjeta.codigoSeguridad = Convert.ToInt32(txtCCV.Text);
+                nuevaTarjeta.tipoTarjeta = (TipoTarjeta)comboTipoTarjeta.SelectedItem;
+                nuevaTarjeta.fechaVencimiento = dateTimeVencimiento.Value;
 
-
-                Console.WriteLine(tarjeta);
-                funcionForm.Guardar(this, tarjeta);
+                Console.WriteLine(nuevaTarjeta);
+                if (TarjetaInicial == null || nuevaTarjeta.FueModificadaRespectoA(TarjetaInicial))
+                {
+                    DebeActualizarTarjeta = true;
+                    TarjetaFinal = nuevaTarjeta;
+                }
+                DialogResult = DialogResult.OK;
+                Close();
             }
 
             catch (UserInputException ex)
@@ -50,29 +67,39 @@ namespace PalcoNet.Abm_Cliente
                 MessageBox.Show(ex.Message, "Error en el ingreso",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + "\n" + ex.StackTrace);
+                MessageBox.Show("Ha ocurrido un error");
+            }
         }
 
         private void ValidarInputs()
         {
-            foreach (TextBox t in TodosLosTextbox())
-            { }
-
+            
             if (new ValidadorNumerico().IsInvalid(this.txtNroTarjeta.Text))
                 throw new UserInputException("Tarjeta inválida. Debe ser numerica");
             if (new ValidadorNumerico().IsInvalid(txtCCV.Text))
                 throw new UserInputException("El CCV debe ser numérico");
+            if (txtCCV.Text.Length > 5)
+                throw new UserInputException("El CCV tiene que tener como máximo 5 dígitos");
+
         }
 
-        internal void LlenateConDatosDe(Abm_Cliente.Tarjeta tarjeta)
+        public void LlenateConDatosDe(Tarjeta tarjeta)
         {
+            Console.WriteLine("Llenando form con tarjeta: " + tarjeta);
             txtNroTarjeta.Text = tarjeta.nroTarjeta;
-            txtCCV.Text = tarjeta.codigoSeguridad;
+            txtCCV.Text = tarjeta.codigoSeguridad.ToString();
             comboTipoTarjeta.SelectedItem = tarjeta.tipoTarjeta;
-            if (tarjeta.fechaVencimiento != null)
-                dateTimeVencimiento.Value = (DateTime)tarjeta.fechaVencimiento;
+            if (tarjeta.fechaVencimiento < Contexto.FechaActual)
+                dateTimeVencimiento.MinDate = tarjeta.fechaVencimiento;
+            dateTimeVencimiento.Value = tarjeta.fechaVencimiento;
 
-            this.TarjetaActual = tarjeta;
+            this.TarjetaInicial = tarjeta;
         }
+
+
 
     }
 }

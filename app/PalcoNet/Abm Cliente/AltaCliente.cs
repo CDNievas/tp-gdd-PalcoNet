@@ -16,6 +16,7 @@ namespace PalcoNet.Abm_Cliente
         public Cliente ClienteActual { get; set; }
         public FuncionFormCliente funcionForm { get; set; }
         public Tarjeta tarjetaAGuardar { get; set; }
+        public Boolean DebeGuardarTarjeta { get; set; }
         public CheckBox CheckHabilitado
         {
             get
@@ -59,13 +60,13 @@ namespace PalcoNet.Abm_Cliente
 
         private void btnDatosTarjeta_Click(object sender, EventArgs e)
         {
-            altaTarjeta altaTarjeta = new altaTarjeta();
-            altaTarjeta.funcionForm = new RegistrarTarjeta();
+            AltaTarjeta altaTarjeta = new AltaTarjeta(this.tarjetaAGuardar, this.DebeGuardarTarjeta);
             var resultado = altaTarjeta.ShowDialog();
-
-            if (resultado == DialogResult.OK)
+ 
+            if (resultado == DialogResult.OK && altaTarjeta.DebeActualizarTarjeta)
             {
-                this.tarjetaAGuardar = altaTarjeta.TarjetaActual;
+                this.tarjetaAGuardar = altaTarjeta.TarjetaFinal;
+                this.DebeGuardarTarjeta = true;
             }
 
         }
@@ -105,6 +106,12 @@ namespace PalcoNet.Abm_Cliente
 
                 cliente.fechaNacimiento = fechaNacimiento.Value;
                 cliente.fechaCreacion = Contexto.FechaActual;
+
+                if (this.tarjetaAGuardar == null && this.DebeGuardarTarjeta)
+                {
+                    MessageBox.Show("Debe ingresar los datos de la tarjeta");
+                    return;
+                }
 
                 Console.WriteLine(cliente);
                 funcionForm.Guardar(this, cliente);
