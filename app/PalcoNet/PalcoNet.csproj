@@ -131,7 +131,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje Puntos\Premio.cs" />
-    <Compile Include="Comprar\buscadorCompras.cs" />
+    <Compile Include="Comprar\listarPublicaciones.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="DataBasePackage\DataBase.cs" />
     <Compile Include="DataBasePackage\DataRowUtils.cs" />

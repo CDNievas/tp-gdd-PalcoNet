@@ -38,7 +38,8 @@
             // boxFuncionalidad
             // 
             this.boxFuncionalidad.FormattingEnabled = true;
-            this.boxFuncionalidad.Location = new System.Drawing.Point(39, 129);
+            this.boxFuncionalidad.Location = new System.Drawing.Point(29, 105);
+            this.boxFuncionalidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.boxFuncionalidad.Name = "boxFuncionalidad";
             this.boxFuncionalidad.Size = new System.Drawing.Size(204, 21);
             this.boxFuncionalidad.TabIndex = 0;
@@ -46,7 +47,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 93);
+            this.label1.Location = new System.Drawing.Point(39, 76);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(178, 13);
             this.label1.TabIndex = 1;
@@ -65,7 +67,8 @@
             // linkCambioPass
             // 
             this.linkCambioPass.AutoSize = true;
-            this.linkCambioPass.Location = new System.Drawing.Point(152, 21);
+            this.linkCambioPass.Location = new System.Drawing.Point(114, 17);
+            this.linkCambioPass.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkCambioPass.Name = "linkCambioPass";
             this.linkCambioPass.Size = new System.Drawing.Size(120, 13);
             this.linkCambioPass.TabIndex = 3;
@@ -76,7 +79,8 @@
             // lblNombreUsuario
             // 
             this.lblNombreUsuario.AutoSize = true;
-            this.lblNombreUsuario.Location = new System.Drawing.Point(24, 21);
+            this.lblNombreUsuario.Location = new System.Drawing.Point(18, 17);
+            this.lblNombreUsuario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNombreUsuario.Name = "lblNombreUsuario";
             this.lblNombreUsuario.Size = new System.Drawing.Size(35, 13);
             this.lblNombreUsuario.TabIndex = 4;
@@ -86,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(286, 257);
             this.Controls.Add(this.lblNombreUsuario);
             this.Controls.Add(this.linkCambioPass);
             this.Controls.Add(this.btnAccept);
