@@ -242,6 +242,7 @@
     <Compile Include="Abm Rol\AltaRolForm.Designer.cs">
       <DependentUpon>AltaRolForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginUtils\PassGenerator.cs" />
     <Compile Include="Registro de Usuario\CreadorDeUsuarios.cs" />
     <Compile Include="SelectorFuncionalidad.cs" />
     <Compile Include="SelectorFuncionalidadForm.cs">
@@ -249,6 +250,12 @@
     </Compile>
     <Compile Include="SelectorFuncionalidadForm.Designer.cs">
       <DependentUpon>SelectorFuncionalidadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioPassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsuarioPassForm.Designer.cs">
+      <DependentUpon>UsuarioPassForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Validadores\UserInputException.cs" />
     <Compile Include="Validadores\Validador.cs" />
@@ -398,6 +405,9 @@
     </Compile>
     <EmbeddedResource Include="SelectorFuncionalidadForm.resx">
       <DependentUpon>SelectorFuncionalidadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsuarioPassForm.resx">
+      <DependentUpon>UsuarioPassForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="GD2C2018DataSet.xsc">
       <DependentUpon>GD2C2018DataSet.xsd</DependentUpon>

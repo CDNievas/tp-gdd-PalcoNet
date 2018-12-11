@@ -1,4 +1,5 @@
 ﻿using PalcoNet.Abm_Rol;
+using PalcoNet.LoginUtils;
 using PalcoNet.Registro_de_Usuario;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,11 @@ namespace PalcoNet.Abm_Cliente
                 "Solicitud de confirmación", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                CreadorDeUsuarios.CrearNuevoCliente(cliente, cliente.nroDocumento, cliente.nroDocumento, true);
+                var user = cliente.nroDocumento;
+                var password = PassGenerator.CreateRandomPassword(20);
+                CreadorDeUsuarios.CrearNuevoCliente(cliente, user, password, true);
                 form.Close();
+                new UsuarioPassForm(user, password).ShowDialog();
             }
         }
 

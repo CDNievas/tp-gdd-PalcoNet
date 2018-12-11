@@ -1,4 +1,5 @@
-﻿using PalcoNet.Registro_de_Usuario;
+﻿using PalcoNet.LoginUtils;
+using PalcoNet.Registro_de_Usuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,9 +72,14 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
                 "Solicitud de confirmación", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                CreadorDeUsuarios.CrearNuevaEmpresa(empresa, empresa.cuit, empresa.cuit, true);
+                var user = empresa.cuit;
+                var pass = PassGenerator.CreateRandomPassword(20);
+                CreadorDeUsuarios.CrearNuevaEmpresa(empresa, user, pass, true);
+                form.Close();
+                new UsuarioPassForm(user, pass).ShowDialog();
+                
             }
-            form.Close();
+            
         }
     }
 }

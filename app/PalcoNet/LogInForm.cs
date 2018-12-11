@@ -46,7 +46,7 @@ namespace PalcoNet
                 }
                 else
                 {
-                    var formSelector = new SelectorFuncionalidadForm();
+                    var formSelector = new SelectorFuncionalidadForm(username.Text);
                     formSelector.Funcionalidades = funcionalidades;
                     formSelector.Show();
                 }
