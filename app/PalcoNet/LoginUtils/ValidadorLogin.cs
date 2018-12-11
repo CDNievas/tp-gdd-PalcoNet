@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.LoginUtils
 {
-    class ValidadorLogin
+    public class ValidadorLogin
     {
         // tira excepción si el login es incorrecto
         public static int ValidarLogin(String username, String password){
+            Console.WriteLine(String.Format("User: {0}, Pass: {1}", username, password));
             var output = new ParametroOut("id_usuario", SqlDbType.Int);
             DataBase.GetInstance().Procedure("intentar_logear",
                 new ParametroIn("username", username),
