@@ -1,4 +1,5 @@
 ﻿using PalcoNet.Editar_Publicacion.SectoresUtils;
+using PalcoNet.Generar_Publicacion;
 using PalcoNet.PublicacionesUtils;
 using System;
 using System.Collections.Generic;
@@ -71,12 +72,6 @@ namespace PalcoNet.Editar_Publicacion
             comboRubro.SelectedItem = publicacion.rubro;
             comboGrado.SelectedItem = publicacion.grado;
 
-            var lista = new BindingList<Ubicacion>(publicacion.Ubicaciones);
-            var bindingSource = new BindingSource(lista, null);
-
-            this.numeradosDataGrid.DataSource = bindingSource;
-            this.numeradosDataGrid.Columns["id"].Visible = false;
-
             this.CargarSectoresDe(publicacion.id);
 
             this.publicacion = publicacion;
@@ -114,8 +109,9 @@ namespace PalcoNet.Editar_Publicacion
                 GuardarBorrador();
                 this.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message + "\n" + ex.StackTrace);
                 MessageBox.Show("No se pudo guardar");
             }
         }
@@ -146,9 +142,17 @@ namespace PalcoNet.Editar_Publicacion
             try
             {
                 GuardarBorrador();
-                publicacion.Publicarse(this.SectoresPublicacion());
+                DialogResult dialogResult = MessageBox.Show("¿Desea realizar esta publicación para varias fechas?",
+                    "Publicación por lotes", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                    PublicarUnaVez();
+                else
+                {
+                    var form = new PublicacionMultiFechaForm(this.SectoresPublicacion(), this.publicacion);
+                    form.fechas.Add(this.fechaEspectaculo.Value);
+                    form.ShowDialog();
+                }
                 Close();
-                MessageBox.Show("Se ha publicado el evento");
             }
             catch (Exception ex)
             {
@@ -157,10 +161,18 @@ namespace PalcoNet.Editar_Publicacion
             }
         }
 
+        private void PublicarUnaVez()
+        {
+            publicacion.Publicarse(this.SectoresPublicacion());
+            Close();
+            MessageBox.Show("Se ha publicado el evento");
+        }
+
         private void EditarPublicacion_Load(object sender, EventArgs e)
         {
             CargarGrados();
             CargarRubros();
+            fechaEspectaculo.MinDate = Contexto.FechaActual;
             funcion.Setup(this);
         }
 
@@ -216,7 +228,7 @@ namespace PalcoNet.Editar_Publicacion
 
         public void GuardarSectores()
         {
-            this.SectoresPublicacion().ForEach(s => s.PersistiteParaUn(this.publicacion.id));
+            this.SectoresPublicacion().ForEach(s => s.PersistiteParaUn(this.publicacion.GetIdEspectaculo()));
         }
 
         public List<Sector> SectoresPublicacion()

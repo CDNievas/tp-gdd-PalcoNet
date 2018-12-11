@@ -15,9 +15,13 @@ namespace PalcoNet
     {
         public List<Funcionalidad> Funcionalidades;
 
-        public SelectorFuncionalidadForm()
+        private string username;
+
+        public SelectorFuncionalidadForm(string username)
         {
             InitializeComponent();
+            this.username = username;
+            lblNombreUsuario.Text = "Usuario: " + username;
         }
 
         private void SelectorFuncionalidadForm_Load(object sender, EventArgs e)
@@ -40,5 +44,9 @@ namespace PalcoNet
             }
         }
 
+        private void linkCambioPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new CambioClaveForm((int)Contexto.idUsuarioLogueado, username).ShowDialog();
+        }
     }
 }

@@ -47,6 +47,8 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         [DisplayName("Fecha Creación")]
         public DateTime fechaCreacion { get; set; }
+
+        public Boolean Habilitado { get; set; }
         
 
         public override string ToString()
@@ -72,21 +74,22 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             empresa.depto = dr["depto"].ToString();
             empresa.codPostal = dr["cod_postal"].ToString();
             empresa.fechaCreacion = (DateTime)dr["fecha_creacion"];
+            empresa.Habilitado = _dr.BoolValue("habilitado");
 
             return empresa;
         }
 
 
-        internal void Update()
+        public void Update()
         {
             String sql = String.Format(@"update COMPUMUNDOHIPERMEGARED.Empresa
             set cuit = '{0}', razon_social = '{1}', mail = '{2}', telefono = '{3}',
             ciudad = '{4}', localidad = '{5}', dom_calle = '{6}', nro_calle = {7},
-            piso = {8}, depto = '{9}', cod_postal = '{10}'
-            where id_empresa = {11}
+            piso = {8}, depto = '{9}', cod_postal = '{10}', habilitado = {11}
+            where id_empresa = {12}
             ", cuit, razonSocial, mail, telefono,
              ciudad, localidad, domCalle, nroCalle,
-             piso == null? null : piso, depto, codPostal,
+             piso == null? "NULL" : piso.ToString(), depto, codPostal, Habilitado ? 1 : 0,
              id);
             var ignored = DataBase.GetInstance().Query(sql);
         }

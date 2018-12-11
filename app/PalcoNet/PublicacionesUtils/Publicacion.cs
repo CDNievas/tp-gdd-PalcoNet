@@ -66,6 +66,19 @@ namespace PalcoNet.PublicacionesUtils
             }
         }
 
+        private int? _idEspectaculo = null;
+        public int GetIdEspectaculo()
+        {
+            if (_idEspectaculo == null)
+            {
+                var dt = DataBase.GetInstance().Query("select COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion(" + this.id +") as value");
+                _idEspectaculo = new DataRowExtended(dt.Rows[0]).IntValue("value");
+            }
+            return (int)this._idEspectaculo;
+        }
+
+
+
         private List<Ubicacion> ubicaciones = null;
         public List<Ubicacion> Ubicaciones
         {
@@ -99,6 +112,7 @@ namespace PalcoNet.PublicacionesUtils
             publicacion.estado = Estados.Parse(dataRow.StringValue("estado"));
             SetRubro(publicacion, dataRow);
             SetGrado(publicacion, dataRow);
+            publicacion._idEspectaculo = dataRow.IntValue("id_espectaculo");
 
             return publicacion;
         }
@@ -119,7 +133,8 @@ namespace PalcoNet.PublicacionesUtils
                 var idGrado = dr.IntValue("grado_id");
                 var descripcion = dr.StringValue("grado_descripcion");
                 var comision = dr.DoubleValue("grado_comision");
-                p.grado = new Grado(idGrado, descripcion, comision);
+                var eliminado = dr.BoolValue("eliminado");
+                p.grado = new Grado(idGrado, descripcion, comision, eliminado);
             }catch(Exception){
                 p.grado = null;
             }
@@ -144,32 +159,25 @@ namespace PalcoNet.PublicacionesUtils
                 throw new Exception("Esta publicación no puede modificarse");
             this.BorrarSectoresBorrador();
             DataBase.GetInstance()
-                .TypedQuery(@"update COMPUMUNDOHIPERMEGARED.Publicacion
-                              set descripcion = @descripcion,
-                              fecha_espectaculo = @fecha_espectaculo, estado = @estado,
-                              ciudad = @ciudad, localidad = @localidad, dom_calle = @dom_calle,
-                              num_calle = @num_calle, cod_postal = @cod_postal, empresa_id = @empresa_id,
-                              rubro_id = @rubro_id, grado_id = @grado_id
-                              where id_publicacion = @id_publicacion",
-                              new QueryParameter("descripcion", SqlDbType.NVarChar, this.descripcion),
-                              new QueryParameter("fecha_espectaculo", SqlDbType.DateTime, this.fechaEspectaculo),
-                              new QueryParameter("estado", SqlDbType.NVarChar, this.estado.Codigo()),
-                              new QueryParameter("ciudad", SqlDbType.NVarChar, this.ciudad),
-                              new QueryParameter("localidad", SqlDbType.NVarChar, this.localidad),
-                              new QueryParameter("dom_calle", SqlDbType.NVarChar, this.calle),
-                              new QueryParameter("num_calle", SqlDbType.Decimal, GetNumeroCalle(this.nroCalle)),
-                              new QueryParameter("cod_postal", SqlDbType.NVarChar, this.codigoPostal),
-                              new QueryParameter("empresa_id", SqlDbType.Int, empresaId),
-                              new QueryParameter("rubro_id", SqlDbType.Int, this.rubro != null? rubro.id as int? : null),
-                              new QueryParameter("grado_id", SqlDbType.Int, this.grado.id),
-                              new QueryParameter("id_publicacion", SqlDbType.Int, this.id));
+                .Procedure("update_datos_borrador",
+                              new NullableInParameter("descripcion", this.descripcion),
+                              new NullableInParameter("fecha_espectaculo", this.fechaEspectaculo),
+                              new NullableInParameter("ciudad", this.ciudad),
+                              new NullableInParameter("localidad", this.localidad),
+                              new NullableInParameter("dom_calle", this.calle),
+                              new NullableInParameter("num_calle", GetNumeroCalle(this.nroCalle)),
+                              new NullableInParameter("cod_postal", this.codigoPostal),
+                              new NullableInParameter("empresa_id", empresaId),
+                              new NullableInParameter("rubro_id", this.rubro != null ? rubro.id as int? : null),
+                              new NullableInParameter("grado_id", this.grado != null ? grado.id as int? : null),
+                              new ParametroIn("id_publicacion", this.id));
         }
 
         public void GuardarBorrador(long empresaId)
         {
             if (!this.PuedeModificarse())
                 throw new Exception("Esta publicación no puede modificarse");
-            var returnPar = new ParametroOut("borrador_id", SqlDbType.Int);
+            var returnPar = new ParametroOut("publicacion_id_generado", SqlDbType.BigInt);
 
             this.estado = new Borrador();
 
@@ -187,7 +195,8 @@ namespace PalcoNet.PublicacionesUtils
                               new NullableInParameter("rubro_id", this.rubro != null ? this.rubro.id as int? : null),
                               new NullableInParameter("grado_id", this.grado.id),
                               returnPar);
-            this.id = (int)returnPar.valorRetorno;
+            this.id = (long)returnPar.valorRetorno;
+            Console.WriteLine("Publicacion generada id: " + this.id);
         }
 
         private int? GetNumeroCalle(String s)
@@ -205,20 +214,67 @@ namespace PalcoNet.PublicacionesUtils
         public void BorrarSectoresBorrador(){
             DataBase.GetInstance()
                 .Query(@"delete from COMPUMUNDOHIPERMEGARED.Sector
-                              where id_borrador = " + this.id);
+                              where id_espectaculo = " + this.GetIdEspectaculo());
         }
 
 
         public void Publicarse(List<Sector> sectores)
         {
-            DataBase.GetInstance()
-                .TypedQuery(@"update COMPUMUNDOHIPERMEGARED.Publicacion
-                              set fecha_creacion = @fecha, estado = 'PUBLICADA'"
-                , new QueryParameter("fecha", SqlDbType.DateTime, Contexto.FechaActual));
+            DataBase.GetInstance().WithTransaction(() =>
+            {
+                DataBase.GetInstance()
+                    .TypedQuery(@"update COMPUMUNDOHIPERMEGARED.Publicacion
+                              set fecha_creacion = @fecha, estado = @estado
+                              where id_publicacion = @id"
+                    , new QueryParameter("fecha", SqlDbType.DateTime, Contexto.FechaActual)
+                    , new QueryParameter("estado", SqlDbType.Char, new Publicado().Codigo())
+                    , new QueryParameter("id", SqlDbType.BigInt, this.id));
+                DataBase.GetInstance()
+                    .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", this.id));
+            });
             this.estado = new Publicado();
-            DataBase.GetInstance()
-                .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", this.id));
+        }
 
+        // esto esta horrible porque si le pasas un null en el ultimo parametro se crea una nueva y si no no
+        private static void Publicar(Publicacion publicacion, List<Sector> sectores, long? publicacionID)
+        {
+            var self = publicacion;
+            var salida = new ParametroOut("id_publicacion_generado", SqlDbType.BigInt);
+            DataBase.GetInstance()
+                    .Procedure("publicar_fecha"
+                    , new ParametroIn("fecha_creacion", Contexto.FechaActual)
+                    , new ParametroIn("fecha_espectaculo", self.fechaEspectaculo)
+                    , new ParametroIn("grado_id", self.grado.id)
+                    , new ParametroIn("id_espectaculo", self.GetIdEspectaculo())
+                    , new ParametroIn("id_publicacion", publicacionID == null ? (Object)DBNull.Value : (Object)publicacionID)
+                    , salida);
+            var unString = publicacionID == null ? "NULL" : publicacionID.ToString();
+            Console.WriteLine("publicacionID = " + unString);
+
+            var nuevoID = Convert.ToInt64(salida.valorRetorno);
+
+            if (publicacionID != null && nuevoID != publicacionID)
+                throw new Exception("Esto no tenía que pasar");
+
+            Console.WriteLine("publicacion_id = " + nuevoID);
+            DataBase.GetInstance()
+                .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", nuevoID));
+            
+            self.estado = new Publicado();
+        }
+
+        public static void PublicarFechas(Publicacion publicacion, List<DateTime> fechas, List<Sector> sectores)
+        {
+            DataBase.GetInstance().WithTransaction(() =>
+            {
+                long? id = publicacion.id;
+                foreach (DateTime fecha in fechas)
+                {
+                    publicacion.fechaEspectaculo = fecha;
+                    Publicar(publicacion, sectores, id);
+                    id = null;
+                }
+            });
         }
     }
    

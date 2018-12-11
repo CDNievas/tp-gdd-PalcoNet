@@ -83,6 +83,32 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             var empresa = (Empresa)empresasDataGrid.CurrentRow.DataBoundItem;
             Console.WriteLine("Modificando " + empresa);
             var ignored = new AltaEmpresaForm(new Modificacion(empresa)).ShowDialog();
+            ActualizarTabla();
+        }
+
+        private void btnNueva_Click(object sender, EventArgs e)
+        {
+            new AltaEmpresaForm(new AltaEmpresa()).ShowDialog();
+            ActualizarTabla();
+        }
+
+        private void btnEmpresaBaja_Click(object sender, EventArgs e)
+        {
+            var empresa = (Empresa)empresasDataGrid.CurrentRow.DataBoundItem;
+            DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea deshabilitar la empresa " + empresa.razonSocial + "?",
+                "Solicitud de confirmación", MessageBoxButtons.YesNo);
+            try
+            {
+                if (dialogResult == DialogResult.Yes)
+                {
+                    empresa.Habilitado = false;
+                    empresa.Update();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error: " + ex.Message);
+            }
         }
     }
 }

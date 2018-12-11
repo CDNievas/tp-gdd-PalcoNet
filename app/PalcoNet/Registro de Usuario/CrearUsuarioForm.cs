@@ -136,14 +136,12 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void PersistirEmpresa()
         {
-            CreadorDeUsuarios.CrearNuevaEmpresa(empresaAPersistir, txtUsuario.Text, password.Text,
-                GetSelectedRol().id);
+            CreadorDeUsuarios.CrearNuevaEmpresa(empresaAPersistir, txtUsuario.Text, password.Text);
         }
 
         private void PersistirCliente()
         {
-            int idCliente = CreadorDeUsuarios.CrearNuevoCliente(clienteAPersistir, txtUsuario.Text, password.Text,
-            GetSelectedRol().id);
+            int idCliente = CreadorDeUsuarios.CrearNuevoCliente(clienteAPersistir, txtUsuario.Text, password.Text);
 
             this.tarjetaAPersistir.Insert(idCliente);
             

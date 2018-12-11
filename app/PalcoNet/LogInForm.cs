@@ -36,22 +36,40 @@ namespace PalcoNet
                 var idUser = ValidadorLogin.ValidarLogin(username.Text, password.Text);
                 Contexto.idUsuarioLogueado = idUser;
                 Console.WriteLine("SE LOGUEO : " + idUser);
+
+                ValidarPrimerLogin(idUser, username.Text);
+
                 var funcionalidades = Funcionalidades.findFuncionalidadesByUsuarioId(idUser);
                 if (funcionalidades.Count == 1)
                 {
-                    throw new NotImplementedException("debería dejarte acceder a su funcion");
+                    SelectorFuncionalidad.EjecutarFuncionalidad(funcionalidades[0].Id);
                 }
                 else
                 {
-                    var formSelector = new SelectorFuncionalidadForm();
+                    var formSelector = new SelectorFuncionalidadForm(username.Text);
                     formSelector.Funcionalidades = funcionalidades;
                     formSelector.Show();
                 }
-                
+
             }
             catch (ProcedureException ex)
             {
                 MessageBox.Show(ex.GetSqlErrorMessage(), "Error al iniciar sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Ha ocurrido un error");
+            }
+        }
+
+        private void ValidarPrimerLogin(int idUsuario, string username)
+        {
+            var dt = DataBase.GetInstance().Query("select solicitud_cambio_pass as result from COMPUMUNDOHIPERMEGARED.Usuario where id_usuario = " + idUsuario);
+            var primerLogin = new DataRowExtended(dt.Rows[0]).BoolValue("result");
+            if (primerLogin)
+            {
+                new CambioClaveForm(idUsuario, username).ShowDialog();
             }
         }
 

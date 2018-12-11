@@ -80,11 +80,17 @@
     <Compile Include="Abm Rol\FuncionRolForm.cs" />
     <Compile Include="Abm Rol\Rol.cs" />
     <Compile Include="Abm Rol\Roles.cs" />
-    <Compile Include="Canje Puntos\canjearPuntos.cs">
+    <Compile Include="CambioClaveForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Canje Puntos\canjearPuntos.Designer.cs">
-      <DependentUpon>canjearPuntos.cs</DependentUpon>
+    <Compile Include="CambioClaveForm.Designer.cs">
+      <DependentUpon>CambioClaveForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Canje Puntos\CanjearPuntos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Canje Puntos\CanjearPuntos.Designer.cs">
+      <DependentUpon>CanjearPuntos.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje Puntos\ConsultaPuntos.cs">
       <SubType>Form</SubType>
@@ -106,11 +112,11 @@
     </Compile>
     <Compile Include="Abm Empresa Espectaculo\BuscadorEmpresas.cs" />
     <Compile Include="Abm Empresa Espectaculo\Empresa.cs" />
-    <Compile Include="Abm Grado\altaGrado.cs">
+    <Compile Include="Abm Grado\AltaGrado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Grado\altaGrado.Designer.cs">
-      <DependentUpon>altaGrado.cs</DependentUpon>
+    <Compile Include="Abm Grado\AltaGrado.Designer.cs">
+      <DependentUpon>AltaGrado.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Grado\ListarGrado.cs">
       <SubType>Form</SubType>
@@ -124,6 +130,7 @@
     <Compile Include="Abm Rubro\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Canje Puntos\Premio.cs" />
     <Compile Include="Comprar\listarPublicaciones.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="DataBasePackage\DataBase.cs" />
@@ -133,6 +140,7 @@
     <Compile Include="DataBasePackage\Parametro.cs" />
     <Compile Include="DataBasePackage\ParametroOut.cs" />
     <Compile Include="DataBasePackage\ProcedureException.cs" />
+    <Compile Include="DataBasePackage\QueryException.cs" />
     <Compile Include="DataBasePackage\QueryParameter.cs" />
     <Compile Include="Editar Publicacion\FuncionFormPublicacion.cs" />
     <Compile Include="Editar Publicacion\SectoresUtils\Sector.cs" />
@@ -161,6 +169,18 @@
     </Compile>
     <Compile Include="Generar Publicacion\AltaPublicacion.Designer.cs">
       <DependentUpon>AltaPublicacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Publicacion\DateTimeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Publicacion\DateTimeForm.Designer.cs">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Publicacion\PublicacionMultiFechaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Publicacion\PublicacionMultiFechaForm.Designer.cs">
+      <DependentUpon>PublicacionMultiFechaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Generar Rendicion Comisiones\rendicionComisiones.cs">
       <SubType>Form</SubType>
@@ -210,11 +230,11 @@
     <Compile Include="Abm Empresa Espectaculo\ListarEmpresa.Designer.cs">
       <DependentUpon>ListarEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Grado\modificarGrado.cs">
+    <Compile Include="Abm Grado\ActualizarGrado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Grado\modificarGrado.Designer.cs">
-      <DependentUpon>modificarGrado.cs</DependentUpon>
+    <Compile Include="Abm Grado\ActualizarGrado.Designer.cs">
+      <DependentUpon>ActualizarGrado.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\AltaRolForm.cs">
       <SubType>Form</SubType>
@@ -222,6 +242,7 @@
     <Compile Include="Abm Rol\AltaRolForm.Designer.cs">
       <DependentUpon>AltaRolForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginUtils\PassGenerator.cs" />
     <Compile Include="Registro de Usuario\CreadorDeUsuarios.cs" />
     <Compile Include="SelectorFuncionalidad.cs" />
     <Compile Include="SelectorFuncionalidadForm.cs">
@@ -230,10 +251,18 @@
     <Compile Include="SelectorFuncionalidadForm.Designer.cs">
       <DependentUpon>SelectorFuncionalidadForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UsuarioPassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsuarioPassForm.Designer.cs">
+      <DependentUpon>UsuarioPassForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Validadores\UserInputException.cs" />
     <Compile Include="Validadores\Validador.cs" />
+    <Compile Include="Validadores\ValidadorCuil.cs" />
     <Compile Include="Validadores\ValidadorEmail.cs" />
     <Compile Include="Validadores\ValidadorNumerico.cs" />
+    <Compile Include="Validadores\ValidadorNumeroComa.cs" />
     <EmbeddedResource Include="Abm Cliente\altaTarjeta.resx">
       <DependentUpon>altaTarjeta.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,6 +284,9 @@
     <Compile Include="Editar Publicacion\EditarPublicacion.Designer.cs">
       <DependentUpon>EditarPublicacion.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CambioClaveForm.resx">
+      <DependentUpon>CambioClaveForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editar Publicacion\EditarPublicacion.resx">
       <DependentUpon>EditarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
@@ -279,6 +311,12 @@
     <EmbeddedResource Include="Editar Publicacion\SectoresUtils\SectorSinNumerarForm.resx">
       <DependentUpon>SectorSinNumerarForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\DateTimeForm.resx">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\PublicacionMultiFechaForm.resx">
+      <DependentUpon>PublicacionMultiFechaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generar Rendicion Comisiones\rendicionComisiones.resx">
       <DependentUpon>rendicionComisiones.cs</DependentUpon>
     </EmbeddedResource>
@@ -300,8 +338,8 @@
     <Compile Include="PublicacionesUtils\Publicaciones.cs" />
     <Compile Include="PublicacionesUtils\RangoFechas.cs" />
     <Compile Include="PublicacionesUtils\Rubro.cs" />
-    <EmbeddedResource Include="Abm Grado\modificarGrado.resx">
-      <DependentUpon>modificarGrado.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Grado\ActualizarGrado.resx">
+      <DependentUpon>ActualizarGrado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Empresa Espectaculo\modificarEmpresa.resx">
       <DependentUpon>modificarEmpresa.cs</DependentUpon>
@@ -326,8 +364,8 @@
       <DependentUpon>modificarCliente.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Canje Puntos\canjearPuntos.resx">
-      <DependentUpon>canjearPuntos.cs</DependentUpon>
+    <EmbeddedResource Include="Canje Puntos\CanjearPuntos.resx">
+      <DependentUpon>CanjearPuntos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Canje Puntos\ConsultaPuntos.resx">
       <DependentUpon>ConsultaPuntos.cs</DependentUpon>
@@ -338,8 +376,8 @@
     <EmbeddedResource Include="Abm Empresa Espectaculo\bajaEmpresa.resx">
       <DependentUpon>bajaEmpresa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Grado\altaGrado.resx">
-      <DependentUpon>altaGrado.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Grado\AltaGrado.resx">
+      <DependentUpon>AltaGrado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Grado\ListarGrado.resx">
       <DependentUpon>ListarGrado.cs</DependentUpon>
@@ -367,6 +405,9 @@
     </Compile>
     <EmbeddedResource Include="SelectorFuncionalidadForm.resx">
       <DependentUpon>SelectorFuncionalidadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsuarioPassForm.resx">
+      <DependentUpon>UsuarioPassForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="GD2C2018DataSet.xsc">
       <DependentUpon>GD2C2018DataSet.xsd</DependentUpon>

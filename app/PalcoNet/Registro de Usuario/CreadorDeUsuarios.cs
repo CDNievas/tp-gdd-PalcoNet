@@ -1,5 +1,6 @@
 ﻿using PalcoNet.Abm_Cliente;
 using PalcoNet.Abm_Empresa_Espectaculo;
+using PalcoNet.Abm_Rol;
 using PalcoNet.DataBasePackage;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace PalcoNet.Registro_de_Usuario
 {
     class CreadorDeUsuarios
     {
-        public static int CrearNuevoCliente(Cliente cliente, String username, String pass, int rolID){
+        public static int CrearNuevoCliente(Cliente cliente, String username, String pass, Boolean solicitudCambio = false){
 
             var param = new ParametroOut("cliente_id", System.Data.SqlDbType.Int);
 
@@ -32,16 +33,17 @@ namespace PalcoNet.Registro_de_Usuario
                 new ParametroIn("cod_postal", cliente.codPostal),
                 new ParametroIn("fecha_nacimiento", cliente.fechaNacimiento),
                 new ParametroIn("fecha_creacion", cliente.fechaCreacion),
-                new ParametroIn("rol_id", rolID),
+                new ParametroIn("rol_id", Roles.Cliente.id),
                 new ParametroIn("username", username),
                 new ParametroIn("pass", pass),
+                new ParametroIn("solicitud_cambio_pass", solicitudCambio? 1 : 0),
                 param);
 
             return (int)param.valorRetorno;
 
         }
 
-        public static void CrearNuevaEmpresa(Empresa empresa, String username, String pass, int rolId)
+        public static void CrearNuevaEmpresa(Empresa empresa, String username, String pass, Boolean solicitudCambio = false)
         {
             DataBase.GetInstance().Procedure("crear_usuario_empresa",
                 new ParametroIn("cuit", empresa.cuit),
@@ -56,9 +58,10 @@ namespace PalcoNet.Registro_de_Usuario
                 new NullableInParameter("depto", empresa.depto),
                 new ParametroIn("cod_postal", empresa.codPostal),
                 new ParametroIn("fecha_creacion", empresa.fechaCreacion),
-                new ParametroIn("rol_id", rolId),
+                new ParametroIn("rol_id", Roles.Empresa.id),
                 new ParametroIn("pass", pass),
-                new ParametroIn("username", username));
+                new ParametroIn("username", username),
+                new ParametroIn("solicitud_cambio_pass", solicitudCambio ? 1 : 0));
         }
     }
 

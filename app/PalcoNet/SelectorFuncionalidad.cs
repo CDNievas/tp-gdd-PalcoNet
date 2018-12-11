@@ -23,10 +23,10 @@ namespace PalcoNet
                     new Abm_Empresa_Espectaculo.ListarEmpresa().Show();
                     break;
                 case 4:
-                    throw new NotImplementedException("ABM Rubro");
+                    new Abm_Rubro.Form1().Show();
                     break;
                 case 5:
-                    throw new NotImplementedException("ABM Grado Publicación");
+                    new Abm_Grado.ListarGrado().Show();
                     break;
                 case 6:
                     new Editar_Publicacion.EditarPublicacion(new Editar_Publicacion.FuncionCrearPublicacion()).Show();
@@ -41,7 +41,7 @@ namespace PalcoNet
                     throw new NotImplementedException("Historial cliente");
                     break;
                 case 10:
-                    throw new NotImplementedException("Canje puntos");
+                    new Canje_Puntos.ConsultaPuntos().Show();
                     break;
                 case 11:
                     throw new NotImplementedException("Rendición comisiones");

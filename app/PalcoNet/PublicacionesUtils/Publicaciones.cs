@@ -18,11 +18,12 @@ namespace PalcoNet.PublicacionesUtils
         public static List<Publicacion> PublicacionesByEmpresaId(long idEmpresa, Pagina pag, Boolean soloBorradores) {
             String condicionWhereBorrador = "";
             if (soloBorradores)
-                condicionWhereBorrador = "and estado = 'BORRADOR'";
+                condicionWhereBorrador = "and estado = '"+ new Borrador().Codigo() +"'";
 
             String sql = String.Format( @"select * from COMPUMUNDOHIPERMEGARED.PublicacionesView where id_empresa = {0}
                                         {3}
-                                        ORDER BY fecha_espectaculo desc OFFSET {1} ROWS FETCH NEXT {2} ROWS ONLY",
+                                        ORDER BY case when estado like 'B' then 0 else 1 end, fecha_espectaculo desc
+                                        OFFSET {1} ROWS FETCH NEXT {2} ROWS ONLY",
                                         idEmpresa, pag.FirstResultIndex(), pag.pageSize, condicionWhereBorrador);
             var dt = DataBase.GetInstance().Query(sql);
             return PublicacionesFromDataTable(dt);

@@ -16,6 +16,24 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         private FuncionFormEmpresa funcion;
         public Empresa empresaAPersistir = null;
 
+        public String Titulo
+        {
+            get
+            {
+                return titulo.Text;
+            }
+            set
+            {
+                titulo.Text = value;
+            }
+        }
+
+        public CheckBox CheckHabilitado
+        {
+            get { return checkHabilitado; }
+        }
+
+
         public AltaEmpresaForm(FuncionFormEmpresa funcion)
         {
             this.funcion = funcion;
@@ -81,7 +99,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
                         throw new UserInputException("Debe completar todos los campos");
             }
 
-            if (this.txtEmpresaCuit.Text.Trim().Equals("")) // todo validar posta
+            if (new ValidadorCuil().IsInvalid(txtEmpresaCuit.Text)) // todo validar posta
             {
                 throw new UserInputException("Cuit inválido");
             }
@@ -112,6 +130,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             txtEmpresaPiso.Text = empresa.piso == null? "" : empresa.piso.ToString();
             txtEmpresaDpto.Text = empresa.depto;
             txtEmpresaCP.Text = empresa.codPostal;
+            checkHabilitado.Checked = empresa.Habilitado;
             empresaAPersistir = empresa;
             Console.WriteLine("Empresa a persistir " + empresaAPersistir);
         }

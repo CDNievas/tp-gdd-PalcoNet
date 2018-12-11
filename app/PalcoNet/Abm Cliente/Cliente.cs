@@ -1,4 +1,5 @@
 ﻿using PalcoNet.Abm_Rol;
+using PalcoNet.DataBasePackage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,6 +62,13 @@ namespace PalcoNet.Abm_Cliente
         [DisplayName("Creación")]
         public DateTime? fechaCreacion { get; set; }
 
+        public Boolean Habilitado { get; set; }
+
+        public static Cliente FindByUserId(int userID)
+        {
+            var dt = DataBase.GetInstance().Query("select * from COMPUMUNDOHIPERMEGARED.Cliente where usuario_id = " + userID);
+            return traerDe(dt.Rows[0]);
+        }
 
         public override string ToString()
         {
@@ -99,25 +107,50 @@ namespace PalcoNet.Abm_Cliente
             cliente.codPostal = data.StringValue("cod_postal");
             cliente.fechaNacimiento = data.OrElse<DateTime?>("fecha_nacimiento", null);
             cliente.fechaCreacion = data.OrElse<DateTime?>("fecha_creacion", null);
+            cliente.Habilitado = data.BoolValue("habilitado");
 
             return cliente;
         }
 
 
-        internal void Update()
+        public void Update()
         {
-            String sql = String.Format
-                (@" update COMPUMUNDOHIPERMEGARED.Cliente
-                    set cuil = '{0}', tipo_documento = '{1}', nro_documento = '{2}',
-                    nombre = '{3}', apellido = '{4}', mail = '{5}', telefono = {6},
-                    ciudad = '{7}', localidad = '{8}', dom_calle = '{9}', num_calle = '{10}',
-                    depto = '{11}', piso = {12}, cod_postal = '{13}', fecha_nacimiento = '{14}',
-                    fecha_creacion = '{15}'
-                    where id_cliente = {16}",
-                     cuil, tipoDocumento.discriminator, nroDocumento, nombre, apellido,
-                     mail, telefono, ciudad, localidad, domCalle, nroCalle,
-                     depto, piso == null? "null" : piso.ToString(), codPostal, fechaNacimiento, fechaCreacion, id);
-            var ignored = DataBase.GetInstance().Query(sql);
+            DataBase.GetInstance()
+                .TypedQuery(@" update COMPUMUNDOHIPERMEGARED.Cliente
+                    set cuil = @cuil, tipo_documento = @tipoDocumento, nro_documento = @nroDocumento,
+                    nombre = @nombre, apellido = @apellido, mail = @mail, telefono = @telefono,
+                    ciudad = @ciudad, localidad = @localidad, dom_calle = @domCalle, num_calle = @nroCalle,
+                    depto = @depto, piso = @piso, cod_postal = @codPostal, fecha_nacimiento = @fechaNacimiento,
+                    fecha_creacion = @fechaCreacion, habilitado = @habilitado
+                    where id_cliente = @id"
+                , new QueryParameter("cuil", SqlDbType.NVarChar, cuil)
+                , new QueryParameter("tipoDocumento", SqlDbType.Char, tipoDocumento.discriminator)
+                , new QueryParameter("nroDocumento", SqlDbType.NVarChar, nroDocumento)
+                , new QueryParameter("nombre", SqlDbType.NVarChar, nombre)
+                , new QueryParameter("apellido", SqlDbType.NVarChar, apellido)
+                , new QueryParameter("mail", SqlDbType.NVarChar, mail)
+                , new QueryParameter("telefono", SqlDbType.NVarChar, telefono)
+                , new QueryParameter("ciudad", SqlDbType.NVarChar, ciudad)
+                , new QueryParameter("localidad", SqlDbType.NVarChar, localidad)
+                , new QueryParameter("domCalle", SqlDbType.NVarChar, domCalle)
+                , new QueryParameter("nroCalle", SqlDbType.NVarChar, nroCalle)
+                , new QueryParameter("depto", SqlDbType.NVarChar, depto)
+                , new QueryParameter("piso", SqlDbType.Decimal, piso)
+                , new QueryParameter("codPostal", SqlDbType.NVarChar, codPostal)
+                , new QueryParameter("fechaNacimiento", SqlDbType.DateTime, fechaNacimiento)
+                , new QueryParameter("fechaCreacion", SqlDbType.DateTime, fechaCreacion)
+                , new QueryParameter("habilitado", SqlDbType.Bit, Habilitado ? 1 : 0)
+                , new QueryParameter("id", SqlDbType.Int, id));
+
+        }
+
+        public int GetPuntos()
+        {
+            var dt = DataBase.GetInstance().TypedQuery("select COMPUMUNDOHIPERMEGARED.puntosDeCliente(@clienteId, @fecha) as result",
+                new QueryParameter("clienteID", SqlDbType.Int, this.id),
+                new QueryParameter("fecha", SqlDbType.DateTime, Contexto.FechaActual));
+            var dr = dt.Rows[0];
+            return new DataRowExtended(dr).IntValue("result");
         }
     }
 }

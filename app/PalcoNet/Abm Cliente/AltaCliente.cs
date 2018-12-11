@@ -16,6 +16,25 @@ namespace PalcoNet.Abm_Cliente
         public Cliente ClienteActual { get; set; }
         public FuncionFormCliente funcionForm { get; set; }
         public Tarjeta tarjetaAGuardar { get; set; }
+        public CheckBox CheckHabilitado
+        {
+            get
+            {
+                return checkHabilitado;
+            }
+        }
+
+        public String Titulo
+        {
+            get
+            {
+                return this.titulo.Text;
+            }
+            set
+            {
+                this.titulo.Text = value;
+            }
+        }
 
         public AltaCliente()
         {
@@ -113,7 +132,12 @@ namespace PalcoNet.Abm_Cliente
                 throw new UserInputException("El teléfono debe ser numérico");
             if (new ValidadorNumerico().IsInvalid(txtClienteNro.Text))
                 throw new UserInputException("El numéro de calle debe ser numérico");
+            if (new ValidadorCuil().IsInvalid(txtClienteCuil.Text))
+                throw new UserInputException("Cuil inválido");
 
+            string dniFromCuil = txtClienteCuil.Text.Split(new[] { "-" }, StringSplitOptions.None)[1];
+            if (!dniFromCuil.Equals(txtClienteDoc.Text))
+                throw new UserInputException("El CUIL y el DNI no coinciden");
         }
 
         private void AltaClienteForm_Load(object sender, EventArgs e)
@@ -121,7 +145,7 @@ namespace PalcoNet.Abm_Cliente
             funcionForm.Setup(this);
         }
 
-        internal void LlenateConDatosDe(Abm_Cliente.Cliente cliente)
+        public void LlenateConDatosDe(Abm_Cliente.Cliente cliente)
         {
             txtClienteNombre.Text = cliente.nombre;
             txtClienteApellido.Text = cliente.apellido;
@@ -139,6 +163,7 @@ namespace PalcoNet.Abm_Cliente
             txtClienteCP.Text = cliente.codPostal;
             if(cliente.fechaNacimiento != null)
                 fechaNacimiento.Value = (DateTime)cliente.fechaNacimiento;
+            checkHabilitado.Checked = cliente.Habilitado;
             this.ClienteActual = cliente;
         }
     }

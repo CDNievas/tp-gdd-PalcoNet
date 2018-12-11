@@ -1,4 +1,6 @@
-﻿using PalcoNet.Registro_de_Usuario;
+﻿using PalcoNet.Abm_Rol;
+using PalcoNet.LoginUtils;
+using PalcoNet.Registro_de_Usuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +20,23 @@ namespace PalcoNet.Abm_Cliente
     {
         public void Guardar(AltaCliente form, Cliente cliente)
         {
-            throw new NotImplementedException();
+            DialogResult dialogResult = MessageBox.Show("Al crear este cliente autogenerará su usuario y contraseña. ¿Desea continuar?",
+                "Solicitud de confirmación", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                var user = cliente.nroDocumento;
+                var password = PassGenerator.CreateRandomPassword(20);
+                CreadorDeUsuarios.CrearNuevoCliente(cliente, user, password, true);
+                form.Close();
+                new UsuarioPassForm(user, password).ShowDialog();
+            }
         }
 
         public void Setup(AltaCliente form)
         {
-            // No hace nada
+            form.CheckHabilitado.Visible = false;
+            form.Text = "Alta de cliente";
+            form.Titulo = "Nuevo Cliente";
         }
     }
 
@@ -38,12 +51,19 @@ namespace PalcoNet.Abm_Cliente
 
         public void Guardar(AltaCliente form, Cliente cliente)
         {
+            cliente.Habilitado = form.CheckHabilitado.Checked;
             cliente.Update();   
             form.Close();
+            MessageBox.Show(String.Format("El cliente {0} {1} ha sido actualizado", cliente.nombre, cliente.apellido),
+                    "Cliente actualizado",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void Setup(AltaCliente form)
         {
+            form.Text = "Modifición de cliente";
+            form.Titulo = "Modificar Cliente";
+            form.CheckHabilitado.Visible = true;
             form.LlenateConDatosDe(cliente);
         }
     }
@@ -59,7 +79,9 @@ namespace PalcoNet.Abm_Cliente
 
         public void Setup(AltaCliente form)
         {
-            // No hace nada
+            form.CheckHabilitado.Visible = false;
+            form.Text = "Registro de cliente";
+            form.Titulo = "Registrarse";
         }
 
     }
