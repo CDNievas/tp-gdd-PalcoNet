@@ -124,6 +124,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Publicacion(
 	fecha_vencimiento datetime,
 	fecha_espectaculo datetime,
 	estado char(1) not null check(estado in('B', 'P', 'F')),
+	porcentaje_comision numeric(5,2),
 	grado_id int CONSTRAINT FK_PUBLICACION_GRADO references COMPUMUNDOHIPERMEGARED.Grado(id_grado)
 )
 
@@ -380,7 +381,7 @@ p.fecha_espectaculo as fecha_espectaculo, p.estado as estado, e.ciudad as ciudad
 e.localidad as localidad, e.dom_calle as dom_calle, e.num_calle as num_calle, e.cod_postal as cod_postal,
 e.empresa_id as id_empresa, r.id_rubro as rubro_id, r.descripcion as rubro_descripcion,
 g.id_grado as grado_id, g.descripcion as grado_descripcion, g.comision as grado_comision,
-e.id_espectaculo as id_espectaculo
+g.eliminado as grado_eliminado, e.id_espectaculo as id_espectaculo
 FROM COMPUMUNDOHIPERMEGARED.Publicacion p
 inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
 on e.id_espectaculo = p.espectaculo_id
@@ -846,19 +847,20 @@ create procedure COMPUMUNDOHIPERMEGARED.publicar_fecha(
 	@id_publicacion_generado bigint output
 )
 as
+	declare @porcentaje_comision numeric(5,2) = (select g.comision from COMPUMUNDOHIPERMEGARED.Grado g where g.id_grado = @grado_id)
 	if @id_publicacion is not null
 	begin
 		update COMPUMUNDOHIPERMEGARED.Publicacion
 		set espectaculo_id = @id_espectaculo, fecha_creacion = @fecha_creacion, fecha_espectaculo = @fecha_espectaculo,
-		estado = 'P', grado_id = @grado_id
+		estado = 'P', grado_id = @grado_id, porcentaje_comision = @porcentaje_comision
 		where id_publicacion = @id_publicacion
 
 		set @id_publicacion_generado = @id_publicacion
 		return
 	end
 
-	insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_creacion, fecha_espectaculo, estado, grado_id)
-	values (@id_espectaculo, @fecha_creacion, @fecha_espectaculo, 'P', @grado_id)
+	insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_creacion, fecha_espectaculo, estado, grado_id, porcentaje_comision)
+	values (@id_espectaculo, @fecha_creacion, @fecha_espectaculo, 'P', @grado_id, @porcentaje_comision)
 
 	set @id_publicacion_generado = @@IDENTITY
 	return

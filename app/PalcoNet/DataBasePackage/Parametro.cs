@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.DataBasePackage
 {
-    interface Parametro
+    public interface Parametro
     {
         void AgregateA(SqlCommand cmd);
         void ObteneResultadoDe(SqlCommand cmd);

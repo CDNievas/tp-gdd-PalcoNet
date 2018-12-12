@@ -46,15 +46,11 @@
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.lblFechaPublicación = new System.Windows.Forms.Label();
-            this.lblFechaVencimiento = new System.Windows.Forms.Label();
             this.comboGrado = new System.Windows.Forms.ComboBox();
             this.lblGrado = new System.Windows.Forms.Label();
             this.lblRubro = new System.Windows.Forms.Label();
             this.comboRubro = new System.Windows.Forms.ComboBox();
             this.btnPublicar = new System.Windows.Forms.Button();
-            this.fechaPublicacion = new System.Windows.Forms.Label();
-            this.fechaVencimiento = new System.Windows.Forms.Label();
             this.fechaEspectaculo = new System.Windows.Forms.DateTimePicker();
             this.numeradosDataGrid = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
@@ -174,7 +170,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 135);
+            this.label1.Location = new System.Drawing.Point(40, 129);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 13);
@@ -185,7 +181,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(38, 9);
+            this.label2.Location = new System.Drawing.Point(38, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(238, 25);
             this.label2.TabIndex = 42;
@@ -204,9 +200,9 @@
             // 
             // rectangleShape1
             // 
-            this.rectangleShape1.Location = new System.Drawing.Point(22, 44);
+            this.rectangleShape1.Location = new System.Drawing.Point(19, 15);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(853, 517);
+            this.rectangleShape1.Size = new System.Drawing.Size(853, 545);
             // 
             // btnLimpiar
             // 
@@ -229,25 +225,6 @@
             this.btnGuardar.Text = "Guardar borrador";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // lblFechaPublicación
-            // 
-            this.lblFechaPublicación.AutoSize = true;
-            this.lblFechaPublicación.Location = new System.Drawing.Point(40, 75);
-            this.lblFechaPublicación.Name = "lblFechaPublicación";
-            this.lblFechaPublicación.Size = new System.Drawing.Size(110, 13);
-            this.lblFechaPublicación.TabIndex = 62;
-            this.lblFechaPublicación.Text = "Fecha de Publicación";
-            // 
-            // lblFechaVencimiento
-            // 
-            this.lblFechaVencimiento.AutoSize = true;
-            this.lblFechaVencimiento.Location = new System.Drawing.Point(40, 105);
-            this.lblFechaVencimiento.Name = "lblFechaVencimiento";
-            this.lblFechaVencimiento.Size = new System.Drawing.Size(113, 13);
-            this.lblFechaVencimiento.TabIndex = 63;
-            this.lblFechaVencimiento.Text = "Fecha de Vencimiento";
-            this.lblFechaVencimiento.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // comboGrado
             // 
@@ -293,24 +270,6 @@
             this.btnPublicar.Text = "Publicar";
             this.btnPublicar.UseVisualStyleBackColor = true;
             this.btnPublicar.Click += new System.EventHandler(this.btnPublicar_Click);
-            // 
-            // fechaPublicacion
-            // 
-            this.fechaPublicacion.AutoSize = true;
-            this.fechaPublicacion.Location = new System.Drawing.Point(170, 75);
-            this.fechaPublicacion.Name = "fechaPublicacion";
-            this.fechaPublicacion.Size = new System.Drawing.Size(35, 13);
-            this.fechaPublicacion.TabIndex = 69;
-            this.fechaPublicacion.Text = "label4";
-            // 
-            // fechaVencimiento
-            // 
-            this.fechaVencimiento.AutoSize = true;
-            this.fechaVencimiento.Location = new System.Drawing.Point(170, 105);
-            this.fechaVencimiento.Name = "fechaVencimiento";
-            this.fechaVencimiento.Size = new System.Drawing.Size(35, 13);
-            this.fechaVencimiento.TabIndex = 70;
-            this.fechaVencimiento.Text = "label5";
             // 
             // fechaEspectaculo
             // 
@@ -413,15 +372,11 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.numeradosDataGrid);
             this.Controls.Add(this.fechaEspectaculo);
-            this.Controls.Add(this.fechaVencimiento);
-            this.Controls.Add(this.fechaPublicacion);
             this.Controls.Add(this.btnPublicar);
             this.Controls.Add(this.comboRubro);
             this.Controls.Add(this.lblRubro);
             this.Controls.Add(this.lblGrado);
             this.Controls.Add(this.comboGrado);
-            this.Controls.Add(this.lblFechaVencimiento);
-            this.Controls.Add(this.lblFechaPublicación);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.txtDescripción);
@@ -470,15 +425,11 @@
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.Label lblFechaPublicación;
-        private System.Windows.Forms.Label lblFechaVencimiento;
         private System.Windows.Forms.ComboBox comboGrado;
         private System.Windows.Forms.Label lblGrado;
         private System.Windows.Forms.Label lblRubro;
         private System.Windows.Forms.ComboBox comboRubro;
         private System.Windows.Forms.Button btnPublicar;
-        private System.Windows.Forms.Label fechaPublicacion;
-        private System.Windows.Forms.Label fechaVencimiento;
         private System.Windows.Forms.DateTimePicker fechaEspectaculo;
         private System.Windows.Forms.DataGridView numeradosDataGrid;
         private System.Windows.Forms.Label label4;

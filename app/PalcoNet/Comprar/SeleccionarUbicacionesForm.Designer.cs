@@ -96,6 +96,7 @@
             this.btnAnterior.TabIndex = 4;
             this.btnAnterior.Text = "Anterior";
             this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
             // 
             // btnSiguiente
             // 
@@ -125,6 +126,7 @@
             this.comboTipo.Name = "comboTipo";
             this.comboTipo.Size = new System.Drawing.Size(121, 21);
             this.comboTipo.TabIndex = 7;
+            this.comboTipo.SelectedIndexChanged += new System.EventHandler(this.comboTipo_SelectedIndexChanged);
             // 
             // label1
             // 

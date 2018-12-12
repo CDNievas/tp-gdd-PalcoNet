@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet
 {
-    class DataBase
+    public class DataBase
     {
         private const String schemaName = "COMPUMUNDOHIPERMEGARED";
         private static DataBase instance = null;
@@ -49,6 +49,7 @@ namespace PalcoNet
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
                 throw new QueryException("Query error", ex);
@@ -79,6 +80,7 @@ namespace PalcoNet
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
                 throw new QueryException("Query error", ex);
@@ -104,6 +106,7 @@ namespace PalcoNet
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
                 throw new ProcedureException("Error al ejecutar el procedure " + procName, ex);

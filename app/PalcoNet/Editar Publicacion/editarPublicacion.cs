@@ -1,6 +1,7 @@
 ﻿using PalcoNet.Editar_Publicacion.SectoresUtils;
 using PalcoNet.Generar_Publicacion;
 using PalcoNet.PublicacionesUtils;
+using PalcoNet.Validadores;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -57,8 +58,6 @@ namespace PalcoNet.Editar_Publicacion
 
         public void LlenateCon(Publicacion publicacion)
         {
-            fechaPublicacion.Text = publicacion.fechaPublicacion != null ? publicacion.fechaPublicacion.ToString() : "-";
-            fechaVencimiento.Text = publicacion.fechaVencimiento != null ? publicacion.fechaVencimiento.ToString() : "-";
             fechaEspectaculo.Value = publicacion.fechaPublicacion.GetValueOrDefault(Contexto.FechaActual);
             
             txtCiudad.Text = publicacion.ciudad;
@@ -141,6 +140,7 @@ namespace PalcoNet.Editar_Publicacion
         {
             try
             {
+                ValidarTodo();
                 GuardarBorrador();
                 DialogResult dialogResult = MessageBox.Show("¿Desea realizar esta publicación para varias fechas?",
                     "Publicación por lotes", MessageBoxButtons.YesNo);
@@ -154,11 +154,32 @@ namespace PalcoNet.Editar_Publicacion
                 }
                 Close();
             }
-            catch (Exception ex)
+            catch (UserInputException ex)
             {
-                Console.WriteLine(ex.StackTrace);
                 MessageBox.Show(ex.Message);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex + "\n" + ex.Message + "\n" + ex.StackTrace);
+                MessageBox.Show("Ha ocurrido un error");
+            }
+        }
+
+        private void ValidarTodo()
+        {
+            foreach (TextBox t in TodosLosTextbox())
+            {
+                if (String.IsNullOrWhiteSpace(t.Text))
+                    throw new UserInputException("Debe completar todos los campos");
+            }
+            if (new ValidadorNumerico().IsInvalid(txtNroCalle.Text))
+                throw new UserInputException("El nro de calle debe ser un número");
+            if (comboGrado.SelectedItem == null)
+                throw new UserInputException("Debe seleccionar un grado para su publicación");
+            if (comboRubro.SelectedItem == null)
+                throw new UserInputException("Debe seleccionar un rubro para su publicación");
+            if (fechaEspectaculo.Value < Contexto.FechaActual)
+                throw new UserInputException("La fecha del espectáculo debe ser posterior a la actual");
         }
 
         private void PublicarUnaVez()
@@ -172,8 +193,8 @@ namespace PalcoNet.Editar_Publicacion
         {
             CargarGrados();
             CargarRubros();
-            fechaEspectaculo.MinDate = Contexto.FechaActual;
             funcion.Setup(this);
+            fechaEspectaculo.MinDate = fechaEspectaculo.Value < Contexto.FechaActual ? fechaEspectaculo.Value : Contexto.FechaActual;
         }
 
         private void btnNuevoNumerado_Click(object sender, EventArgs e)

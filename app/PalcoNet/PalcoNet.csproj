@@ -131,6 +131,13 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje Puntos\Premio.cs" />
+    <Compile Include="Comprar\CompraManager.cs" />
+    <Compile Include="Comprar\CompraResumenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\CompraResumenForm.Designer.cs">
+      <DependentUpon>CompraResumenForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comprar\listarPublicaciones.cs" />
     <Compile Include="Comprar\SeleccionarUbicacionesForm.cs">
       <SubType>Form</SubType>
@@ -175,12 +182,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GD2C2018DataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Generar Publicacion\AltaPublicacion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Generar Publicacion\AltaPublicacion.Designer.cs">
-      <DependentUpon>AltaPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Generar Publicacion\DateTimeForm.cs">
       <SubType>Form</SubType>
@@ -299,6 +300,9 @@
     <EmbeddedResource Include="CambioClaveForm.resx">
       <DependentUpon>CambioClaveForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\CompraResumenForm.resx">
+      <DependentUpon>CompraResumenForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Comprar\SeleccionarUbicacionesForm.resx">
       <DependentUpon>SeleccionarUbicacionesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -402,9 +406,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rubro\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Generar Publicacion\AltaPublicacion.resx">
-      <DependentUpon>AltaPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Historial Cliente\historialClienteCompras.resx">
       <DependentUpon>historialClienteCompras.cs</DependentUpon>

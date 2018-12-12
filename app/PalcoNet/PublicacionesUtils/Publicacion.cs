@@ -124,6 +124,7 @@ namespace PalcoNet.PublicacionesUtils
                 var rubro = new Rubro(idrubro, descripcion);
                 p.rubro = rubro;
             }catch(Exception){
+                Console.WriteLine("No se pudo encontrar rubro para la publicación " + p.id);
                 p.rubro = null;
             }
         }
@@ -133,9 +134,10 @@ namespace PalcoNet.PublicacionesUtils
                 var idGrado = dr.IntValue("grado_id");
                 var descripcion = dr.StringValue("grado_descripcion");
                 var comision = dr.DoubleValue("grado_comision");
-                var eliminado = dr.BoolValue("eliminado");
+                var eliminado = dr.BoolValue("grado_eliminado");
                 p.grado = new Grado(idGrado, descripcion, comision, eliminado);
             }catch(Exception){
+                Console.WriteLine("No se pudo encontrar grado para la publicación " + p.id);
                 p.grado = null;
             }
         }
@@ -222,15 +224,7 @@ namespace PalcoNet.PublicacionesUtils
         {
             DataBase.GetInstance().WithTransaction(() =>
             {
-                DataBase.GetInstance()
-                    .TypedQuery(@"update COMPUMUNDOHIPERMEGARED.Publicacion
-                              set fecha_creacion = @fecha, estado = @estado
-                              where id_publicacion = @id"
-                    , new QueryParameter("fecha", SqlDbType.DateTime, Contexto.FechaActual)
-                    , new QueryParameter("estado", SqlDbType.Char, new Publicado().Codigo())
-                    , new QueryParameter("id", SqlDbType.BigInt, this.id));
-                DataBase.GetInstance()
-                    .Procedure("generar_ubicaciones_de", new ParametroIn("id_publicacion", this.id));
+                Publicar(this, sectores, this.id);
             });
             this.estado = new Publicado();
         }
