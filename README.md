@@ -2,7 +2,6 @@
 TP GDD 2018
 
 ## Alumnos
-- Christian Dario Nievas, 155.900-0
 - Lautaro Gomez Odriozola, 156.607-6
 - Martín Gabriel Mallea Santagada, 159.093-5
 - Fiorella Denise Altobelli, 159.092-3
