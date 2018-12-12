@@ -15,16 +15,18 @@ namespace PalcoNet.PublicacionesUtils
             return PublicacionesFromDataTable(dt);
         }
 
-        public static List<Publicacion> PublicacionesByEmpresaId(long idEmpresa, Pagina pag, Boolean soloBorradores) {
-            String condicionWhereBorrador = "";
+        public static List<Publicacion> PublicacionesByEmpresaId(long idEmpresa, Pagina pag, Boolean soloBorradores, String nombre = null) {
+            String where = "";
             if (soloBorradores)
-                condicionWhereBorrador = "and estado = '"+ new Borrador().Codigo() +"'";
+                where += "and estado = '"+ new Borrador().Codigo() +"'";
+            if (!String.IsNullOrWhiteSpace(nombre))
+                where += String.Format(" and descripcion like '%{0}%' ", nombre);
 
             String sql = String.Format( @"select * from COMPUMUNDOHIPERMEGARED.PublicacionesView where id_empresa = {0}
                                         {3}
                                         ORDER BY case when estado like 'B' then 0 else 1 end, fecha_espectaculo desc
                                         OFFSET {1} ROWS FETCH NEXT {2} ROWS ONLY",
-                                        idEmpresa, pag.FirstResultIndex(), pag.pageSize, condicionWhereBorrador);
+                                        idEmpresa, pag.FirstResultIndex(), pag.pageSize, where);
             var dt = DataBase.GetInstance().Query(sql);
             return PublicacionesFromDataTable(dt);
         }
@@ -74,9 +76,9 @@ namespace PalcoNet.PublicacionesUtils
                 condiciones.Add(condicion);
             }
 
-            String condicionWhere = "";
+            String condicionWhere = String.Format("where estado = '{0}' ", new Publicado().Codigo());
             if (condiciones.Count != 0)
-                condicionWhere = "where " + condiciones.Aggregate((prod, next) => prod + " and " + next);
+                condicionWhere += "and " + condiciones.Aggregate((prod, next) => prod + " and " + next);
 
             var sql = String.Format("select * from COMPUMUNDOHIPERMEGARED.PublicacionesView "
                 + condicionWhere

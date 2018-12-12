@@ -38,7 +38,7 @@ namespace PalcoNet.Editar_Publicacion
 
         private void ActualizarTabla()
         {
-            var lista = new BindingList<Publicacion>(Publicaciones.PublicacionesByEmpresaId(Contexto.GetEmpresaLogeadaId(), PaginaActual, SoloBorradores));
+            var lista = new BindingList<Publicacion>(Publicaciones.PublicacionesByEmpresaId(Contexto.GetEmpresaLogeadaId(), PaginaActual, SoloBorradores, txtNombre.Text));
             var bindingSource = new BindingSource(lista, null);
 
             publicacionesDataGrid.DataSource = bindingSource;
@@ -93,6 +93,11 @@ namespace PalcoNet.Editar_Publicacion
         private void checkBorrador_CheckedChanged(object sender, EventArgs e)
         {
             PaginaActual.pageNumber = 1;
+            ActualizarTabla();
+        }
+
+        private void btnPublicacionBuscar_Click(object sender, EventArgs e)
+        {
             ActualizarTabla();
         }
 

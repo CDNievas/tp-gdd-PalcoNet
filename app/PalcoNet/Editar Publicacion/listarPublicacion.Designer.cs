@@ -131,6 +131,7 @@
             this.btnPublicacionBuscar.TabIndex = 40;
             this.btnPublicacionBuscar.Text = "Buscar";
             this.btnPublicacionBuscar.UseVisualStyleBackColor = true;
+            this.btnPublicacionBuscar.Click += new System.EventHandler(this.btnPublicacionBuscar_Click);
             // 
             // shapeContainer1
             // 

@@ -152,7 +152,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Ubicacion(
 	ocupado bit default 0,
 	compra_id int CONSTRAINT FK_UBICACION_COMPRA references COMPUMUNDOHIPERMEGARED.Compra(id_compra),
 	tipo_ubicacion_id int CONSTRAINT FK_UBICACION_TIPOUBICACION references COMPUMUNDOHIPERMEGARED.TipoUbicacion(id_tipo_ubicacion),
-	publicacion_id bigint CONSTRAINT FK_UBICACION_PUBLICACION references COMPUMUNDOHIPERMEGARED.Publicacion(id_publicacion)
+	publicacion_id bigint CONSTRAINT FK_UBICACION_PUBLICACION references COMPUMUNDOHIPERMEGARED.Publicacion(id_publicacion) not null
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Factura( -- MIGRADO
@@ -957,6 +957,15 @@ begin
 end
 go
 
+create function COMPUMUNDOHIPERMEGARED.StockDePublicacion(@publicacion_id bigint)
+returns int
+as
+begin
+	return (select count(*) from COMPUMUNDOHIPERMEGARED.Ubicacion u where u.publicacion_id = @publicacion_id and u.ocupado = 0)
+end
+go
+
+
 CREATE TYPE UbicacionTableType AS TABLE   
 ( ubicacion_id bigint);  
 GO 
@@ -974,6 +983,14 @@ begin
 	if not exists (select ubicacion_id from @ubicaciones_table)
 	begin
 		raiserror('Debe comprar al menos una ubicación', 11, 1)
+		rollback tran
+		return
+	end
+
+	if exists (select * from COMPUMUNDOHIPERMEGARED.Ubicacion u
+	where u.id_ubicacion in (select ubicacion_id from @ubicaciones_table) and u.ocupado = 1)
+	begin
+		raiserror('No se puede comprar ubicaciones ocupadas', 11, 1)
 		rollback tran
 		return
 	end
@@ -997,6 +1014,29 @@ begin
 	update COMPUMUNDOHIPERMEGARED.Ubicacion
 	set ocupado = 1, compra_id = @compra_id
 	where id_ubicacion in (select ubicacion_id from @ubicaciones_table)
+	
+	declare c1 cursor for
+	select distinct(u.publicacion_id)
+	from COMPUMUNDOHIPERMEGARED.Ubicacion u
+	where u.id_ubicacion in (select ubicacion_id from @ubicaciones_table)
+	
+	declare @id_publicacion bigint
+	
+	open c1
+	fetch next from c1 into @id_publicacion
+
+	while @@FETCH_STATUS = 0
+	begin
+		if COMPUMUNDOHIPERMEGARED.StockDePublicacion(@id_publicacion) = 0
+		begin
+			update COMPUMUNDOHIPERMEGARED.Publicacion
+			set estado = 'F', fecha_vencimiento = @fecha
+			where id_publicacion = @id_publicacion
+		end
+		fetch next from c1 into @id_publicacion
+	end
+	close c1
+	deallocate c1
 
 	commit tran
 	return

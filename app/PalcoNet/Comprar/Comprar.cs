@@ -272,7 +272,7 @@ namespace PalcoNet.Comprar
             {
                 MessageBox.Show("Debe seleccionar una publicación");
             }
-
+            ActualizarTabla();
         }
 
         private Publicacion GetSelectedPublicacion()
