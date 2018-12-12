@@ -5,12 +5,12 @@ using System.Text;
 
 namespace PalcoNet.PublicacionesUtils
 {
-    class RangoFechas
+    public class RangoFechas
     {
-        public RangoFechas(DateTime dateTime1, DateTime dateTime2)
+        public RangoFechas(DateTime inicio, DateTime fin)
         {
-            this.inicio= dateTime1;
-            this.fin = dateTime2;
+            this.inicio = inicio;
+            this.fin = fin;
         }
         public DateTime inicio { get; set; }
         public DateTime fin {get; set;}

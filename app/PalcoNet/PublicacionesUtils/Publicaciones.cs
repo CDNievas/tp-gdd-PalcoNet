@@ -35,7 +35,14 @@ namespace PalcoNet.PublicacionesUtils
                 pag = new Pagina(1, 10);
 
             String sql = GetBusquedaQuery(descripcion, rango, rubros, pag);
-            var dt = DataBase.GetInstance().Query(sql);
+            QueryParameter[] arr = { };
+            if (rango != null)
+            {
+                arr = new QueryParameter[] {new QueryParameter("inicio", SqlDbType.DateTime, rango.inicio),
+                new QueryParameter("fin", SqlDbType.DateTime, rango.fin)};
+            }
+
+            var dt = DataBase.GetInstance().TypedQuery(sql, arr);
             return PublicacionesFromDataTable(dt);
         }
 
@@ -50,7 +57,7 @@ namespace PalcoNet.PublicacionesUtils
             }
             if (rango != null)
             {
-                var condicion = String.Format("fecha_espectaculo between '{0}' and '{1}'", rango.inicio, rango.fin);
+                var condicion = String.Format("fecha_espectaculo between @inicio and @fin");
                 condiciones.Add(condicion);
             }
             if (rubros != null && rubros.Count != 0)
@@ -73,7 +80,7 @@ namespace PalcoNet.PublicacionesUtils
 
             var sql = String.Format("select * from COMPUMUNDOHIPERMEGARED.PublicacionesView "
                 + condicionWhere
-                + " order by prioridad desc"
+                + " order by grado_comision desc"
                 + " OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", pag.FirstResultIndex(), pag.pageSize);
 
             return sql;

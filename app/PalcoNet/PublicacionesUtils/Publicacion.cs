@@ -276,6 +276,33 @@ namespace PalcoNet.PublicacionesUtils
                 }
             });
         }
+
+        public List<Ubicacion> GetUbicacionesDisponibles(TipoUbicacion tipoUbicacion = null, Pagina pagina = null)
+        {
+            if (pagina == null)
+                pagina = new Pagina(1, 10);
+
+            String where = "";
+            if (tipoUbicacion != null)
+                where = "where tipo_ubicacion_id = " + tipoUbicacion.id;
+
+            var sql = String.Format(@"select * from COMPUMUNDOHIPERMEGARED.Ubicacion u
+            inner join COMPUMUNDOHIPERMEGARED.TipoUbicacion t on u.tipo_ubicacion_id = t.id_tipo_ubicacion
+            and u.publicacion_id = {1} and ocupado = 0
+            {0}
+            order by precio desc
+            OFFSET " + pagina.FirstResultIndex() + " ROWS FETCH NEXT " + pagina.pageSize + " ROWS ONLY",
+                     where, this.id);
+
+            var dt = DataBase.GetInstance().Query(sql);
+
+            var lista = new List<Ubicacion>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                lista.Add(Ubicacion.FromDataRow(dr));
+            }
+            return lista;
+        }
     }
    
 }

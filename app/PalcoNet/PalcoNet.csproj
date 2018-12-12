@@ -131,6 +131,18 @@
     </Compile>
     <Compile Include="Canje Puntos\Premio.cs" />
     <Compile Include="Comprar\listarPublicaciones.cs" />
+    <Compile Include="Comprar\SeleccionarUbicacionesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\SeleccionarUbicacionesForm.Designer.cs">
+      <DependentUpon>SeleccionarUbicacionesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar\SeleccionCategoriaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\SeleccionCategoriaForm.Designer.cs">
+      <DependentUpon>SeleccionCategoriaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Contexto.cs" />
     <Compile Include="DataBasePackage\DataBase.cs" />
     <Compile Include="DataBasePackage\DataRowUtils.cs" />
@@ -285,6 +297,12 @@
     </Compile>
     <EmbeddedResource Include="CambioClaveForm.resx">
       <DependentUpon>CambioClaveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\SeleccionarUbicacionesForm.resx">
+      <DependentUpon>SeleccionarUbicacionesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\SeleccionCategoriaForm.resx">
+      <DependentUpon>SeleccionCategoriaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editar Publicacion\EditarPublicacion.resx">
       <DependentUpon>EditarPublicacion.cs</DependentUpon>

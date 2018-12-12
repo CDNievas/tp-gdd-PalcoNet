@@ -29,10 +29,12 @@ namespace PalcoNet.Editar_Publicacion
         [DisplayName("Ocupado?")]
         public Boolean Ocupado { get; set; }
 
-        private static Ubicacion FromDataRow(DataRow _dr)
+        public static Ubicacion FromDataRow(DataRow _dr)
         {
             var dr = new DataRowExtended(_dr);
             var ubicacion = new Ubicacion();
+
+            ubicacion.Id = dr.IntValue("id_ubicacion");
 
             ubicacion.Fila = dr.StringValue("fila");
             ubicacion.Asiento = dr.TryGet<String>("", _ => _.StringValue("asiento"));
