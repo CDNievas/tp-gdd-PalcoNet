@@ -1,92 +1,125 @@
-use GD2C2018
+USE GD2C2018
 GO
-alter table COMPUMUNDOHIPERMEGARED.Compras
-drop constraint fk_compra_ubicacion 
-go
 
-drop INDEX index_dni on COMPUMUNDOHIPERMEGARED.Cliente
-go
-
-drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario
-go
-
+----------------------------------------------------------------------------------------------
+								/** ELIMINACIÓN DE CONSTRAINS DE TABLAS ANTERIORES **/
+----------------------------------------------------------------------------------------------
 drop procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol
-go
-
-drop type COMPUMUNDOHIPERMEGARED.FuncionalidadList
-go
+drop procedure COMPUMUNDOHIPERMEGARED.actualizarRol
+drop procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario
+drop procedure COMPUMUNDOHIPERMEGARED.intentar_logear
+drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_cliente
+drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_empresa
+drop procedure COMPUMUNDOHIPERMEGARED.eliminar_rol
+drop procedure COMPUMUNDOHIPERMEGARED.crear_borrador
+drop procedure COMPUMUNDOHIPERMEGARED.generar_ubicaciones_de
+drop procedure COMPUMUNDOHIPERMEGARED.update_datos_borrador
+drop procedure COMPUMUNDOHIPERMEGARED.publicar_fecha
+drop procedure COMPUMUNDOHIPERMEGARED.realizarCanje
+drop procedure COMPUMUNDOHIPERMEGARED.AsignarTarjetaA
 
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
-go
-
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario
-go
+drop function COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion
+drop function COMPUMUNDOHIPERMEGARED.puntosDeCliente
 
-drop procedure COMPUMUNDOHIPERMEGARED.eliminar_rol
-go
+drop trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
 
-drop procedure COMPUMUNDOHIPERMEGARED.actualizarRol
-go
-
-drop procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario
-go
-
-drop procedure COMPUMUNDOHIPERMEGARED.intentar_logear
-go
+drop type COMPUMUNDOHIPERMEGARED.FuncionalidadList 
 
 drop view COMPUMUNDOHIPERMEGARED.PublicacionesView
-go
 
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Publicacion', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Publicacion
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Funcionalidad', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Funcionalidad
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Rol', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Rol
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Rol_Usuario', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Rol_Usuario
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Empresa', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Empresa
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Cliente', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Cliente
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Usuario', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Usuario
+drop SEQUENCE COMPUMUNDOHIPERMEGARED.CompraSequence
+drop SEQUENCE COMPUMUNDOHIPERMEGARED.UbicacionSequence
 
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Tarjeta', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Tarjeta
 
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Compras', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Compras
+PRINT('Eliminacion de Schema anterior') 
+IF EXISTS (SELECT * FROM SYS.SCHEMAS WHERE name = 'COMPUMUNDOHIPERMEGARED')
+BEGIN
+	DECLARE @Sql NVARCHAR(MAX) = '';
 
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Puntos', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Puntos
+-------------------------------------
+--		ELIMINACION DE CONSTRAINTS
+-------------------------------------
+PRINT('Eliminacion de Constraints anteriores') 
+	SELECT @Sql = @Sql + 'ALTER TABLE ' + QUOTENAME('COMPUMUNDOHIPERMEGARED') + '.' + QUOTENAME(t.name) + ' DROP CONSTRAINT ' 
+																		+ QUOTENAME(f.name)  + ';' + CHAR(13)
+	FROM SYS.TABLES t 
+	INNER JOIN SYS.FOREIGN_KEYS f ON f.parent_object_id = t.object_id 
+	INNER JOIN SYS.SCHEMAS s ON t.SCHEMA_ID = s.SCHEMA_ID
+	WHERE s.name = 'COMPUMUNDOHIPERMEGARED'
+	ORDER BY t.name;
+	PRINT @Sql
+	EXEC  (@Sql)
+	PRINT('Eliminacion HECHA') 
+	/*
 
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Facturas', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Facturas
-
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Pagos', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Pagos
-
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.TipoUbicacion', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.TipoUbicacion
-
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Ubicacion', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Ubicacion
-
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Rubro', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Rubro
-
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Grado', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Grado
-
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.Item_Factura', 'U') IS NOT NULL 
-	drop table COMPUMUNDOHIPERMEGARED.Item_Factura
-
-IF OBJECT_ID('COMPUMUNDOHIPERMEGARED.findIdClienteByDni', 'U') IS NOT NULL 
-	drop function COMPUMUNDOHIPERMEGARED.findIdClienteByDni
-
-IF EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'COMPUMUNDOHIPERMEGARED')
-	drop schema COMPUMUNDOHIPERMEGARED
+	*/
+-------------------------------------
+--		ELIMINACION DE TABLAS
+-------------------------------------
+PRINT('Eliminacion de tablas existentes') 
+	DECLARE @SqlStatement NVARCHAR(MAX)
+	SELECT @SqlStatement = COALESCE(@SqlStatement, N'') + N'DROP TABLE [COMPUMUNDOHIPERMEGARED].' + QUOTENAME(TABLE_NAME) + N';' + CHAR(13)
+	FROM INFORMATION_SCHEMA.TABLES
+	WHERE TABLE_SCHEMA = 'COMPUMUNDOHIPERMEGARED' AND TABLE_TYPE = 'BASE TABLE'
+	PRINT @SqlStatement
+	EXEC  (@SqlStatement)
+	DROP SCHEMA COMPUMUNDOHIPERMEGARED
+END
 GO
+PRINT('Eliminacion HECHA') 
+
+/*
+DROP TABLE COMPUMUNDOHIPERMEGARED.Usuario 
+DROP TABLE COMPUMUNDOHIPERMEGARED.Rol_Usuario
+DROP TABLE COMPUMUNDOHIPERMEGARED.Cliente
+DROP TABLE COMPUMUNDOHIPERMEGARED.Empresa
+DROP TABLE COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad
+DROP TABLE COMPUMUNDOHIPERMEGARED.Funcionalidad
+DROP TABLE COMPUMUNDOHIPERMEGARED.Tarjeta
+DROP TABLE COMPUMUNDOHIPERMEGARED.Ubicacion
+DROP TABLE COMPUMUNDOHIPERMEGARED.TipoUbicacion
+DROP TABLE COMPUMUNDOHIPERMEGARED.Compra
+DROP TABLE COMPUMUNDOHIPERMEGARED.Puntos
+DROP TABLE COMPUMUNDOHIPERMEGARED.Grado
+DROP TABLE COMPUMUNDOHIPERMEGARED.Publicacion
+DROP TABLE COMPUMUNDOHIPERMEGARED.Rol
+DROP TABLE COMPUMUNDOHIPERMEGARED.PremioDisponible
+DROP TABLE COMPUMUNDOHIPERMEGARED.CanjeUsuario
+DROP TABLE COMPUMUNDOHIPERMEGARED.Factura
+DROP TABLE COMPUMUNDOHIPERMEGARED.Item_Factura
+DROP TABLE COMPUMUNDOHIPERMEGARED.Rubro
+DROP TABLE COMPUMUNDOHIPERMEGARED.Sector
+DROP TABLE COMPUMUNDOHIPERMEGARED.Espectaculo
+
+drop table COMPUMUNDOHIPERMEGARED.##UbicacionTemp
+drop table COMPUMUNDOHIPERMEGARED.##CompraTemp
+
+drop procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol
+drop procedure COMPUMUNDOHIPERMEGARED.actualizarRol
+drop procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario
+drop procedure COMPUMUNDOHIPERMEGARED.intentar_logear
+drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_cliente
+drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_empresa
+drop procedure COMPUMUNDOHIPERMEGARED.eliminar_rol
+drop procedure COMPUMUNDOHIPERMEGARED.crear_borrador
+drop procedure COMPUMUNDOHIPERMEGARED.generar_ubicaciones_de
+drop procedure COMPUMUNDOHIPERMEGARED.update_datos_borrador
+drop procedure COMPUMUNDOHIPERMEGARED.publicar_fecha
+
+drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
+drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario
+drop function COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion
+
+drop trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
+
+drop type COMPUMUNDOHIPERMEGARED.FuncionalidadList 
+
+drop view COMPUMUNDOHIPERMEGARED.PublicacionesView
+
+drop SEQUENCE COMPUMUNDOHIPERMEGARED.CompraSequence
+drop SEQUENCE COMPUMUNDOHIPERMEGARED.UbicacionSequence
+
+DROP SCHEMA COMPUMUNDOHIPERMEGARED
+*/

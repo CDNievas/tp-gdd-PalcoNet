@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using System.Globalization;
 
 namespace PalcoNet
 {
@@ -12,7 +14,7 @@ namespace PalcoNet
     {
         public static int? idUsuarioLogueado = null;
 
-        public static readonly DateTime FechaActual = DateTime.Now; // todo deberia caragarlo del archiov config
+        public static readonly DateTime FechaActual = DateTime.ParseExact(ConfigurationManager.AppSettings["System_DateTime"], "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
 
         public static long GetEmpresaLogeadaId()
         {
