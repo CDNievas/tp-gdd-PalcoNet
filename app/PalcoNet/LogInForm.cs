@@ -48,7 +48,7 @@ namespace PalcoNet
                 {
                     var formSelector = new SelectorFuncionalidadForm(username.Text);
                     formSelector.Funcionalidades = funcionalidades;
-                    formSelector.Show();
+                    formSelector.ShowDialog();
                 }
 
             }
@@ -61,6 +61,9 @@ namespace PalcoNet
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("Ha ocurrido un error");
             }
+            Contexto.idUsuarioLogueado = null;
+            Contexto.ClienteLogeado = null;
+            Contexto.EmpresaLogeada = null;
         }
 
         private void ValidarPrimerLogin(int idUsuario, string username)

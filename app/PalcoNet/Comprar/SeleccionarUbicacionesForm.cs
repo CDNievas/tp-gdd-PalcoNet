@@ -29,6 +29,7 @@ namespace PalcoNet.Comprar
             comboTipo.DataSource = TipoUbicacion.Todos();
             ubicacionesDataGrid.MultiSelect = false;
             carritoDataGrid.MultiSelect = false;
+            lblCantidad.Text = "0";
         }
 
         private void SeleccionarUbicacionesFormcs_Load(object sender, EventArgs e)
@@ -38,8 +39,8 @@ namespace PalcoNet.Comprar
 
         private void ActualizarUbicacionesDisponibles()
         {
-            ubicaciones = publicacion.GetUbicacionesDisponibles(FiltarPorTipo ? SelectedTipo() : null, paginaActual)
-                .Where(u => !CarritoContiene(u.Id)).ToList();
+            ubicaciones = publicacion.GetUbicacionesDisponiblesSinIncluir(
+                FiltarPorTipo ? SelectedTipo() : null, paginaActual, this.carrito);
         }
 
         private Boolean CarritoContiene(long ubicacionId)
@@ -82,6 +83,7 @@ namespace PalcoNet.Comprar
                     return;
                 }
                 carrito.Add(ubicacion);
+                lblCantidad.Text = carrito.Count.ToString();
                 ActualizarTablas();
             }
             catch
@@ -104,6 +106,8 @@ namespace PalcoNet.Comprar
             carritoDataGrid.Columns["Id"].Visible = false;
 
             lblTotal.Text = "$ " + TotalCompra().ToString();
+
+            lblPagina.Text = paginaActual.pageNumber.ToString();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -117,6 +121,7 @@ namespace PalcoNet.Comprar
                     return;
                 }
                 carrito.Remove(ubicacion);
+                lblCantidad.Text = carrito.Count.ToString();
                 ActualizarTablas();
             }
             catch
@@ -158,7 +163,8 @@ namespace PalcoNet.Comprar
                 }
             }
             var dialogResult = new CompraResumenForm(this.publicacion, this.carrito, tarjeta, cliente).ShowDialog();
-
+            if (dialogResult == DialogResult.OK)
+                this.Close();
         }
 
         private long TotalCompra()

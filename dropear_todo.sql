@@ -17,6 +17,8 @@ drop procedure COMPUMUNDOHIPERMEGARED.update_datos_borrador
 drop procedure COMPUMUNDOHIPERMEGARED.publicar_fecha
 drop procedure COMPUMUNDOHIPERMEGARED.realizarCanje
 drop procedure COMPUMUNDOHIPERMEGARED.AsignarTarjetaA
+drop procedure COMPUMUNDOHIPERMEGARED.ComprarUbicaciones
+drop procedure COMPUMUNDOHIPERMEGARED.RegistrarPuntosDeCompra
 
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario
@@ -25,7 +27,8 @@ drop function COMPUMUNDOHIPERMEGARED.puntosDeCliente
 
 drop trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
 
-drop type COMPUMUNDOHIPERMEGARED.FuncionalidadList 
+drop type COMPUMUNDOHIPERMEGARED.FuncionalidadList
+drop TYPE UbicacionTableType
 
 drop view COMPUMUNDOHIPERMEGARED.PublicacionesView
 

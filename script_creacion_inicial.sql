@@ -138,6 +138,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Compra(
 	id_compra int PRIMARY KEY,
 	fecha datetime,
 	cantidad numeric(18,0),
+	precio_total numeric(18,0),
 	cliente_id int CONSTRAINT FK_COMPRA_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente(id_cliente),
 	tarjeta_id int CONSTRAINT FK_COMPRA_TARJETA references COMPUMUNDOHIPERMEGARED.Tarjeta(id_tarjeta)
 )
@@ -936,7 +937,8 @@ create procedure COMPUMUNDOHIPERMEGARED.AsignarTarjetaA(
 	@nro_tarjeta nvarchar(50),
 	@tipo char(1),
 	@ccv numeric(5, 0),
-	@fecha_vencimiento date
+	@fecha_vencimiento date,
+	@tarjeta_id int output
 )
 as
 begin
@@ -944,15 +946,74 @@ begin
 	insert into COMPUMUNDOHIPERMEGARED.Tarjeta(nro_tarjeta, tipo, ccv, fecha_vencimiento, cliente_id)
 	values (@nro_tarjeta, @tipo, @ccv, @fecha_vencimiento, @cliente_id)
 
-	declare @id_tarjeta int = @@IDENTITY
+	set @tarjeta_id = @@IDENTITY
 
 	update COMPUMUNDOHIPERMEGARED.Cliente
-	set tarjeta_actual_id = @id_tarjeta
+	set tarjeta_actual_id = @tarjeta_id
 	where id_cliente = @cliente_id
 
 	commit tran
+	return
 end
+go
 
+CREATE TYPE UbicacionTableType AS TABLE   
+( ubicacion_id bigint);  
+GO 
+
+create procedure COMPUMUNDOHIPERMEGARED.ComprarUbicaciones(
+	@ubicaciones_table UbicacionTableType READONLY,
+	@cliente_id int,
+	@tarjeta_id int,
+	@fecha datetime,
+	@compra_id int output
+)
+as
+begin
+	begin tran
+	if not exists (select ubicacion_id from @ubicaciones_table)
+	begin
+		raiserror('Debe comprar al menos una ubicación', 11, 1)
+		rollback tran
+		return
+	end
+
+	declare @total numeric(12,0) = (select sum(u.precio) from COMPUMUNDOHIPERMEGARED.Ubicacion u
+	where u.id_ubicacion in (select ubicacion_id from @ubicaciones_table))
+
+	if @total < 0
+	begin
+		raiserror('No puede haber compras con importe negativo', 11, 1)
+		rollback tran
+		return
+	end
+
+	declare @cantidad int = (select COUNT(*) from @ubicaciones_table)
+	select @compra_id = next value for COMPUMUNDOHIPERMEGARED.CompraSequence
+	
+	insert into COMPUMUNDOHIPERMEGARED.Compra(id_compra, fecha, cantidad, cliente_id, tarjeta_id, precio_total)
+	values(@compra_id, @fecha, @cantidad, @cliente_id, @tarjeta_id, @total)
+
+	update COMPUMUNDOHIPERMEGARED.Ubicacion
+	set ocupado = 1, compra_id = @compra_id
+	where id_ubicacion in (select ubicacion_id from @ubicaciones_table)
+
+	commit tran
+	return
+end
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.RegistrarPuntosDeCompra(@compra_id int)
+as
+begin
+	declare @precio_total numeric(18,0), @cliente_id int, @fecha datetime
+	
+	select @precio_total = c.precio_total, @cliente_id = c.cliente_id, @fecha = c.fecha 
+	from COMPUMUNDOHIPERMEGARED.Compra c where c.id_compra = @compra_id
+
+	insert into COMPUMUNDOHIPERMEGARED.Puntos(cant_puntos, fecha_creacion, cliente_id, compra_id)
+	values(ROUND(@precio_total/3, 0, 1), @fecha, @cliente_id, @compra_id)
+end
 go
 
 PRINT 'Todes les procedures y les funciones creades'

@@ -284,7 +284,49 @@ namespace PalcoNet.PublicacionesUtils
             inner join COMPUMUNDOHIPERMEGARED.TipoUbicacion t on u.tipo_ubicacion_id = t.id_tipo_ubicacion
             and u.publicacion_id = {1} and ocupado = 0
             {0}
-            order by precio desc
+            order by precio desc, fila asc
+            OFFSET " + pagina.FirstResultIndex() + " ROWS FETCH NEXT " + pagina.pageSize + " ROWS ONLY",
+                     where, this.id);
+
+            var dt = DataBase.GetInstance().Query(sql);
+
+            var lista = new List<Ubicacion>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                lista.Add(Ubicacion.FromDataRow(dr));
+            }
+            return lista;
+        }
+
+        public List<Ubicacion> GetUbicacionesDisponiblesSinIncluir(TipoUbicacion tipoUbicacion, Pagina pagina, List<Ubicacion> carrito)
+        {
+            if (pagina == null)
+                pagina = new Pagina(1, 10);
+
+            String where = "";
+            List<string> condiciones = new List<string>();
+            if (tipoUbicacion != null)
+                condiciones.Add(" tipo_ubicacion_id = " + tipoUbicacion.id);
+            if (carrito != null && carrito.Count != 0)
+            {
+                string[] arr = carrito.Select(u => u.Id.ToString()).ToArray();
+                var list = string.Join(",", arr);
+                var condicion = String.Format("id_ubicacion not in ({0})", list);
+                condiciones.Add(condicion);
+            }
+
+            if (condiciones.Count > 0)
+            {
+                where += "where ";
+                var condicionMultiple = string.Join(" and ", condiciones.ToArray());
+                where += condicionMultiple;
+            }
+
+            var sql = String.Format(@"select * from COMPUMUNDOHIPERMEGARED.Ubicacion u
+            inner join COMPUMUNDOHIPERMEGARED.TipoUbicacion t on u.tipo_ubicacion_id = t.id_tipo_ubicacion
+            and u.publicacion_id = {1} and ocupado = 0
+            {0}
+            order by precio desc, fila asc
             OFFSET " + pagina.FirstResultIndex() + " ROWS FETCH NEXT " + pagina.pageSize + " ROWS ONLY",
                      where, this.id);
 

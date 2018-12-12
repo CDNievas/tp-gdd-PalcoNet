@@ -63,7 +63,24 @@ namespace PalcoNet.Comprar
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-
+            var compraManager = new CompraManager();
+            try
+            {
+                compraManager.RealizarCompra(cliente, tarjeta, publicacion, ubicaciones);
+                compraManager.SumarPuntos();
+                MessageBox.Show("Se ha realizado su compra");
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (CompraException ex)
+            {
+                Console.WriteLine(ex + "\n" + ex.Message + "\n" + ex.StackTrace);
+                MessageBox.Show("Ha ocurrido un error al realizar la compra");
+            }
+            catch (PuntosException)
+            {
+                Console.WriteLine("Error al sumar puntos para la compra " + compraManager.IdCompra);
+            }
         }
     }
 }

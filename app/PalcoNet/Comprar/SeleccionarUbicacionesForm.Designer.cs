@@ -41,6 +41,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblPagina = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblCantidad = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ubicacionesDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.carritoDataGrid)).BeginInit();
             this.SuspendLayout();
@@ -161,7 +165,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(199, 529);
+            this.label3.Location = new System.Drawing.Point(283, 532);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 20);
             this.label3.TabIndex = 11;
@@ -171,17 +175,57 @@
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(283, 528);
+            this.lblTotal.Location = new System.Drawing.Point(374, 531);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(67, 20);
             this.lblTotal.TabIndex = 12;
             this.lblTotal.Text = "lblTotal";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(425, 335);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Página:";
+            // 
+            // lblPagina
+            // 
+            this.lblPagina.AutoSize = true;
+            this.lblPagina.Location = new System.Drawing.Point(475, 335);
+            this.lblPagina.Name = "lblPagina";
+            this.lblPagina.Size = new System.Drawing.Size(35, 13);
+            this.lblPagina.TabIndex = 14;
+            this.lblPagina.Text = "label5";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(139, 537);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Cantidad:";
+            // 
+            // lblCantidad
+            // 
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.Location = new System.Drawing.Point(198, 538);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(59, 13);
+            this.lblCantidad.TabIndex = 16;
+            this.lblCantidad.Text = "lblCantidad";
             // 
             // SeleccionarUbicacionesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(697, 579);
+            this.Controls.Add(this.lblCantidad);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblPagina);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -220,5 +264,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblPagina;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblCantidad;
     }
 }

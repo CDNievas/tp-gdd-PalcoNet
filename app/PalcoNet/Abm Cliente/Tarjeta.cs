@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PalcoNet.DataBasePackage;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -51,13 +52,18 @@ namespace PalcoNet.Abm_Cliente
 
         public void SerAsignadaA(int idCliente)
         {
+            var salida = new ParametroOut("tarjeta_id", SqlDbType.Int);
             DataBase.GetInstance()
                 .Procedure("AsignarTarjetaA",
                 new ParametroIn("cliente_id", idCliente),
                 new ParametroIn("nro_tarjeta", this.nroTarjeta),
                 new ParametroIn("tipo", this.tipoTarjeta.discriminator),
                 new ParametroIn("ccv", this.codigoSeguridad),
-                new ParametroIn("fecha_vencimiento", this.fechaVencimiento));
+                new ParametroIn("fecha_vencimiento", this.fechaVencimiento),
+                salida);
+            var tarjetaID = Convert.ToInt64(salida.valorRetorno);
+            Console.WriteLine("Tarjeta ID: " + tarjetaID);
+            this.id = tarjetaID;
         }
 
         public Boolean FueModificadaRespectoA(Tarjeta otra)

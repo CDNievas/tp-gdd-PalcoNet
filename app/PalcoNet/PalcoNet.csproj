@@ -131,6 +131,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje Puntos\Premio.cs" />
+    <Compile Include="Comprar\CompraException.cs" />
     <Compile Include="Comprar\CompraManager.cs" />
     <Compile Include="Comprar\CompraResumenForm.cs">
       <SubType>Form</SubType>
@@ -139,6 +140,7 @@
       <DependentUpon>CompraResumenForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Comprar\listarPublicaciones.cs" />
+    <Compile Include="Comprar\PuntosException.cs" />
     <Compile Include="Comprar\SeleccionarUbicacionesForm.cs">
       <SubType>Form</SubType>
     </Compile>
