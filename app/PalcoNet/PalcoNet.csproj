@@ -209,11 +209,17 @@
     <Compile Include="Historial Cliente\historialClienteCompras.Designer.cs">
       <DependentUpon>historialClienteCompras.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\obtenerTop5.cs">
+    <Compile Include="Listado Estadistico\ObtenerTop5.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\obtenerTop5.Designer.cs">
-      <DependentUpon>obtenerTop5.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\ObtenerTop5.Designer.cs">
+      <DependentUpon>ObtenerTop5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listado Estadistico\SeleccionEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\SeleccionEmpresa.Designer.cs">
+      <DependentUpon>SeleccionEmpresa.cs</DependentUpon>
     </Compile>
     <Compile Include="LogInForm.cs">
       <SubType>Form</SubType>
@@ -344,6 +350,9 @@
     <EmbeddedResource Include="Generar Rendicion Comisiones\rendicionComisiones.resx">
       <DependentUpon>rendicionComisiones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\SeleccionEmpresa.resx">
+      <DependentUpon>SeleccionEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\CrearUsuarioForm.resx">
       <DependentUpon>CrearUsuarioForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -412,8 +421,8 @@
     <EmbeddedResource Include="Historial Cliente\historialClienteCompras.resx">
       <DependentUpon>historialClienteCompras.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listado Estadistico\obtenerTop5.resx">
-      <DependentUpon>obtenerTop5.cs</DependentUpon>
+    <EmbeddedResource Include="Listado Estadistico\ObtenerTop5.resx">
+      <DependentUpon>ObtenerTop5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

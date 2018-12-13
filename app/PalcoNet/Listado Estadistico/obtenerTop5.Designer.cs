@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Listado_Estadistico
 {
-    partial class obtenerTop5
+    partial class ObtenerTop5
     {
         /// <summary>
         /// Required designer variable.
@@ -29,72 +29,37 @@
         private void InitializeComponent()
         {
             this.lbltop5 = new System.Windows.Forms.Label();
-            this.lbltop5Filtro = new System.Windows.Forms.Label();
-            this.btnfiltro1 = new System.Windows.Forms.RadioButton();
-            this.btnfiltro3 = new System.Windows.Forms.RadioButton();
-            this.btnfiltro2 = new System.Windows.Forms.RadioButton();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.btntop5Limpiar = new System.Windows.Forms.Button();
-            this.btntop5Guardar = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.usuario_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipo_usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.resultadosDataGrid = new System.Windows.Forms.DataGridView();
+            this.tipoListadoComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.trimestreInput = new System.Windows.Forms.NumericUpDown();
+            this.anioInput = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblGrado = new System.Windows.Forms.Label();
+            this.lblMes = new System.Windows.Forms.Label();
+            this.comboGrado = new System.Windows.Forms.ComboBox();
+            this.comboMes = new System.Windows.Forms.ComboBox();
+            this.lblEmpresa = new System.Windows.Forms.Label();
+            this.txtEmpresa = new System.Windows.Forms.TextBox();
+            this.btnSeleccionEmpresa = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.resultadosDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trimestreInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anioInput)).BeginInit();
             this.SuspendLayout();
             // 
             // lbltop5
             // 
             this.lbltop5.AutoSize = true;
             this.lbltop5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltop5.Location = new System.Drawing.Point(35, 25);
-            this.lbltop5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbltop5.Location = new System.Drawing.Point(26, 20);
             this.lbltop5.Name = "lbltop5";
-            this.lbltop5.Size = new System.Drawing.Size(201, 31);
+            this.lbltop5.Size = new System.Drawing.Size(163, 25);
             this.lbltop5.TabIndex = 1;
             this.lbltop5.Text = "Obtener Top 5";
-            // 
-            // lbltop5Filtro
-            // 
-            this.lbltop5Filtro.AutoSize = true;
-            this.lbltop5Filtro.Location = new System.Drawing.Point(38, 73);
-            this.lbltop5Filtro.Name = "lbltop5Filtro";
-            this.lbltop5Filtro.Size = new System.Drawing.Size(79, 17);
-            this.lbltop5Filtro.TabIndex = 3;
-            this.lbltop5Filtro.Text = "Elegir Filtro";
-            // 
-            // btnfiltro1
-            // 
-            this.btnfiltro1.AutoSize = true;
-            this.btnfiltro1.Location = new System.Drawing.Point(52, 105);
-            this.btnfiltro1.Name = "btnfiltro1";
-            this.btnfiltro1.Size = new System.Drawing.Size(110, 21);
-            this.btnfiltro1.TabIndex = 4;
-            this.btnfiltro1.TabStop = true;
-            this.btnfiltro1.Text = "radioButton1";
-            this.btnfiltro1.UseVisualStyleBackColor = true;
-            // 
-            // btnfiltro3
-            // 
-            this.btnfiltro3.AutoSize = true;
-            this.btnfiltro3.Location = new System.Drawing.Point(440, 105);
-            this.btnfiltro3.Name = "btnfiltro3";
-            this.btnfiltro3.Size = new System.Drawing.Size(110, 21);
-            this.btnfiltro3.TabIndex = 5;
-            this.btnfiltro3.TabStop = true;
-            this.btnfiltro3.Text = "radioButton2";
-            this.btnfiltro3.UseVisualStyleBackColor = true;
-            // 
-            // btnfiltro2
-            // 
-            this.btnfiltro2.AutoSize = true;
-            this.btnfiltro2.Location = new System.Drawing.Point(240, 105);
-            this.btnfiltro2.Name = "btnfiltro2";
-            this.btnfiltro2.Size = new System.Drawing.Size(110, 21);
-            this.btnfiltro2.TabIndex = 6;
-            this.btnfiltro2.TabStop = true;
-            this.btnfiltro2.Text = "radioButton3";
-            this.btnfiltro2.UseVisualStyleBackColor = true;
             // 
             // shapeContainer1
             // 
@@ -103,73 +68,178 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(636, 533);
+            this.shapeContainer1.Size = new System.Drawing.Size(812, 495);
             this.shapeContainer1.TabIndex = 8;
             this.shapeContainer1.TabStop = false;
             // 
             // rectangleShape1
             // 
-            this.rectangleShape1.Location = new System.Drawing.Point(34, 84);
+            this.rectangleShape1.Location = new System.Drawing.Point(34, 48);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(541, 76);
+            this.rectangleShape1.Size = new System.Drawing.Size(493, 151);
             // 
-            // btntop5Limpiar
+            // btnBuscar
             // 
-            this.btntop5Limpiar.Location = new System.Drawing.Point(41, 203);
-            this.btntop5Limpiar.Name = "btntop5Limpiar";
-            this.btntop5Limpiar.Size = new System.Drawing.Size(88, 30);
-            this.btntop5Limpiar.TabIndex = 19;
-            this.btntop5Limpiar.Text = "Limpiar";
-            this.btntop5Limpiar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Location = new System.Drawing.Point(444, 164);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(66, 24);
+            this.btnBuscar.TabIndex = 18;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // btntop5Guardar
+            // resultadosDataGrid
             // 
-            this.btntop5Guardar.Location = new System.Drawing.Point(483, 203);
-            this.btntop5Guardar.Name = "btntop5Guardar";
-            this.btntop5Guardar.Size = new System.Drawing.Size(88, 30);
-            this.btntop5Guardar.TabIndex = 18;
-            this.btntop5Guardar.Text = "Guardar";
-            this.btntop5Guardar.UseVisualStyleBackColor = true;
+            this.resultadosDataGrid.AllowUserToAddRows = false;
+            this.resultadosDataGrid.AllowUserToDeleteRows = false;
+            this.resultadosDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.resultadosDataGrid.Location = new System.Drawing.Point(31, 235);
+            this.resultadosDataGrid.Name = "resultadosDataGrid";
+            this.resultadosDataGrid.ReadOnly = true;
+            this.resultadosDataGrid.Size = new System.Drawing.Size(750, 239);
+            this.resultadosDataGrid.TabIndex = 20;
             // 
-            // dataGridView1
+            // tipoListadoComboBox
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.usuario_id,
-            this.tipo_usuario});
-            this.dataGridView1.Location = new System.Drawing.Point(41, 263);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(530, 217);
-            this.dataGridView1.TabIndex = 20;
+            this.tipoListadoComboBox.FormattingEnabled = true;
+            this.tipoListadoComboBox.Location = new System.Drawing.Point(231, 129);
+            this.tipoListadoComboBox.Name = "tipoListadoComboBox";
+            this.tipoListadoComboBox.Size = new System.Drawing.Size(289, 21);
+            this.tipoListadoComboBox.TabIndex = 21;
+            this.tipoListadoComboBox.SelectedIndexChanged += new System.EventHandler(this.tipoListadoComboBox_SelectedIndexChanged);
             // 
-            // usuario_id
+            // label1
             // 
-            this.usuario_id.HeaderText = "usuario_id";
-            this.usuario_id.Name = "usuario_id";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(94, 132);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "TipoListado";
             // 
-            // tipo_usuario
+            // trimestreInput
             // 
-            this.tipo_usuario.HeaderText = "tipo_usuario";
-            this.tipo_usuario.Name = "tipo_usuario";
+            this.trimestreInput.Location = new System.Drawing.Point(231, 94);
+            this.trimestreInput.Name = "trimestreInput";
+            this.trimestreInput.Size = new System.Drawing.Size(120, 20);
+            this.trimestreInput.TabIndex = 23;
+            this.trimestreInput.ValueChanged += new System.EventHandler(this.trimestreInput_ValueChanged);
             // 
-            // obtenerTop5
+            // anioInput
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.anioInput.Location = new System.Drawing.Point(231, 62);
+            this.anioInput.Name = "anioInput";
+            this.anioInput.Size = new System.Drawing.Size(120, 20);
+            this.anioInput.TabIndex = 24;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(97, 69);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.TabIndex = 25;
+            this.label2.Text = "Año:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(97, 100);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 26;
+            this.label3.Text = "Trimestre:";
+            // 
+            // lblGrado
+            // 
+            this.lblGrado.AutoSize = true;
+            this.lblGrado.Location = new System.Drawing.Point(575, 69);
+            this.lblGrado.Name = "lblGrado";
+            this.lblGrado.Size = new System.Drawing.Size(39, 13);
+            this.lblGrado.TabIndex = 27;
+            this.lblGrado.Text = "Grado:";
+            // 
+            // lblMes
+            // 
+            this.lblMes.AutoSize = true;
+            this.lblMes.Location = new System.Drawing.Point(575, 105);
+            this.lblMes.Name = "lblMes";
+            this.lblMes.Size = new System.Drawing.Size(30, 13);
+            this.lblMes.TabIndex = 28;
+            this.lblMes.Text = "Mes:";
+            // 
+            // comboGrado
+            // 
+            this.comboGrado.FormattingEnabled = true;
+            this.comboGrado.Location = new System.Drawing.Point(646, 62);
+            this.comboGrado.Name = "comboGrado";
+            this.comboGrado.Size = new System.Drawing.Size(121, 21);
+            this.comboGrado.TabIndex = 29;
+            // 
+            // comboMes
+            // 
+            this.comboMes.FormattingEnabled = true;
+            this.comboMes.Location = new System.Drawing.Point(646, 102);
+            this.comboMes.Name = "comboMes";
+            this.comboMes.Size = new System.Drawing.Size(121, 21);
+            this.comboMes.TabIndex = 30;
+            // 
+            // lblEmpresa
+            // 
+            this.lblEmpresa.AutoSize = true;
+            this.lblEmpresa.Location = new System.Drawing.Point(575, 110);
+            this.lblEmpresa.Name = "lblEmpresa";
+            this.lblEmpresa.Size = new System.Drawing.Size(117, 13);
+            this.lblEmpresa.TabIndex = 31;
+            this.lblEmpresa.Text = "Empresa seleccionada:";
+            // 
+            // txtEmpresa
+            // 
+            this.txtEmpresa.Location = new System.Drawing.Point(578, 132);
+            this.txtEmpresa.Name = "txtEmpresa";
+            this.txtEmpresa.Size = new System.Drawing.Size(168, 20);
+            this.txtEmpresa.TabIndex = 32;
+            // 
+            // btnSeleccionEmpresa
+            // 
+            this.btnSeleccionEmpresa.Location = new System.Drawing.Point(578, 164);
+            this.btnSeleccionEmpresa.Name = "btnSeleccionEmpresa";
+            this.btnSeleccionEmpresa.Size = new System.Drawing.Size(168, 23);
+            this.btnSeleccionEmpresa.TabIndex = 33;
+            this.btnSeleccionEmpresa.Text = "Seleccionar Empresa";
+            this.btnSeleccionEmpresa.UseVisualStyleBackColor = true;
+            this.btnSeleccionEmpresa.Click += new System.EventHandler(this.btnSeleccionEmpresa_Click);
+            // 
+            // ObtenerTop5
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 533);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.btntop5Limpiar);
-            this.Controls.Add(this.btntop5Guardar);
-            this.Controls.Add(this.btnfiltro2);
-            this.Controls.Add(this.btnfiltro3);
-            this.Controls.Add(this.btnfiltro1);
-            this.Controls.Add(this.lbltop5Filtro);
+            this.ClientSize = new System.Drawing.Size(812, 495);
+            this.Controls.Add(this.btnSeleccionEmpresa);
+            this.Controls.Add(this.txtEmpresa);
+            this.Controls.Add(this.lblEmpresa);
+            this.Controls.Add(this.comboMes);
+            this.Controls.Add(this.comboGrado);
+            this.Controls.Add(this.lblMes);
+            this.Controls.Add(this.lblGrado);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.anioInput);
+            this.Controls.Add(this.trimestreInput);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tipoListadoComboBox);
+            this.Controls.Add(this.resultadosDataGrid);
+            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.lbltop5);
             this.Controls.Add(this.shapeContainer1);
-            this.Name = "obtenerTop5";
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "ObtenerTop5";
             this.Text = "top5";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.obtenerTop5_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.resultadosDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trimestreInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anioInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,17 +248,23 @@
         #endregion
 
         private System.Windows.Forms.Label lbltop5;
-        private System.Windows.Forms.Label lbltop5Filtro;
-        private System.Windows.Forms.RadioButton btnfiltro1;
-        private System.Windows.Forms.RadioButton btnfiltro3;
-        private System.Windows.Forms.RadioButton btnfiltro2;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
-        private System.Windows.Forms.Button btntop5Limpiar;
-        private System.Windows.Forms.Button btntop5Guardar;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn usuario_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tipo_usuario;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.DataGridView resultadosDataGrid;
+        private System.Windows.Forms.ComboBox tipoListadoComboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown trimestreInput;
+        private System.Windows.Forms.NumericUpDown anioInput;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblGrado;
+        private System.Windows.Forms.Label lblMes;
+        private System.Windows.Forms.ComboBox comboGrado;
+        private System.Windows.Forms.ComboBox comboMes;
+        private System.Windows.Forms.Label lblEmpresa;
+        private System.Windows.Forms.TextBox txtEmpresa;
+        private System.Windows.Forms.Button btnSeleccionEmpresa;
 
     }
 }

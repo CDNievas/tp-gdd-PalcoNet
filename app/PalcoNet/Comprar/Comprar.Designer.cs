@@ -41,8 +41,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.RangoFechas = new System.Windows.Forms.Label();
             this.nombrePublicacion = new System.Windows.Forms.Label();
-            this.btnElegirUbicacion = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.btnComprasLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,8 +49,6 @@
             this.btnPagPrimera = new System.Windows.Forms.Button();
             this.btnPagUltima = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnElegirUbicaciones = new System.Windows.Forms.Button();
             this.Filtros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -190,24 +186,6 @@
             this.nombrePublicacion.TabIndex = 0;
             this.nombrePublicacion.Text = "Nombre:";
             // 
-            // btnElegirUbicacion
-            // 
-            this.btnElegirUbicacion.Location = new System.Drawing.Point(123, 169);
-            this.btnElegirUbicacion.Name = "btnElegirUbicacion";
-            this.btnElegirUbicacion.Size = new System.Drawing.Size(214, 19);
-            this.btnElegirUbicacion.TabIndex = 37;
-            this.btnElegirUbicacion.Text = "tipo de ubicación";
-            this.btnElegirUbicacion.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(27, 174);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(92, 13);
-            this.label8.TabIndex = 36;
-            this.label8.Text = "Tipo de ubicación";
-            // 
             // btnComprasLimpiar
             // 
             this.btnComprasLimpiar.Location = new System.Drawing.Point(724, 108);
@@ -283,29 +261,11 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 223);
+            this.dataGridView1.Location = new System.Drawing.Point(10, 171);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(864, 370);
+            this.dataGridView1.Size = new System.Drawing.Size(864, 422);
             this.dataGridView1.TabIndex = 20;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 197);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 13);
-            this.label5.TabIndex = 38;
-            this.label5.Text = " ubicación";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(123, 197);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(214, 19);
-            this.button2.TabIndex = 39;
-            this.button2.Text = "Elegir ubicación";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // btnElegirUbicaciones
             // 
@@ -325,10 +285,6 @@
             this.Controls.Add(this.btnElegirUbicaciones);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnComprasLimpiar);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.btnElegirUbicacion);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnPagUltima);
             this.Controls.Add(this.btnPagPrimera);
@@ -365,11 +321,7 @@
         private System.Windows.Forms.Button btnPagPrimera;
         private System.Windows.Forms.Button btnPagUltima;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnElegirUbicacion;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnCategoria;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button2;
         public System.Windows.Forms.Label lblCategorias;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox checkFecha;

@@ -16,18 +16,22 @@ namespace PalcoNet.PublicacionesUtils
         }
 
         public static List<Publicacion> PublicacionesByEmpresaId(long idEmpresa, Pagina pag, Boolean soloBorradores, String nombre = null) {
+            List<QueryParameter> parametros = new List<QueryParameter>();
             String where = "";
             if (soloBorradores)
                 where += "and estado = '"+ new Borrador().Codigo() +"'";
             if (!String.IsNullOrWhiteSpace(nombre))
-                where += String.Format(" and descripcion like '%{0}%' ", nombre);
+            {
+                where += " and descripcion like @paramNombre ";
+                parametros.Add(new QueryParameter("paramNombre", SqlDbType.NVarChar, "%" + nombre + "%"));
+            }
 
             String sql = String.Format( @"select * from COMPUMUNDOHIPERMEGARED.PublicacionesView where id_empresa = {0}
                                         {3}
                                         ORDER BY case when estado like 'B' then 0 else 1 end, fecha_espectaculo desc
                                         OFFSET {1} ROWS FETCH NEXT {2} ROWS ONLY",
                                         idEmpresa, pag.FirstResultIndex(), pag.pageSize, where);
-            var dt = DataBase.GetInstance().Query(sql);
+            var dt = DataBase.GetInstance().TypedQuery(sql, parametros.ToArray());
             return PublicacionesFromDataTable(dt);
         }
 
@@ -36,31 +40,29 @@ namespace PalcoNet.PublicacionesUtils
             if (pag == null)
                 pag = new Pagina(1, 10);
 
-            String sql = GetBusquedaQuery(descripcion, rango, rubros, pag);
-            QueryParameter[] arr = { };
-            if (rango != null)
-            {
-                arr = new QueryParameter[] {new QueryParameter("inicio", SqlDbType.DateTime, rango.inicio),
-                new QueryParameter("fin", SqlDbType.DateTime, rango.fin)};
-            }
+            var parametros = new List<QueryParameter>();
+            String sql = GetBusquedaQuery(descripcion, rango, rubros, pag, parametros);
 
-            var dt = DataBase.GetInstance().TypedQuery(sql, arr);
+            var dt = DataBase.GetInstance().TypedQuery(sql, parametros.ToArray());
             return PublicacionesFromDataTable(dt);
         }
 
-        public static String GetBusquedaQuery(String descripcion, RangoFechas rango, List<Rubro> rubros, Pagina pag)
+        public static String GetBusquedaQuery(String descripcion, RangoFechas rango, List<Rubro> rubros, Pagina pag, List<QueryParameter> parametros)
         {
             var condiciones = new List<String>();
 
             if (descripcion != null && !descripcion.Trim().Equals(""))
             {
-                var condicion = String.Format("upper(descripcion) like '%{0}%'", descripcion.ToUpper());
+                var condicion = "upper(descripcion) like @descripcionParam";
                 condiciones.Add(condicion);
+                parametros.Add(new QueryParameter("descripcionParam", SqlDbType.NVarChar, "%" + descripcion.ToUpper() + "%"));
             }
             if (rango != null)
             {
                 var condicion = String.Format("fecha_espectaculo between @inicio and @fin");
                 condiciones.Add(condicion);
+                parametros.Add(new QueryParameter("inicio", SqlDbType.DateTime, rango.inicio));
+                parametros.Add(new QueryParameter("fin", SqlDbType.DateTime, rango.fin));
             }
             if (rubros != null && rubros.Count != 0)
             {

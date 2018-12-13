@@ -25,6 +25,10 @@ drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario
 drop function COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion
 drop function COMPUMUNDOHIPERMEGARED.puntosDeCliente
 drop function COMPUMUNDOHIPERMEGARED.StockDePublicacion
+drop function COMPUMUNDOHIPERMEGARED.EmpresasConMenosVentas
+drop function COMPUMUNDOHIPERMEGARED.GetTipoDocumento
+drop function COMPUMUNDOHIPERMEGARED.ClientesConMasPuntosVencidos
+drop function COMPUMUNDOHIPERMEGARED.ClientesConMasComprasDeEmpresa
 
 drop trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
 
@@ -115,6 +119,9 @@ drop procedure COMPUMUNDOHIPERMEGARED.publicar_fecha
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario
 drop function COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion
+drop function COMPUMUNDOHIPERMEGARED.EmpresasConMenosVentas
+drop function COMPUMUNDOHIPERMEGARED.GetTipoDocumento
+drop function COMPUMUNDOHIPERMEGARED.ClientesConMasPuntosVencidos
 
 drop trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
 

@@ -47,7 +47,7 @@ namespace PalcoNet
                     throw new NotImplementedException("Rendición comisiones");
                     break;
                 case 12:
-                    throw new NotImplementedException("Listado Estadístico");
+                    new Listado_Estadistico.ObtenerTop5().ShowDialog();
                     break;
             }
         }

@@ -192,6 +192,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Puntos(
 	cant_puntos int not null,
 	cant_usada int default 0 not null,
 	fecha_creacion datetime not null,
+	fecha_vencimiento datetime not null,
 	cliente_id int CONSTRAINT FK_PUNTOS_CLIENTE references COMPUMUNDOHIPERMEGARED.Cliente not null,
 	compra_id int CONSTRAINT FK_PUNTOS_COMPRA references COMPUMUNDOHIPERMEGARED.Compra
 )
@@ -363,11 +364,12 @@ on m.Espec_Empresa_Cuit = e.cuit
 PRINT 'Migre Espectaculo'
 GO
 
-insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_espectaculo, fecha_vencimiento, estado)
+insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_espectaculo, fecha_vencimiento, estado, grado_id)
 select e.id_espectaculo, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc,
 case when lower(m.Espectaculo_Estado) like 'publicada' then 'P'
 when lower(m.Espectaculo_Estado) like 'borrador' then 'B'
-when lower(m.Espectaculo_Estado) like 'finalizada' then 'F' end
+when lower(m.Espectaculo_Estado) like 'finalizada' then 'F' end,
+3
 from gd_esquema.Maestra m
 inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
 on e.codigo = m.Espectaculo_Cod
@@ -519,8 +521,8 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.PremioDisponible(descripcion,cant_puntos) VAL
 PRINT 'Migre PremioDisponible'
 GO
 
-INSERT INTO COMPUMUNDOHIPERMEGARED.Puntos(cant_puntos, fecha_creacion, cliente_id, compra_id)
-	SELECT ROUND(u.precio/3, 0, 1), c.fecha, c.cliente_id, c.id_compra
+INSERT INTO COMPUMUNDOHIPERMEGARED.Puntos(cant_puntos, fecha_creacion, fecha_vencimiento, cliente_id, compra_id)
+	SELECT ROUND(u.precio/3, 0, 1), c.fecha, DATEADD(MONTH, 3, c.fecha), c.cliente_id, c.id_compra
 	FROM COMPUMUNDOHIPERMEGARED.Compra c
 	JOIN COMPUMUNDOHIPERMEGARED.Ubicacion u ON c.id_compra = u.compra_id
 	WHERE u.compra_id IS NOT NULL
@@ -877,7 +879,7 @@ as
 begin
 	return isnull((select isnull(sum(p.cant_puntos - p.cant_usada), 0) from COMPUMUNDOHIPERMEGARED.Puntos p
 			where p.fecha_creacion <= @fecha and
-			DATEDIFF(MONTH, p.fecha_creacion, @fecha) <= 3 and p.cant_puntos > p.cant_usada
+			@fecha <= p.fecha_vencimiento and p.cant_puntos > p.cant_usada
 			and p.cliente_id = @cliente_id
 			group by p.cliente_id), 0)
 end
@@ -1051,9 +1053,96 @@ begin
 	select @precio_total = c.precio_total, @cliente_id = c.cliente_id, @fecha = c.fecha 
 	from COMPUMUNDOHIPERMEGARED.Compra c where c.id_compra = @compra_id
 
-	insert into COMPUMUNDOHIPERMEGARED.Puntos(cant_puntos, fecha_creacion, cliente_id, compra_id)
-	values(ROUND(@precio_total/3, 0, 1), @fecha, @cliente_id, @compra_id)
+	insert into COMPUMUNDOHIPERMEGARED.Puntos(cant_puntos, fecha_creacion, fecha_vencimiento, cliente_id, compra_id)
+	values(ROUND(@precio_total/3, 0, 1), @fecha, DATEADD(MONTH, 3, @fecha), @cliente_id, @compra_id)
 end
+go
+
+/*
+		PARA el  LISTADO ESTADÍSTICO
+*/
+
+create function COMPUMUNDOHIPERMEGARED.EmpresasConMenosVentas(@anio int, @mes int, @grado_id int)
+returns table
+as
+	return (
+		select top 5 COUNT(u.id_ubicacion) as [Cantidad no vendida],
+		emp.razon_social as [Razón social],
+		emp.cuit as [CUIT],
+		emp.mail as [E-mail],
+		emp.telefono as [Nro. Teléfono]
+		from COMPUMUNDOHIPERMEGARED.Empresa emp
+		inner join COMPUMUNDOHIPERMEGARED.Espectaculo esp
+		on emp.id_empresa = esp.empresa_id
+		inner join COMPUMUNDOHIPERMEGARED.Publicacion p
+		on p.espectaculo_id = esp.id_espectaculo
+		inner join COMPUMUNDOHIPERMEGARED.Grado g
+		on g.id_grado = p.grado_id
+		inner join COMPUMUNDOHIPERMEGARED.Ubicacion u
+		on u.publicacion_id = p.id_publicacion and u.ocupado = 0
+		where YEAR(p.fecha_espectaculo) = @anio
+		and MONTH(p.fecha_espectaculo) = @mes
+		and p.grado_id = @grado_id
+		group by emp.id_empresa, emp.razon_social, emp.cuit, emp.mail, emp.telefono,
+		p.id_publicacion, p.fecha_espectaculo, g.comision
+		order by COUNT(u.id_ubicacion) desc, p.fecha_espectaculo, g.comision desc
+		)
+GO
+
+create function COMPUMUNDOHIPERMEGARED.GetTipoDocumento(@char char(1))
+returns nvarchar(25)
+as
+begin
+	return (select case when @char like 'D' then 'DNI'
+						when @char like 'C' then 'Libreta Cívica'
+						when @char like 'E' then 'Libreta de enrolamiento' end)
+end
+go
+
+create function COMPUMUNDOHIPERMEGARED.ClientesConMasPuntosVencidos(@anio int, @trimestre int)
+returns table
+as
+	return (
+		select top 5 sum(p.cant_puntos - p.cant_usada) as [Puntos vencidos],
+		c.id_cliente as [Id],
+		c.nombre + ' ' + c.apellido as [Nombre y Apellido],
+		COMPUMUNDOHIPERMEGARED.GetTipoDocumento(c.tipo_documento) as [Tipo Documento],
+		c.nro_documento as [Nro. Documento],
+		c.mail as [E-mail],
+		c.telefono as [Teléfono]
+		from COMPUMUNDOHIPERMEGARED.Cliente c
+		left join COMPUMUNDOHIPERMEGARED.Puntos p
+		on p.cliente_id = c.id_cliente
+		where year(p.fecha_vencimiento) = @anio and datepart(QUARTER, p.fecha_vencimiento) = @trimestre
+		group by c.id_cliente, c.nombre + ' ' + c.apellido, COMPUMUNDOHIPERMEGARED.GetTipoDocumento(c.tipo_documento), c.nro_documento, c.mail, c.telefono
+		order by [Puntos vencidos] desc
+	)
+go
+
+create function COMPUMUNDOHIPERMEGARED.ClientesConMasComprasDeEmpresa(@anio int, @trimestre int, @empresa_id int)
+returns table
+as
+	return (
+		select top 5
+		COUNT(distinct com.id_compra) as [Cantidad de compras],
+		cli.id_cliente as [Id],
+		cli.nombre + ' ' + cli.apellido as [Nombre y Apellido],
+		COMPUMUNDOHIPERMEGARED.GetTipoDocumento(cli.tipo_documento) as [Tipo Documento],
+		cli.nro_documento as [Nro. Documento],
+		cli.mail as [E-mail],
+		cli.telefono as [Teléfono]
+		from COMPUMUNDOHIPERMEGARED.Cliente cli
+		inner join COMPUMUNDOHIPERMEGARED.Compra com on com.cliente_id = cli.id_cliente
+		and year(com.fecha) = @anio and DATEPART(QUARTER, com.fecha) = @trimestre
+		inner join COMPUMUNDOHIPERMEGARED.Ubicacion u on u.compra_id = com.id_compra
+		inner join COMPUMUNDOHIPERMEGARED.Publicacion p on p.id_publicacion = u.publicacion_id
+		inner join COMPUMUNDOHIPERMEGARED.Espectaculo e on e.id_espectaculo = p.espectaculo_id
+		where e.empresa_id = @empresa_id
+		group by cli.id_cliente, cli.nombre + ' ' + cli.apellido,
+		COMPUMUNDOHIPERMEGARED.GetTipoDocumento(cli.tipo_documento), cli.nro_documento,
+		cli.mail, cli.telefono,
+		p.id_publicacion, e.empresa_id
+		order by [Cantidad de compras] desc)
 go
 
 PRINT 'Todes les procedures y les funciones creades'

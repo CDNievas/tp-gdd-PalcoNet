@@ -12,7 +12,9 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
     {
         public List<Empresa> filtrarEmpresas(String razonSocial, String cuit, String email, Pagina pag)
         {
-            var dt = DataBase.GetInstance().Query(this.getBusquedaQuery(razonSocial, cuit, email, pag));
+            var parametros = new List<QueryParameter>();
+            var dt = DataBase.GetInstance()
+                .TypedQuery(this.getBusquedaQuery(razonSocial, cuit, email, pag, parametros), parametros.ToArray());
 
             var lista = new List<Empresa>();
 
@@ -24,23 +26,26 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             return lista;
         }
 
-        public String getBusquedaQuery(String razonSocial, String cuit, String email, Pagina pag)
+        public String getBusquedaQuery(String razonSocial, String cuit, String email, Pagina pag, List<QueryParameter> parametros)
         {
             var condiciones = new List<String>(); 
             if (razonSocial != null && !razonSocial.Trim().Equals(""))
             {
-                var condicionRazonSocial = String.Format("razon_social like '%{0}%'", razonSocial);
+                var condicionRazonSocial = "razon_social like @razonSocial";
                 condiciones.Add(condicionRazonSocial);
+                parametros.Add(new QueryParameter("razonSocial", SqlDbType.NVarChar, "%" + razonSocial + "%"));
             }
             if (cuit != null  && !cuit.Trim().Equals(""))
             {
-                var condicionCuit = String.Format("cuit = '{0}'", cuit);
+                var condicionCuit = "cuit = @cuit";
                 condiciones.Add(condicionCuit);
+                parametros.Add(new QueryParameter("cuit", SqlDbType.NVarChar, cuit));
             }
             if (email != null && !email.Trim().Equals(""))
             {
-                var condicionMail = String.Format("mail like '%{0}%'", email);
+                var condicionMail = "mail like @email";
                 condiciones.Add(condicionMail);
+                parametros.Add(new QueryParameter("email", SqlDbType.NVarChar, "%" + email + "%"));
             }
 
             String condicion = "";
