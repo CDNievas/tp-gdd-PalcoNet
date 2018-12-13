@@ -104,12 +104,6 @@
     <Compile Include="Abm Empresa Espectaculo\AltaEmpresaForm.Designer.cs">
       <DependentUpon>AltaEmpresaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Empresa Espectaculo\bajaEmpresa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Empresa Espectaculo\bajaEmpresa.Designer.cs">
-      <DependentUpon>bajaEmpresa.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Empresa Espectaculo\BuscadorEmpresas.cs" />
     <Compile Include="Abm Empresa Espectaculo\Empresa.cs" />
     <Compile Include="Abm Grado\AltaGrado.cs">
@@ -239,12 +233,6 @@
     <Compile Include="Abm Cliente\ListarCliente.Designer.cs">
       <DependentUpon>ListarCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Empresa Espectaculo\modificarEmpresa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Empresa Espectaculo\modificarEmpresa.Designer.cs">
-      <DependentUpon>modificarEmpresa.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Empresa Espectaculo\ListarEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -284,6 +272,7 @@
     <Compile Include="Validadores\ValidadorEmail.cs" />
     <Compile Include="Validadores\ValidadorNumerico.cs" />
     <Compile Include="Validadores\ValidadorNumeroComa.cs" />
+    <Compile Include="Validadores\ValidadorSinIncluir.cs" />
     <EmbeddedResource Include="Abm Cliente\AltaTarjeta.resx">
       <DependentUpon>AltaTarjeta.cs</DependentUpon>
     </EmbeddedResource>
@@ -374,9 +363,6 @@
     <EmbeddedResource Include="Abm Grado\ActualizarGrado.resx">
       <DependentUpon>ActualizarGrado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Empresa Espectaculo\modificarEmpresa.resx">
-      <DependentUpon>modificarEmpresa.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Abm Empresa Espectaculo\ListarEmpresa.resx">
       <DependentUpon>ListarEmpresa.cs</DependentUpon>
     </EmbeddedResource>
@@ -405,9 +391,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Empresa Espectaculo\AltaEmpresaForm.resx">
       <DependentUpon>AltaEmpresaForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Abm Empresa Espectaculo\bajaEmpresa.resx">
-      <DependentUpon>bajaEmpresa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Grado\AltaGrado.resx">
       <DependentUpon>AltaGrado.cs</DependentUpon>

@@ -46,6 +46,25 @@ namespace PalcoNet.Abm_Cliente
             
             comboTipoDoc.DropDownStyle = ComboBoxStyle.DropDownList;
             comboTipoDoc.DataSource = TipoDocumento.Todos();
+            ConfigurarLargoTextbox();
+        }
+
+        private void ConfigurarLargoTextbox()
+        {
+            txtClienteNombre.MaxLength = 255;
+            txtClienteApellido.MaxLength = 255;
+            txtClienteDoc.MaxLength = 30;
+            txtClienteCuil.MaxLength = 13;
+            txtClienteEmail.MaxLength = 255;
+            txtClienteTelefono.MaxLength = 30;
+            txtClienteCalle.MaxLength = 255;
+            txtClienteNro.MaxLength = 9;
+            txtPiso.MaxLength = 9;
+            txtClienteDpto.MaxLength = 255;
+            txtClienteLoc.MaxLength = 255;
+            txtCiudad.MaxLength = 255;
+            txtClienteCP.MaxLength = 255;
+
         }
 
         private List<TextBox> TodosLosTextbox()

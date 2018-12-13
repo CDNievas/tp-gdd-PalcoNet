@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.Abm_Cliente
 {
-    class Buscador
+    public class Buscador
     {
         public List<Cliente> filtrarClientes(String nombre = null, String apellido = null, String dni = null, String email = null, Pagina pag = null)
         {
             pag = pag == null ? new Pagina(1, 10) : pag;
 
-            var dt = DataBase.GetInstance().Query(this.getBusquedaQuery(nombre, apellido, dni, email, pag));
+            var parametros = new List<QueryParameter>();
+
+            var dt = DataBase.GetInstance().TypedQuery(this.getBusquedaQuery(nombre, apellido, dni, email, pag, parametros), parametros.ToArray());
 
             var lista = new List<Cliente>();
 
@@ -26,28 +28,32 @@ namespace PalcoNet.Abm_Cliente
             return lista;
         }
 
-        public String getBusquedaQuery(String nombre, String apellido, String dni, String email, Pagina pag)
+        private String getBusquedaQuery(String nombre, String apellido, String dni, String email, Pagina pag, List<QueryParameter> parametros)
         {
             var condiciones = new List<String>();
             if (nombre != null && !nombre.Trim().Equals(""))
             {
-                var condicion = String.Format("nombre like '%{0}%'", nombre);
+                var condicion = "nombre like @nombre";
                 condiciones.Add(condicion);
+                parametros.Add(new QueryParameter("nombre", SqlDbType.NVarChar, "%" + nombre + "%"));
             }
             if (apellido != null && !apellido.Trim().Equals(""))
             {
-                var condicion = String.Format("apellido like '%{0}%'", apellido);
+                var condicion = "apellido like @apellido";
                 condiciones.Add(condicion);
+                parametros.Add(new QueryParameter("apellido", SqlDbType.NVarChar, "%" + apellido + "%"));
             }
             if (dni != null && !dni.Trim().Equals(""))
             {
-                var condicion = String.Format("nro_documento = '{0}'", dni);
+                var condicion = "nro_documento = @documento";
                 condiciones.Add(condicion);
+                parametros.Add(new QueryParameter("documento", SqlDbType.NVarChar, dni));
             }
             if (email != null && email.Trim().Equals(""))
             {
-                var condicion = String.Format("mail like '%{0}%'", email);
+                var condicion = "mail like @email";
                 condiciones.Add(condicion);
+                parametros.Add(new QueryParameter("email", SqlDbType.NVarChar, "%" + email + "%"));
             }
 
             String condicionWhere = "";

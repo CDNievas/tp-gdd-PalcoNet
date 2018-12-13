@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PalcoNet.DataBasePackage;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -82,16 +83,28 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         public void Update()
         {
-            String sql = String.Format(@"update COMPUMUNDOHIPERMEGARED.Empresa
-            set cuit = '{0}', razon_social = '{1}', mail = '{2}', telefono = '{3}',
-            ciudad = '{4}', localidad = '{5}', dom_calle = '{6}', nro_calle = {7},
-            piso = {8}, depto = '{9}', cod_postal = '{10}', habilitado = {11}
-            where id_empresa = {12}
-            ", cuit, razonSocial, mail, telefono,
-             ciudad, localidad, domCalle, nroCalle,
-             piso == null? "NULL" : piso.ToString(), depto, codPostal, Habilitado ? 1 : 0,
-             id);
-            var ignored = DataBase.GetInstance().Query(sql);
+            var varchar = SqlDbType.NVarChar;
+            String sql = @"update COMPUMUNDOHIPERMEGARED.Empresa
+            set cuit = @cuit, razon_social = @razon, mail = @mail, telefono = @telefono,
+            ciudad = @ciudad, localidad = @localidad, dom_calle = @domCalle, nro_calle = @nroCalle,
+            piso = @piso, depto = @depto, cod_postal = @codPostal, habilitado = @habilitado
+            where id_empresa = @idEmpresa";
+
+            DataBase.GetInstance()
+                .TypedQuery(sql,
+                new QueryParameter("cuit", varchar, cuit),
+                new QueryParameter("razon", varchar, razonSocial),
+                new QueryParameter("mail", varchar, mail),
+                new QueryParameter("telefono", varchar, telefono),
+                new QueryParameter("ciudad", varchar, ciudad),
+                new QueryParameter("localidad", varchar, localidad),
+                new QueryParameter("domCalle", varchar, domCalle),
+                new QueryParameter("nroCalle", SqlDbType.Decimal, nroCalle),
+                new QueryParameter("piso", SqlDbType.Decimal, piso),
+                new QueryParameter("depto", varchar, depto),
+                new QueryParameter("codPostal", varchar, codPostal),
+                new QueryParameter("habilitado", SqlDbType.Bit, Habilitado? 1 : 0),
+                new QueryParameter("idEmpresa", SqlDbType.Int, id));
         }
     }
 }

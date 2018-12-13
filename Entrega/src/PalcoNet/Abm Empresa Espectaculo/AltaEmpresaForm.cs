@@ -38,6 +38,22 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         {
             this.funcion = funcion;
             InitializeComponent();
+            ConfigurarLargoTextBox();
+        }
+        
+        private void ConfigurarLargoTextBox()
+        {
+            txtEmpresaRS.MaxLength = 255;
+            txtEmpresaCuit.MaxLength = 255;
+            txtEmpresaEmail.MaxLength = 50;
+            txtEmpresaTelefono.MaxLength = 30;
+            txtEmpresaCiudad.MaxLength = 255;
+            txtEmpresaLocalidad.MaxLength = 255;
+            txtEmpresaCalle.MaxLength = 50;
+            txtEmpresaNro.MaxLength = 9;
+            txtEmpresaPiso.MaxLength = 9;
+            txtEmpresaDpto.MaxLength = 50;
+            txtEmpresaCP.MaxLength = 50;
         }
 
         private List<TextBox> TodosLosTextbox()
@@ -74,7 +90,8 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
                 empresaAPersistir.localidad = txtEmpresaLocalidad.Text;
                 empresaAPersistir.domCalle = txtEmpresaCalle.Text;
                 empresaAPersistir.nroCalle = txtEmpresaNro.Text;
-                empresaAPersistir.piso = txtEmpresaPiso.Text.Trim().Equals("") ? null : (int?)Convert.ToInt32(txtEmpresaPiso.Text);
+                empresaAPersistir.piso = String.IsNullOrWhiteSpace(txtEmpresaPiso.Text) ? null : (int?)Convert.ToInt32(txtEmpresaPiso.Text);
+                empresaAPersistir.depto = String.IsNullOrWhiteSpace(txtEmpresaDpto.Text) ? null : txtEmpresaDpto.Text;
                 empresaAPersistir.codPostal = txtEmpresaCP.Text;
                 empresaAPersistir.fechaCreacion = Contexto.FechaActual;
 
@@ -95,11 +112,11 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             foreach (TextBox t in TodosLosTextbox())
             {
                 if(!t.Equals(txtEmpresaDpto) && !t.Equals(txtEmpresaPiso))
-                    if (t.Text.Trim().Equals(""))
+                    if (String.IsNullOrWhiteSpace(t.Text))
                         throw new UserInputException("Debe completar todos los campos");
             }
 
-            if (new ValidadorCuil().IsInvalid(txtEmpresaCuit.Text)) // todo validar posta
+            if (new ValidadorCuil().IsInvalid(txtEmpresaCuit.Text))
             {
                 throw new UserInputException("Cuit inválido");
             }
@@ -111,7 +128,8 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             {
                 throw new UserInputException("El campo Número de calle debe ser numérico");
             }
-            if (new ValidadorNumerico().IsInvalid(txtEmpresaNro.Text))
+            var piso = txtEmpresaPiso.Text;
+            if (!String.IsNullOrWhiteSpace(piso) && new ValidadorNumerico().IsInvalid(piso))
             {
                 throw new UserInputException("El piso debe ser un valor numérico");
             }

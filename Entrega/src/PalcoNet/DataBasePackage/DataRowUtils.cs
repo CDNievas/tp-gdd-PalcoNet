@@ -37,8 +37,9 @@ namespace PalcoNet
             {
                 return f.Invoke(dr[columnName]);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e + "\n" + e.Message + "\n" + e.StackTrace);
                 return ifNull;
             }
         }
