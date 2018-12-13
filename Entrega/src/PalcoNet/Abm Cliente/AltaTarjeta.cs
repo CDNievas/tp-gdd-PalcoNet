@@ -33,7 +33,8 @@ namespace PalcoNet.Abm_Cliente
 
         private void altaTarjeta_Load(object sender, EventArgs e)
         {
-
+            txtNroTarjeta.MaxLength = 50;
+            txtCCV.MaxLength = 5;
         }
 
         private List<TextBox> TodosLosTextbox()

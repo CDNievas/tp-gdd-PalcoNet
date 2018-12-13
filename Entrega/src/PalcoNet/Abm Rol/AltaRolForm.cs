@@ -24,6 +24,7 @@ namespace PalcoNet.Abm_Rol
 
         private void AltaRolForm_Load(object sender, EventArgs e)
         {
+            txtNombre.MaxLength = 50;
             LoadFuncionalidades();
             funcion.Setup(this);
         }

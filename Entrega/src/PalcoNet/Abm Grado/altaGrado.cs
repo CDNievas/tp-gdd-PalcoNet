@@ -28,7 +28,8 @@ namespace PalcoNet.Abm_Grado
 
         private void AltaGrado_Load(object sender, EventArgs e)
         {
-
+            txtDescripcionGrado.MaxLength = 10;
+            txtComision.MaxLength = 7;
         }
 
         private void btnGradoGuardar_Click(object sender, EventArgs e)
