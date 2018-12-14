@@ -25,7 +25,20 @@ namespace PalcoNet.Editar_Publicacion
         {
             InitializeComponent();
             this.funcion = funcion;
+            ConfigurarInputs();
         }
+
+        private void ConfigurarInputs()
+        {
+            txtCiudad.MaxLength = 255;
+            txtLocalidad.MaxLength = 255;
+            txtCalle.MaxLength = 50;
+            txtNroCalle.MaxLength = 9;
+            txtCodPostal.MaxLength = 50;
+            txtDescripción.MaxLength = 255;
+        }
+
+
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {

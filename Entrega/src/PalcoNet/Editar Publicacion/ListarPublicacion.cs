@@ -1,4 +1,5 @@
-﻿using PalcoNet.DataBasePackage;
+﻿using PalcoNet.Abm_Empresa_Espectaculo;
+using PalcoNet.DataBasePackage;
 using PalcoNet.PublicacionesUtils;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,12 @@ namespace PalcoNet.Editar_Publicacion
     public partial class ListarPublicacion : Form
     {
         private Pagina PaginaActual;
+        private Empresa empresa;
 
-        public ListarPublicacion()
+        public ListarPublicacion(Empresa empresa)
         {
             InitializeComponent();
+            this.empresa = empresa;
             PaginaActual = new Pagina(1, 15);
             publicacionesDataGrid.MultiSelect = false;
         }
@@ -38,7 +41,7 @@ namespace PalcoNet.Editar_Publicacion
 
         private void ActualizarTabla()
         {
-            var lista = new BindingList<Publicacion>(Publicaciones.PublicacionesByEmpresaId(Contexto.GetEmpresaLogeadaId(), PaginaActual, SoloBorradores, txtNombre.Text));
+            var lista = new BindingList<Publicacion>(Publicaciones.PublicacionesByEmpresaId(empresa.id, PaginaActual, SoloBorradores, txtNombre.Text));
             var bindingSource = new BindingSource(lista, null);
 
             publicacionesDataGrid.DataSource = bindingSource;

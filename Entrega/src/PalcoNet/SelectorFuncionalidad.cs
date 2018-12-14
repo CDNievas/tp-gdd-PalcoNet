@@ -1,8 +1,11 @@
-﻿using System;
+﻿using PalcoNet.Abm_Empresa_Espectaculo;
+using PalcoNet.Listado_Estadistico;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PalcoNet
 {
@@ -28,11 +31,25 @@ namespace PalcoNet
                 case 5:
                     new Abm_Grado.ListarGrado().ShowDialog();
                     break;
-                case 6:
+                case 6: //Crear publicacion
                     new Editar_Publicacion.EditarPublicacion(new Editar_Publicacion.FuncionCrearPublicacion()).ShowDialog();
                     break;
                 case 7:
-                    new Editar_Publicacion.ListarPublicacion().ShowDialog();
+                    Empresa empresa;
+                    try
+                    {
+                        empresa = Contexto.EmpresaLogeada;
+                        var id = empresa.id;
+                    }
+                    catch {
+                        MessageBox.Show("Seleccione una empresa", "Empresa", MessageBoxButtons.OK);
+                        var form = new SeleccionEmpresa();
+                        var result = form.ShowDialog();
+                        if (result != DialogResult.OK)
+                            return;
+                        empresa = form.empresa;
+                    }
+                    new Editar_Publicacion.ListarPublicacion(empresa).ShowDialog();
                     break;
                 case 8:
                     new Comprar.Comprar().ShowDialog();
