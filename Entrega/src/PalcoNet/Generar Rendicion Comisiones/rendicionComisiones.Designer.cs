@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Generar_Rendicion_Comisiones
 {
-    partial class rendicionComisiones
+    partial class GenerarRendiciones
     {
         /// <summary>
         /// Required designer variable.
@@ -28,123 +28,106 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.groupBoxRendirComisiones = new System.Windows.Forms.GroupBox();
+            this.dataGridViewRendirComisiones = new System.Windows.Forms.DataGridView();
+            this.facturaNumero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Localidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rendir = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.groupBoxRendirComisiones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRendirComisiones)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // groupBoxRendirComisiones
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(227, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(188, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Registrar Facturas";
+            this.groupBoxRendirComisiones.Controls.Add(this.dataGridViewRendirComisiones);
+            this.groupBoxRendirComisiones.Location = new System.Drawing.Point(48, 27);
+            this.groupBoxRendirComisiones.Name = "groupBoxRendirComisiones";
+            this.groupBoxRendirComisiones.Size = new System.Drawing.Size(822, 512);
+            this.groupBoxRendirComisiones.TabIndex = 0;
+            this.groupBoxRendirComisiones.TabStop = false;
+            this.groupBoxRendirComisiones.Text = "Rendicion de Comisiones";
             // 
-            // label2
+            // dataGridViewRendirComisiones
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(59, 69);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Factura nro:";
+            this.dataGridViewRendirComisiones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRendirComisiones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.facturaNumero,
+            this.Localidades,
+            this.FechaCompra,
+            this.Total,
+            this.Cliente,
+            this.Comision,
+            this.Rendir});
+            this.dataGridViewRendirComisiones.Location = new System.Drawing.Point(29, 23);
+            this.dataGridViewRendirComisiones.Name = "dataGridViewRendirComisiones";
+            this.dataGridViewRendirComisiones.Size = new System.Drawing.Size(774, 483);
+            this.dataGridViewRendirComisiones.TabIndex = 0;
+            this.dataGridViewRendirComisiones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // label3
+            // facturaNumero
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(308, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Fecha factura:";
+            this.facturaNumero.HeaderText = "Numero Factura";
+            this.facturaNumero.Name = "facturaNumero";
             // 
-            // label4
+            // Localidades
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(59, 100);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Monto total: ";
+            this.Localidades.HeaderText = "Cantidad Localidades";
+            this.Localidades.Name = "Localidades";
             // 
-            // label5
+            // FechaCompra
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(308, 100);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(84, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Forma de pago: ";
+            this.FechaCompra.HeaderText = "Fecha de Compra";
+            this.FechaCompra.Name = "FechaCompra";
             // 
-            // textBox1
+            // Total
             // 
-            this.textBox1.Location = new System.Drawing.Point(129, 62);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 5;
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
             // 
-            // textBox2
+            // Cliente
             // 
-            this.textBox2.Location = new System.Drawing.Point(129, 97);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 6;
+            this.Cliente.HeaderText = "Cliente";
+            this.Cliente.Name = "Cliente";
             // 
-            // textBox3
+            // Comision
             // 
-            this.textBox3.Location = new System.Drawing.Point(390, 93);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(192, 20);
-            this.textBox3.TabIndex = 7;
+            this.Comision.HeaderText = "Comision";
+            this.Comision.Name = "Comision";
             // 
-            // dateTimePicker1
+            // Rendir
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(390, 58);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker1.TabIndex = 8;
+            this.Rendir.HeaderText = "Rendir Comision";
+            this.Rendir.Name = "Rendir";
             // 
             // rendicionComisiones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(633, 491);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(922, 574);
+            this.Controls.Add(this.groupBoxRendirComisiones);
             this.Name = "rendicionComisiones";
-            this.Text = "Rendicion de Comisiones";
+            this.Text = "Generar rendicion comisiones";
+            this.Load += new System.EventHandler(this.GenerarRendiciones_Load);
+            this.groupBoxRendirComisiones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRendirComisiones)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.GroupBox groupBoxRendirComisiones;
+        private System.Windows.Forms.DataGridView dataGridViewRendirComisiones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn facturaNumero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Localidades;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCompra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Comision;
+        private System.Windows.Forms.DataGridViewButtonColumn Rendir;
     }
 }
