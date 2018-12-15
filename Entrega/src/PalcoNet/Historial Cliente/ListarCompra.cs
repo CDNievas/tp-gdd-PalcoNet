@@ -51,6 +51,3 @@ inner join COMPUMUNDOHIPERMEGARED.Espectaculo e on i.id_item_factura= e.id_espec
 
 }
 
-
-
-}
