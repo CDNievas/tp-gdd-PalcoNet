@@ -121,6 +121,7 @@
     <Compile Include="Comprar\CompraResumenForm.Designer.cs">
       <DependentUpon>CompraResumenForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comprar\Factura.cs" />
     <Compile Include="Comprar\listarPublicaciones.cs" />
     <Compile Include="Comprar\PuntosException.cs" />
     <Compile Include="Comprar\SeleccionarUbicacionesForm.cs">
