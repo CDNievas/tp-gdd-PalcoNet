@@ -191,6 +191,7 @@
     <Compile Include="Historial Cliente\historialClienteCompras.Designer.cs">
       <DependentUpon>historialClienteCompras.cs</DependentUpon>
     </Compile>
+    <Compile Include="Historial Cliente\ListarCompra.cs" />
     <Compile Include="Listado Estadistico\ObtenerTop5.cs">
       <SubType>Form</SubType>
     </Compile>

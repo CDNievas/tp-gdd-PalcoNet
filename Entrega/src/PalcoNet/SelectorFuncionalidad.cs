@@ -55,7 +55,7 @@ namespace PalcoNet
                     new Comprar.Comprar().ShowDialog();
                     break;
                 case 9:
-                    throw new NotImplementedException("Historial cliente");
+                    new Historial_Cliente.historialClienteCompras().ShowDialog();
                     break;
                 case 10:
                     new Canje_Puntos.ConsultaPuntos().ShowDialog();
