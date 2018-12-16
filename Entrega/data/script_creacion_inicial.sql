@@ -451,14 +451,15 @@ compra_id int,
 id_ubicacion bigint,
 fecha datetime,
 cantidad numeric(18),
-cliente_id int
+cliente_id int,
+precio_total numeric(18,0)
 )
 
 go
 
 insert into COMPUMUNDOHIPERMEGARED.##CompraTemp
 select next value for COMPUMUNDOHIPERMEGARED.CompraSequence, u.id_ubicacion ubicacion_id, m.Compra_Fecha fecha, m.Compra_Cantidad cantidad,
-c.id_cliente id_cliente
+c.id_cliente id_cliente, u.precio
 from COMPUMUNDOHIPERMEGARED.##UbicacionTemp u
 inner join gd_esquema.Maestra m
 on m.Ubicacion_Fila = u.fila and m.Ubicacion_Asiento = u.asiento and m.Ubicacion_Precio = u.precio
@@ -467,12 +468,12 @@ and m.Espectaculo_Cod = u.espectaculo_cod
 inner join COMPUMUNDOHIPERMEGARED.Cliente c
 on c.nro_documento = m.Cli_Dni
 where m.Compra_Cantidad is not null or m.Compra_Fecha is not null
-group by u.id_ubicacion, m.Compra_Fecha, m.Compra_Cantidad, c.id_cliente
+group by u.id_ubicacion, m.Compra_Fecha, m.Compra_Cantidad, c.id_cliente, u.precio
 
 go
 
-insert into COMPUMUNDOHIPERMEGARED.Compra(id_compra, fecha, cantidad, cliente_id)
-select c.compra_id, c.fecha, c.cantidad, c.cliente_id
+insert into COMPUMUNDOHIPERMEGARED.Compra(id_compra, fecha, cantidad, cliente_id, precio_total)
+select c.compra_id, c.fecha, c.cantidad, c.cliente_id, c.precio_total
 from COMPUMUNDOHIPERMEGARED.##CompraTemp c
 
 go
@@ -1143,6 +1144,19 @@ as
 		cli.mail, cli.telefono,
 		p.id_publicacion, e.empresa_id
 		order by [Cantidad de compras] desc)
+go
+
+create function COMPUMUNDOHIPERMEGARED.ComprasDeCliente(@cliente_id int)
+returns table
+as
+	return (select c.id_compra as [Id Compra], c.precio_total as [Precio Total], c.fecha as [Fecha], c.cantidad as [Cantidad de entradas],
+			t.nro_tarjeta as [Nro. tarjeta],
+			case when t.tipo like 'M' then 'Mastercard' when t.tipo like 'V' then 'Visa' when t.tipo like 'A' then 'American Express' end as [Tipo Tarjeta],
+			t.fecha_vencimiento as [Vencimiento tarjeta]
+			from COMPUMUNDOHIPERMEGARED.Compra c
+			left join COMPUMUNDOHIPERMEGARED.Tarjeta t on c.tarjeta_id = t.id_tarjeta
+			where c.cliente_id = @cliente_id)
+
 go
 
 PRINT 'Todes les procedures y les funciones creades'

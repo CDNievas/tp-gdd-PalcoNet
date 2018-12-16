@@ -193,6 +193,12 @@
       <DependentUpon>historialClienteCompras.cs</DependentUpon>
     </Compile>
     <Compile Include="Historial Cliente\ListarCompra.cs" />
+    <Compile Include="Historial Cliente\UbicacionesCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Historial Cliente\UbicacionesCompra.Designer.cs">
+      <DependentUpon>UbicacionesCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listado Estadistico\ObtenerTop5.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -328,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Rendicion Comisiones\rendicionComisiones.resx">
       <DependentUpon>rendicionComisiones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\UbicacionesCompra.resx">
+      <DependentUpon>UbicacionesCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listado Estadistico\SeleccionEmpresa.resx">
       <DependentUpon>SeleccionEmpresa.cs</DependentUpon>

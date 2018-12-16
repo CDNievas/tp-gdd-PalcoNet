@@ -55,7 +55,8 @@ namespace PalcoNet
                     new Comprar.Comprar().ShowDialog();
                     break;
                 case 9:
-                    new Historial_Cliente.historialClienteCompras().ShowDialog();
+                    var cliente = Contexto.ClienteLogeado;
+                    new Historial_Cliente.historialClienteCompras(cliente).ShowDialog();
                     break;
                 case 10:
                     new Canje_Puntos.ConsultaPuntos().ShowDialog();

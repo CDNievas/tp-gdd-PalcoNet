@@ -29,6 +29,7 @@ drop function COMPUMUNDOHIPERMEGARED.EmpresasConMenosVentas
 drop function COMPUMUNDOHIPERMEGARED.GetTipoDocumento
 drop function COMPUMUNDOHIPERMEGARED.ClientesConMasPuntosVencidos
 drop function COMPUMUNDOHIPERMEGARED.ClientesConMasComprasDeEmpresa
+drop function COMPUMUNDOHIPERMEGARED.ComprasDeCliente
 
 drop trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
 
