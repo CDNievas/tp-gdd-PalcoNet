@@ -30,6 +30,8 @@ namespace PalcoNet.Editar_Publicacion
 
         private void ConfigurarInputs()
         {
+            fechaEspectaculo.Format = DateTimePickerFormat.Custom;
+            fechaEspectaculo.CustomFormat = "dd/MM/yyyy HH:mm";
             txtCiudad.MaxLength = 255;
             txtLocalidad.MaxLength = 255;
             txtCalle.MaxLength = 50;

@@ -22,6 +22,8 @@ namespace PalcoNet.Generar_Publicacion
         private void DateTimeForm_Load(object sender, EventArgs e)
         {
             pickerFecha.MinDate = Contexto.FechaActual;
+            pickerFecha.Format = DateTimePickerFormat.Custom;
+            pickerFecha.CustomFormat = "dd/MM/yyyy HH:mm";
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
