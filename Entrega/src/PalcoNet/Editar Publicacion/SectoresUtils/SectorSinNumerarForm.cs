@@ -23,6 +23,7 @@ namespace PalcoNet.Editar_Publicacion.SectoresUtils
         {
             comboTipoUbicacion.DropDownStyle = ComboBoxStyle.DropDownList;
             comboTipoUbicacion.DataSource = TipoUbicacion.Todos();
+            cantidad.Minimum = 1;
             cantidad.Maximum = Decimal.MaxValue;
             precio.Maximum = Decimal.MaxValue;
         }
@@ -35,10 +36,17 @@ namespace PalcoNet.Editar_Publicacion.SectoresUtils
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            Sector = new SectorSinNumerar((TipoUbicacion)comboTipoUbicacion.SelectedItem, (int)precio.Value,
-                (int) cantidad.Value);
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            try
+            {
+                Sector = new SectorSinNumerar((TipoUbicacion)comboTipoUbicacion.SelectedItem, (int)precio.Value,
+                    (int)cantidad.Value);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Debe seleccionar un tipo de ubicación");
+            }
         }
     }
 }
