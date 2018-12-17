@@ -180,11 +180,18 @@
     <Compile Include="Generar Publicacion\PublicacionMultiFechaForm.Designer.cs">
       <DependentUpon>PublicacionMultiFechaForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Generar Rendicion Comisiones\buscadorCompras.cs" />
     <Compile Include="Generar Rendicion Comisiones\rendicionComisiones.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Generar Rendicion Comisiones\rendicionComisiones.Designer.cs">
       <DependentUpon>rendicionComisiones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Rendicion Comisiones\seleccionadorEmpresaRendicion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Rendicion Comisiones\seleccionadorEmpresaRendicion.Designer.cs">
+      <DependentUpon>seleccionadorEmpresaRendicion.cs</DependentUpon>
     </Compile>
     <Compile Include="Historial Cliente\historialClienteCompras.cs">
       <SubType>Form</SubType>
@@ -334,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Rendicion Comisiones\rendicionComisiones.resx">
       <DependentUpon>rendicionComisiones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Rendicion Comisiones\seleccionadorEmpresaRendicion.resx">
+      <DependentUpon>seleccionadorEmpresaRendicion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Historial Cliente\UbicacionesCompra.resx">
       <DependentUpon>UbicacionesCompra.cs</DependentUpon>

@@ -39,7 +39,7 @@ namespace PalcoNet.Listado_Estadistico
         {
             paginaActual.Next();
             ActualizarTabla();
-            if (empresasDataGrid.RowCount == 0)
+            if (empresaDataGrid.RowCount == 0)
             {
                 paginaActual.Previous();
                 ActualizarTabla();
@@ -49,15 +49,15 @@ namespace PalcoNet.Listado_Estadistico
         private void ActualizarTabla()
         {
             var _lista = new BuscadorEmpresas()
-               .filtrarEmpresas(razonSocial: txtRazonSocial.Text, cuit: txtCuit.Text, email: txtMail.Text, pag: paginaActual);
+               .filtrarEmpresas(razonSocial: textRazonSocial.Text, cuit: textCuit.Text, email: textMail.Text, pag: paginaActual);
             _lista.ForEach(e => Console.WriteLine(e));
             var lista = new BindingList<Empresa>(_lista);
 
             var bindingSource = new BindingSource(lista, null);
 
-            this.empresasDataGrid.DataSource = bindingSource;
+            this.empresaDataGrid.DataSource = bindingSource;
  
-            this.empresasDataGrid.Columns["id"].Visible = false;
+            this.empresaDataGrid.Columns["id"].Visible = false;
         }
 
         private void btnPagAnt_Click(object sender, EventArgs e)
@@ -74,7 +74,7 @@ namespace PalcoNet.Listado_Estadistico
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            this.empresa = (Empresa)empresasDataGrid.CurrentRow.DataBoundItem;
+            this.empresa = (Empresa)empresaDataGrid.CurrentRow.DataBoundItem;
             DialogResult = DialogResult.OK;
             Close();
         }

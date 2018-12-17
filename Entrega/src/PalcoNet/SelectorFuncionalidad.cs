@@ -62,7 +62,7 @@ namespace PalcoNet
                     new Canje_Puntos.ConsultaPuntos().ShowDialog();
                     break;
                 case 11:
-                    throw new NotImplementedException("Rendición comisiones");
+                    new Generar_Rendicion_Comisiones.seleccionadorEmpresaRendicion().ShowDialog();
                     break;
                 case 12:
                     new Listado_Estadistico.ObtenerTop5().ShowDialog();

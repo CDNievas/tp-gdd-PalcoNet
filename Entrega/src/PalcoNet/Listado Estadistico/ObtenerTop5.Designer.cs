@@ -154,7 +154,7 @@
             // lblGrado
             // 
             this.lblGrado.AutoSize = true;
-            this.lblGrado.Location = new System.Drawing.Point(575, 69);
+            this.lblGrado.Location = new System.Drawing.Point(549, 62);
             this.lblGrado.Name = "lblGrado";
             this.lblGrado.Size = new System.Drawing.Size(39, 13);
             this.lblGrado.TabIndex = 27;
@@ -163,7 +163,7 @@
             // lblMes
             // 
             this.lblMes.AutoSize = true;
-            this.lblMes.Location = new System.Drawing.Point(575, 105);
+            this.lblMes.Location = new System.Drawing.Point(549, 94);
             this.lblMes.Name = "lblMes";
             this.lblMes.Size = new System.Drawing.Size(30, 13);
             this.lblMes.TabIndex = 28;
@@ -172,7 +172,7 @@
             // comboGrado
             // 
             this.comboGrado.FormattingEnabled = true;
-            this.comboGrado.Location = new System.Drawing.Point(646, 62);
+            this.comboGrado.Location = new System.Drawing.Point(594, 59);
             this.comboGrado.Name = "comboGrado";
             this.comboGrado.Size = new System.Drawing.Size(121, 21);
             this.comboGrado.TabIndex = 29;
@@ -180,7 +180,7 @@
             // comboMes
             // 
             this.comboMes.FormattingEnabled = true;
-            this.comboMes.Location = new System.Drawing.Point(646, 102);
+            this.comboMes.Location = new System.Drawing.Point(594, 91);
             this.comboMes.Name = "comboMes";
             this.comboMes.Size = new System.Drawing.Size(121, 21);
             this.comboMes.TabIndex = 30;
@@ -188,7 +188,7 @@
             // lblEmpresa
             // 
             this.lblEmpresa.AutoSize = true;
-            this.lblEmpresa.Location = new System.Drawing.Point(575, 110);
+            this.lblEmpresa.Location = new System.Drawing.Point(549, 132);
             this.lblEmpresa.Name = "lblEmpresa";
             this.lblEmpresa.Size = new System.Drawing.Size(117, 13);
             this.lblEmpresa.TabIndex = 31;
@@ -196,9 +196,9 @@
             // 
             // txtEmpresa
             // 
-            this.txtEmpresa.Location = new System.Drawing.Point(578, 132);
+            this.txtEmpresa.Location = new System.Drawing.Point(672, 129);
             this.txtEmpresa.Name = "txtEmpresa";
-            this.txtEmpresa.Size = new System.Drawing.Size(168, 20);
+            this.txtEmpresa.Size = new System.Drawing.Size(128, 20);
             this.txtEmpresa.TabIndex = 32;
             // 
             // btnSeleccionEmpresa

@@ -10,49 +10,55 @@ using System.Windows.Forms;
 using PalcoNet.Abm_Cliente;
 using PalcoNet.Abm_Empresa_Espectaculo;
 using PalcoNet.Comprar;
+using PalcoNet.DataBasePackage;
 
 namespace PalcoNet.Generar_Rendicion_Comisiones
 {
     public partial class GenerarRendiciones : Form
     {
-        private Cliente clienteActual;
-        private Empresa empresaActual;
-        private List<Factura> facturasActuales;
+        private Pagina paginaActual;
+        public Empresa empresaActual;
+        public int comprasARendir;
 
-        public GenerarRendiciones(Cliente cliente)
+        public GenerarRendiciones(Empresa empresa, int cantidadComprasARendir)
         {
-            clienteActual = cliente;
+            empresaActual = empresa;
+            comprasARendir = cantidadComprasARendir;
             InitializeComponent();
-
-            Inicializar();
         }
 
-        private void Inicializar()
+        private void GenerarRendiciones_Load(object sender, EventArgs e)
         {
-            facturasActuales = traerFacturas();
-            //facturasActuales.Sort((x, y) => DateTime.Compare(x.fact_fecha, y.fact_fecha));
-
-
-            InicializarGrilla();
+            paginaActual = new Pagina(1, 25);
+            dataGridViewRendirComisiones.MultiSelect = false;
+            ActualizarTabla();
         }
 
-        private void InicializarGrilla()
+        private void ActualizarTabla()
         {
-            foreach (var factura in facturasActuales)
+            buscadorCompras buscador = new buscadorCompras();
+
+            this.dataGridViewRendirComisiones.DataSource = buscador.filtrarCompras(empresaActual.id,pag: paginaActual); ;
+            this.dataGridViewRendirComisiones.AllowUserToAddRows = false;
+            foreach (DataGridViewColumn c in dataGridViewRendirComisiones.Columns)
             {
-                var dt = DataBase.GetInstance().Query("SELECT * FROM COMPUMUNDOHIPERMEGARED.Item_Factura where factura_id = " + factura.id);
-                int cantidadLocalidades = dt.Columns.Count;
-
-                DataGridViewRow row = (DataGridViewRow)dataGridViewRendirComisiones.Rows[0].Clone();
-                row.Cells[0].Value = factura.fact_nro;
-                row.Cells[1].Value = cantidadLocalidades;
-                row.Cells[2].Value = factura.fact_fecha;
-                row.Cells[3].Value = factura.fact_total;
-                row.Cells[4].Value = clienteActual.nombre;
-                //row.Cells[5].Value = 
-
-                dataGridViewRendirComisiones.Rows.Add(row);
+                c.ReadOnly = true;
             }
+        }
+
+        private void pagSiguiente_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewRendirComisiones.RowCount != 0)
+            {
+                paginaActual.Next();
+                ActualizarTabla();
+            }
+        }
+
+        private void pagAnterior_Click(object sender, EventArgs e)
+        {
+            paginaActual.Previous();
+            ActualizarTabla();
         }
 
         public static Factura traerDe(DataRow dr)
@@ -69,28 +75,7 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
             factura.empresa_id = data.Fold<int?>("empresa_id", null, x => Convert.ToInt32(x.ToString()));
 
             return factura;
-        }
-
-        public static List<Factura> traerFacturas()
-        {
-            List<Factura> listaFacturas = new List<Factura>();
-
-            var dt = DataBase.GetInstance().Query("SELECT * FROM COMPUMUNDOHIPERMEGARED.Factura");
-            int cantidadDeFacturas = dt.Columns.Count;
-
-            for (int i = 0; i < cantidadDeFacturas; i++)
-            {
-                Factura fact = traerDe(dt.Rows[i]);
-                listaFacturas.Add(fact);
-            }
-
-            return listaFacturas;
-        }
-
-        private void GenerarRendiciones_Load(object sender, EventArgs e)
-        {
-
-        }
+        }        
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -103,20 +88,27 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
                 {
                     /*
                     if (e.RowIndex != 0)
-                        throw new Exception("Debe empezas rindiendo las facturas mas viejas");
-                        */
+                        throw new Exception("Debe empezas rindiendo las facturas mas viejas");*/                        
+                    
+                    /*var facturaARendir = facturasActuales[e.RowIndex];
 
-                    var facturaARendir = facturasActuales[e.RowIndex];
+                    var dr = DataBase.GetInstance().Query("SELECT SUM(CAST ((it.item_factura_monto*comision/100.0) AS decimal(6,2))) as comision_cobrada FROM COMPUMUNDOHIPERMEGARED.Item_Factura it INNER JOIN COMPUMUNDOHIPERMEGARED.Ubicacion u ON it.ubicacion_id = u.id_ubicacion INNER JOIN COMPUMUNDOHIPERMEGARED.Publicacion p ON u.publicacion_id = p.id_publicacion INNER JOIN COMPUMUNDOHIPERMEGARED.Grado g ON p.grado_id = g.id_grado WHERE factura_id = "+ facturaARendir.id +" GROUP BY factura_id ORDER BY it.factura_id");
+                    float comisionCobrada = (float) dr.Rows[0]["comision_cobrada"];
+
+                    var dt = DataBase.GetInstance().Query("SELECT f.empresa_id AS empresaID, razon_social AS razonSocial FROM COMPUMUNDOHIPERMEGARED.Factura f INNER JOIN COMPUMUNDOHIPERMEGARED.Empresa e ON f.empresa_id = e.id_empresa WHERE f.id_factura = " + facturaARendir.id);
+                    int empresaID = (int) dt.Rows[0]["empresaID"];
+                    String razonSocial = (String) dt.Rows[0]["razonSocial"];
+
                     if (facturasActuales.Exists(f => f.fact_fecha < facturaARendir.fact_fecha))
                         throw new Exception("Debe empezar rindiendo las facturas mas viejas");
                     //facturaARendir.Rendida = 1;
                     //_facturaRepositorio.Guardar(facturaARendir);
-                    /*MessageBox.Show(String.Format("Se rindio la comision de la factura {0} a la empresa {1} con una comision de ${2}",
-                        facturaARendir.Numero, facturaARendir.Empresa.RazonSocial, facturaARendir.Items.Sum(i => i.Comision)),
-                        "Rendicion OK", MessageBoxButtons.OK, MessageBoxIcon.None);*/
+                    MessageBox.Show(String.Format("Se rindio la comision de la factura {0} a la empresa con ID: {1} y razon social: {2} con una comision de ${3}",
+                        facturaARendir.fact_nro, empresaID, razonSocial,comisionCobrada,
+                        "Rendicion OK", MessageBoxButtons.OK, MessageBoxIcon.None));
 
                     dataGridViewRendirComisiones.Rows.Clear();
-                    Inicializar();
+                    Inicializar();*/
                 }
             }
             catch (Exception ex)
@@ -124,5 +116,12 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
                 MessageBox.Show(ex.Message, "Error Rendicion", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnRendirComisiones_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Compras rendidas");
+        }
+
+
     }
 }
