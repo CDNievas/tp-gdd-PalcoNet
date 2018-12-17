@@ -44,6 +44,16 @@ namespace PalcoNet.Generar_Publicacion
                 MessageBox.Show("Las fechas deben ser ingresadas en órden.");
                 return;
             }
+            if (fechas.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar al menos una fecha");
+                return;
+            }
+            if (fechas[1] < Contexto.FechaActual)
+            {
+                MessageBox.Show("La fecha en que se publicará no puede ser anterior a la actual");
+                return;
+            }
 
             try
             {

@@ -20,6 +20,7 @@ namespace PalcoNet.Editar_Publicacion.SectoresUtils
             InitializeComponent();
             comboTipoUbicacion.DropDownStyle = ComboBoxStyle.DropDownList;
             comboTipoUbicacion.DataSource = TipoUbicacion.Todos();
+            precio.Minimum = 0;
             precio.Maximum = Decimal.MaxValue;
         }
 
