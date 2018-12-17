@@ -164,6 +164,7 @@
     <Compile Include="Editar Publicacion\TipoUbicacion.cs" />
     <Compile Include="Editar Publicacion\Ubicacion.cs" />
     <Compile Include="FuncionalidadDeCliente.cs" />
+    <Compile Include="FuncionalidadDeEmpresa.cs" />
     <Compile Include="GD2C2018DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

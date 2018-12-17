@@ -1,4 +1,5 @@
-﻿using PalcoNet.Editar_Publicacion.SectoresUtils;
+﻿using PalcoNet.Abm_Empresa_Espectaculo;
+using PalcoNet.Editar_Publicacion.SectoresUtils;
 using PalcoNet.Generar_Publicacion;
 using PalcoNet.PublicacionesUtils;
 using PalcoNet.Validadores;
@@ -21,9 +22,10 @@ namespace PalcoNet.Editar_Publicacion
         public List<SectorNumerado> sectoresNumerados { get; set; }
         public List<SectorSinNumerar> sectoresSinNumerar { get; set; }
 
-        public EditarPublicacion(FuncionFormPublicacion funcion)
+        public EditarPublicacion(FuncionFormPublicacion funcion, Empresa empresa)
         {
             InitializeComponent();
+            funcion.Empresa = empresa;
             this.funcion = funcion;
             ConfigurarInputs();
         }
@@ -195,6 +197,8 @@ namespace PalcoNet.Editar_Publicacion
                 throw new UserInputException("Debe seleccionar un rubro para su publicación");
             if (fechaEspectaculo.Value < Contexto.FechaActual)
                 throw new UserInputException("La fecha del espectáculo debe ser posterior a la actual");
+            if (this.SectoresPublicacion().Count == 0)
+                throw new UserInputException("Debe por lo menos haber algún sector para la publicación");
         }
 
         private void PublicarUnaVez()

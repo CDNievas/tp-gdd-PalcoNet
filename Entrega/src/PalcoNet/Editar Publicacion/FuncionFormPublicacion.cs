@@ -1,4 +1,5 @@
-﻿using PalcoNet.PublicacionesUtils;
+﻿using PalcoNet.Abm_Empresa_Espectaculo;
+using PalcoNet.PublicacionesUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +7,12 @@ using System.Text;
 
 namespace PalcoNet.Editar_Publicacion
 {
-    public interface FuncionFormPublicacion
+    public abstract class FuncionFormPublicacion
     {
-        void Setup(EditarPublicacion form);
-        void GuardarBorrador(EditarPublicacion form, Publicacion publicacion);
+        public Empresa Empresa { get; set; }
+        public abstract void Setup(EditarPublicacion form);
+        public abstract void GuardarBorrador(EditarPublicacion form, Publicacion publicacion);
+
     }
 
     public class FuncionModificarPublicacion : FuncionFormPublicacion
@@ -21,28 +24,29 @@ namespace PalcoNet.Editar_Publicacion
             this.publicacion = publicacion;
         }
 
-        public void Setup(EditarPublicacion form)
+        public override void Setup(EditarPublicacion form)
         {
             form.LlenateCon(publicacion);
         }
 
-        public void GuardarBorrador(EditarPublicacion form, Publicacion publicacion)
+        public override void GuardarBorrador(EditarPublicacion form, Publicacion publicacion)
         {
-            publicacion.UpdateBorrador(Contexto.GetEmpresaLogeadaId());
+            publicacion.UpdateBorrador(this.Empresa.id);
             form.GuardarSectores();
         }
     }
 
     public class FuncionCrearPublicacion : FuncionFormPublicacion
     {
-        public void Setup(EditarPublicacion form)
+
+        public override void Setup(EditarPublicacion form)
         {
             form.CargarSectoresVacios();
         }
 
-        public void GuardarBorrador(EditarPublicacion form, Publicacion publicacion)
+        public override void GuardarBorrador(EditarPublicacion form, Publicacion publicacion)
         {
-            publicacion.GuardarBorrador(Contexto.GetEmpresaLogeadaId());
+            publicacion.GuardarBorrador(this.Empresa.id);
             form.GuardarSectores();
         }
     }

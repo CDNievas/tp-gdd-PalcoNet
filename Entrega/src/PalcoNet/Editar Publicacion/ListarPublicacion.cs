@@ -84,7 +84,7 @@ namespace PalcoNet.Editar_Publicacion
                 MessageBox.Show("Esta publicación no puede modificarse", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var ignored = new EditarPublicacion(new FuncionModificarPublicacion(publicacion)).ShowDialog();
+            var ignored = new EditarPublicacion(new FuncionModificarPublicacion(publicacion), empresa).ShowDialog();
             ActualizarTabla();
         }
 

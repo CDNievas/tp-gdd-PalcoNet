@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblRolNombre = new System.Windows.Forms.Label();
-            this.btnBaja = new System.Windows.Forms.Button();
             this.btnMod = new System.Windows.Forms.Button();
             this.l = new System.Windows.Forms.Label();
             this.publicacionBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -69,16 +68,6 @@
             this.lblRolNombre.Size = new System.Drawing.Size(47, 13);
             this.lblRolNombre.TabIndex = 46;
             this.lblRolNombre.Text = "Nombre:";
-            // 
-            // btnBaja
-            // 
-            this.btnBaja.Location = new System.Drawing.Point(819, 268);
-            this.btnBaja.Margin = new System.Windows.Forms.Padding(2);
-            this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(66, 24);
-            this.btnBaja.TabIndex = 45;
-            this.btnBaja.Text = "Baja";
-            this.btnBaja.UseVisualStyleBackColor = true;
             // 
             // btnMod
             // 
@@ -212,7 +201,6 @@
             this.Controls.Add(this.publicacionesDataGrid);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.lblRolNombre);
-            this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnMod);
             this.Controls.Add(this.l);
             this.Controls.Add(this.btnPublicacionLimpiar);
@@ -235,7 +223,6 @@
 
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblRolNombre;
-        private System.Windows.Forms.Button btnBaja;
         private System.Windows.Forms.Button btnMod;
         private System.Windows.Forms.Label l;
         private System.Windows.Forms.Button btnPublicacionLimpiar;
