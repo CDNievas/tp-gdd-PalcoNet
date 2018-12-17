@@ -1158,7 +1158,7 @@ as
 
 go
 
-PRINT 'Todes les procedures y les funciones creades'
+PRINT 'Todos los procedures y las funciones creados'
 
 PRINT 'Creando al admin default'
 declare @tablaFunciones COMPUMUNDOHIPERMEGARED.FuncionalidadList
