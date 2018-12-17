@@ -52,14 +52,13 @@ namespace PalcoNet
                     new Editar_Publicacion.ListarPublicacion(empresa).ShowDialog();
                     break;
                 case 8:
-                    new Comprar.Comprar().ShowDialog();
+                    new FuncionalidadComprar().Ejecutarse();
                     break;
                 case 9:
-                    var cliente = Contexto.ClienteLogeado;
-                    new Historial_Cliente.historialClienteCompras(cliente).ShowDialog();
+                    new FuncionalidadHistorialCliente().Ejecutarse();
                     break;
                 case 10:
-                    new Canje_Puntos.ConsultaPuntos().ShowDialog();
+                    new FuncionalidadPuntos().Ejecutarse();
                     break;
                 case 11:
                     new Generar_Rendicion_Comisiones.seleccionadorEmpresaRendicion().ShowDialog();

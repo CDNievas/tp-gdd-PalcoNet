@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PalcoNet.Abm_Cliente;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,21 +13,23 @@ namespace PalcoNet.Canje_Puntos
 {
     public partial class ConsultaPuntos : Form
     {
-        public ConsultaPuntos()
+        private Cliente cliente;
+        public ConsultaPuntos(Cliente cliente)
         {
             InitializeComponent();
+            this.cliente = cliente;
         }
 
         private void ConsultaPuntos_Load(object sender, EventArgs e)
         {
             this.Text = "Canje de puntos";
-            puntos.Text = Contexto.ClienteLogeado.GetPuntos().ToString();
+            puntos.Text = cliente.GetPuntos().ToString();
         }
 
         private void btnPremios_Click(object sender, EventArgs e)
         {
-            new CanjearPuntos(Contexto.ClienteLogeado).ShowDialog();
-            puntos.Text = Contexto.ClienteLogeado.GetPuntos().ToString();            
+            new CanjearPuntos(cliente).ShowDialog();
+            puntos.Text = cliente.GetPuntos().ToString();            
         }
     }
 }
