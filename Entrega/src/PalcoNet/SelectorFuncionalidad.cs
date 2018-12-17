@@ -32,24 +32,10 @@ namespace PalcoNet
                     new Abm_Grado.ListarGrado().ShowDialog();
                     break;
                 case 6: //Crear publicacion
-                    new Editar_Publicacion.EditarPublicacion(new Editar_Publicacion.FuncionCrearPublicacion()).ShowDialog();
+                    new FuncionalidadCrearPublicacion().Ejecutarse();
                     break;
                 case 7:
-                    Empresa empresa;
-                    try
-                    {
-                        empresa = Contexto.EmpresaLogeada;
-                        var id = empresa.id;
-                    }
-                    catch {
-                        MessageBox.Show("Seleccione una empresa", "Empresa", MessageBoxButtons.OK);
-                        var form = new SeleccionEmpresa();
-                        var result = form.ShowDialog();
-                        if (result != DialogResult.OK)
-                            return;
-                        empresa = form.empresa;
-                    }
-                    new Editar_Publicacion.ListarPublicacion(empresa).ShowDialog();
+                    new FuncionalidadListarPublicacion().Ejecutarse();
                     break;
                 case 8:
                     new FuncionalidadComprar().Ejecutarse();
