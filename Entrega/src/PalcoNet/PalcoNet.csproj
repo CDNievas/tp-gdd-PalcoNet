@@ -163,6 +163,7 @@
     </Compile>
     <Compile Include="Editar Publicacion\TipoUbicacion.cs" />
     <Compile Include="Editar Publicacion\Ubicacion.cs" />
+    <Compile Include="FuncionalidadDeCliente.cs" />
     <Compile Include="GD2C2018DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -249,6 +250,12 @@
     </Compile>
     <Compile Include="LoginUtils\PassGenerator.cs" />
     <Compile Include="Registro de Usuario\CreadorDeUsuarios.cs" />
+    <Compile Include="SelectorClienteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectorClienteForm.Designer.cs">
+      <DependentUpon>SelectorClienteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SelectorFuncionalidad.cs" />
     <Compile Include="SelectorFuncionalidadForm.cs">
       <SubType>Form</SubType>
@@ -411,6 +418,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SelectorClienteForm.resx">
+      <DependentUpon>SelectorClienteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SelectorFuncionalidadForm.resx">
       <DependentUpon>SelectorFuncionalidadForm.cs</DependentUpon>
     </EmbeddedResource>

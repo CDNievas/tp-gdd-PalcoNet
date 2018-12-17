@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PalcoNet.DataBasePackage;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,6 +15,21 @@ namespace PalcoNet.Abm_Rol
             var dt = DataBase.GetInstance().Query(sql);
             var roles = new List<Rol>();
             foreach (DataRow dr in dt.Rows) {
+                roles.Add(Rol.TraerDe(dr));
+            }
+            return roles;
+        }
+
+        public static List<Rol> RolesDeUsuario(int idUsuario)
+        {
+            var dt = DataBase.GetInstance()
+                .TypedQuery(@"
+                select r.* from COMPUMUNDOHIPERMEGARED.Rol_Usuario ru
+                inner join COMPUMUNDOHIPERMEGARED.Rol r on r.id_rol = ru.rol_id
+                and ru.usuario_id = @usuarioId and ru.eliminado = 0", new QueryParameter("usuarioId", SqlDbType.Int, idUsuario));
+            var roles = new List<Rol>();
+            foreach (DataRow dr in dt.Rows)
+            {
                 roles.Add(Rol.TraerDe(dr));
             }
             return roles;

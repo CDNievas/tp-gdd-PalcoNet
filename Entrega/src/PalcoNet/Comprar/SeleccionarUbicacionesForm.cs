@@ -1,4 +1,5 @@
-﻿using PalcoNet.DataBasePackage;
+﻿using PalcoNet.Abm_Cliente;
+using PalcoNet.DataBasePackage;
 using PalcoNet.Editar_Publicacion;
 using PalcoNet.PublicacionesUtils;
 using System;
@@ -19,8 +20,9 @@ namespace PalcoNet.Comprar
         private List<Ubicacion> ubicaciones;
         private List<Ubicacion> carrito = new List<Ubicacion>();
         private Pagina paginaActual = new Pagina(1, 25);
+        private Cliente cliente;
 
-        public SeleccionarUbicacionesForm(Publicacion publicacion)
+        public SeleccionarUbicacionesForm(Publicacion publicacion, Cliente cliente)
         {
             InitializeComponent();
             this.publicacion = publicacion;
@@ -30,6 +32,7 @@ namespace PalcoNet.Comprar
             ubicacionesDataGrid.MultiSelect = false;
             carritoDataGrid.MultiSelect = false;
             lblCantidad.Text = "0";
+            this.cliente = cliente;
         }
 
         private void SeleccionarUbicacionesFormcs_Load(object sender, EventArgs e)
@@ -142,7 +145,6 @@ namespace PalcoNet.Comprar
         */
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            var cliente = Contexto.ClienteLogeado;
             var tarjeta = cliente.GetTarjeta();
             if (tarjeta == null)
             {
