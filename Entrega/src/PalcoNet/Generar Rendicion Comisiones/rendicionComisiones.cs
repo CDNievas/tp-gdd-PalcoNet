@@ -16,7 +16,6 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 {
     public partial class GenerarRendiciones : Form
     {
-        private Pagina paginaActual;
         public Empresa empresaActual;
         public int comprasARendir;
 
@@ -29,7 +28,6 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
         private void GenerarRendiciones_Load(object sender, EventArgs e)
         {
-            paginaActual = new Pagina(1, 25);
             dataGridViewRendirComisiones.MultiSelect = false;
             ActualizarTabla();
         }
@@ -37,28 +35,19 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
         private void ActualizarTabla()
         {
             buscadorCompras buscador = new buscadorCompras();
+            var unasCompras = buscador.
+                filtrarCompras(empresaActual.id, comprasARendir);
+            this.dataGridViewRendirComisiones.DataSource = unasCompras;
+            this.dataGridViewRendirComisiones.Columns["empresa_ID"].Visible = false;
+            this.dataGridViewRendirComisiones.Columns["compra_ID"].Visible = false;
 
-            this.dataGridViewRendirComisiones.DataSource = buscador.filtrarCompras(empresaActual.id,pag: paginaActual); ;
-            this.dataGridViewRendirComisiones.AllowUserToAddRows = false;
-            foreach (DataGridViewColumn c in dataGridViewRendirComisiones.Columns)
-            {
-                c.ReadOnly = true;
+            double total = 0;
+            for (int i = 0; i < dataGridViewRendirComisiones.Rows.Count; ++i){
+                total += Convert.ToDouble(dataGridViewRendirComisiones.Rows[i].Cells["Comisión a cobrar"].Value);
             }
-        }
 
-        private void pagSiguiente_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewRendirComisiones.RowCount != 0)
-            {
-                paginaActual.Next();
-                ActualizarTabla();
-            }
-        }
-
-        private void pagAnterior_Click(object sender, EventArgs e)
-        {
-            paginaActual.Previous();
-            ActualizarTabla();
+            this.label1.Text += "$ " + total;
+  
         }
 
         public static Factura traerDe(DataRow dr)

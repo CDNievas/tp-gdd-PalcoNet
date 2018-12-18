@@ -363,12 +363,12 @@ on m.Espec_Empresa_Cuit = e.cuit
 PRINT 'Migre Espectaculo'
 GO
 
-insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_espectaculo, fecha_vencimiento, estado, grado_id)
+insert into COMPUMUNDOHIPERMEGARED.Publicacion(espectaculo_id, fecha_espectaculo, fecha_vencimiento, estado, grado_id, porcentaje_comision)
 select e.id_espectaculo, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc,
 case when lower(m.Espectaculo_Estado) like 'publicada' then 'P'
 when lower(m.Espectaculo_Estado) like 'borrador' then 'B'
 when lower(m.Espectaculo_Estado) like 'finalizada' then 'F' end,
-3
+3, 10.00
 from gd_esquema.Maestra m
 inner join COMPUMUNDOHIPERMEGARED.Espectaculo e
 on e.codigo = m.Espectaculo_Cod

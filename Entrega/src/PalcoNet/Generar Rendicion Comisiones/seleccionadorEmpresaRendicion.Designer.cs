@@ -41,8 +41,10 @@
             this.btnPagSig = new System.Windows.Forms.Button();
             this.btnPagAnt = new System.Windows.Forms.Button();
             this.lblComprasARendir = new System.Windows.Forms.Label();
-            this.textComprasARendir = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cantComprasInput = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.empresasDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cantComprasInput)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAccept
@@ -169,19 +171,29 @@
             this.lblComprasARendir.TabIndex = 34;
             this.lblComprasARendir.Text = "CANTIDAD COMPRAS A RENDIR:";
             // 
-            // textComprasARendir
+            // label1
             // 
-            this.textComprasARendir.Location = new System.Drawing.Point(362, 106);
-            this.textComprasARendir.Name = "textComprasARendir";
-            this.textComprasARendir.Size = new System.Drawing.Size(247, 20);
-            this.textComprasARendir.TabIndex = 35;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(65, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(279, 13);
+            this.label1.TabIndex = 36;
+            this.label1.Text = "Seleccione la empresa de la cual quiere rendir comisiones";
+            // 
+            // cantComprasInput
+            // 
+            this.cantComprasInput.Location = new System.Drawing.Point(362, 111);
+            this.cantComprasInput.Name = "cantComprasInput";
+            this.cantComprasInput.Size = new System.Drawing.Size(120, 20);
+            this.cantComprasInput.TabIndex = 37;
             // 
             // seleccionadorEmpresaRendicion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 608);
-            this.Controls.Add(this.textComprasARendir);
+            this.Controls.Add(this.cantComprasInput);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblComprasARendir);
             this.Controls.Add(this.btnPagSig);
             this.Controls.Add(this.btnPagAnt);
@@ -197,7 +209,9 @@
             this.Controls.Add(this.btnAccept);
             this.Name = "seleccionadorEmpresaRendicion";
             this.Text = "SeleccionEmpresa";
+            this.Load += new System.EventHandler(this.seleccionadorEmpresaRendicion_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.empresasDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cantComprasInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,6 +232,7 @@
         private System.Windows.Forms.Button btnPagSig;
         private System.Windows.Forms.Button btnPagAnt;
         private System.Windows.Forms.Label lblComprasARendir;
-        private System.Windows.Forms.TextBox textComprasARendir;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown cantComprasInput;
     }
 }

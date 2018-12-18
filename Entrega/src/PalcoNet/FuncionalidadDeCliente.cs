@@ -29,6 +29,7 @@ namespace PalcoNet
             else
             {
                 var form = new SelectorClienteForm();
+                MessageBox.Show("Debe seleccionar el cliente para el cual realizar esta funcionalidad", "Cliente", MessageBoxButtons.OK);
                 DialogResult result = form.ShowDialog();
                 if (result != DialogResult.OK)
                     return;

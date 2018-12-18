@@ -17,17 +17,12 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
         private Pagina paginaActual;
         public Empresa empresa { get; set; }
-        public int cantidadDeComprasARendir;
 
         public seleccionadorEmpresaRendicion()
         {
             InitializeComponent();
-        }
-
-        private void seleccionadorEmpresaRendicion_Load(object sender, EventArgs e)
-        {
-            paginaActual = new Pagina(1, 25);
-            ActualizarTabla();
+            this.paginaActual = new Pagina(1, 25);
+            cantComprasInput.Minimum = 1;
         }
 
         private List<TextBox> TodosLosTextbox()
@@ -47,12 +42,6 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
             this.empresasDataGrid.DataSource = bindingSource; 
             this.empresasDataGrid.Columns["id"].Visible = false;
-            this.empresasDataGrid.AllowUserToAddRows = false;
-
-            foreach (DataGridViewColumn c in empresasDataGrid.Columns)
-            {
-                c.ReadOnly = true;
-            }
         }
         
 
@@ -87,18 +76,28 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
         private void btnAccept_Click_1(object sender, EventArgs e)
         {
+            if (empresasDataGrid.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar una empresa");
+                return;
+            }
             this.empresa = (Empresa)empresasDataGrid.CurrentRow.DataBoundItem;
             try
             {
-                cantidadDeComprasARendir = Convert.ToInt32(textComprasARendir.Text);
+                int cantidadDeComprasARendir = Convert.ToInt32(cantComprasInput.Value);
+                DialogResult = DialogResult.OK;
+                new Generar_Rendicion_Comisiones.GenerarRendiciones(this.empresa, cantidadDeComprasARendir).ShowDialog();
+                Close();
             }
             catch
             {
                 MessageBox.Show("Debe ingresar cantidad de compras a rendir obligatoriamente.");
             }
-            DialogResult = DialogResult.OK;
-            new Generar_Rendicion_Comisiones.GenerarRendiciones(this.empresa, cantidadDeComprasARendir).ShowDialog();
-            Close();
+        }
+
+        private void seleccionadorEmpresaRendicion_Load_1(object sender, EventArgs e)
+        {
+            ActualizarTabla();
         }
     }
 }
