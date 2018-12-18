@@ -41,13 +41,25 @@ namespace PalcoNet.PublicacionesUtils
                 pag = new Pagina(1, 10);
 
             var parametros = new List<QueryParameter>();
-            String sql = GetBusquedaQuery(descripcion, rango, rubros, pag, parametros);
+            String sql = "select * " + GetBusquedaQuery(descripcion, rango, rubros, parametros)
+            + " order by grado_comision desc "
+            + String.Format(" OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", pag.FirstResultIndex(), pag.pageSize);
 
             var dt = DataBase.GetInstance().TypedQuery(sql, parametros.ToArray());
             return PublicacionesFromDataTable(dt);
         }
 
-        public static String GetBusquedaQuery(String descripcion, RangoFechas rango, List<Rubro> rubros, Pagina pag, List<QueryParameter> parametros)
+        public static int CantidadDePublicacionesAComprar(String descripcion = null, RangoFechas rango = null, List<Rubro> rubros = null)
+        {
+            var parametros = new List<QueryParameter>();
+            String sql = "select count(*) as cantidad " + GetBusquedaQuery(descripcion, rango, rubros, parametros);
+
+            var dt = DataBase.GetInstance().TypedQuery(sql, parametros.ToArray());
+
+            return Convert.ToInt32(dt.Rows[0]["cantidad"]);
+        }
+
+        public static String GetBusquedaQuery(String descripcion, RangoFechas rango, List<Rubro> rubros, List<QueryParameter> parametros)
         {
             var condiciones = new List<String>();
 
@@ -78,14 +90,15 @@ namespace PalcoNet.PublicacionesUtils
                 condiciones.Add(condicion);
             }
 
-            String condicionWhere = String.Format("where estado = '{0}' ", new Publicado().Codigo());
-            if (condiciones.Count != 0)
-                condicionWhere += "and " + condiciones.Aggregate((prod, next) => prod + " and " + next);
+            String condicionWhere = String.Format("where estado = '{0}' and fecha_vencimiento > @fechaActual ",
+                new Publicado().Codigo());
+            parametros.Add(new QueryParameter("fechaActual", SqlDbType.DateTime, Contexto.FechaActual));
 
-            var sql = String.Format("select * from COMPUMUNDOHIPERMEGARED.PublicacionesView "
-                + condicionWhere
-                + " order by grado_comision desc"
-                + " OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", pag.FirstResultIndex(), pag.pageSize);
+            if (condiciones.Count != 0)
+                condicionWhere += " and " + condiciones.Aggregate((prod, next) => prod + " and " + next);
+
+            var sql = "from COMPUMUNDOHIPERMEGARED.PublicacionesView "
+                + condicionWhere;
 
             return sql;
         }

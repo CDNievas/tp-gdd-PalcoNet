@@ -50,6 +50,10 @@
             this.btnPagUltima = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnElegirUbicaciones = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtPagActual = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtUltimaPag = new System.Windows.Forms.Label();
             this.Filtros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -277,11 +281,51 @@
             this.btnElegirUbicaciones.UseVisualStyleBackColor = true;
             this.btnElegirUbicaciones.Click += new System.EventHandler(this.btnElegirUbicaciones_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(573, 618);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "Página";
+            // 
+            // txtPagActual
+            // 
+            this.txtPagActual.AutoSize = true;
+            this.txtPagActual.Location = new System.Drawing.Point(620, 617);
+            this.txtPagActual.Name = "txtPagActual";
+            this.txtPagActual.Size = new System.Drawing.Size(17, 13);
+            this.txtPagActual.TabIndex = 42;
+            this.txtPagActual.Text = "xx";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(644, 618);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(19, 13);
+            this.label8.TabIndex = 43;
+            this.label8.Text = "de";
+            // 
+            // txtUltimaPag
+            // 
+            this.txtUltimaPag.AutoSize = true;
+            this.txtUltimaPag.Location = new System.Drawing.Point(670, 617);
+            this.txtUltimaPag.Name = "txtUltimaPag";
+            this.txtUltimaPag.Size = new System.Drawing.Size(17, 13);
+            this.txtUltimaPag.TabIndex = 44;
+            this.txtUltimaPag.Text = "yy";
+            // 
             // Comprar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(963, 648);
+            this.Controls.Add(this.txtUltimaPag);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtPagActual);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnElegirUbicaciones);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnComprasLimpiar);
@@ -326,5 +370,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox checkFecha;
         private System.Windows.Forms.Button btnElegirUbicaciones;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label txtPagActual;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label txtUltimaPag;
     }
 }

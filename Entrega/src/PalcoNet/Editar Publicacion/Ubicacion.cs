@@ -47,19 +47,6 @@ namespace PalcoNet.Editar_Publicacion
             return ubicacion;
         }
 
-
-        public void Persist()
-        {
-            if (Id == null)
-            {
-                this.Guadarse();
-            }
-            else
-            {
-                this.Actualizarse();
-            }
-        }
-
         private void Actualizarse()
         {
             var sql = String.Format(@"

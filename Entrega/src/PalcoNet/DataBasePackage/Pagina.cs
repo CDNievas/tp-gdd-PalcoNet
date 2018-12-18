@@ -32,13 +32,24 @@ namespace PalcoNet.DataBasePackage
             this.pageNumber = r <= 0 ? 1 : r;
         }
 
-       public void Last()
+       public void Last(int countResult)
        {
-           this.pageNumber= this.pageSize;
-        }
+           this.pageNumber =  this.LastPageNumer(countResult);
+       }
+
+       public int LastPageNumer(int countResult)
+       {
+           return (int)((countResult / pageSize) + 1);
+       }
+
        public void First()
        {
            this.pageNumber = 1;
+       }
+
+       public bool TieneSiguiente(int countResult)
+       {
+           return LastPageNumer(countResult) > this.pageNumber;
        }
     }
 }

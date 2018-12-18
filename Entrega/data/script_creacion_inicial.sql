@@ -1158,6 +1158,13 @@ as
 
 go
 
+create procedure COMPUMUNDOHIPERMEGARED.FinalizarPublicacionesVencidas
+as
+update COMPUMUNDOHIPERMEGARED.Publicacion
+set estado = 'F'
+where fecha_vencimiento < GETDATE()
+go
+
 PRINT 'Todos los procedures y las funciones creados'
 
 PRINT 'Creando al admin default'
