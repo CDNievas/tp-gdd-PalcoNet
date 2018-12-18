@@ -158,18 +158,18 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Factura( -- MIGRADO
 	id_factura int IDENTITY(1,1) PRIMARY KEY,
 	numero numeric(18,0),
 	fecha datetime,
-	total numeric(18,2), -- (sumatoria monto_total de compras)
+	total numeric(18,2),
 	forma_pago varchar(255),
 	empresa_id int CONSTRAINT FK_FACTURA_EMPRESA references COMPUMUNDOHIPERMEGARED.Empresa
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Item_Factura( -- MIGRADO
-	id_item_factura int IDENTITY(1,1) PRIMARY KEY,
 	item_factura_monto numeric(18,2), -- (comision descontada por cada compra)
 	item_factura_cantidad numeric(18,0), -- (1)
 	item_factura_descripcion nvarchar(60), -- ('Comision por compra')
 	factura_id int CONSTRAINT FK_ITEMFACTURA_FACTURA references COMPUMUNDOHIPERMEGARED.Factura(id_factura),
-	ubicacion_id bigint CONSTRAINT FK_ITEMFACTURA_UBICACION references COMPUMUNDOHIPERMEGARED.Ubicacion(id_ubicacion)
+	compra_id int CONSTRAINT FK_ITEMFACTURA_COMPRA references COMPUMUNDOHIPERMEGARED.Compra(id_compra),
+	primary key(factura_id, compra_id)
 )
 
 
@@ -412,6 +412,14 @@ PRINT 'Migre TipoUbicacion'
 GO
 
 create SEQUENCE COMPUMUNDOHIPERMEGARED.UbicacionSequence 
+    AS bigint   
+    START WITH 1
+    INCREMENT BY 1  
+    NO CYCLE
+;
+go
+
+create SEQUENCE COMPUMUNDOHIPERMEGARED.CompraSequence 
     AS int   
     START WITH 1
     INCREMENT BY 1  
@@ -421,6 +429,7 @@ go
 
 create table COMPUMUNDOHIPERMEGARED.##UbicacionTemp(
 id_ubicacion bigint,
+compra_id int,
 fila varchar(3),
 asiento numeric(18,0),
 precio numeric(18,0),
@@ -432,8 +441,9 @@ publicacion_id bigint)
 PRINT 'Tabla temporal ubicaciones creada'
 go
 
-insert into COMPUMUNDOHIPERMEGARED.##UbicacionTemp(id_ubicacion, fila, asiento, sin_numerar, precio, ubicacion_tipo_codigo, espectaculo_cod, dni_comprador, publicacion_id)
-select next value for COMPUMUNDOHIPERMEGARED.UbicacionSequence, m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar,
+insert into COMPUMUNDOHIPERMEGARED.##UbicacionTemp(id_ubicacion, compra_id, fila, asiento, sin_numerar, precio, ubicacion_tipo_codigo, espectaculo_cod, dni_comprador, publicacion_id)
+select next value for COMPUMUNDOHIPERMEGARED.UbicacionSequence, next value for COMPUMUNDOHIPERMEGARED.CompraSequence,
+m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar,
 m.Ubicacion_Precio, m.Ubicacion_Tipo_Codigo, m.Espectaculo_Cod,
 max(Cli_Dni), p.id_publicacion
 from gd_esquema.Maestra m
@@ -443,16 +453,10 @@ inner join COMPUMUNDOHIPERMEGARED.Publicacion p
 on p.espectaculo_id = e.id_espectaculo
 group by m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Sin_numerar,
 m.Ubicacion_Precio, m.Ubicacion_Tipo_Codigo, m.Espectaculo_Cod, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc, p.id_publicacion
+PRINT 'Insertados en UbicacionTemp'
 go
 
-create SEQUENCE COMPUMUNDOHIPERMEGARED.CompraSequence 
-    AS int   
-    START WITH 1
-    INCREMENT BY 1  
-    NO CYCLE
-;
 
-go
 
 create table COMPUMUNDOHIPERMEGARED.##CompraTemp(
 compra_id int,
@@ -466,7 +470,7 @@ precio_total numeric(18,0)
 go
 
 insert into COMPUMUNDOHIPERMEGARED.##CompraTemp
-select next value for COMPUMUNDOHIPERMEGARED.CompraSequence, u.id_ubicacion ubicacion_id, m.Compra_Fecha fecha, m.Compra_Cantidad cantidad,
+select u.compra_id, u.id_ubicacion ubicacion_id, m.Compra_Fecha fecha, m.Compra_Cantidad cantidad,
 c.id_cliente id_cliente, u.precio
 from COMPUMUNDOHIPERMEGARED.##UbicacionTemp u
 inner join gd_esquema.Maestra m
@@ -476,14 +480,14 @@ and m.Espectaculo_Cod = u.espectaculo_cod
 inner join COMPUMUNDOHIPERMEGARED.Cliente c
 on c.nro_documento = m.Cli_Dni
 where m.Compra_Cantidad is not null or m.Compra_Fecha is not null
-group by u.id_ubicacion, m.Compra_Fecha, m.Compra_Cantidad, c.id_cliente, u.precio
-
+group by u.id_ubicacion, m.Compra_Fecha, m.Compra_Cantidad, c.id_cliente, u.precio, u.compra_id
+PRINT 'Insertados en CompraTemp'
 go
 
 insert into COMPUMUNDOHIPERMEGARED.Compra(id_compra, fecha, cantidad, cliente_id, precio_total)
 select c.compra_id, c.fecha, c.cantidad, c.cliente_id, c.precio_total
 from COMPUMUNDOHIPERMEGARED.##CompraTemp c
-
+PRINT 'Insertados en Compra'
 go
 
 insert into COMPUMUNDOHIPERMEGARED.Ubicacion(id_ubicacion, fila, asiento, precio, sin_numerar,
@@ -493,12 +497,10 @@ tu.id_tipo_ubicacion, t.publicacion_id, c.compra_id, case when c.compra_id is nu
 from COMPUMUNDOHIPERMEGARED.##UbicacionTemp t
 left join COMPUMUNDOHIPERMEGARED.##CompraTemp c on c.id_ubicacion = t.id_ubicacion
 join COMPUMUNDOHIPERMEGARED.TipoUbicacion tu on tu.codigo = t.ubicacion_tipo_codigo
-
-drop table COMPUMUNDOHIPERMEGARED.##CompraTemp
-
-PRINT 'Migre Ubicaciones y Compras'
+PRINT 'Insertados en Ubicación'
 go
 
+PRINT 'Migre Ubicaciones y Compras'
 
 INSERT INTO COMPUMUNDOHIPERMEGARED.Factura(numero, fecha, total, forma_pago, empresa_id)
 	SELECT DISTINCT m.Factura_Nro, m.Factura_Fecha, m.Factura_Total, m.Forma_Pago_Desc,
@@ -509,9 +511,9 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Factura(numero, fecha, total, forma_pago, emp
 PRINT 'Migre Facturas'
 GO
 
-INSERT INTO COMPUMUNDOHIPERMEGARED.Item_Factura(item_factura_monto, item_factura_cantidad, item_factura_descripcion, factura_id, ubicacion_id)
+INSERT INTO COMPUMUNDOHIPERMEGARED.Item_Factura(item_factura_monto, item_factura_cantidad, item_factura_descripcion, factura_id, compra_id)
 	SELECT m.Item_Factura_Monto, m.Item_Factura_Cantidad, m.Item_Factura_Descripcion,
-	f.id_factura, u.id_ubicacion
+	f.id_factura, u.compra_id
 	FROM gd_esquema.Maestra m
 	join COMPUMUNDOHIPERMEGARED.Factura f on f.numero = m.Factura_Nro
 	join COMPUMUNDOHIPERMEGARED.##UbicacionTemp u on u.fila = m.Ubicacion_Fila and u.asiento = m.Ubicacion_Asiento
@@ -519,6 +521,7 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Item_Factura(item_factura_monto, item_factura
 	and u.ubicacion_tipo_codigo = m.Ubicacion_Tipo_Codigo and u.espectaculo_cod = m.Espectaculo_Cod
 	WHERE m.Item_Factura_Cantidad IS NOT NULL
 
+drop table COMPUMUNDOHIPERMEGARED.##CompraTemp
 drop table COMPUMUNDOHIPERMEGARED.##UbicacionTemp
 PRINT 'Migre Item_Factura'
 GO
@@ -977,7 +980,7 @@ end
 go
 
 
-CREATE TYPE UbicacionTableType AS TABLE   
+CREATE TYPE COMPUMUNDOHIPERMEGARED.UbicacionTableType AS TABLE   
 ( ubicacion_id bigint);  
 GO 
 
@@ -1165,6 +1168,44 @@ as
 			left join COMPUMUNDOHIPERMEGARED.Tarjeta t on c.tarjeta_id = t.id_tarjeta
 			where c.cliente_id = @cliente_id)
 
+go
+
+create function COMPUMUNDOHIPERMEGARED.TopComprasDeEmpresa(@empresa_id int, @cantidad_top int)
+returns table
+as
+return (SELECT top (@cantidad_top) c.id_compra AS compra_ID, c.precio_total AS [Precio total], c.cantidad as [Cantidad],
+                c.fecha AS [Fecha compra], e.empresa_id AS empresa_ID, e.descripcion as [Descripción], p.fecha_espectaculo as [Fecha Espectáculo],
+                SUM(CAST ((c.precio_total*p.porcentaje_comision/100.0) AS decimal(6,2))) AS [Comisión a cobrar]
+                FROM COMPUMUNDOHIPERMEGARED.Compra c INNER JOIN COMPUMUNDOHIPERMEGARED.Ubicacion u ON u.compra_id = c.id_compra
+                INNER JOIN COMPUMUNDOHIPERMEGARED.Publicacion p ON p.id_publicacion = u.publicacion_id
+                INNER JOIN COMPUMUNDOHIPERMEGARED.Espectaculo e ON e.id_espectaculo = p.espectaculo_id
+				WHERE empresa_ID = @cantidad_top
+                GROUP BY c.fecha, e.empresa_id, c.precio_total, c.fecha, c.id_compra, p.fecha_espectaculo, e.descripcion, c.cantidad
+                ORDER BY [Fecha compra] asc)
+go
+
+create procedure COMPUMUNDOHIPERMEGARED.RendirComisionesDeEmpresa(@empresa_id int, @cantidad_a_rendir int, @fecha_actual datetime)
+as
+	declare @numero_factura numeric(18,0) = (select MAX(f.numero) + 1 from COMPUMUNDOHIPERMEGARED.Factura f)
+
+	begin tran
+	insert into COMPUMUNDOHIPERMEGARED.Factura(numero, fecha, empresa_id)
+	values (@numero_factura, @fecha_actual, @empresa_id)
+
+	declare @id_factura int = @@IDENTITY
+
+	insert into COMPUMUNDOHIPERMEGARED.Item_Factura(item_factura_cantidad, item_factura_descripcion, item_factura_monto,
+	factura_id, compra_id)
+	select t.Cantidad, 'Comisión por venta', t.[Comisión a cobrar], @id_factura, t.compra_ID
+	from COMPUMUNDOHIPERMEGARED.TopComprasDeEmpresa(@empresa_id, @cantidad_a_rendir) t
+
+	declare @total numeric(18,2) = (select sum(itf.item_factura_monto) from COMPUMUNDOHIPERMEGARED.Item_Factura itf where itf.factura_id = @id_factura)
+
+	update COMPUMUNDOHIPERMEGARED.Factura
+	set total = @total
+	where id_factura = @id_factura
+
+	commit tran
 go
 
 PRINT 'Todos los procedures y las funciones creados'

@@ -19,6 +19,8 @@ drop procedure COMPUMUNDOHIPERMEGARED.realizarCanje
 drop procedure COMPUMUNDOHIPERMEGARED.AsignarTarjetaA
 drop procedure COMPUMUNDOHIPERMEGARED.ComprarUbicaciones
 drop procedure COMPUMUNDOHIPERMEGARED.RegistrarPuntosDeCompra
+drop procedure COMPUMUNDOHIPERMEGARED.RendirComisionesDeEmpresa
+go
 
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
 drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario
@@ -31,17 +33,22 @@ drop function COMPUMUNDOHIPERMEGARED.ClientesConMasPuntosVencidos
 drop function COMPUMUNDOHIPERMEGARED.ClientesConMasComprasDeEmpresa
 drop function COMPUMUNDOHIPERMEGARED.ComprasDeCliente
 drop function COMPUMUNDOHIPERMEGARED.DescripcionOrElse
+drop function COMPUMUNDOHIPERMEGARED.TopComprasDeEmpresa
+go
 
 drop trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
+go
 
 drop type COMPUMUNDOHIPERMEGARED.FuncionalidadList
-drop TYPE UbicacionTableType
+drop TYPE COMPUMUNDOHIPERMEGARED.UbicacionTableType
+go
 
 drop view COMPUMUNDOHIPERMEGARED.PublicacionesView
+go
 
 drop SEQUENCE COMPUMUNDOHIPERMEGARED.CompraSequence
 drop SEQUENCE COMPUMUNDOHIPERMEGARED.UbicacionSequence
-
+go
 
 PRINT('Eliminacion de Schema anterior') 
 IF EXISTS (SELECT * FROM SYS.SCHEMAS WHERE name = 'COMPUMUNDOHIPERMEGARED')
@@ -103,8 +110,6 @@ DROP TABLE COMPUMUNDOHIPERMEGARED.Rubro
 DROP TABLE COMPUMUNDOHIPERMEGARED.Sector
 DROP TABLE COMPUMUNDOHIPERMEGARED.Espectaculo
 
-drop table COMPUMUNDOHIPERMEGARED.##UbicacionTemp
-drop table COMPUMUNDOHIPERMEGARED.##CompraTemp
 
 drop procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol
 drop procedure COMPUMUNDOHIPERMEGARED.actualizarRol

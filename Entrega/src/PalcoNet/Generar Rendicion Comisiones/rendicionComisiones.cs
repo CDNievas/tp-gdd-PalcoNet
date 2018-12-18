@@ -34,7 +34,7 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
         private void ActualizarTabla()
         {
-            buscadorCompras buscador = new buscadorCompras();
+            BuscadorCompras buscador = new BuscadorCompras();
             var unasCompras = buscador.
                 filtrarCompras(empresaActual.id, comprasARendir);
             this.dataGridViewRendirComisiones.DataSource = unasCompras;
@@ -108,7 +108,19 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
         private void btnRendirComisiones_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Compras rendidas");
+            try
+            {
+                MessageBox.Show("Compras rendidas");
+                DataBase.GetInstance().Procedure("RendirComisionesDeEmpresa",
+                    new ParametroIn("empresa_id", empresaActual.id),
+                    new ParametroIn("cantidad_a_rendir", comprasARendir),
+                    new ParametroIn("fecha_actual", Contexto.FechaActual));
+                Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex + "\n" + ex.Message + "\n" + ex.StackTrace);
+            }
         }
 
 
