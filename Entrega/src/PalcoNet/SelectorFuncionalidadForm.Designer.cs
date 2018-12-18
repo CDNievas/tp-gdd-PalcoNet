@@ -33,13 +33,14 @@
             this.btnAccept = new System.Windows.Forms.Button();
             this.linkCambioPass = new System.Windows.Forms.LinkLabel();
             this.lblNombreUsuario = new System.Windows.Forms.Label();
+            this.lblFechaSistema = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // boxFuncionalidad
             // 
             this.boxFuncionalidad.FormattingEnabled = true;
             this.boxFuncionalidad.Location = new System.Drawing.Point(29, 105);
-            this.boxFuncionalidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.boxFuncionalidad.Margin = new System.Windows.Forms.Padding(2);
             this.boxFuncionalidad.Name = "boxFuncionalidad";
             this.boxFuncionalidad.Size = new System.Drawing.Size(204, 21);
             this.boxFuncionalidad.TabIndex = 0;
@@ -56,7 +57,7 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(168, 190);
+            this.btnAccept.Location = new System.Drawing.Point(177, 211);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 2;
@@ -86,11 +87,21 @@
             this.lblNombreUsuario.TabIndex = 4;
             this.lblNombreUsuario.Text = "label2";
             // 
+            // lblFechaSistema
+            // 
+            this.lblFechaSistema.AutoSize = true;
+            this.lblFechaSistema.Location = new System.Drawing.Point(26, 151);
+            this.lblFechaSistema.Name = "lblFechaSistema";
+            this.lblFechaSistema.Size = new System.Drawing.Size(35, 13);
+            this.lblFechaSistema.TabIndex = 5;
+            this.lblFechaSistema.Text = "label2";
+            // 
             // SelectorFuncionalidadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(286, 257);
+            this.Controls.Add(this.lblFechaSistema);
             this.Controls.Add(this.lblNombreUsuario);
             this.Controls.Add(this.linkCambioPass);
             this.Controls.Add(this.btnAccept);
@@ -111,5 +122,6 @@
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.LinkLabel linkCambioPass;
         private System.Windows.Forms.Label lblNombreUsuario;
+        private System.Windows.Forms.Label lblFechaSistema;
     }
 }

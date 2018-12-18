@@ -347,8 +347,17 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Grado(descripcion, comision) VALUES
 PRINT 'Migre Grados'
 GO
 
+create function COMPUMUNDOHIPERMEGARED.DescripcionOrElse(@string nvarchar(255), @orElse nvarchar(255))
+returns nvarchar(255)
+as
+begin
+return (select case when RTRIM(LTRIM(@string)) like '' then @orElse else @string end)
+end
+go
+
 insert into COMPUMUNDOHIPERMEGARED.Rubro(descripcion)
-select distinct Espectaculo_Rubro_Descripcion from gd_esquema.Maestra
+select distinct COMPUMUNDOHIPERMEGARED.DescripcionOrElse(Espectaculo_Rubro_Descripcion, 'Sin rubro')
+from gd_esquema.Maestra
 
 PRINT 'Migre Rubro'
 go
@@ -357,7 +366,7 @@ insert into COMPUMUNDOHIPERMEGARED.Espectaculo(codigo, descripcion, rubro_id, em
 select distinct m.Espectaculo_Cod, m.Espectaculo_Descripcion, r.id_rubro, e.id_empresa
 from gd_esquema.Maestra m
 left outer join COMPUMUNDOHIPERMEGARED.Rubro r
-on r.descripcion = m.Espectaculo_Rubro_Descripcion
+on r.descripcion = COMPUMUNDOHIPERMEGARED.DescripcionOrElse(m.Espectaculo_Rubro_Descripcion, 'Sin rubro')
 inner join COMPUMUNDOHIPERMEGARED.Empresa e
 on m.Espec_Empresa_Cuit = e.cuit
 PRINT 'Migre Espectaculo'
@@ -1158,13 +1167,6 @@ as
 
 go
 
-create procedure COMPUMUNDOHIPERMEGARED.FinalizarPublicacionesVencidas
-as
-update COMPUMUNDOHIPERMEGARED.Publicacion
-set estado = 'F'
-where fecha_vencimiento < GETDATE()
-go
-
 PRINT 'Todos los procedures y las funciones creados'
 
 PRINT 'Creando al admin default'
@@ -1194,3 +1196,6 @@ as
 	end
 
 go
+
+insert into COMPUMUNDOHIPERMEGARED.Rubro(descripcion)
+values ('Comedia'),('Acción'),('Drama')

@@ -68,7 +68,7 @@ namespace PalcoNet.Editar_Publicacion
         private void CargarRubros()
         {
             comboRubro.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboRubro.DataSource = Rubro.Todos();
+            comboRubro.DataSource = Rubro.Todos().Where(r => !String.Equals(r.Descripcion, "sin rubro", StringComparison.OrdinalIgnoreCase)).ToList();
             comboRubro.ValueMember = "Id";
             comboRubro.DisplayMember = "Descripcion";
         }

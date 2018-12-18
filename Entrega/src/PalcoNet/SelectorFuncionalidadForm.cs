@@ -22,6 +22,7 @@ namespace PalcoNet
             InitializeComponent();
             this.username = username;
             lblNombreUsuario.Text = "Usuario: " + username;
+            lblFechaSistema.Text = "Fecha del sistema: " + Contexto.FechaActual;
         }
 
         private void SelectorFuncionalidadForm_Load(object sender, EventArgs e)
