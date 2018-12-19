@@ -104,7 +104,7 @@ namespace PalcoNet.PublicacionesUtils
                 condiciones.Add(condicion);
             }
 
-            String condicionWhere = String.Format("where estado = '{0}' and fecha_vencimiento > @fechaActual ",
+            String condicionWhere = String.Format("where estado = '{0}' and (fecha_vencimiento > @fechaActual or fecha_vencimiento is null ) ",
                 new Publicado().Codigo());
             parametros.Add(new QueryParameter("fechaActual", SqlDbType.DateTime, Contexto.FechaActual));
 

@@ -110,11 +110,10 @@ namespace PalcoNet.Comprar
 
         private void ActualizarCantPaginas()
         {
-            var hasta = new DateTime(
             this.countResult = Publicaciones.CantidadDePublicacionesAComprar(
             descripcion: txtPublicacion.Text,
             rango: this.checkFecha.Checked ? new RangoFechas(dateDesde.Value, FechaHastaInclusive()) : null,
-            rubros: this.categorias));
+            rubros: this.categorias);
             txtUltimaPag.Text = paginaActual.LastPageNumer(countResult).ToString();
         }
 

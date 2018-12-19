@@ -49,7 +49,7 @@ namespace PalcoNet.Generar_Publicacion
                 MessageBox.Show("Debe seleccionar al menos una fecha");
                 return;
             }
-            if (fechas[1] < Contexto.FechaActual)
+            if (fechas[0] < Contexto.FechaActual)
             {
                 MessageBox.Show("La fecha en que se publicará no puede ser anterior a la actual");
                 return;
