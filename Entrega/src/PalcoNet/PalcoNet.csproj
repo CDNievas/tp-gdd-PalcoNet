@@ -285,6 +285,7 @@
     <Compile Include="Validadores\ValidadorNumerico.cs" />
     <Compile Include="Validadores\ValidadorNumeroComa.cs" />
     <Compile Include="Validadores\ValidadorSinIncluir.cs" />
+    <Compile Include="Validadores\ValidadorSoloLetras.cs" />
     <EmbeddedResource Include="Abm Cliente\AltaTarjeta.resx">
       <DependentUpon>AltaTarjeta.cs</DependentUpon>
     </EmbeddedResource>

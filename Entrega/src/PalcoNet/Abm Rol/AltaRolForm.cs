@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PalcoNet.Validadores;
 
 namespace PalcoNet.Abm_Rol
 {
@@ -15,9 +16,11 @@ namespace PalcoNet.Abm_Rol
     {
         private FuncionRolForm funcion;
         private Rol rol;
+        private ValidadorSoloLetras validador;
 
         public AltaRolForm(FuncionRolForm funcion)
         {
+            validador = new ValidadorSoloLetras();
             InitializeComponent();
             this.funcion = funcion;
         }
@@ -86,5 +89,11 @@ namespace PalcoNet.Abm_Rol
             this.rol = rol;
                 
         }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validador.soloLetras(e);
+        }
+
     }
 }

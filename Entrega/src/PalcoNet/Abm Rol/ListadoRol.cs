@@ -7,13 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PalcoNet.Validadores;
 
 namespace PalcoNet.Abm_Rol
 {
     public partial class ListadoRol : Form
     {
+        private ValidadorSoloLetras validador;
+
         public ListadoRol()
         {
+            validador = new ValidadorSoloLetras();
             InitializeComponent();
             rolesDataGrid.MultiSelect = false;
             rolesDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -99,6 +103,11 @@ namespace PalcoNet.Abm_Rol
         {
             txtNombre.Text = "";
             ActualizarRoles();
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validador.soloLetras(e);
         }
     }
 }
