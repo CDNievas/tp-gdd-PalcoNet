@@ -15,6 +15,9 @@ namespace PalcoNet.Abm_Cliente
     {
         public Cliente ClienteActual { get; set; }
         public FuncionFormCliente funcionForm { get; set; }
+        private ValidadorSoloLetras validadorLetras;
+        private ValidadorSoloLetrasAndNumeros validadorLetrasAndNumeros;
+        private ValidadorNumerico validadorNumerico;
         public Tarjeta tarjetaAGuardar { get; set; }
         public Boolean DebeGuardarTarjeta { get; set; }
         public CheckBox CheckHabilitado
@@ -42,6 +45,9 @@ namespace PalcoNet.Abm_Cliente
             InitializeComponent();
             fechaNacimiento.MinDate = new DateTime(1880, 1, 1);
             fechaNacimiento.MaxDate = Contexto.FechaActual;
+            validadorLetras = new ValidadorSoloLetras();
+            validadorLetrasAndNumeros = new ValidadorSoloLetrasAndNumeros();
+            validadorNumerico = new ValidadorNumerico();
 
             
             comboTipoDoc.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -191,6 +197,56 @@ namespace PalcoNet.Abm_Cliente
                 fechaNacimiento.Value = (DateTime)cliente.fechaNacimiento;
             checkHabilitado.Checked = cliente.Habilitado;
             this.ClienteActual = cliente;
+        }
+
+        private void txtClienteNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validadorLetras.soloLetras(e);
+        }
+
+        private void txtClienteApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validadorLetras.soloLetras(e);
+        }
+
+        private void txtClienteCalle_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validadorLetrasAndNumeros.soloLetrasAndNumeros(e);
+        }
+
+        private void txtCiudad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validadorLetras.soloLetras(e);
+        }
+
+        private void txtClienteDoc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validadorNumerico.soloNumeros(e);
+        }
+
+        private void txtClienteTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validadorNumerico.soloNumeros(e);
+        }
+
+        private void txtPiso_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validadorNumerico.soloNumeros(e);
+        }
+
+        private void txtClienteLoc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validadorLetrasAndNumeros.soloLetrasAndNumeros(e);
+        }
+
+        private void txtClienteCP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validadorLetrasAndNumeros.soloLetrasAndNumeros(e);
+        }
+
+        private void txtClienteNro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validadorNumerico.soloNumeros(e);
         }
     }
 }

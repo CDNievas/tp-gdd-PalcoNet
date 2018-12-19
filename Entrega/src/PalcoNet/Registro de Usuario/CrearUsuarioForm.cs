@@ -16,8 +16,12 @@ namespace PalcoNet.Registro_de_Usuario
 {
     public partial class CrearUsuarioForm : Form
     {
+        private ValidadorSoloLetrasAndNumeros validador;
+
+
         public CrearUsuarioForm()
         {
+            validador = new ValidadorSoloLetrasAndNumeros();
             InitializeComponent();
             SetupComboRoles();
             
@@ -147,6 +151,11 @@ namespace PalcoNet.Registro_de_Usuario
                 tarjetaAPersistir.SerAsignadaA(idCliente);
             });
             
+        }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validador.soloLetrasAndNumeros(e);
         }
 
 

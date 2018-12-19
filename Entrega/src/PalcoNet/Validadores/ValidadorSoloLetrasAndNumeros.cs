@@ -2,25 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace PalcoNet.Validadores
 {
-    class ValidadorNumerico: Validador
+    class ValidadorSoloLetrasAndNumeros
     {
-        override public Boolean IsValid(String s)
+        public void soloLetrasAndNumeros(KeyPressEventArgs e)
         {
-            String pattern = @"^[0-9][0-9]*$";
-            Regex regex = new Regex(pattern);
-            return regex.IsMatch(s);
-        }
-
-        public void soloNumeros(KeyPressEventArgs e)
-        {
-            if (Char.IsDigit(e.KeyChar))
+            if (Char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsDigit(e.KeyChar))
             {
                 e.Handled = false;
             }
@@ -35,7 +30,7 @@ namespace PalcoNet.Validadores
             else
             {
                 e.Handled = true;
-                MessageBox.Show("Solo números");
+                MessageBox.Show("Solo letras y/o numeros");
             }
         }
     }
