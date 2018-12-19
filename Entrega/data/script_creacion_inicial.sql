@@ -1208,7 +1208,7 @@ return (SELECT top (@cantidad_top) c.id_compra AS compra_ID, c.precio_total AS [
                 INNER JOIN COMPUMUNDOHIPERMEGARED.Espectaculo e ON e.id_espectaculo = p.espectaculo_id
 				left outer join COMPUMUNDOHIPERMEGARED.Item_Factura itf on itf.compra_id = c.id_compra
 				WHERE empresa_ID = @empresa_id and itf.compra_id is null
-                GROUP BY c.fecha, e.empresa_id, c.precio_total, c.fecha, c.id_compra, p.fecha_espectaculo, e.descripcion, c.cantidad
+                GROUP BY c.fecha, e.empresa_id, c.precio_total, c.fecha, c.id_compra, p.fecha_espectaculo, e.descripcion, c.cantidad, p.porcentaje_comision
                 ORDER BY [Fecha compra] asc)
 go
 
