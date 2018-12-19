@@ -59,6 +59,7 @@ namespace PalcoNet.Comprar
             dateHasta.Value = Contexto.FechaActual;
             checkFecha.Checked = false;
             categorias = new List<Rubro>();
+            paginaActual.pageNumber = 1;
             ActualizarCantPaginas();
             ActualizarTabla();
         }

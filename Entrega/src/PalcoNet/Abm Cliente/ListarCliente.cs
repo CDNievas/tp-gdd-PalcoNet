@@ -14,6 +14,7 @@ namespace PalcoNet.Abm_Cliente
     public partial class ListarCliente : Form
     {
         private Pagina paginaActual;
+        private int countResult;
 
         public ListarCliente()
         {
@@ -31,6 +32,7 @@ namespace PalcoNet.Abm_Cliente
             paginaActual = new Pagina(1, 25);
             clientesDataGrid.MultiSelect = false;
             ActualizarTabla();
+            ActualizarCantPaginas();
         }
 
         private void btnClienteBaja_Click(object sender, EventArgs e)
@@ -62,29 +64,40 @@ namespace PalcoNet.Abm_Cliente
 
             this.clientesDataGrid.DataSource = bindingSource;
             this.clientesDataGrid.Columns["id"].Visible = false;
-            this.clientesDataGrid.AllowUserToAddRows = false;
-            foreach (DataGridViewColumn c in clientesDataGrid.Columns)
-            {
-                c.ReadOnly = true;
-            }
+            ActualizarTextPaginaActual();
+        }
+
+        private void ActualizarCantPaginas()
+        {
+            this.countResult = new Buscador().CantidadDeClientesAFiltrar(nombre: txtName.Text, apellido: txtApellido.Text,
+                dni: txtDocumento.Text, email: txtMail.Text);
+            this.txtUltimaPag.Text = paginaActual.LastPageNumer(countResult).ToString();
+        }
+
+        private void ActualizarTextPaginaActual()
+        {
+            txtPagActual.Text = paginaActual.pageNumber.ToString();
         }
 
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             TodosLosTextbox().ForEach(t => t.Text = "");
+            paginaActual.pageNumber = 1;
+            ActualizarCantPaginas();
             ActualizarTabla();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            ActualizarCantPaginas();
             paginaActual.pageNumber = 1;
             ActualizarTabla();
         }
 
         private void btnPagSig_Click(object sender, EventArgs e)
         {
-            if (clientesDataGrid.RowCount != 0)
+            if (paginaActual.TieneSiguiente(this.countResult))
             {
                 paginaActual.Next();
                 ActualizarTabla();
@@ -123,6 +136,19 @@ namespace PalcoNet.Abm_Cliente
             form.ShowDialog();
         }
 
+        private void btnPagUltima_Click(object sender, EventArgs e)
+        {
+            paginaActual.Last(countResult);
+            ActualizarTabla();
+        }
+
+        private void btnPagPrimera_Click(object sender, EventArgs e)
+        {
+            paginaActual.pageNumber = 1;
+            ActualizarTabla();
+        }
+
+        
        
 
         

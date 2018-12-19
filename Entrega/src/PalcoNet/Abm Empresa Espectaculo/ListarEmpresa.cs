@@ -47,7 +47,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         private void ListarEmpresa_Load(object sender, EventArgs e)
         {
-            paginaActual = new Pagina(1, 25);
+            paginaActual = new Pagina(1, 15);
             empresasDataGrid.MultiSelect = false;
             
             ActualizarTabla();
@@ -72,11 +72,14 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             TodosLosTextbox().ForEach(t => t.Text = "");
+            paginaActual.pageNumber = 1;
+            ActualizarCantPaginas();
             ActualizarTabla();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            ActualizarCantPaginas();
             paginaActual.pageNumber = 1;
             ActualizarTabla();
         }

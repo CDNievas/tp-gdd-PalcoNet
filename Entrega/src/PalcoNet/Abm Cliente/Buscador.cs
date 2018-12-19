@@ -16,7 +16,11 @@ namespace PalcoNet.Abm_Cliente
 
             var parametros = new List<QueryParameter>();
 
-            var dt = DataBase.GetInstance().TypedQuery(this.getBusquedaQuery(nombre, apellido, dni, email, pag, parametros), parametros.ToArray());
+            var sql = "select * " + this.getBusquedaQuery(nombre, apellido, dni, email, parametros)
+                + String.Format(" ORDER BY id_cliente OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY",
+                pag.FirstResultIndex(), pag.pageSize);
+
+            var dt = DataBase.GetInstance().TypedQuery(sql, parametros.ToArray());
 
             var lista = new List<Cliente>();
 
@@ -28,28 +32,37 @@ namespace PalcoNet.Abm_Cliente
             return lista;
         }
 
-        private String getBusquedaQuery(String nombre, String apellido, String dni, String email, Pagina pag, List<QueryParameter> parametros)
+        public int CantidadDeClientesAFiltrar(String nombre = null, String apellido = null, String dni = null, String email = null)
+        {
+            var parametros = new List<QueryParameter>();
+            var sql = "select count(*) as cantidad " + this.getBusquedaQuery(nombre, apellido, dni, email, parametros);
+            var dt = DataBase.GetInstance().TypedQuery(sql, parametros.ToArray());
+
+            return Convert.ToInt32(dt.Rows[0]["cantidad"]);
+        }
+
+        private String getBusquedaQuery(String nombre, String apellido, String dni, String email, List<QueryParameter> parametros)
         {
             var condiciones = new List<String>();
-            if (nombre != null && !nombre.Trim().Equals(""))
+            if (nombre != null && !String.IsNullOrWhiteSpace(nombre))
             {
                 var condicion = "nombre like @nombre";
                 condiciones.Add(condicion);
                 parametros.Add(new QueryParameter("nombre", SqlDbType.NVarChar, "%" + nombre + "%"));
             }
-            if (apellido != null && !apellido.Trim().Equals(""))
+            if (apellido != null && !String.IsNullOrWhiteSpace(apellido))
             {
                 var condicion = "apellido like @apellido";
                 condiciones.Add(condicion);
                 parametros.Add(new QueryParameter("apellido", SqlDbType.NVarChar, "%" + apellido + "%"));
             }
-            if (dni != null && !dni.Trim().Equals(""))
+            if (dni != null && !String.IsNullOrWhiteSpace(dni))
             {
                 var condicion = "nro_documento = @documento";
                 condiciones.Add(condicion);
                 parametros.Add(new QueryParameter("documento", SqlDbType.NVarChar, dni));
             }
-            if (email != null && email.Trim().Equals(""))
+            if (email != null && !String.IsNullOrWhiteSpace(email))
             {
                 var condicion = "mail like @email";
                 condiciones.Add(condicion);
@@ -60,9 +73,7 @@ namespace PalcoNet.Abm_Cliente
             if (condiciones.Count != 0)
                 condicionWhere = "where " + condiciones.Aggregate((prod, next) => prod + " and " + next);
 
-            var sql = "select * from COMPUMUNDOHIPERMEGARED.Cliente " + condicionWhere
-                + String.Format(" ORDER BY id_cliente OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY",
-                pag.FirstResultIndex(), pag.pageSize);
+            var sql = " from COMPUMUNDOHIPERMEGARED.Cliente " + condicionWhere;
 
             return sql;
         }
