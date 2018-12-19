@@ -39,7 +39,10 @@ namespace PalcoNet.DataBasePackage
 
        public int LastPageNumer(int countResult)
        {
-           return (int)((countResult / pageSize) + 1);
+           var res =  (int)(countResult / pageSize);
+           if (countResult % pageSize != 0)
+               res++;
+           return Math.Max(1,res);
        }
 
        public void First()

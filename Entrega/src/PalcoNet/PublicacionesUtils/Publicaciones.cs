@@ -15,8 +15,27 @@ namespace PalcoNet.PublicacionesUtils
             return PublicacionesFromDataTable(dt);
         }
 
-        public static List<Publicacion> PublicacionesByEmpresaId(long idEmpresa, Pagina pag, Boolean soloBorradores, String nombre = null) {
+        public static List<Publicacion> PublicacionesByEmpresaId(long idEmpresa, Boolean soloBorradores, Pagina pag, String nombre = null) {
             List<QueryParameter> parametros = new List<QueryParameter>();
+            String sql = "select * " + GetPublicacionesEmpresaQuery(idEmpresa:idEmpresa,
+                soloBorradores: soloBorradores, nombre:nombre, parametros:parametros)
+            + " ORDER BY case when estado like 'B' then 0 else 1 end, fecha_espectaculo desc "
+            + String.Format( " OFFSET {1} ROWS FETCH NEXT {2} ROWS ONLY ", idEmpresa, pag.FirstResultIndex(), pag.pageSize);
+            var dt = DataBase.GetInstance().TypedQuery(sql, parametros.ToArray());
+            return PublicacionesFromDataTable(dt);
+        }
+
+        public static int CantidadPublicacionesByEmpresaId(long idEmpresa, Boolean soloBorradores, String nombre = null)
+        {
+            var parametros = new List<QueryParameter>();
+            var sql = "select count (*) as cantidad " + GetPublicacionesEmpresaQuery(idEmpresa: idEmpresa,
+                soloBorradores: soloBorradores, nombre: nombre, parametros: parametros);
+            var dt = DataBase.GetInstance().TypedQuery(sql, parametros.ToArray());
+            return Convert.ToInt32(dt.Rows[0]["cantidad"]);
+        }
+
+        public static String GetPublicacionesEmpresaQuery(long idEmpresa, Boolean soloBorradores, List<QueryParameter> parametros, String nombre = null)
+        {
             String where = "";
             if (soloBorradores)
                 where += "and estado = '"+ new Borrador().Codigo() +"'";
@@ -26,13 +45,8 @@ namespace PalcoNet.PublicacionesUtils
                 parametros.Add(new QueryParameter("paramNombre", SqlDbType.NVarChar, "%" + nombre + "%"));
             }
 
-            String sql = String.Format( @"select * from COMPUMUNDOHIPERMEGARED.PublicacionesView where id_empresa = {0}
-                                        {3}
-                                        ORDER BY case when estado like 'B' then 0 else 1 end, fecha_espectaculo desc
-                                        OFFSET {1} ROWS FETCH NEXT {2} ROWS ONLY",
-                                        idEmpresa, pag.FirstResultIndex(), pag.pageSize, where);
-            var dt = DataBase.GetInstance().TypedQuery(sql, parametros.ToArray());
-            return PublicacionesFromDataTable(dt);
+            return String.Format(@" from COMPUMUNDOHIPERMEGARED.PublicacionesView where id_empresa = {0}
+                    {1} ", idEmpresa, where);
         }
 
         public static List<Publicacion> FiltrarPublicacionesAComprar(String descripcion = null, RangoFechas rango = null, List<Rubro> rubros = null, Pagina pag = null)

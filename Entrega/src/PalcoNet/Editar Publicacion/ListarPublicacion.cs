@@ -17,6 +17,7 @@ namespace PalcoNet.Editar_Publicacion
     {
         private Pagina PaginaActual;
         private Empresa empresa;
+        private int countResult;
 
         public ListarPublicacion(Empresa empresa)
         {
@@ -37,23 +38,41 @@ namespace PalcoNet.Editar_Publicacion
         private void listarPublicacion_Load(object sender, EventArgs e)
         {
             ActualizarTabla();
+            ActualizarCantPaginas();
         }
 
         private void ActualizarTabla()
         {
-            var lista = new BindingList<Publicacion>(Publicaciones.PublicacionesByEmpresaId(empresa.id, PaginaActual, SoloBorradores, txtNombre.Text));
+            var lista = new BindingList<Publicacion>(
+                Publicaciones.PublicacionesByEmpresaId(idEmpresa:empresa.id, pag:PaginaActual,
+                soloBorradores:SoloBorradores, nombre:txtNombre.Text));
             var bindingSource = new BindingSource(lista, null);
 
             publicacionesDataGrid.DataSource = bindingSource;
             publicacionesDataGrid.Columns["id"].Visible = false;
+            ActualizarTextPaginaActual();
+        }
+
+        private void ActualizarTextPaginaActual()
+        {
+            this.txtPagActual.Text = this.PaginaActual.pageNumber.ToString();
+        }
+
+        private void ActualizarCantPaginas()
+        {
+            this.countResult = Publicaciones
+                .CantidadPublicacionesByEmpresaId(idEmpresa: empresa.id,
+                soloBorradores: SoloBorradores, nombre: txtNombre.Text);
+            this.txtUltimaPag.Text = this.PaginaActual.LastPageNumer(countResult).ToString();
         }
 
         private void btnPagSig_Click(object sender, EventArgs e)
         {
-            PaginaActual.Next();
-            ActualizarTabla();
-            if (publicacionesDataGrid.RowCount == 0)
-                btnPagAnt_Click(null, null);
+            if (PaginaActual.TieneSiguiente(this.countResult))
+            {
+                PaginaActual.Next();
+                ActualizarTabla();
+            }
         }
 
         private void btnPagAnt_Click(object sender, EventArgs e)
@@ -65,6 +84,9 @@ namespace PalcoNet.Editar_Publicacion
         private void btnPublicacionLimpiar_Click(object sender, EventArgs e)
         {
             txtNombre.Text = "";
+            PaginaActual.pageNumber = 1;
+            ActualizarCantPaginas();
+            ActualizarTabla();
         }
 
         private void btnMod_Click(object sender, EventArgs e)
@@ -96,11 +118,26 @@ namespace PalcoNet.Editar_Publicacion
         private void checkBorrador_CheckedChanged(object sender, EventArgs e)
         {
             PaginaActual.pageNumber = 1;
+            ActualizarCantPaginas();
             ActualizarTabla();
         }
 
         private void btnPublicacionBuscar_Click(object sender, EventArgs e)
         {
+            ActualizarCantPaginas();
+            PaginaActual.pageNumber = 1;
+            ActualizarTabla();
+        }
+
+        private void btnPagUltima_Click(object sender, EventArgs e)
+        {
+            PaginaActual.Last(countResult);
+            ActualizarTabla();
+        }
+
+        private void btnPagPrimera_Click(object sender, EventArgs e)
+        {
+            PaginaActual.pageNumber = 1;
             ActualizarTabla();
         }
 

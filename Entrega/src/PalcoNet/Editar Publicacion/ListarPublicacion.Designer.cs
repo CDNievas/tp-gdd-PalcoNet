@@ -45,6 +45,12 @@
             this.btnPagAnt = new System.Windows.Forms.Button();
             this.btnPagSig = new System.Windows.Forms.Button();
             this.checkBorrador = new System.Windows.Forms.CheckBox();
+            this.btnPagPrimera = new System.Windows.Forms.Button();
+            this.btnPagUltima = new System.Windows.Forms.Button();
+            this.txtUltimaPag = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtPagActual = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionBindingSource)).BeginInit();
@@ -161,7 +167,7 @@
             // 
             // btnPagAnt
             // 
-            this.btnPagAnt.Location = new System.Drawing.Point(115, 521);
+            this.btnPagAnt.Location = new System.Drawing.Point(160, 520);
             this.btnPagAnt.Name = "btnPagAnt";
             this.btnPagAnt.Size = new System.Drawing.Size(108, 23);
             this.btnPagAnt.TabIndex = 52;
@@ -171,7 +177,7 @@
             // 
             // btnPagSig
             // 
-            this.btnPagSig.Location = new System.Drawing.Point(536, 520);
+            this.btnPagSig.Location = new System.Drawing.Point(559, 520);
             this.btnPagSig.Name = "btnPagSig";
             this.btnPagSig.Size = new System.Drawing.Size(105, 23);
             this.btnPagSig.TabIndex = 53;
@@ -190,11 +196,73 @@
             this.checkBorrador.UseVisualStyleBackColor = true;
             this.checkBorrador.CheckedChanged += new System.EventHandler(this.checkBorrador_CheckedChanged);
             // 
+            // btnPagPrimera
+            // 
+            this.btnPagPrimera.Location = new System.Drawing.Point(41, 520);
+            this.btnPagPrimera.Name = "btnPagPrimera";
+            this.btnPagPrimera.Size = new System.Drawing.Size(75, 23);
+            this.btnPagPrimera.TabIndex = 55;
+            this.btnPagPrimera.Text = "Primera";
+            this.btnPagPrimera.UseVisualStyleBackColor = true;
+            this.btnPagPrimera.Click += new System.EventHandler(this.btnPagPrimera_Click);
+            // 
+            // btnPagUltima
+            // 
+            this.btnPagUltima.Location = new System.Drawing.Point(704, 520);
+            this.btnPagUltima.Name = "btnPagUltima";
+            this.btnPagUltima.Size = new System.Drawing.Size(75, 23);
+            this.btnPagUltima.TabIndex = 56;
+            this.btnPagUltima.Text = "Ultima";
+            this.btnPagUltima.UseVisualStyleBackColor = true;
+            this.btnPagUltima.Click += new System.EventHandler(this.btnPagUltima_Click);
+            // 
+            // txtUltimaPag
+            // 
+            this.txtUltimaPag.AutoSize = true;
+            this.txtUltimaPag.Location = new System.Drawing.Point(438, 524);
+            this.txtUltimaPag.Name = "txtUltimaPag";
+            this.txtUltimaPag.Size = new System.Drawing.Size(17, 13);
+            this.txtUltimaPag.TabIndex = 60;
+            this.txtUltimaPag.Text = "yy";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(412, 525);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(19, 13);
+            this.label8.TabIndex = 59;
+            this.label8.Text = "de";
+            // 
+            // txtPagActual
+            // 
+            this.txtPagActual.AutoSize = true;
+            this.txtPagActual.Location = new System.Drawing.Point(388, 524);
+            this.txtPagActual.Name = "txtPagActual";
+            this.txtPagActual.Size = new System.Drawing.Size(17, 13);
+            this.txtPagActual.TabIndex = 58;
+            this.txtPagActual.Text = "xx";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(341, 525);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 57;
+            this.label5.Text = "Página";
+            // 
             // ListarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(896, 555);
+            this.Controls.Add(this.txtUltimaPag);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtPagActual);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btnPagUltima);
+            this.Controls.Add(this.btnPagPrimera);
             this.Controls.Add(this.checkBorrador);
             this.Controls.Add(this.btnPagSig);
             this.Controls.Add(this.btnPagAnt);
@@ -237,5 +305,11 @@
         private System.Windows.Forms.Button btnPagAnt;
         private System.Windows.Forms.Button btnPagSig;
         private System.Windows.Forms.CheckBox checkBorrador;
+        private System.Windows.Forms.Button btnPagPrimera;
+        private System.Windows.Forms.Button btnPagUltima;
+        private System.Windows.Forms.Label txtUltimaPag;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label txtPagActual;
+        private System.Windows.Forms.Label label5;
     }
 }
