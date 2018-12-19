@@ -49,6 +49,12 @@
             this.empresasDataGrid = new System.Windows.Forms.DataGridView();
             this.btnPagAnt = new System.Windows.Forms.Button();
             this.btnPagSig = new System.Windows.Forms.Button();
+            this.txtUltimaPag = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtPagActual = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnPagUltima = new System.Windows.Forms.Button();
+            this.btnPagPrimera = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empresasDataGrid)).BeginInit();
@@ -203,15 +209,18 @@
             // 
             // empresasDataGrid
             // 
+            this.empresasDataGrid.AllowUserToAddRows = false;
+            this.empresasDataGrid.AllowUserToDeleteRows = false;
             this.empresasDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.empresasDataGrid.Location = new System.Drawing.Point(35, 144);
             this.empresasDataGrid.Name = "empresasDataGrid";
+            this.empresasDataGrid.ReadOnly = true;
             this.empresasDataGrid.Size = new System.Drawing.Size(639, 298);
             this.empresasDataGrid.TabIndex = 26;
             // 
             // btnPagAnt
             // 
-            this.btnPagAnt.Location = new System.Drawing.Point(92, 467);
+            this.btnPagAnt.Location = new System.Drawing.Point(140, 462);
             this.btnPagAnt.Name = "btnPagAnt";
             this.btnPagAnt.Size = new System.Drawing.Size(98, 23);
             this.btnPagAnt.TabIndex = 27;
@@ -221,7 +230,7 @@
             // 
             // btnPagSig
             // 
-            this.btnPagSig.Location = new System.Drawing.Point(541, 467);
+            this.btnPagSig.Location = new System.Drawing.Point(451, 462);
             this.btnPagSig.Name = "btnPagSig";
             this.btnPagSig.Size = new System.Drawing.Size(103, 23);
             this.btnPagSig.TabIndex = 28;
@@ -229,11 +238,73 @@
             this.btnPagSig.UseVisualStyleBackColor = true;
             this.btnPagSig.Click += new System.EventHandler(this.btnPagSig_Click);
             // 
+            // txtUltimaPag
+            // 
+            this.txtUltimaPag.AutoSize = true;
+            this.txtUltimaPag.Location = new System.Drawing.Point(381, 467);
+            this.txtUltimaPag.Name = "txtUltimaPag";
+            this.txtUltimaPag.Size = new System.Drawing.Size(17, 13);
+            this.txtUltimaPag.TabIndex = 48;
+            this.txtUltimaPag.Text = "yy";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(355, 468);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(19, 13);
+            this.label8.TabIndex = 47;
+            this.label8.Text = "de";
+            // 
+            // txtPagActual
+            // 
+            this.txtPagActual.AutoSize = true;
+            this.txtPagActual.Location = new System.Drawing.Point(331, 467);
+            this.txtPagActual.Name = "txtPagActual";
+            this.txtPagActual.Size = new System.Drawing.Size(17, 13);
+            this.txtPagActual.TabIndex = 46;
+            this.txtPagActual.Text = "xx";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(284, 468);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 45;
+            this.label5.Text = "Página";
+            // 
+            // btnPagUltima
+            // 
+            this.btnPagUltima.Location = new System.Drawing.Point(608, 463);
+            this.btnPagUltima.Name = "btnPagUltima";
+            this.btnPagUltima.Size = new System.Drawing.Size(75, 23);
+            this.btnPagUltima.TabIndex = 50;
+            this.btnPagUltima.Text = "Ultima";
+            this.btnPagUltima.UseVisualStyleBackColor = true;
+            this.btnPagUltima.Click += new System.EventHandler(this.btnPagUltima_Click);
+            // 
+            // btnPagPrimera
+            // 
+            this.btnPagPrimera.Location = new System.Drawing.Point(35, 462);
+            this.btnPagPrimera.Name = "btnPagPrimera";
+            this.btnPagPrimera.Size = new System.Drawing.Size(75, 23);
+            this.btnPagPrimera.TabIndex = 49;
+            this.btnPagPrimera.Text = "Primera";
+            this.btnPagPrimera.UseVisualStyleBackColor = true;
+            this.btnPagPrimera.Click += new System.EventHandler(this.btnPagPrimera_Click);
+            // 
             // ListarEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 511);
+            this.Controls.Add(this.btnPagUltima);
+            this.Controls.Add(this.btnPagPrimera);
+            this.Controls.Add(this.txtUltimaPag);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtPagActual);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnPagSig);
             this.Controls.Add(this.btnPagAnt);
             this.Controls.Add(this.empresasDataGrid);
@@ -284,5 +355,11 @@
         private System.Windows.Forms.DataGridView empresasDataGrid;
         private System.Windows.Forms.Button btnPagAnt;
         private System.Windows.Forms.Button btnPagSig;
+        private System.Windows.Forms.Label txtUltimaPag;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label txtPagActual;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnPagUltima;
+        private System.Windows.Forms.Button btnPagPrimera;
     }
 }

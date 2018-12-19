@@ -14,6 +14,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
     public partial class ListarEmpresa : Form
     {
         private Pagina paginaActual;
+        private int countResult;
 
         private List<TextBox> TodosLosTextbox()
         {
@@ -29,18 +30,19 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         {
             var _lista = new BuscadorEmpresas()
                 .filtrarEmpresas(razonSocial: txtRazonSocial.Text, cuit: txtCuit.Text, email: txtMail.Text, pag: paginaActual);
-            _lista.ForEach(e => Console.WriteLine(e));
             var lista = new BindingList<Empresa>(_lista);
 
             var bindingSource = new BindingSource(lista, null);
 
             this.empresasDataGrid.DataSource = bindingSource;
-            this.empresasDataGrid.AllowUserToAddRows = false;
-            foreach (DataGridViewColumn c in empresasDataGrid.Columns)
-            {
-                c.ReadOnly = true;
-            }
             this.empresasDataGrid.Columns["id"].Visible = false;
+            ActualizarTextPaginaActual();
+        }
+
+        private void ActualizarCantPaginas()
+        {
+            this.countResult = new BuscadorEmpresas().CantidadDeEmpresasAFiltrar(razonSocial: txtRazonSocial.Text, cuit: txtCuit.Text, email: txtMail.Text);
+            this.txtUltimaPag.Text = paginaActual.LastPageNumer(countResult).ToString();
         }
 
         private void ListarEmpresa_Load(object sender, EventArgs e)
@@ -49,6 +51,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             empresasDataGrid.MultiSelect = false;
             
             ActualizarTabla();
+            ActualizarCantPaginas();
         }
 
         private void btnPagAnt_Click(object sender, EventArgs e)
@@ -59,11 +62,11 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         private void btnPagSig_Click(object sender, EventArgs e)
         {
-           paginaActual.Next();
-            ActualizarTabla();
-            Console.WriteLine("Hay " + empresasDataGrid.RowCount + " empresas");
-            if (empresasDataGrid.RowCount == 0)
-                btnPagAnt_Click(null, null);
+            if (paginaActual.TieneSiguiente(this.countResult))
+            {
+                paginaActual.Next();
+                ActualizarTabla();
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -109,6 +112,23 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             {
                 MessageBox.Show("Ha ocurrido un error: " + ex.Message);
             }
+        }
+
+        private void btnPagPrimera_Click(object sender, EventArgs e)
+        {
+            paginaActual.pageNumber = 1;
+            ActualizarTabla();
+        }
+
+        private void btnPagUltima_Click(object sender, EventArgs e)
+        {
+            paginaActual.Last(countResult);
+            ActualizarTabla();
+        }
+
+        private void ActualizarTextPaginaActual()
+        {
+            txtPagActual.Text = paginaActual.pageNumber.ToString();
         }
     }
 }
