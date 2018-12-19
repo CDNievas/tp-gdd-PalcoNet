@@ -547,11 +547,13 @@ GO
 */
 
 
-create procedure COMPUMUNDOHIPERMEGARED.actualizarRol(@rol_id smallint, @listaFuncionalidad FuncionalidadList readonly)
+create procedure COMPUMUNDOHIPERMEGARED.actualizarRol(@nombre_rol nvarchar(50), @rol_id smallint, @listaFuncionalidad FuncionalidadList readonly)
 as
 begin
 	delete from COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad
 	where rol_id = @rol_id
+
+	update COMPUMUNDOHIPERMEGARED.Rol set nombre = @nombre_rol where id_rol = @rol_id
 
 	insert into COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad(funcionalidad_id, rol_id)
 	select l.funcionalidad_id, @rol_id from @listaFuncionalidad l

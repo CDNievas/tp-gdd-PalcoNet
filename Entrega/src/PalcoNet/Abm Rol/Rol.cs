@@ -99,6 +99,7 @@ namespace PalcoNet.Abm_Rol
         public void Update() {
             var funcionalidadesTable = GetFuncionalidadesTable();
             DataBase.GetInstance().Procedure("actualizarRol",
+                new ParametroIn("nombre_rol", this.nombre),
                 new ParametroIn("rol_id", this.id),
                 new ParametroIn("listaFuncionalidad", funcionalidadesTable));
         }

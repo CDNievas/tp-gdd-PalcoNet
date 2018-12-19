@@ -44,6 +44,7 @@ namespace PalcoNet.Abm_Rol
         private void btnMod_Click(object sender, EventArgs e)
         {
             var rol = (Rol)rolesDataGrid.CurrentRow.DataBoundItem;
+            rol.nombre = txtNombre.Text;
             var ignored = new AltaRolForm(new ModificarRol(rol)).ShowDialog();
             ActualizarRoles();
         }
