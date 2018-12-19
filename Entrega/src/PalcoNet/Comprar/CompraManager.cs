@@ -26,6 +26,7 @@ namespace PalcoNet.Comprar
                 var parametroSalida = new ParametroOut("compra_id", SqlDbType.Int);
                 DataBase.GetInstance()
                     .Procedure("ComprarUbicaciones",
+                    new ParametroIn("publicacion_id", publicacion.id),
                     new ParametroIn("ubicaciones_table", ubicacionesDt),
                     new ParametroIn("cliente_id", cliente.id),
                     new ParametroIn("tarjeta_id", tarjeta.id),

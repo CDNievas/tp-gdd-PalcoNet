@@ -123,7 +123,10 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Publicacion(
 	fecha_espectaculo datetime,
 	estado char(1) not null check(estado in('B', 'P', 'F')),
 	porcentaje_comision numeric(5,2),
-	grado_id int CONSTRAINT FK_PUBLICACION_GRADO references COMPUMUNDOHIPERMEGARED.Grado(id_grado)
+	cant_ubicaciones_total int,
+	cant_ubicaciones_vendidas int,
+	grado_id int CONSTRAINT FK_PUBLICACION_GRADO references COMPUMUNDOHIPERMEGARED.Grado(id_grado),
+	CONSTRAINT CHECK_UBICACIONES_VENDIDAS check(cant_ubicaciones_total >= cant_ubicaciones_vendidas)
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.TipoUbicacion( -- MIGRADO
@@ -541,6 +544,37 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Puntos(cant_puntos, fecha_creacion, fecha_ven
 PRINT 'Migre Puntos'
 GO
 
+declare c1 cursor for select p.id_publicacion, sum(cast(ocupado as int)) as ocupadas, count(*) as totales
+from COMPUMUNDOHIPERMEGARED.Publicacion p
+inner join COMPUMUNDOHIPERMEGARED.Ubicacion u on u.publicacion_id = p.id_publicacion
+group by p.id_publicacion
+
+declare @id_publicacion bigint, @ocupadas int, @totales int
+open c1
+fetch next from c1 into @id_publicacion, @ocupadas, @totales
+while @@FETCH_STATUS = 0
+begin
+	if @totales = @ocupadas
+	begin
+		update COMPUMUNDOHIPERMEGARED.Publicacion
+		set cant_ubicaciones_total = @totales, cant_ubicaciones_vendidas = @ocupadas, estado = 'F'
+		where id_publicacion = @id_publicacion
+	end
+	else
+	begin
+		update COMPUMUNDOHIPERMEGARED.Publicacion
+		set cant_ubicaciones_total = @totales, cant_ubicaciones_vendidas = @ocupadas
+		where id_publicacion = @id_publicacion
+	end
+
+	fetch next from c1 into @id_publicacion, @ocupadas, @totales
+end
+close c1
+deallocate c1
+PRINT 'Actualizadas ubicaciones de publicaciones'
+go
+
+
 /*
 	CREANDO CONFIGURACIONES INICIALES
 */
@@ -826,6 +860,11 @@ begin
 	end
 	close c1
 	deallocate c1
+
+	update COMPUMUNDOHIPERMEGARED.Publicacion
+	set cant_ubicaciones_total = (select count(id_ubicacion) from COMPUMUNDOHIPERMEGARED.Ubicacion where publicacion_id = @id_publicacion), cant_ubicaciones_vendidas = 0
+	where id_publicacion = @id_publicacion
+
 end
 go
 
@@ -988,6 +1027,7 @@ GO
 
 create procedure COMPUMUNDOHIPERMEGARED.ComprarUbicaciones(
 	@ubicaciones_table UbicacionTableType READONLY,
+	@publicacion_id bigint,
 	@cliente_id int,
 	@tarjeta_id int,
 	@fecha datetime,
@@ -1031,28 +1071,14 @@ begin
 	set ocupado = 1, compra_id = @compra_id
 	where id_ubicacion in (select ubicacion_id from @ubicaciones_table)
 	
-	declare c1 cursor for
-	select distinct(u.publicacion_id)
-	from COMPUMUNDOHIPERMEGARED.Ubicacion u
-	where u.id_ubicacion in (select ubicacion_id from @ubicaciones_table)
+	-- Actualizando localidades restantes
+	update COMPUMUNDOHIPERMEGARED.Publicacion
+	set cant_ubicaciones_vendidas = cant_ubicaciones_vendidas + @cantidad
+	where id_publicacion = @publicacion_id
 	
-	declare @id_publicacion bigint
-	
-	open c1
-	fetch next from c1 into @id_publicacion
-
-	while @@FETCH_STATUS = 0
-	begin
-		if COMPUMUNDOHIPERMEGARED.StockDePublicacion(@id_publicacion) = 0
-		begin
-			update COMPUMUNDOHIPERMEGARED.Publicacion
-			set estado = 'F', fecha_vencimiento = @fecha
-			where id_publicacion = @id_publicacion
-		end
-		fetch next from c1 into @id_publicacion
-	end
-	close c1
-	deallocate c1
+	update COMPUMUNDOHIPERMEGARED.Publicacion
+	set estado = 'F'
+	where id_publicacion = @publicacion_id and cant_ubicaciones_vendidas = cant_ubicaciones_total
 
 	commit tran
 	return
@@ -1080,7 +1106,7 @@ create function COMPUMUNDOHIPERMEGARED.EmpresasConMenosVentas(@anio int, @mes in
 returns table
 as
 	return (
-		select top 5 COUNT(u.id_ubicacion) as [Cantidad no vendida],
+		select top 5 sum(p.cant_ubicaciones_total - p.cant_ubicaciones_vendidas) as [Cantidad no vendida],
 		emp.razon_social as [Razón social],
 		emp.cuit as [CUIT],
 		emp.mail as [E-mail],
@@ -1092,14 +1118,13 @@ as
 		on p.espectaculo_id = esp.id_espectaculo
 		inner join COMPUMUNDOHIPERMEGARED.Grado g
 		on g.id_grado = p.grado_id
-		inner join COMPUMUNDOHIPERMEGARED.Ubicacion u
-		on u.publicacion_id = p.id_publicacion and u.ocupado = 0
 		where YEAR(p.fecha_espectaculo) = @anio
 		and MONTH(p.fecha_espectaculo) = @mes
 		and p.grado_id = @grado_id
 		group by emp.id_empresa, emp.razon_social, emp.cuit, emp.mail, emp.telefono,
 		p.id_publicacion, p.fecha_espectaculo, g.comision
-		order by COUNT(u.id_ubicacion) desc, p.fecha_espectaculo, g.comision desc
+		order by sum(p.cant_ubicaciones_total - p.cant_ubicaciones_vendidas) desc,
+		p.fecha_espectaculo, g.comision desc
 		)
 GO
 
@@ -1177,7 +1202,7 @@ returns table
 as
 return (SELECT top (@cantidad_top) c.id_compra AS compra_ID, c.precio_total AS [Precio total], c.cantidad as [Cantidad],
                 c.fecha AS [Fecha compra], e.empresa_id AS empresa_ID, e.descripcion as [Descripción], p.fecha_espectaculo as [Fecha Espectáculo],
-                SUM(CAST ((c.precio_total*p.porcentaje_comision/100.0) AS decimal(6,2))) AS [Comisión a cobrar]
+                CAST ((c.precio_total*p.porcentaje_comision/100.0) AS decimal(6,2)) AS [Comisión a cobrar]
                 FROM COMPUMUNDOHIPERMEGARED.Compra c INNER JOIN COMPUMUNDOHIPERMEGARED.Ubicacion u ON u.compra_id = c.id_compra
                 INNER JOIN COMPUMUNDOHIPERMEGARED.Publicacion p ON p.id_publicacion = u.publicacion_id
                 INNER JOIN COMPUMUNDOHIPERMEGARED.Espectaculo e ON e.id_espectaculo = p.espectaculo_id
@@ -1237,14 +1262,13 @@ create trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
 on COMPUMUNDOHIPERMEGARED.Publicacion
 after update
 as
-	if exists ( select * from inserted i join deleted d on i.id_publicacion = d.id_publicacion
+	if exists ( select 1 from inserted i join deleted d on i.id_publicacion = d.id_publicacion
 				where (d.estado like 'P' and i.estado like 'B')
 				or (d.estado like 'F' and i.estado not like 'F'))
 	begin
 		raiserror('Transición de estados no válida', 16, 1)
 		rollback transaction
 	end
-
 go
 
 insert into COMPUMUNDOHIPERMEGARED.Rubro(descripcion)
