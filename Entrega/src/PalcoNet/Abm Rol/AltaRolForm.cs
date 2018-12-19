@@ -87,7 +87,7 @@ namespace PalcoNet.Abm_Rol
             }
         }
 
-        internal void LlenateCon(Rol rol)
+        public void LlenateCon(Rol rol)
         {
             txtNombre.Text = rol.nombre;
 

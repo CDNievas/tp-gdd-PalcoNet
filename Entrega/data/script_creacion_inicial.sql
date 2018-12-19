@@ -30,8 +30,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Rol( -- MIGRADO
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Rol_Usuario( -- MIGRADO
 	id_rol_usuario int IDENTITY(1,1) PRIMARY KEY,
 	usuario_id int CONSTRAINT FK_ROLUSUARIO_USUARIO REFERENCES COMPUMUNDOHIPERMEGARED.Usuario(id_usuario),
-	rol_id int CONSTRAINT FK_ROLUSUARIO_ROL REFERENCES COMPUMUNDOHIPERMEGARED.Rol(id_rol),
-	eliminado bit DEFAULT 0	
+	rol_id int CONSTRAINT FK_ROLUSUARIO_ROL REFERENCES COMPUMUNDOHIPERMEGARED.Rol(id_rol)
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Rol_Funcionalidad( -- MIGRADO
@@ -159,7 +158,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Factura( -- MIGRADO
 	numero numeric(18,0),
 	fecha datetime,
 	total numeric(18,2),
-	forma_pago varchar(255),
+	forma_pago nvarchar(255),
 	empresa_id int CONSTRAINT FK_FACTURA_EMPRESA references COMPUMUNDOHIPERMEGARED.Empresa
 )
 
@@ -1193,8 +1192,8 @@ as
 	declare @numero_factura numeric(18,0) = (select MAX(f.numero) + 1 from COMPUMUNDOHIPERMEGARED.Factura f)
 
 	begin tran
-	insert into COMPUMUNDOHIPERMEGARED.Factura(numero, fecha, empresa_id)
-	values (@numero_factura, @fecha_actual, @empresa_id)
+	insert into COMPUMUNDOHIPERMEGARED.Factura(numero, fecha, empresa_id, forma_pago)
+	values (@numero_factura, @fecha_actual, @empresa_id, 'Efectivo')
 
 	declare @id_factura int = @@IDENTITY
 
@@ -1224,8 +1223,14 @@ declare @idRol smallint
 
 exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'Administrador General', @tablaFunciones, @id_generado = @idRol output 
 
-exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario 'admin', 'w23', @idRol
+exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario 'admin', 'w23e', @idRol
 PRINT 'Administrador general creado'
+go
+
+declare @id_rol smallint
+select @id_rol = id_rol from COMPUMUNDOHIPERMEGARED.Rol where nombre like 'ADMINISTRADOR'
+exec COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario 'administrador', 'administrador', @id_rol
+PRINT 'Administrador estándar creado'
 go
 
 create trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
