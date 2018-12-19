@@ -84,7 +84,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Cliente( -- MIGRADO
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Rubro( -- MIGRADO
 	id_rubro int IDENTITY(1,1) PRIMARY KEY,
-	descripcion nvarchar(255) NOT NULL
+	descripcion nvarchar(255) UNIQUE NOT NULL
 )
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Grado( -- MIGRADO
@@ -223,8 +223,8 @@ DECLARE @fecha_creacion datetime = GETUTCDATE()
 INSERT INTO COMPUMUNDOHIPERMEGARED.Cliente (tipo_documento, nro_documento, apellido, nombre, fecha_nacimiento, fecha_creacion, mail, dom_calle, num_calle, piso, depto, cod_postal)
 	SELECT DISTINCT 'D', m.Cli_Dni, m.Cli_Apeliido, m.Cli_Nombre, m.Cli_Fecha_Nac, @fecha_creacion, m.Cli_Mail, m.Cli_Dom_Calle, m.Cli_Nro_Calle, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal
 		FROM gd_esquema.Maestra m
+		WHERE m.Cli_Dni is not null
 		ORDER BY m.Cli_Dni
-		OFFSET 1 ROWS
 PRINT 'Migre Clientes'
 GO
 
@@ -232,6 +232,7 @@ DECLARE @fecha_creacion datetime = GETUTCDATE()
 INSERT INTO COMPUMUNDOHIPERMEGARED.Empresa (cuit, razon_social, mail, dom_calle, nro_calle, piso, depto, cod_postal, fecha_creacion)
 	SELECT DISTINCT m.Espec_Empresa_Cuit, m.Espec_Empresa_Razon_Social, m.Espec_Empresa_Mail, m.Espec_Empresa_Dom_Calle, m.Espec_Empresa_Nro_Calle, m.Espec_Empresa_Piso, m.Espec_Empresa_Depto, m.Espec_Empresa_Cod_Postal, @fecha_creacion
 		FROM gd_esquema.Maestra m
+		where m.Espec_Empresa_Cuit is not null
 		ORDER BY m.Espec_Empresa_Cuit
 PRINT 'Migre Empresas'
 GO
@@ -1179,7 +1180,8 @@ return (SELECT top (@cantidad_top) c.id_compra AS compra_ID, c.precio_total AS [
                 FROM COMPUMUNDOHIPERMEGARED.Compra c INNER JOIN COMPUMUNDOHIPERMEGARED.Ubicacion u ON u.compra_id = c.id_compra
                 INNER JOIN COMPUMUNDOHIPERMEGARED.Publicacion p ON p.id_publicacion = u.publicacion_id
                 INNER JOIN COMPUMUNDOHIPERMEGARED.Espectaculo e ON e.id_espectaculo = p.espectaculo_id
-				WHERE empresa_ID = @cantidad_top
+				left outer join COMPUMUNDOHIPERMEGARED.Item_Factura itf on itf.compra_id = c.id_compra
+				WHERE empresa_ID = @empresa_id and itf.compra_id is null
                 GROUP BY c.fecha, e.empresa_id, c.precio_total, c.fecha, c.id_compra, p.fecha_espectaculo, e.descripcion, c.cantidad
                 ORDER BY [Fecha compra] asc)
 go
