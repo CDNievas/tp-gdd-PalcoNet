@@ -35,7 +35,7 @@ namespace PalcoNet.Validadores
             else
             {
                 e.Handled = true;
-                MessageBox.Show("Solo números");
+                //MessageBox.Show("Solo números");
             }
         }
     }

@@ -150,26 +150,50 @@ namespace PalcoNet.Abm_Cliente
 
         private void ValidarInputs()
         {
+            String msg = ""; 
+
             foreach (TextBox t in TodosLosTextbox())
             {
                 if(!t.Equals(txtPiso) & !t.Equals(txtClienteDpto))
                     if (t.Text.Trim().Equals(""))
-                        throw new UserInputException("Debe completar todos los campos");
+                        msg += "Debe completar todos los campos. \n";
             }
-            if (!txtPiso.Text.Trim().Equals("") && new ValidadorNumerico().IsInvalid(txtPiso.Text))
-                throw new UserInputException("Piso inválido");
-            if (new ValidadorEmail().IsInvalid(this.txtClienteEmail.Text))
-                throw new UserInputException("E-mail inválido");
-            if(new ValidadorNumerico().IsInvalid(txtClienteTelefono.Text))
-                throw new UserInputException("El teléfono debe ser numérico");
-            if (new ValidadorNumerico().IsInvalid(txtClienteNro.Text))
-                throw new UserInputException("El numéro de calle debe ser numérico");
-            if (new ValidadorCuil().IsInvalid(txtClienteCuil.Text))
-                throw new UserInputException("Cuil inválido");
 
-            string dniFromCuil = txtClienteCuil.Text.Split(new[] { "-" }, StringSplitOptions.None)[1];
-            if (!dniFromCuil.Equals(txtClienteDoc.Text))
-                throw new UserInputException("El CUIL y el DNI no coinciden");
+            if(!new ValidadorSoloLetras().IsValid(txtClienteNombre.Text))
+                msg += "- Nombre debe contener solo letras. \n";
+            if (!new ValidadorSoloLetras().IsValid(txtClienteApellido.Text))
+                msg += "- Apellido debe contener solo letras. \n";
+            if (new ValidadorNumerico().IsInvalid(txtClienteDoc.Text))
+                msg += "- Documento debe contener solo numeros. \n";
+            if (!new ValidadorSoloLetrasAndNumeros().IsValid(txtClienteCalle.Text))
+                msg += "- Calle debe contener solo letras y números. \n";
+            if (!txtPiso.Text.Trim().Equals("") && new ValidadorNumerico().IsInvalid(txtPiso.Text))
+                msg += "- Piso debe ser numerico. \n";
+            if (new ValidadorEmail().IsInvalid(this.txtClienteEmail.Text))
+                msg += "- Email debe tener la forma ejemplo@mail.com \n";
+            if (new ValidadorNumerico().IsInvalid(txtClienteTelefono.Text))
+                msg += "- Telefono debe ser numerico. \n";
+            if (new ValidadorNumerico().IsInvalid(txtClienteNro.Text))
+                msg += "- Numero de calle debe ser numerico. \n";
+            if (new ValidadorCuil().IsInvalid(txtClienteCuil.Text))
+                msg += "- CUIL debe tener formato XX-XXXXXXXX-X. \n";
+
+            try
+            {
+                string dniFromCuil = txtClienteCuil.Text.Split(new[] { "-" }, StringSplitOptions.None)[1];
+                if (!dniFromCuil.Equals(txtClienteDoc.Text))
+                    msg += "- CUIL y DNI no coinciden. \n";
+            }
+            catch 
+            {
+                msg += "- CUIL debe tener formato XX-XXXXXXXX-X.\n";
+            }
+
+
+            if (!msg.Equals("")) {
+                throw new UserInputException(msg); 
+            }
+
         }
 
         private void AltaClienteForm_Load(object sender, EventArgs e)
@@ -199,6 +223,7 @@ namespace PalcoNet.Abm_Cliente
             this.ClienteActual = cliente;
         }
 
+        /*
         private void txtClienteNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
             validadorLetras.soloLetras(e);
@@ -247,6 +272,7 @@ namespace PalcoNet.Abm_Cliente
         private void txtClienteNro_KeyPress(object sender, KeyPressEventArgs e)
         {
             validadorNumerico.soloNumeros(e);
-        }
+        }*/
+
     }
 }

@@ -210,7 +210,7 @@
             this.txtClienteNombre.Name = "txtClienteNombre";
             this.txtClienteNombre.Size = new System.Drawing.Size(110, 20);
             this.txtClienteNombre.TabIndex = 15;
-            this.txtClienteNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClienteNombre_KeyPress);
+            
             // 
             // txtClienteApellido
             // 
@@ -219,7 +219,7 @@
             this.txtClienteApellido.Name = "txtClienteApellido";
             this.txtClienteApellido.Size = new System.Drawing.Size(110, 20);
             this.txtClienteApellido.TabIndex = 16;
-            this.txtClienteApellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClienteApellido_KeyPress);
+           
             // 
             // txtClienteDoc
             // 
@@ -228,7 +228,7 @@
             this.txtClienteDoc.Name = "txtClienteDoc";
             this.txtClienteDoc.Size = new System.Drawing.Size(110, 20);
             this.txtClienteDoc.TabIndex = 18;
-            this.txtClienteDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClienteDoc_KeyPress);
+ 
             // 
             // txtClienteCuil
             // 
@@ -253,7 +253,7 @@
             this.txtClienteTelefono.Name = "txtClienteTelefono";
             this.txtClienteTelefono.Size = new System.Drawing.Size(110, 20);
             this.txtClienteTelefono.TabIndex = 21;
-            this.txtClienteTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClienteTelefono_KeyPress);
+
             // 
             // txtClienteCalle
             // 
@@ -262,7 +262,7 @@
             this.txtClienteCalle.Name = "txtClienteCalle";
             this.txtClienteCalle.Size = new System.Drawing.Size(110, 20);
             this.txtClienteCalle.TabIndex = 22;
-            this.txtClienteCalle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClienteCalle_KeyPress);
+
             // 
             // txtClienteCP
             // 
@@ -271,7 +271,7 @@
             this.txtClienteCP.Name = "txtClienteCP";
             this.txtClienteCP.Size = new System.Drawing.Size(75, 20);
             this.txtClienteCP.TabIndex = 23;
-            this.txtClienteCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClienteCP_KeyPress);
+
             // 
             // txtClienteNro
             // 
@@ -280,7 +280,7 @@
             this.txtClienteNro.Name = "txtClienteNro";
             this.txtClienteNro.Size = new System.Drawing.Size(63, 20);
             this.txtClienteNro.TabIndex = 24;
-            this.txtClienteNro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClienteNro_KeyPress);
+
             // 
             // txtClienteDpto
             // 
@@ -297,7 +297,7 @@
             this.txtClienteLoc.Name = "txtClienteLoc";
             this.txtClienteLoc.Size = new System.Drawing.Size(83, 20);
             this.txtClienteLoc.TabIndex = 26;
-            this.txtClienteLoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClienteLoc_KeyPress);
+
             // 
             // btnClienteLimpiar
             // 
@@ -383,7 +383,7 @@
             this.txtCiudad.Name = "txtCiudad";
             this.txtCiudad.Size = new System.Drawing.Size(100, 20);
             this.txtCiudad.TabIndex = 35;
-            this.txtCiudad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCiudad_KeyPress);
+
             // 
             // labelPiso
             // 
@@ -400,7 +400,7 @@
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(34, 20);
             this.txtPiso.TabIndex = 37;
-            this.txtPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPiso_KeyPress);
+
             // 
             // comboTipoDoc
             // 

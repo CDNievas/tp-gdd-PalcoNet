@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Abm_Empresa_Espectaculo;
 using PalcoNet.DataBasePackage;
+using PalcoNet.Validadores;
 
 namespace PalcoNet.Generar_Rendicion_Comisiones
 {
@@ -47,6 +48,16 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
         private void btnBuscar_Click_1(object sender, EventArgs e)
         {
+            String msg = ""; 
+
+            if (new ValidadorEmail().IsInvalid(this.txtMail.Text))
+                msg += "- Email debe tener la forma ejemplo@mail.com \n";
+
+            if (!msg.Equals(""))
+            {
+                throw new UserInputException(msg);
+            }
+
             paginaActual.pageNumber = 1;
             ActualizarTabla();
         }

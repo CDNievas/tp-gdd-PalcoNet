@@ -52,7 +52,18 @@ namespace PalcoNet.Abm_Rol
 
         private void btnClienteGuardar_Click(object sender, EventArgs e)
         {
-            if (txtNombre.Text.Trim().Equals("") || funcionalidadesCheckList.CheckedItems.Count == 0)
+
+            String msg = "";
+            if (!new ValidadorSoloLetras().IsValid(txtNombre.Text) || txtNombre.Text.Trim().Equals(""))
+                msg += "- Nombre debe contener solo letras. \n";
+
+            if (!msg.Equals(""))
+            {
+                throw new UserInputException(msg);
+            }
+
+
+            if (funcionalidadesCheckList.CheckedItems.Count == 0)
             {
                 MessageBox.Show("Debe ingresar todos los datos", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -88,11 +99,6 @@ namespace PalcoNet.Abm_Rol
             }
             this.rol = rol;
                 
-        }
-
-        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            validador.soloLetras(e);
         }
 
     }

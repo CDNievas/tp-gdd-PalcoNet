@@ -77,13 +77,20 @@ namespace PalcoNet.Abm_Cliente
 
         private void ValidarInputs()
         {
-            
+            String msg = "";
+
+
             if (new ValidadorNumerico().IsInvalid(this.txtNroTarjeta.Text))
-                throw new UserInputException("Tarjeta inválida. Debe ser numerica");
+                msg += "- Tarjeta inválida. Debe ser numerica. \n";
             if (new ValidadorNumerico().IsInvalid(txtCCV.Text))
-                throw new UserInputException("El CCV debe ser numérico");
+                msg += "- El CCV debe ser numérico. \n";
             if (txtCCV.Text.Length > 5)
-                throw new UserInputException("El CCV tiene que tener como máximo 5 dígitos");
+                msg += "- El CCV tiene que tener como máximo 5 dígitos. \n";
+
+            if (!msg.Equals(""))
+            {
+                throw new UserInputException(msg);
+            }
 
         }
 

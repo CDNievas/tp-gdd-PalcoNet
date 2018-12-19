@@ -1,4 +1,5 @@
 ﻿using PalcoNet.DataBasePackage;
+using PalcoNet.Validadores;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,6 +91,20 @@ namespace PalcoNet.Abm_Cliente
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+
+            String msg = "";
+            if (!new ValidadorSoloLetras().IsValid(txtName.Text))
+                msg += "- Nombre debe contener solo letras. \n";
+            if (!new ValidadorSoloLetras().IsValid(txtApellido.Text))
+                msg += "- Apellido debe contener solo letras. \n";
+            if (new ValidadorNumerico().IsInvalid(this.txtDocumento.Text))
+                msg += "- Documento debe contener solo numeros. \n";
+
+            if (!msg.Equals(""))
+            {
+                throw new UserInputException(msg);
+            }
+
             ActualizarCantPaginas();
             paginaActual.pageNumber = 1;
             ActualizarTabla();

@@ -49,7 +49,7 @@
             // btnClienteLimpiar
             // 
             this.btnClienteLimpiar.Location = new System.Drawing.Point(22, 284);
-            this.btnClienteLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClienteLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnClienteLimpiar.Name = "btnClienteLimpiar";
             this.btnClienteLimpiar.Size = new System.Drawing.Size(66, 24);
             this.btnClienteLimpiar.TabIndex = 32;
@@ -60,7 +60,7 @@
             // btnClienteCrear
             // 
             this.btnClienteCrear.Location = new System.Drawing.Point(278, 284);
-            this.btnClienteCrear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClienteCrear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClienteCrear.Name = "btnClienteCrear";
             this.btnClienteCrear.Size = new System.Drawing.Size(66, 24);
             this.btnClienteCrear.TabIndex = 31;
@@ -101,7 +101,7 @@
             // txtUsuario
             // 
             this.txtUsuario.Location = new System.Drawing.Point(96, 48);
-            this.txtUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(120, 20);
             this.txtUsuario.TabIndex = 36;
@@ -110,7 +110,7 @@
             // password
             // 
             this.password.Location = new System.Drawing.Point(96, 95);
-            this.password.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.password.Margin = new System.Windows.Forms.Padding(2);
             this.password.Name = "password";
             this.password.PasswordChar = '*';
             this.password.Size = new System.Drawing.Size(120, 20);
@@ -119,7 +119,7 @@
             // txtConfirmarContra
             // 
             this.txtConfirmarContra.Location = new System.Drawing.Point(134, 139);
-            this.txtConfirmarContra.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtConfirmarContra.Margin = new System.Windows.Forms.Padding(2);
             this.txtConfirmarContra.Name = "txtConfirmarContra";
             this.txtConfirmarContra.PasswordChar = '*';
             this.txtConfirmarContra.Size = new System.Drawing.Size(120, 20);
@@ -142,7 +142,7 @@
             "empresa",
             "cliente"});
             this.comboTipo.Location = new System.Drawing.Point(96, 183);
-            this.comboTipo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboTipo.Margin = new System.Windows.Forms.Padding(2);
             this.comboTipo.Name = "comboTipo";
             this.comboTipo.Size = new System.Drawing.Size(193, 21);
             this.comboTipo.TabIndex = 40;
@@ -150,9 +150,9 @@
             // btnAgregarInfo
             // 
             this.btnAgregarInfo.Location = new System.Drawing.Point(22, 226);
-            this.btnAgregarInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAgregarInfo.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregarInfo.Name = "btnAgregarInfo";
-            this.btnAgregarInfo.Size = new System.Drawing.Size(130, 19);
+            this.btnAgregarInfo.Size = new System.Drawing.Size(130, 27);
             this.btnAgregarInfo.TabIndex = 41;
             this.btnAgregarInfo.Text = "Agregar info especifica";
             this.btnAgregarInfo.UseVisualStyleBackColor = true;
@@ -161,7 +161,7 @@
             // btnDisponible
             // 
             this.btnDisponible.Location = new System.Drawing.Point(232, 48);
-            this.btnDisponible.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDisponible.Margin = new System.Windows.Forms.Padding(2);
             this.btnDisponible.Name = "btnDisponible";
             this.btnDisponible.Size = new System.Drawing.Size(76, 19);
             this.btnDisponible.TabIndex = 42;
@@ -227,7 +227,7 @@
             this.Controls.Add(this.btnClienteCrear);
             this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CrearUsuarioForm";
             this.Text = "crearUsuario";
             this.ResumeLayout(false);

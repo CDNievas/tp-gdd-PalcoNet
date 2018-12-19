@@ -109,30 +109,32 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         private void ValidarInputs()
         {
+            String msg = "";
+            
             foreach (TextBox t in TodosLosTextbox())
             {
                 if(!t.Equals(txtEmpresaDpto) && !t.Equals(txtEmpresaPiso))
                     if (String.IsNullOrWhiteSpace(t.Text))
-                        throw new UserInputException("Debe completar todos los campos");
+                        msg += "Debe completar todos los campos. \n";
             }
 
             if (new ValidadorCuil().IsInvalid(txtEmpresaCuit.Text))
-            {
-                throw new UserInputException("Cuit inválido");
-            }
+                msg += "- CUIL debe tener formato XX-XXXXXXXX-X. \n";           
             if (new ValidadorNumerico().IsInvalid(txtEmpresaTelefono.Text))
-            {
-                throw new UserInputException("El campo teléfono debe ser numérico");
-            }
+                msg += "- Telefono debe ser numerico. \n";
+            if (new ValidadorEmail().IsInvalid(this.txtEmpresaEmail.Text))
+                msg += "- Email debe tener la forma ejemplo@mail.com \n";
             if (new ValidadorNumerico().IsInvalid(txtEmpresaNro.Text))
-            {
-                throw new UserInputException("El campo Número de calle debe ser numérico");
-            }
+                msg += "- Numero de calle debe ser numerico. \n";          
             var piso = txtEmpresaPiso.Text;
-            if (!String.IsNullOrWhiteSpace(piso) && new ValidadorNumerico().IsInvalid(piso))
+            if (!String.IsNullOrWhiteSpace(piso) && new ValidadorNumerico().IsInvalid(piso))        
+                msg += "- Piso debe ser numerico. \n";   
+
+            if (!msg.Equals(""))
             {
-                throw new UserInputException("El piso debe ser un valor numérico");
+                throw new UserInputException(msg);
             }
+
         }
 
         internal void LlenateCon(Empresa empresa)
