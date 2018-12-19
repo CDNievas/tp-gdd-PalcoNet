@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -91,20 +92,6 @@ namespace PalcoNet.Abm_Cliente
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-
-            String msg = "";
-            if (!new ValidadorSoloLetras().IsValid(txtName.Text))
-                msg += "- Nombre debe contener solo letras. \n";
-            if (!new ValidadorSoloLetras().IsValid(txtApellido.Text))
-                msg += "- Apellido debe contener solo letras. \n";
-            if (new ValidadorNumerico().IsInvalid(this.txtDocumento.Text))
-                msg += "- Documento debe contener solo numeros. \n";
-
-            if (!msg.Equals(""))
-            {
-                throw new UserInputException(msg);
-            }
-
             ActualizarCantPaginas();
             paginaActual.pageNumber = 1;
             ActualizarTabla();
@@ -139,7 +126,8 @@ namespace PalcoNet.Abm_Cliente
             catch (ProcedureException ex)
             {
                 MessageBox.Show(ex.GetSqlErrorMessage(), "Error al actualizar el cliente",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
             ActualizarTabla();
         }

@@ -11,7 +11,7 @@ namespace PalcoNet.Validadores
     {
         public override Boolean IsValid(String s)
         {
-            string pattern = "^[0-9]{2}-[0-9]*-[0-9]$";
+            string pattern = "^[0-9]{2}-[0-9]{8}-[0-9]$";
             Regex regex = new Regex(pattern);
             return regex.IsMatch(s);
         }

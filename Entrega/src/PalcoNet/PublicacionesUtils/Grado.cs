@@ -50,7 +50,7 @@ namespace PalcoNet.PublicacionesUtils
         {
             get
             {
-                return String.Format("{0} Comisión: {1}", descripcion, comision);
+                return String.Format("{0} Comisión: {1}%", descripcion, comision);
             }
         }
 

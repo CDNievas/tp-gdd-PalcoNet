@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -101,7 +102,7 @@ namespace PalcoNet.Abm_Cliente
             try
             {
                 ValidarInputs();
-                Cliente cliente = ClienteActual == null? new Cliente() : ClienteActual;
+                Cliente cliente = ClienteActual == null ? new Cliente() : ClienteActual;
                 cliente.cuil = txtClienteCuil.Text;
                 cliente.tipoDocumento = (TipoDocumento)comboTipoDoc.SelectedItem;
                 cliente.nroDocumento = txtClienteDoc.Text;
@@ -145,6 +146,29 @@ namespace PalcoNet.Abm_Cliente
             {
                 MessageBox.Show(ex.Message, "Error en el ingreso",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetBaseException().GetType() == typeof(SqlException))
+                {
+                    Int32 ErrorCode = ((SqlException)ex.InnerException).Number;
+                    switch (ErrorCode)
+                    {
+                        case 2627:  // Unique constraint error
+                            MessageBox.Show("El DNI de este cliente ya existe en el sistema", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        default:
+                            MessageBox.Show("Error al guardar el cliente", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error al guardar el cliente", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

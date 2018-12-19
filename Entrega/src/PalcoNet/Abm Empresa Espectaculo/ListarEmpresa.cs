@@ -80,19 +80,6 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-
-            String msg = "";
-            if (new ValidadorCuil().IsInvalid(txtCuit.Text))
-                msg += "- CUIL debe tener formato XX-XXXXXXXX-X. \n";
-            if (new ValidadorEmail().IsInvalid(this.txtMail.Text))
-                msg += "- Email debe tener la forma ejemplo@mail.com \n";
-
-            if (!msg.Equals(""))
-            {
-                throw new UserInputException(msg);
-            }
-
-
             ActualizarCantPaginas();
             paginaActual.pageNumber = 1;
             ActualizarTabla();

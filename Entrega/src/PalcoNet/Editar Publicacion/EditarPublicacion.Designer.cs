@@ -60,6 +60,7 @@
             this.btnNuevoNumerado = new System.Windows.Forms.Button();
             this.btnBorrarSinNumerar = new System.Windows.Forms.Button();
             this.btnNuevoSinNumerar = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numeradosDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noNumeradasDataGrid)).BeginInit();
             this.SuspendLayout();
@@ -78,9 +79,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(40, 392);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 13);
+            this.label3.Size = new System.Drawing.Size(73, 13);
             this.label3.TabIndex = 55;
-            this.label3.Text = "Descripción:";
+            this.label3.Text = "Descripción: *";
             // 
             // txtNroCalle
             // 
@@ -127,45 +128,45 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(40, 356);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(74, 13);
+            this.label14.Size = new System.Drawing.Size(81, 13);
             this.label14.TabIndex = 48;
-            this.label14.Text = "Codigo postal:";
+            this.label14.Text = "Codigo postal: *";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(40, 276);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(56, 13);
+            this.label13.Size = new System.Drawing.Size(63, 13);
             this.label13.TabIndex = 47;
-            this.label13.Text = "Localidad:";
+            this.label13.Text = "Localidad: *";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(289, 317);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(27, 13);
+            this.label11.Size = new System.Drawing.Size(34, 13);
             this.label11.TabIndex = 46;
-            this.label11.Text = "Nro:";
+            this.label11.Text = "Nro: *";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(40, 314);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(33, 13);
+            this.label10.Size = new System.Drawing.Size(40, 13);
             this.label10.TabIndex = 45;
-            this.label10.Text = "Calle:";
+            this.label10.Text = "Calle: *";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(40, 238);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.Size = new System.Drawing.Size(50, 13);
             this.label6.TabIndex = 44;
-            this.label6.Text = "Ciudad:";
+            this.label6.Text = "Ciudad: *";
             // 
             // label1
             // 
@@ -173,9 +174,9 @@
             this.label1.Location = new System.Drawing.Point(40, 129);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.Size = new System.Drawing.Size(109, 13);
             this.label1.TabIndex = 43;
-            this.label1.Text = "Fecha Espectaculo:";
+            this.label1.Text = "Fecha Espectaculo: *";
             // 
             // label2
             // 
@@ -239,18 +240,18 @@
             this.lblGrado.AutoSize = true;
             this.lblGrado.Location = new System.Drawing.Point(40, 166);
             this.lblGrado.Name = "lblGrado";
-            this.lblGrado.Size = new System.Drawing.Size(36, 13);
+            this.lblGrado.Size = new System.Drawing.Size(43, 13);
             this.lblGrado.TabIndex = 65;
-            this.lblGrado.Text = "Grado";
+            this.lblGrado.Text = "Grado *";
             // 
             // lblRubro
             // 
             this.lblRubro.AutoSize = true;
             this.lblRubro.Location = new System.Drawing.Point(40, 203);
             this.lblRubro.Name = "lblRubro";
-            this.lblRubro.Size = new System.Drawing.Size(36, 13);
+            this.lblRubro.Size = new System.Drawing.Size(43, 13);
             this.lblRubro.TabIndex = 66;
-            this.lblRubro.Text = "Rubro";
+            this.lblRubro.Text = "Rubro *";
             // 
             // comboRubro
             // 
@@ -358,11 +359,21 @@
             this.btnNuevoSinNumerar.UseVisualStyleBackColor = true;
             this.btnNuevoSinNumerar.Click += new System.EventHandler(this.btnNuevoSinNumerar_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(190, 519);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(133, 13);
+            this.label7.TabIndex = 80;
+            this.label7.Text = "* Obligatorios para publicar";
+            // 
             // EditarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(895, 580);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btnNuevoSinNumerar);
             this.Controls.Add(this.btnBorrarSinNumerar);
             this.Controls.Add(this.btnNuevoNumerado);
@@ -439,5 +450,6 @@
         private System.Windows.Forms.Button btnNuevoNumerado;
         private System.Windows.Forms.Button btnBorrarSinNumerar;
         private System.Windows.Forms.Button btnNuevoSinNumerar;
+        private System.Windows.Forms.Label label7;
     }
 }

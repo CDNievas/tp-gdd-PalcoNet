@@ -184,21 +184,23 @@ namespace PalcoNet.Editar_Publicacion
 
         private void ValidarTodo()
         {
-            foreach (TextBox t in TodosLosTextbox())
-            {
-                if (String.IsNullOrWhiteSpace(t.Text))
-                    throw new UserInputException("Debe completar todos los campos");
-            }
+            string msg = "";
+            
+            if(TodosLosTextbox().Any(t => String.IsNullOrWhiteSpace(t.Text)))
+                    msg += "Debe completar todos los campos obligatorios\n";
             if (new ValidadorNumerico().IsInvalid(txtNroCalle.Text))
-                throw new UserInputException("El nro de calle debe ser un número");
+                msg += "El nro de calle debe ser un número\n";
             if (comboGrado.SelectedItem == null)
-                throw new UserInputException("Debe seleccionar un grado para su publicación");
+                msg += "Debe seleccionar un grado para su publicación\n";
             if (comboRubro.SelectedItem == null)
-                throw new UserInputException("Debe seleccionar un rubro para su publicación");
+                msg += "Debe seleccionar un rubro para su publicación\n";
             if (fechaEspectaculo.Value < Contexto.FechaActual)
-                throw new UserInputException("La fecha del espectáculo debe ser posterior a la actual");
+                msg += "La fecha del espectáculo debe ser posterior a la actual\n";
             if (this.SectoresPublicacion().Count == 0)
-                throw new UserInputException("Debe por lo menos haber algún sector para la publicación");
+                msg += "Debe por lo menos haber algún sector para la publicación\n";
+
+            if (!String.IsNullOrEmpty(msg))
+                throw new UserInputException(msg);
         }
 
         private void PublicarUnaVez()
