@@ -134,14 +134,17 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         private void ValidarInputs()
         {
             String msg = "";
+            Boolean camposIncompletos = false;
             
             foreach (TextBox t in TodosLosTextbox())
             {
-                if(!t.Equals(txtEmpresaDpto) && !t.Equals(txtEmpresaPiso))
+                if (!t.Equals(txtEmpresaDpto) && !t.Equals(txtEmpresaPiso))
                     if (String.IsNullOrWhiteSpace(t.Text))
-                        msg += "Debe completar todos los campos. \n";
+                        camposIncompletos = true;
             }
 
+            if(camposIncompletos)
+                msg += "Debe completar todos los campos. \n";
             if (new ValidadorCuil().IsInvalid(txtEmpresaCuit.Text))
                 msg += "- CUIL debe tener formato XX-XXXXXXXX-X. \n";           
             if (new ValidadorNumerico().IsInvalid(txtEmpresaTelefono.Text))

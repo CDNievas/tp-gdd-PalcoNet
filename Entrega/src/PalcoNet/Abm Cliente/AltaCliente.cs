@@ -174,15 +174,18 @@ namespace PalcoNet.Abm_Cliente
 
         private void ValidarInputs()
         {
-            String msg = ""; 
+            String msg = "";
+            Boolean camposIncompletos = false;
 
             foreach (TextBox t in TodosLosTextbox())
             {
-                if(!t.Equals(txtPiso) & !t.Equals(txtClienteDpto))
+                if (!t.Equals(txtPiso) & !t.Equals(txtClienteDpto))
                     if (t.Text.Trim().Equals(""))
-                        msg += "Debe completar todos los campos. \n";
+                        camposIncompletos = true;
             }
 
+            if(camposIncompletos)
+                msg += "Debe completar todos los campos. \n";
             if(!new ValidadorSoloLetras().IsValid(txtClienteNombre.Text))
                 msg += "- Nombre debe contener solo letras. \n";
             if (!new ValidadorSoloLetras().IsValid(txtClienteApellido.Text))
