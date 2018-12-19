@@ -1,55 +1,6 @@
 USE GD2C2018
 GO
 
-----------------------------------------------------------------------------------------------
-								/** ELIMINACIÓN DE CONSTRAINS DE TABLAS ANTERIORES **/
-----------------------------------------------------------------------------------------------
-drop procedure COMPUMUNDOHIPERMEGARED.crearNuevoRol
-drop procedure COMPUMUNDOHIPERMEGARED.actualizarRol
-drop procedure COMPUMUNDOHIPERMEGARED.crear_nuevo_usuario
-drop procedure COMPUMUNDOHIPERMEGARED.intentar_logear
-drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_cliente
-drop procedure COMPUMUNDOHIPERMEGARED.crear_usuario_empresa
-drop procedure COMPUMUNDOHIPERMEGARED.eliminar_rol
-drop procedure COMPUMUNDOHIPERMEGARED.crear_borrador
-drop procedure COMPUMUNDOHIPERMEGARED.generar_ubicaciones_de
-drop procedure COMPUMUNDOHIPERMEGARED.update_datos_borrador
-drop procedure COMPUMUNDOHIPERMEGARED.publicar_fecha
-drop procedure COMPUMUNDOHIPERMEGARED.realizarCanje
-drop procedure COMPUMUNDOHIPERMEGARED.AsignarTarjetaA
-drop procedure COMPUMUNDOHIPERMEGARED.ComprarUbicaciones
-drop procedure COMPUMUNDOHIPERMEGARED.RegistrarPuntosDeCompra
-drop procedure COMPUMUNDOHIPERMEGARED.RendirComisionesDeEmpresa
-go
-
-drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol
-drop function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario
-drop function COMPUMUNDOHIPERMEGARED.get_espectaculo_id_de_publicacion
-drop function COMPUMUNDOHIPERMEGARED.puntosDeCliente
-drop function COMPUMUNDOHIPERMEGARED.StockDePublicacion
-drop function COMPUMUNDOHIPERMEGARED.EmpresasConMenosVentas
-drop function COMPUMUNDOHIPERMEGARED.GetTipoDocumento
-drop function COMPUMUNDOHIPERMEGARED.ClientesConMasPuntosVencidos
-drop function COMPUMUNDOHIPERMEGARED.ClientesConMasComprasDeEmpresa
-drop function COMPUMUNDOHIPERMEGARED.ComprasDeCliente
-drop function COMPUMUNDOHIPERMEGARED.DescripcionOrElse
-drop function COMPUMUNDOHIPERMEGARED.TopComprasDeEmpresa
-go
-
-drop trigger COMPUMUNDOHIPERMEGARED.PubliTrigger
-go
-
-drop type COMPUMUNDOHIPERMEGARED.FuncionalidadList
-drop TYPE COMPUMUNDOHIPERMEGARED.UbicacionTableType
-go
-
-drop view COMPUMUNDOHIPERMEGARED.PublicacionesView
-go
-
-drop SEQUENCE COMPUMUNDOHIPERMEGARED.CompraSequence
-drop SEQUENCE COMPUMUNDOHIPERMEGARED.UbicacionSequence
-go
-
 PRINT('Eliminacion de Schema anterior') 
 IF EXISTS (SELECT * FROM SYS.SCHEMAS WHERE name = 'COMPUMUNDOHIPERMEGARED')
 BEGIN
@@ -68,15 +19,61 @@ PRINT('Eliminacion de Constraints anteriores')
 	ORDER BY t.name;
 	PRINT @Sql
 	EXEC  (@Sql)
-	PRINT('Eliminacion HECHA') 
-	/*
 
-	*/
+declare @SqlStatement nvarchar(max) = ''
+PRINT('Eliminando procedures') 
+SELECT @SqlStatement = COALESCE(@SqlStatement, N'') + N'DROP PROCEDURE [COMPUMUNDOHIPERMEGARED].' + QUOTENAME(name) + N';' + CHAR(13)
+FROM sys.procedures
+WHERE schema_id = SCHEMA_ID('COMPUMUNDOHIPERMEGARED')
+PRINT @SqlStatement
+EXEC  (@SqlStatement)
+
+PRINT('Eliminando funciones') 
+set @SqlStatement = ''
+SELECT @SqlStatement = COALESCE(@SqlStatement, N'') + N'DROP FUNCTION [COMPUMUNDOHIPERMEGARED].' + QUOTENAME(name) + N';' + CHAR(13)
+FROM sys.objects
+WHERE schema_id = SCHEMA_ID('COMPUMUNDOHIPERMEGARED') and type_desc like '%FUNC%'
+PRINT @SqlStatement
+EXEC  (@SqlStatement)
+
+
+PRINT('Eliminando views') 
+set @SqlStatement = ''
+SELECT @SqlStatement = COALESCE(@SqlStatement, N'') + N'DROP VIEW [COMPUMUNDOHIPERMEGARED].' + QUOTENAME(name) + N';' + CHAR(13)
+FROM sys.objects
+WHERE schema_id = SCHEMA_ID('COMPUMUNDOHIPERMEGARED') and type = 'V'
+PRINT @SqlStatement
+EXEC  (@SqlStatement)
+
+PRINT('Eliminando secuencias') 
+set @SqlStatement = ''
+SELECT @SqlStatement = COALESCE(@SqlStatement, N'') + N'DROP SEQUENCE [COMPUMUNDOHIPERMEGARED].' + QUOTENAME(name) + N';' + CHAR(13)
+FROM sys.objects
+WHERE schema_id = SCHEMA_ID('COMPUMUNDOHIPERMEGARED') and type = 'SO'
+PRINT @SqlStatement
+EXEC  (@SqlStatement)
+
+PRINT('Eliminando triggers') 
+set @SqlStatement = ''
+SELECT @SqlStatement = COALESCE(@SqlStatement, N'') + N'DROP TRIGGER [COMPUMUNDOHIPERMEGARED].' + QUOTENAME(name) + N';' + CHAR(13)
+FROM sys.objects
+WHERE schema_id = SCHEMA_ID('COMPUMUNDOHIPERMEGARED') and type = 'TR'
+PRINT @SqlStatement
+EXEC  (@SqlStatement)
+
+PRINT('Eliminando types') 
+set @SqlStatement = ''
+SELECT @SqlStatement = COALESCE(@SqlStatement, N'') + N'DROP TYPE [COMPUMUNDOHIPERMEGARED].' + QUOTENAME(name) + N';' + CHAR(13)
+from sys.types
+WHERE schema_id = SCHEMA_ID('COMPUMUNDOHIPERMEGARED')
+PRINT @SqlStatement
+EXEC  (@SqlStatement)
+
 -------------------------------------
 --		ELIMINACION DE TABLAS
 -------------------------------------
 PRINT('Eliminacion de tablas existentes') 
-	DECLARE @SqlStatement NVARCHAR(MAX)
+set @SqlStatement = ''
 	SELECT @SqlStatement = COALESCE(@SqlStatement, N'') + N'DROP TABLE [COMPUMUNDOHIPERMEGARED].' + QUOTENAME(TABLE_NAME) + N';' + CHAR(13)
 	FROM INFORMATION_SCHEMA.TABLES
 	WHERE TABLE_SCHEMA = 'COMPUMUNDOHIPERMEGARED' AND TABLE_TYPE = 'BASE TABLE'
@@ -84,5 +81,6 @@ PRINT('Eliminacion de tablas existentes')
 	EXEC  (@SqlStatement)
 	DROP SCHEMA COMPUMUNDOHIPERMEGARED
 END
-GO
 PRINT('Eliminacion HECHA') 
+
+
