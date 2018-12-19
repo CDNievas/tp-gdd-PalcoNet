@@ -38,7 +38,7 @@
             this.btnGradoBuscar = new System.Windows.Forms.Button();
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.txtRolAlta = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblRolNombre = new System.Windows.Forms.Label();
             this.rolTableAdapter = new PalcoNet.GD2C2018DataSetTableAdapters.RolTableAdapter();
             this.rolesDataGrid = new System.Windows.Forms.DataGridView();
@@ -93,29 +93,31 @@
             // 
             // btnGradoLimpiar
             // 
-            this.btnGradoLimpiar.Location = new System.Drawing.Point(51, 106);
+            this.btnGradoLimpiar.Location = new System.Drawing.Point(287, 53);
             this.btnGradoLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnGradoLimpiar.Name = "btnGradoLimpiar";
             this.btnGradoLimpiar.Size = new System.Drawing.Size(66, 24);
             this.btnGradoLimpiar.TabIndex = 30;
             this.btnGradoLimpiar.Text = "Limpiar";
             this.btnGradoLimpiar.UseVisualStyleBackColor = true;
+            this.btnGradoLimpiar.Click += new System.EventHandler(this.btnGradoLimpiar_Click);
             // 
             // btnGradoBuscar
             // 
-            this.btnGradoBuscar.Location = new System.Drawing.Point(272, 106);
+            this.btnGradoBuscar.Location = new System.Drawing.Point(420, 53);
             this.btnGradoBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnGradoBuscar.Name = "btnGradoBuscar";
             this.btnGradoBuscar.Size = new System.Drawing.Size(66, 24);
             this.btnGradoBuscar.TabIndex = 29;
             this.btnGradoBuscar.Text = "Buscar";
             this.btnGradoBuscar.UseVisualStyleBackColor = true;
+            this.btnGradoBuscar.Click += new System.EventHandler(this.btnGradoBuscar_Click);
             // 
             // rectangleShape1
             // 
             this.rectangleShape1.Location = new System.Drawing.Point(17, 42);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(670, 98);
+            this.rectangleShape1.Size = new System.Drawing.Size(670, 44);
             // 
             // shapeContainer1
             // 
@@ -128,13 +130,13 @@
             this.shapeContainer1.TabIndex = 35;
             this.shapeContainer1.TabStop = false;
             // 
-            // txtRolAlta
+            // txtNombre
             // 
-            this.txtRolAlta.Location = new System.Drawing.Point(138, 56);
-            this.txtRolAlta.Margin = new System.Windows.Forms.Padding(2);
-            this.txtRolAlta.Name = "txtRolAlta";
-            this.txtRolAlta.Size = new System.Drawing.Size(87, 20);
-            this.txtRolAlta.TabIndex = 37;
+            this.txtNombre.Location = new System.Drawing.Point(109, 56);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(130, 20);
+            this.txtNombre.TabIndex = 37;
             // 
             // lblRolNombre
             // 
@@ -155,10 +157,10 @@
             this.rolesDataGrid.AllowUserToAddRows = false;
             this.rolesDataGrid.AllowUserToDeleteRows = false;
             this.rolesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.rolesDataGrid.Location = new System.Drawing.Point(17, 148);
+            this.rolesDataGrid.Location = new System.Drawing.Point(17, 96);
             this.rolesDataGrid.Name = "rolesDataGrid";
             this.rolesDataGrid.ReadOnly = true;
-            this.rolesDataGrid.Size = new System.Drawing.Size(671, 208);
+            this.rolesDataGrid.Size = new System.Drawing.Size(671, 260);
             this.rolesDataGrid.TabIndex = 38;
             // 
             // btnNuevo
@@ -189,7 +191,7 @@
             this.Controls.Add(this.btnHabilitar);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.rolesDataGrid);
-            this.Controls.Add(this.txtRolAlta);
+            this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.lblRolNombre);
             this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnMod);
@@ -218,7 +220,7 @@
         private System.Windows.Forms.Button btnGradoBuscar;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
-        private System.Windows.Forms.TextBox txtRolAlta;
+        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblRolNombre;
         private GD2C2018DataSet gD2C2018DataSet;
         private System.Windows.Forms.BindingSource rolBindingSource;

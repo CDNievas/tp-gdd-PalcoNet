@@ -20,6 +20,25 @@ namespace PalcoNet.Abm_Rol
             return roles;
         }
 
+        public static List<Rol> BuscarPorNombre(String nombre)
+        {
+            var parametros = new List<QueryParameter>();
+            var query = "select * from COMPUMUNDOHIPERMEGARED.Rol ";
+            if (nombre != null && !String.IsNullOrWhiteSpace(nombre))
+            {
+                query += " where nombre like @descParam ";
+                parametros.Add(new QueryParameter("descParam", SqlDbType.NVarChar,
+                    String.Format("%{0}%", nombre)));
+            }
+            var dt = DataBase.GetInstance().TypedQuery(query, parametros.ToArray());
+            var roles = new List<Rol>();
+            foreach (DataRow dr in dt.Rows) {
+                roles.Add(Rol.TraerDe(dr));
+            }
+            return roles;
+        
+        }
+
         public static List<Rol> RolesDeUsuario(int idUsuario)
         {
             var dt = DataBase.GetInstance()

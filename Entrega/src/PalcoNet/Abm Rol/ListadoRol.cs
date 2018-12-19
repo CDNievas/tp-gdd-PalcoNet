@@ -28,7 +28,7 @@ namespace PalcoNet.Abm_Rol
 
         private void ActualizarRoles()
         {
-            var lista = new BindingList<Rol>(Roles.TraerTodos());
+            var lista = new BindingList<Rol>(Roles.BuscarPorNombre(nombre: txtNombre.Text));
             var bindingSource = new BindingSource(lista, null);
 
             rolesDataGrid.DataSource = bindingSource;
@@ -87,6 +87,17 @@ namespace PalcoNet.Abm_Rol
                 DataBase.GetInstance().Query(sql);
                 ActualizarRoles();
             
+        }
+
+        private void btnGradoBuscar_Click(object sender, EventArgs e)
+        {
+            ActualizarRoles();
+        }
+
+        private void btnGradoLimpiar_Click(object sender, EventArgs e)
+        {
+            txtNombre.Text = "";
+            ActualizarRoles();
         }
     }
 }
