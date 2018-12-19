@@ -87,6 +87,7 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
                 int cantidadDeComprasARendir = Convert.ToInt32(cantComprasInput.Value);
                 DialogResult = DialogResult.OK;
                 new Generar_Rendicion_Comisiones.GenerarRendiciones(this.empresa, cantidadDeComprasARendir).ShowDialog();
+                Console.WriteLine("-");
             }
             catch
             {

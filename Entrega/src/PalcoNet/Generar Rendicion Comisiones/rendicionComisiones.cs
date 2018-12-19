@@ -30,6 +30,19 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
         {
             dataGridViewRendirComisiones.MultiSelect = false;
             ActualizarTabla();
+            if(dataGridViewRendirComisiones.RowCount == 0){
+                MessageBox.Show("Esta empresa no tiene compras disponibles para rendir");
+                Close();
+                return;
+            }
+            var cantCompras = dataGridViewRendirComisiones.RowCount; 
+            if (cantCompras < comprasARendir)
+            {
+                DialogResult result = MessageBox.Show("Esta empresa sólo tiene " + cantCompras + " para rendir\n¿Desea continuar rindiendo esa cantidad?",
+                    "", MessageBoxButtons.YesNo);
+                if (result == DialogResult.No)
+                    Close();
+            }
         }
 
         private void ActualizarTabla()
@@ -110,16 +123,17 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
         {
             try
             {
-                MessageBox.Show("Compras rendidas");
                 DataBase.GetInstance().Procedure("RendirComisionesDeEmpresa",
                     new ParametroIn("empresa_id", empresaActual.id),
                     new ParametroIn("cantidad_a_rendir", comprasARendir),
                     new ParametroIn("fecha_actual", Contexto.FechaActual));
+                MessageBox.Show("Compras rendidas");
                 Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex + "\n" + ex.Message + "\n" + ex.StackTrace);
+                MessageBox.Show("Error al rendir comisiones"); 
             }
         }
 
