@@ -158,7 +158,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Ubicacion(
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Factura( -- MIGRADO
 	id_factura int IDENTITY(1,1) PRIMARY KEY,
-	numero numeric(18,0),
+	numero numeric(18,0) unique,
 	fecha datetime,
 	total numeric(18,2),
 	forma_pago nvarchar(255),
@@ -1077,7 +1077,7 @@ begin
 	where id_publicacion = @publicacion_id
 	
 	update COMPUMUNDOHIPERMEGARED.Publicacion
-	set estado = 'F'
+	set estado = 'F', fecha_vencimiento = @fecha
 	where id_publicacion = @publicacion_id and cant_ubicaciones_vendidas = cant_ubicaciones_total
 
 	commit tran
