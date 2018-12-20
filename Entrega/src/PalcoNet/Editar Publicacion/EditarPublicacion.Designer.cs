@@ -232,7 +232,7 @@
             this.comboGrado.FormattingEnabled = true;
             this.comboGrado.Location = new System.Drawing.Point(151, 163);
             this.comboGrado.Name = "comboGrado";
-            this.comboGrado.Size = new System.Drawing.Size(196, 21);
+            this.comboGrado.Size = new System.Drawing.Size(218, 21);
             this.comboGrado.TabIndex = 64;
             // 
             // lblGrado
@@ -258,7 +258,7 @@
             this.comboRubro.FormattingEnabled = true;
             this.comboRubro.Location = new System.Drawing.Point(151, 200);
             this.comboRubro.Name = "comboRubro";
-            this.comboRubro.Size = new System.Drawing.Size(121, 21);
+            this.comboRubro.Size = new System.Drawing.Size(218, 21);
             this.comboRubro.TabIndex = 67;
             // 
             // btnPublicar

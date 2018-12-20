@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnGradoLimpiar = new System.Windows.Forms.Button();
-            this.btnGradoBuscar = new System.Windows.Forms.Button();
             this.gradoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2018DataSet = new PalcoNet.GD2C2018DataSet();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
@@ -46,26 +44,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2018DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gradosDataGrid)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnGradoLimpiar
-            // 
-            this.btnGradoLimpiar.Location = new System.Drawing.Point(364, 46);
-            this.btnGradoLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnGradoLimpiar.Name = "btnGradoLimpiar";
-            this.btnGradoLimpiar.Size = new System.Drawing.Size(66, 24);
-            this.btnGradoLimpiar.TabIndex = 19;
-            this.btnGradoLimpiar.Text = "Limpiar";
-            this.btnGradoLimpiar.UseVisualStyleBackColor = true;
-            // 
-            // btnGradoBuscar
-            // 
-            this.btnGradoBuscar.Location = new System.Drawing.Point(449, 46);
-            this.btnGradoBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnGradoBuscar.Name = "btnGradoBuscar";
-            this.btnGradoBuscar.Size = new System.Drawing.Size(66, 24);
-            this.btnGradoBuscar.TabIndex = 18;
-            this.btnGradoBuscar.Text = "Buscar";
-            this.btnGradoBuscar.UseVisualStyleBackColor = true;
             // 
             // gradoBindingSource
             // 
@@ -92,7 +70,7 @@
             // 
             this.rectangleShape1.Location = new System.Drawing.Point(24, 31);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(516, 63);
+            this.rectangleShape1.Size = new System.Drawing.Size(516, 42);
             // 
             // label2
             // 
@@ -107,7 +85,7 @@
             // btnMod
             // 
             this.btnMod.Location = new System.Drawing.Point(506, 227);
-            this.btnMod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMod.Margin = new System.Windows.Forms.Padding(2);
             this.btnMod.Name = "btnMod";
             this.btnMod.Size = new System.Drawing.Size(66, 24);
             this.btnMod.TabIndex = 27;
@@ -118,7 +96,7 @@
             // btnBaja
             // 
             this.btnBaja.Location = new System.Drawing.Point(506, 284);
-            this.btnBaja.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBaja.Margin = new System.Windows.Forms.Padding(2);
             this.btnBaja.Name = "btnBaja";
             this.btnBaja.Size = new System.Drawing.Size(66, 24);
             this.btnBaja.TabIndex = 28;
@@ -135,10 +113,10 @@
             this.gradosDataGrid.AllowUserToAddRows = false;
             this.gradosDataGrid.AllowUserToDeleteRows = false;
             this.gradosDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gradosDataGrid.Location = new System.Drawing.Point(24, 116);
+            this.gradosDataGrid.Location = new System.Drawing.Point(24, 88);
             this.gradosDataGrid.Name = "gradosDataGrid";
             this.gradosDataGrid.ReadOnly = true;
-            this.gradosDataGrid.Size = new System.Drawing.Size(467, 252);
+            this.gradosDataGrid.Size = new System.Drawing.Size(467, 280);
             this.gradosDataGrid.TabIndex = 29;
             // 
             // btnAgregar
@@ -154,7 +132,7 @@
             // checkEliminados
             // 
             this.checkEliminados.AutoSize = true;
-            this.checkEliminados.Location = new System.Drawing.Point(218, 51);
+            this.checkEliminados.Location = new System.Drawing.Point(47, 44);
             this.checkEliminados.Name = "checkEliminados";
             this.checkEliminados.Size = new System.Drawing.Size(113, 17);
             this.checkEliminados.TabIndex = 31;
@@ -173,10 +151,8 @@
             this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnMod);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnGradoLimpiar);
-            this.Controls.Add(this.btnGradoBuscar);
             this.Controls.Add(this.shapeContainer1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ListarGrado";
             this.Text = "ListarGrado";
             this.Load += new System.EventHandler(this.ListarGrado_Load);
@@ -190,8 +166,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnGradoLimpiar;
-        private System.Windows.Forms.Button btnGradoBuscar;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private System.Windows.Forms.Label label2;

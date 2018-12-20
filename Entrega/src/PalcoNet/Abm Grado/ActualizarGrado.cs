@@ -24,6 +24,8 @@ namespace PalcoNet.Abm_Grado
             this.txtDescripcion.Text = grado.descripcion;
             this.txtComision.Text = grado.comision.ToString();
             this.checkEliminado.Checked = grado.eliminado;
+            this.txtDescripcion.MaxLength = 25;
+            this.txtComision.MaxLength = 7;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -53,18 +55,20 @@ namespace PalcoNet.Abm_Grado
 
         private void ValidarInputs()
         {
+            String msg = "";
             if (txtDescripcion.Text.Trim().Equals(""))
-                throw new UserInputException("Debe agregar una descripción");
+                msg += "Debe agregar una descripción";
             if (new ValidadorNumeroComa(2).IsInvalid(txtComision.Text) && new ValidadorNumerico().IsInvalid(txtComision.Text))
-                throw new UserInputException("El formato de la comisión es incorrecto, debe ser un número entero o con dos cifras decimales");
+                msg += "El formato de la comisión es incorrecto, debe ser un número entero o con dos cifras decimales";
             try{
                 if (ValorComision() > 100 || ValorComision() < 0)
-                    throw new UserInputException("El porcentaje de comision debe estar entre 0 y 100");
-            }catch(UserInputException){
-                throw;
-            }catch(Exception){
-                throw new UserInputException("Formato de comisión inválido");
+                    msg += "El porcentaje de comision debe estar entre 0 y 100";
+            }catch{
+                msg += "Formato de comisión inválido";
             }
+
+            if (!String.IsNullOrEmpty(msg))
+                throw new UserInputException(msg);
         }
 
         private Double ValorComision()

@@ -28,41 +28,47 @@ namespace PalcoNet.Abm_Grado
 
         private void AltaGrado_Load(object sender, EventArgs e)
         {
-            txtDescripcionGrado.MaxLength = 10;
+            txtDescripcionGrado.MaxLength = 25;
             txtComision.MaxLength = 7;
         }
 
         private void btnGradoGuardar_Click(object sender, EventArgs e)
         {
-            Double porcentaje;
+            Double porcentaje = 0;
+            string msg = "";
+
             if (new ValidadorNumeroComa(2).IsInvalid(txtComision.Text) && new ValidadorNumerico().IsInvalid(txtComision.Text))
             {
-                MessageBox.Show("El formato de la comisión es incorrecto, debe ser un número entero o con dos cifras decimales");
-                return;
-            }
-
-            try
-            {
-                porcentaje = Convert.ToDouble(txtComision.Text);
-            }
-            catch
-            {
-                MessageBox.Show("La comisión debe ser un número");
-                return;
-            }
-            if (porcentaje > 100 || porcentaje < 0)
-            {
-                MessageBox.Show("El porcentaje de comisión debe estar entre 0 y 100");
-                return;
+                msg += "- El formato de la comisión es incorrecto, debe ser un número entero o con dos cifras decimales\n";
             }
             if (txtDescripcionGrado.Text.Trim().Equals(""))
             {
-                MessageBox.Show("Debe ingresar una descripción");
+                msg += "- Debe ingresar una descripción\n";
+            }
+            try
+            {
+                porcentaje = Convert.ToDouble(txtComision.Text);
+                if (porcentaje > 100 || porcentaje < 0)
+                {
+                    msg += "- El porcentaje de comisión debe estar entre 0 y 100\n";
+                }
+            }
+            catch
+            {
+                msg += "- La comisión debe ser un número\n";
+            }
+
+            if (!String.IsNullOrEmpty(msg))
+            {
+                MessageBox.Show(msg);
                 return;
             }
+
             var grado = new Grado(txtDescripcionGrado.Text, porcentaje);
             grado.Guardarse();
             Close();
+
+
         }
     }
 }

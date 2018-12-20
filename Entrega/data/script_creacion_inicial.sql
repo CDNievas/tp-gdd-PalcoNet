@@ -88,7 +88,7 @@ CREATE TABLE COMPUMUNDOHIPERMEGARED.Rubro( -- MIGRADO
 
 CREATE TABLE COMPUMUNDOHIPERMEGARED.Grado( -- MIGRADO
 	id_grado int IDENTITY(1,1) PRIMARY KEY,
-	descripcion nvarchar(10) NOT NULL,
+	descripcion nvarchar(25) NOT NULL,
 	comision numeric(5,2) NOT NULL,
 	eliminado bit default 0 NOT NULL
 )

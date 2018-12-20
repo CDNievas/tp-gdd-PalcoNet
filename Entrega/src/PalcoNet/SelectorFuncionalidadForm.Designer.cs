@@ -68,7 +68,7 @@
             // linkCambioPass
             // 
             this.linkCambioPass.AutoSize = true;
-            this.linkCambioPass.Location = new System.Drawing.Point(114, 17);
+            this.linkCambioPass.Location = new System.Drawing.Point(26, 216);
             this.linkCambioPass.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkCambioPass.Name = "linkCambioPass";
             this.linkCambioPass.Size = new System.Drawing.Size(120, 13);
