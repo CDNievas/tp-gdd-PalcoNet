@@ -36,15 +36,15 @@ namespace PalcoNet.Abm_Rol
         }
 
         public Boolean EsCliente(){
-            return this.nombre.ToLower().Equals("cliente");
+            return this.id == 1;
         }
 
         public Boolean EsEmpresa(){
-            return this.nombre.ToLower().Equals("empresa");
+            return this.id == 3;
         }
 
         public Boolean EsAdministrador(){
-            return this.nombre.ToLower().Equals("administrador");
+            return this.id == 2;
         }
 
         public Rol() { }
