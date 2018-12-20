@@ -14,8 +14,6 @@ namespace PalcoNet
     public partial class CambioClaveForm : Form
     {
         private int usuarioId;
-        private string username;
-        private string password;
 
         public CambioClaveForm(int usuarioId, string username)
         {
@@ -23,26 +21,34 @@ namespace PalcoNet
             this.usuarioId = usuarioId;
             this.txtUsuario.Text = username;
             this.txtUsuario.ReadOnly = true;
+
+            this.txtPass.MaxLength = 50;
+            this.txtConfirmacion.MaxLength = 50;
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (txtPass.Text.Trim().Equals("") || txtConfirmacion.Text.Trim().Equals(""))
+            string msg = "";
+            if (String.IsNullOrEmpty(txtPass.Text) || String.IsNullOrEmpty(txtConfirmacion.Text))
             {
-                MessageBox.Show("Debe ingresar la contraseña");
-                return;
+                msg += "- Debe ingresar la nueva contraseña y su confirmación\n";
             }
 
             if (!txtPass.Text.Equals(txtConfirmacion.Text))
             {
-                MessageBox.Show("Las contraseñas no coinciden");
-                return;
+                msg += "- Las contraseñas no coinciden\n";
             }
             if (txtPass.Text.Length > 50)
             {
-                MessageBox.Show("La máxima longitud de la contraseña son 50 caracteres");
+                msg += "- La máxima longitud de la contraseña son 50 caracteres\n";
+            }
+
+            if (!String.IsNullOrEmpty(msg))
+            {
+                MessageBox.Show(msg);
                 return;
             }
+
             var password = txtPass.Text;
 
             Console.WriteLine(String.Format("Nuevo pass: '{0}', Id user: {1}", password, this.usuarioId));

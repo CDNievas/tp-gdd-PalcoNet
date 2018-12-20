@@ -100,22 +100,38 @@ namespace PalcoNet.Registro_de_Usuario
                 var pass1 = password.Text;
                 var pass2 = txtConfirmarContra.Text;
 
+                string msg = "";
+                if(String.IsNullOrWhiteSpace(txtUsuario.Text))
+                    msg += "- Debe completar el nombre de usuario\n";
+                if(String.IsNullOrEmpty(pass1) || String.IsNullOrEmpty(pass2))
+                    msg += "- Debe completar tanto la contraseña como la confirmación\n";
                 if (!pass1.Equals(pass2))
-                {
-                    throw new UserInputException("El password no se corresponde con la confirmacion");
-                }
+                    msg += "- El password no se corresponde con la confirmacion\n";
+
                 if (GetSelectedRol().EsEmpresa())
                 {
                     if (empresaAPersistir == null)
-                        throw new UserInputException("Debe cargar los datos de la empresa");
+                        msg += "- Debe cargar los datos de la empresa\n";
+                    if (!String.IsNullOrEmpty(msg))
+                    {
+                        MessageBox.Show(msg);
+                        return;
+                    }
+
                     PersistirEmpresa();
                 }
                 else if (GetSelectedRol().EsCliente())
                 {
                     if (clienteAPersistir == null)
-                        throw new UserInputException("Debe cargar los datos del cliente");
+                        msg += "- Debe cargar los datos del cliente\n";
                     if (tarjetaAPersistir == null)
-                        throw new UserInputException("Debe cargar los datos de la tarjeta");
+                        msg += "- Debe cargar los datos de la tarjeta\n";
+
+                    if (!String.IsNullOrEmpty(msg))
+                    {
+                        MessageBox.Show(msg);
+                        return;
+                    }
                     PersistirCliente();
                 }
                 this.Close();
@@ -134,7 +150,7 @@ namespace PalcoNet.Registro_de_Usuario
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show("Ha ocurrido un error");
+                MessageBox.Show("Debe seleccionar el tipo de usuario");
             }
         }
 
