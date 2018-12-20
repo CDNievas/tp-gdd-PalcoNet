@@ -75,7 +75,7 @@ namespace PalcoNet.Editar_Publicacion
 
         public void LlenateCon(Publicacion publicacion)
         {
-            fechaEspectaculo.Value = publicacion.fechaPublicacion.GetValueOrDefault(Contexto.FechaActual);
+            fechaEspectaculo.Value = publicacion.fechaEspectaculo.GetValueOrDefault(Contexto.FechaActual);
             
             txtCiudad.Text = publicacion.ciudad;
             txtLocalidad.Text = publicacion.localidad;
@@ -88,15 +88,16 @@ namespace PalcoNet.Editar_Publicacion
             comboRubro.SelectedItem = publicacion.rubro;
             comboGrado.SelectedItem = publicacion.grado;
 
-            this.CargarSectoresDe(publicacion.id);
+            this.CargarSectoresDe(publicacion);
 
             this.publicacion = publicacion;
         }
 
-        public void CargarSectoresDe(long publicacionId)
+        public void CargarSectoresDe(Publicacion publicacion)
         {
-            this.sectoresSinNumerar = Sectores.FindSectoresSinNumerarByPublicacionId(publicacionId);
-            this.sectoresNumerados = Sectores.FindSectoresNumeradosByPublicacionId(publicacionId);
+            var idEspectaculo = publicacion.GetIdEspectaculo();
+            this.sectoresSinNumerar = Sectores.FindSectoresSinNumerarByEspectaculoId(idEspectaculo);
+            this.sectoresNumerados = Sectores.FindSectoresNumeradosByEspectaculoId(idEspectaculo);
             this.RefreshSectores();
         }
 

@@ -56,7 +56,7 @@ namespace PalcoNet.PublicacionesUtils
 
             var parametros = new List<QueryParameter>();
             String sql = "select * " + GetBusquedaQuery(descripcion, rango, rubros, parametros)
-            + " order by grado_comision desc "
+            + " order by grado_comision desc, fecha_espectaculo asc "
             + String.Format(" OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", pag.FirstResultIndex(), pag.pageSize);
 
             var dt = DataBase.GetInstance().TypedQuery(sql, parametros.ToArray());
@@ -89,6 +89,12 @@ namespace PalcoNet.PublicacionesUtils
                 condiciones.Add(condicion);
                 parametros.Add(new QueryParameter("inicio", SqlDbType.DateTime, rango.inicio));
                 parametros.Add(new QueryParameter("fin", SqlDbType.DateTime, rango.fin));
+            }
+            else
+            {
+                var condicion = String.Format("fecha_espectaculo >= @fechaActualSistema");
+                condiciones.Add(condicion);
+                parametros.Add(new QueryParameter("fechaActualSistema", SqlDbType.DateTime, Contexto.FechaActual));
             }
             if (rubros != null && rubros.Count != 0)
             {
