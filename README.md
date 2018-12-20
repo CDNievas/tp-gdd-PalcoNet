@@ -54,4 +54,4 @@ Nombre y legajo de todos los integrantes :<br>
 	Lautaro Gomez Odriozola, 156.607-6<br>
 	Martín Gabriel Mallea Santagada, 159.093-5<br>
 	Fiorella Denise Altobelli, 159.092-3<br>
-Email del integrante responsable del grupo: cdnievas@hotmail.com
+Email del integrante responsable del grupo: fdaltobelli@gmail.com  -- anterior responsable cdnievas@hotmail.com
