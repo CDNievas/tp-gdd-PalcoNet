@@ -42,7 +42,7 @@ namespace PalcoNet.Historial_Cliente
 
         private DataTable getCompras() 
         {
-            return DataBase.GetInstance().TypedQuery(String.Format("select * from COMPUMUNDOHIPERMEGARED.ComprasDeCliente(@clienteID) ORDER BY [Fecha] OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY",
+            return DataBase.GetInstance().TypedQuery(String.Format("select * from COMPUMUNDOHIPERMEGARED.ComprasDeCliente(@clienteID) ORDER BY [Fecha] desc OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY",
                 pagina.FirstResultIndex(), pagina.pageSize), new QueryParameter("clienteID", SqlDbType.Int, cliente.id));
         }
 

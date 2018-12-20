@@ -1237,6 +1237,16 @@ as
 	commit tran
 go
 
+create function COMPUMUNDOHIPERMEGARED.UbicacionesDeCompra(@id_compra int)
+returns table
+as
+	return (select e.descripcion as [Espectáculo], u.asiento as [Asiento], u.fila as [Fila], u.sin_numerar as [Sin Numerar?], t.descripcion as [Tipo de Ubicación], u.precio as [Precio Ubicación]
+			from COMPUMUNDOHIPERMEGARED.Ubicacion u
+			inner join COMPUMUNDOHIPERMEGARED.TipoUbicacion t on t.id_tipo_ubicacion = u.tipo_ubicacion_id and u.compra_id = @id_compra
+			inner join COMPUMUNDOHIPERMEGARED.Publicacion p on p.id_publicacion = u.publicacion_id
+			inner join COMPUMUNDOHIPERMEGARED.Espectaculo e on e.id_espectaculo = p.espectaculo_id)
+go
+
 PRINT 'Todos los procedures y las funciones creados'
 
 PRINT 'Creando al admin default'
