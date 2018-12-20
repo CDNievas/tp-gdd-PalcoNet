@@ -17,6 +17,17 @@ namespace PalcoNet.Abm_Rol
         private FuncionRolForm funcion;
         private Rol rol;
         private ValidadorSoloLetras validador;
+        public String TituloForm
+        {
+            get
+            {
+                return label2.Text;
+            }
+            set
+            {
+                label2.Text = value;
+            }
+        }
 
         public AltaRolForm(FuncionRolForm funcion)
         {
@@ -54,21 +65,18 @@ namespace PalcoNet.Abm_Rol
         {
 
             String msg = "";
-            if (!new ValidadorSoloLetras().IsValid(txtNombre.Text) || txtNombre.Text.Trim().Equals(""))
-                msg += "- Nombre debe contener solo letras. \n";
-
-            if (!msg.Equals(""))
-            {
-                throw new UserInputException(msg);
-            }
-
+            if (String.IsNullOrEmpty(txtNombre.Text))
+                msg += "- Debe completar el nombre del rol. \n";
 
             if (funcionalidadesCheckList.CheckedItems.Count == 0)
-            {
-                MessageBox.Show("Debe ingresar todos los datos", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                msg += "- El rol debe tener al menos una funcionalidad \n";
+            
+
+            if(!String.IsNullOrEmpty(msg)){
+                MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             var funcionalidades = funcionalidadesCheckList.CheckedItems.OfType<Funcionalidad>().ToList();
             if(this.rol == null)
                 this.rol = new Rol();

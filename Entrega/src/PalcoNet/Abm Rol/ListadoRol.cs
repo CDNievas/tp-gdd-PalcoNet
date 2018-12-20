@@ -62,7 +62,8 @@ namespace PalcoNet.Abm_Rol
                 return;
             }
 
-            var confirmResult = MessageBox.Show("Está seguro de deshabilitar el rol " + rol.nombre,
+            var confirmResult = MessageBox.Show("Está seguro de deshabilitar el rol " + rol.nombre
+                + "\n Todas las asignaciones de este rol a los usuarios serán eliminadas permanentemente",
                                      "Solicitud de confirmación",
                                      MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
@@ -104,9 +105,5 @@ namespace PalcoNet.Abm_Rol
             ActualizarRoles();
         }
 
-        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            validador.soloLetras(e);
-        }
     }
 }

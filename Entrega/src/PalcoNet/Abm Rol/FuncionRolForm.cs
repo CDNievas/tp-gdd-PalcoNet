@@ -16,7 +16,7 @@ namespace PalcoNet.Abm_Rol
     {
         public void Setup(AltaRolForm form)
         {
-            //nada
+            form.TituloForm = "Alta de rol";
         }
         public void Guardar(AltaRolForm form, Rol rol)
         {
@@ -35,6 +35,7 @@ namespace PalcoNet.Abm_Rol
 
         public void Setup(AltaRolForm form)
         {
+            form.TituloForm = "Modificación de rol";
             form.LlenateCon(rol);
         }
         public void Guardar(AltaRolForm form, Rol rol)
