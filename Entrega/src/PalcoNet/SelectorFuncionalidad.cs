@@ -52,6 +52,10 @@ namespace PalcoNet
                 case 12:
                     new Listado_Estadistico.ObtenerTop5().ShowDialog();
                     break;
+                case 13:
+                    new ListarUsuaries().ShowDialog();
+                    break;
+
             }
         }
 

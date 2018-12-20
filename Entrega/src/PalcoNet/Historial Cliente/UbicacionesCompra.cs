@@ -24,8 +24,7 @@ namespace PalcoNet.Historial_Cliente
         private void UbicacionesCompra_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = DataBase.GetInstance()
-                .TypedQuery(@"select u.asiento as [Asiento], u.fila as [Fila], u.sin_numerar as [Sin Numerar?], t.descripcion as [Tipo de Ubicación], u.precio as [Precio Ubicación]
-                            from COMPUMUNDOHIPERMEGARED.Ubicacion u inner join COMPUMUNDOHIPERMEGARED.TipoUbicacion t on t.id_tipo_ubicacion = u.tipo_ubicacion_id and u.compra_id = @compraId"
+                .TypedQuery(@"select * from COMPUMUNDOHIPERMEGARED.UbicacionesDeCompra(@compraID)"
                 , new QueryParameter("compraId", SqlDbType.Int, this.idCompra));
         }
     }

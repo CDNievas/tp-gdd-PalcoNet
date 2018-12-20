@@ -251,7 +251,8 @@ INSERT INTO COMPUMUNDOHIPERMEGARED.Funcionalidad(descripcion, id_funcionalidad) 
 	('HISTORIAL CLIENTE', 9),
 	('CANJE PUNTOS', 10),
 	('RENDICION COMISIONES', 11),
-	('LISTADO ESTADÍSTICO', 12)
+	('LISTADO ESTADÍSTICO', 12),
+	('Habilitación/Inhabilitación de USUARIOS', 13)
 PRINT 'Migre Funcionalidad'
 GO
 
@@ -280,7 +281,7 @@ insert into @funcionalidades_cliente values (8),(9),(10)
 exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'CLIENTE', @funcionalidades_cliente, null
 
 declare @funcionalidades_admin COMPUMUNDOHIPERMEGARED.FuncionalidadList
-insert into @funcionalidades_admin values (1),(2),(3),(4),(5),(11),(12)
+insert into @funcionalidades_admin values (1),(2),(3),(4),(5),(11),(12), (13)
 exec COMPUMUNDOHIPERMEGARED.crearNuevoRol 'ADMINISTRADOR', @funcionalidades_admin, null
 
 declare @funcionalidades_empresa COMPUMUNDOHIPERMEGARED.FuncionalidadList
@@ -691,7 +692,7 @@ end
 go
 
 create function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_rol(@rol_id smallint)
-returns @funcionalidades table(id_funcionalidad tinyint, descripcion varchar(30))
+returns @funcionalidades table(id_funcionalidad tinyint, descripcion nvarchar(50))
 as
 begin
 	insert into @funcionalidades
@@ -704,13 +705,13 @@ end
 go
 
 create function COMPUMUNDOHIPERMEGARED.find_funcionalidades_de_usuario(@usuario_id int)
-returns @funcionalidades table(id_funcionalidad tinyint, descripcion varchar(30))
+returns @funcionalidades table(id_funcionalidad tinyint, descripcion nvarchar(50))
 as
 begin
 	declare c1 cursor for select r.rol_id from Rol_Usuario r
 	where r.usuario_id = @usuario_id
 	declare @id_rol smallint
-	declare @funcionalidades_temp table(id_funcionalidad tinyint, descripcion varchar(30))
+	declare @funcionalidades_temp table(id_funcionalidad tinyint, descripcion varchar(50))
 
 	open c1
 	fetch next from c1 into @id_rol
@@ -1234,6 +1235,16 @@ as
 	where id_factura = @id_factura
 
 	commit tran
+go
+
+create function COMPUMUNDOHIPERMEGARED.UbicacionesDeCompra(@id_compra int)
+returns table
+as
+	return (select e.descripcion as [Espectáculo], u.asiento as [Asiento], u.fila as [Fila], u.sin_numerar as [Sin Numerar?], t.descripcion as [Tipo de Ubicación], u.precio as [Precio Ubicación]
+			from COMPUMUNDOHIPERMEGARED.Ubicacion u
+			inner join COMPUMUNDOHIPERMEGARED.TipoUbicacion t on t.id_tipo_ubicacion = u.tipo_ubicacion_id and u.compra_id = @id_compra
+			inner join COMPUMUNDOHIPERMEGARED.Publicacion p on p.id_publicacion = u.publicacion_id
+			inner join COMPUMUNDOHIPERMEGARED.Espectaculo e on e.id_espectaculo = p.espectaculo_id)
 go
 
 PRINT 'Todos los procedures y las funciones creados'

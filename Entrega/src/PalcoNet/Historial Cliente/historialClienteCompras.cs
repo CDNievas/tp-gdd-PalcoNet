@@ -14,6 +14,7 @@ namespace PalcoNet.Historial_Cliente
 {
     public partial class historialClienteCompras : Form
     {
+        private int countResult;
         private Cliente cliente;
         private Pagina pagina = new Pagina(1, 13);
 
@@ -22,16 +23,26 @@ namespace PalcoNet.Historial_Cliente
             InitializeComponent();
             this.cliente = cliente;
             ActualizarTabla();
+            ActualizarCantPaginas();
         }
 
         private void ActualizarTabla() {
             this.dataGridView1.DataSource = getCompras();
             dataGridView1.Columns["Id Compra"].Visible = false;
+            this.txtPagActual.Text = pagina.pageNumber.ToString();
+        }
+
+        private void ActualizarCantPaginas()
+        {
+            var dt = DataBase.GetInstance().TypedQuery("select count(*) as cantidad from COMPUMUNDOHIPERMEGARED.ComprasDeCliente(@clienteID)",
+                new QueryParameter("clienteID", SqlDbType.Int, cliente.id));
+            this.countResult = Convert.ToInt32(dt.Rows[0]["cantidad"]);
+            txtUltimaPag.Text = pagina.LastPageNumer(countResult).ToString();
         }
 
         private DataTable getCompras() 
         {
-            return DataBase.GetInstance().TypedQuery(String.Format("select * from COMPUMUNDOHIPERMEGARED.ComprasDeCliente(@clienteID) ORDER BY [Fecha] OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY",
+            return DataBase.GetInstance().TypedQuery(String.Format("select * from COMPUMUNDOHIPERMEGARED.ComprasDeCliente(@clienteID) ORDER BY [Fecha] desc OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY",
                 pagina.FirstResultIndex(), pagina.pageSize), new QueryParameter("clienteID", SqlDbType.Int, cliente.id));
         }
 
@@ -47,11 +58,9 @@ namespace PalcoNet.Historial_Cliente
 
         private void btnPagSiguiente_Click(object sender, EventArgs e)
         {
-            pagina.Next();
-            ActualizarTabla();
-            if (dataGridView1.RowCount == 0)
+            if (pagina.TieneSiguiente(countResult))
             {
-                pagina.Previous();
+                pagina.Next();
                 ActualizarTabla();
             }
         }
@@ -76,6 +85,18 @@ namespace PalcoNet.Historial_Cliente
 
         private int idCompraSeleccionada() {
             return (int)this.dataGridView1.CurrentRow.Cells["Id Compra"].Value;
+        }
+
+        private void btnPagUltima_Click(object sender, EventArgs e)
+        {
+            pagina.Last(countResult);
+            ActualizarTabla();
+        }
+
+        private void btnPagPrimera_Click(object sender, EventArgs e)
+        {
+            pagina.First();
+            ActualizarTabla();
         }
 
 

@@ -221,6 +221,12 @@
     <Compile Include="Listado Estadistico\SeleccionEmpresa.Designer.cs">
       <DependentUpon>SeleccionEmpresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListarUsuaries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListarUsuaries.Designer.cs">
+      <DependentUpon>ListarUsuaries.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +278,7 @@
     <Compile Include="SelectorFuncionalidadForm.Designer.cs">
       <DependentUpon>SelectorFuncionalidadForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Usuarie.cs" />
     <Compile Include="UsuarioPassForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -361,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listado Estadistico\SeleccionEmpresa.resx">
       <DependentUpon>SeleccionEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListarUsuaries.resx">
+      <DependentUpon>ListarUsuaries.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\CrearUsuarioForm.resx">
       <DependentUpon>CrearUsuarioForm.cs</DependentUpon>
